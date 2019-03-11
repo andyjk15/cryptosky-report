@@ -1,0 +1,100 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.9 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{1}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=452dff749c5d03968381e376f46bf0a0}{%
+           family={Pagolu},
+           familyi={P\bibinitperiod},
+           given={Venkata\bibnamedelima Sasank},
+           giveni={V\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=18d16b6609c94fec3ce6a27cb11ad712}{%
+           family={Reddy},
+           familyi={R\bibinitperiod},
+           given={Kamal\bibnamedelima Nayan},
+           giveni={K\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{hash=bb79fbbcf11783d9a120114935cbcf43}{%
+           family={Panda},
+           familyi={P\bibinitperiod},
+           given={Ganapati},
+           giveni={G\bibinitperiod}}}%
+        {{hash=4056f804aa7f98a00b2df63d78959f2d}{%
+           family={Majhi},
+           familyi={M\bibinitperiod},
+           given={Babita},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{85459ae8a334aacad62b2b686d8d6ff4}
+      \strng{fullhash}{cc3c0aac71b441c0b6d46a956c9328f7}
+      \strng{bibnamehash}{cc3c0aac71b441c0b6d46a956c9328f7}
+      \strng{authorbibnamehash}{cc3c0aac71b441c0b6d46a956c9328f7}
+      \strng{authornamehash}{85459ae8a334aacad62b2b686d8d6ff4}
+      \strng{authorfullhash}{cc3c0aac71b441c0b6d46a956c9328f7}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2016 international conference on signal processing, communication, power and embedded system (SCOPES)}
+      \field{title}{Sentiment analysis of Twitter data for predicting stock market movements}
+      \field{year}{2016}
+      \field{pages}{1345\bibrangedash 1350}
+      \range{pages}{6}
+      \verb{urlraw}
+      \verb https://arxiv.org/pdf/1610.09225.pdf
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/pdf/1610.09225.pdf
+      \endverb
+    \endentry
+    \entry{2}{online}{}
+      \name{author}{1}{}{%
+        {{hash=43cefe0572c54e4d0af2b971c896b486}{%
+           family={brnrd.me},
+           familyi={b\bibinitperiod},
+           given={Ben\bibnamedelima Donkor},
+           giveni={B\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \strng{namehash}{43cefe0572c54e4d0af2b971c896b486}
+      \strng{fullhash}{43cefe0572c54e4d0af2b971c896b486}
+      \strng{bibnamehash}{43cefe0572c54e4d0af2b971c896b486}
+      \strng{authorbibnamehash}{43cefe0572c54e4d0af2b971c896b486}
+      \strng{authornamehash}{43cefe0572c54e4d0af2b971c896b486}
+      \strng{authorfullhash}{43cefe0572c54e4d0af2b971c896b486}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Sentiment Analysis: Why It's Never 100% Accurate}
+      \verb{urlraw}
+      \verb https://brnrd.me/posts/sentiment-analysis-never-accurate
+      \endverb
+      \verb{url}
+      \verb https://brnrd.me/posts/sentiment-analysis-never-accurate
+      \endverb
+      \warn{\item Entry '2' (report.bib): Invalid format 'date' of date field 'date' - ignoring}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
