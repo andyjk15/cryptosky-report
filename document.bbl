@@ -67,33 +67,6 @@
       \verb https://arxiv.org/pdf/1610.09225.pdf
       \endverb
     \endentry
-    \entry{2}{online}{}
-      \name{author}{1}{}{%
-        {{hash=43cefe0572c54e4d0af2b971c896b486}{%
-           family={brnrd.me},
-           familyi={b\bibinitperiod},
-           given={Ben\bibnamedelima Donkor},
-           giveni={B\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
-      }
-      \strng{namehash}{43cefe0572c54e4d0af2b971c896b486}
-      \strng{fullhash}{43cefe0572c54e4d0af2b971c896b486}
-      \strng{bibnamehash}{43cefe0572c54e4d0af2b971c896b486}
-      \strng{authorbibnamehash}{43cefe0572c54e4d0af2b971c896b486}
-      \strng{authornamehash}{43cefe0572c54e4d0af2b971c896b486}
-      \strng{authorfullhash}{43cefe0572c54e4d0af2b971c896b486}
-      \field{sortinit}{2}
-      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{Sentiment Analysis: Why It's Never 100% Accurate}
-      \verb{urlraw}
-      \verb https://brnrd.me/posts/sentiment-analysis-never-accurate
-      \endverb
-      \verb{url}
-      \verb https://brnrd.me/posts/sentiment-analysis-never-accurate
-      \endverb
-      \warn{\item Entry '2' (report.bib): Invalid format 'date' of date field 'date' - ignoring}
-    \endentry
   \enddatalist
 \endrefsection
 \endinput
