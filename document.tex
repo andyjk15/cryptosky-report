@@ -21,6 +21,7 @@
 \usepackage{pdflscape}
 \usepackage[acronym,toc]{glossaries}
 \usepackage[margin=1.2in]{geometry}
+\usepackage{titling}
 
 \usepackage[style=ieee,backend=biber]{biblatex}
 \addbibresource{report.bib}
@@ -35,6 +36,21 @@
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt plus 2pt minus 1pt}
+
+
+\pretitle{%
+	\begin{center}
+		\huge
+		\includegraphics[width=6cm,height=2cm]{images/reading_logo.png}\\[\bigskipamount]
+	
+	}
+\posttitle{
+	
+	\large
+	School of Mathematical, Physical and Computational Sciences
+	
+	Indivdual Project - CS3IP16
+\end{center}}
 
 
 \title{Opinion Mining and Social Media Sentiment Analysis in the Prediction of Cryptocurrency Prices}
@@ -52,12 +68,20 @@
 	\begin{center}
 		\section{Abstract}\label{abstract}
 	\end{center}
-		The volatility of the stock markets is an aspect that is both hard to predict and to mitigate especially when relating to the cryptocurrency market. Cryptocurrency is highly volatile and which has attracted investors to attempt to make quick profits on the market.
+		The volatility of the stock markets is an aspect that is both hard to predict and to mitigate particularly when relating to the cryptocurrency market. Commodities such as cryptocurrencies are profoundly volatile and have attracted investors in an attempt to make quick profits on the market. These financial commodities are subject to the whim of public confidence and platforms such as Twitter and Facebook are most notably utilised to express opinions. Extrapolating sentiment from such platforms has been used to gain insight into topics across industries, thus applying it to crypto-market analysis could serve to show a relationship between public opinion and market change. 
+		
+		This project looks into public perception of the cryptomarket, by analysing Bitcoin-related tweets per hour for sentiment changes that could indicate a correlation to market fluctuations in the near future. This is achieved by training a recurrent neural network on the severity changes of historical sentiment and price over the past year every hour. The predictions are then shifted forward in time by 1 hour to indicate the corresponding Bitcoin price interval.
 
 	
 	\newpage
 	\begin{center}
 		\section{Acknowledgements}\label{acknowledgements}
+		I would like to express my gratitude to Dr. Kenneth Boness for his continued support and guidance throughout this project.  
+		
+		Secondly, I want to express gratitude to PhD. Jason Brownlee, of \href{machinelearningmastery.com}{Machine Learning Mastery} for having clear and thorough explanations of machine learning concepts and metrics.
+		
+		I would also like to thank my family for their support during the development of this project.
+		
 	\end{center}
 	
 	\newpage
@@ -75,6 +99,18 @@
 	Twitter - Online social media platform, which allows users to post information or express opinions through messages called "Tweets"
 	
 	Tweets - The name given for messages posted on the Twitter platform, which are restricted to 280 characters.
+	
+	Hashtag - Is a keyword or phrase used to describe a topic and allows the tweets to be categorised.
+	
+	Fomo (Fear of Missing Out) - Is used to describe buying behaviour when stocks are moving suddenly and more buyers appear to enter all of a sudden.
+	
+	Shorting - Or short sale, is the sale of an asset that the investor buys shares and immediately sells them, hoping to make a profit from buying later at a lower price.
+	
+	Doubling Down - Is to take further risk on a stock by doubling effort/investment in a hope and attempt to raise the price
+	
+	RNN - Recurrent Neural Network
+	
+	LSTM - Long-Short Term Memory Neural Network
 	
 	\newpage
 	
@@ -111,42 +147,160 @@
 		
 		\subsection{Problem Statement}\label{statement}
 		
-		The key problems this project will attempt to address are that of a public open-source system that aids in the analysis and prediction of BTC, the accuracy of open-source tools and technology when applied to trading market scene and to identify whether there is a correlation between Twitter sentiment and BTC price fluctuation. While there are tools out there only a few are available to the public and only provide basic functionality such as only sentiment analysis, while others are kept in-house of major corporations whom invest into this problem domain.
+		The key problems this project attempts to address are that of, an open-source system available to the public that aids in the analysis and prediction of BTC. The accuracy of open-source tools and technology when applied to the trading market scene and to identify whether there is a correlation between Twitter sentiment and BTC price fluctuation. While there are existing tools only a few are available to the public and only provide basic functionality, while others are kept in-house of major corporations who invest into this problem domain.
 		
-		The other issue presented here is that assuming perfect accuracy can be achieved is naive. As this project will only be using existing tools and technologies thus, there are limitations to accuracy that can be obtained. One of that being the suitability of the tools, there are no open-source sentiment analysers for stock market prediction thus finding a specifically trained analyser for the chosen domain in highly unlikely. In relation, finding the most suitable machine learning or neural network is equally important as this will determine the accuracy of the predictions.
+		The other issue presented here is that assuming perfect accuracy can be achieved is naive. As this project will only be using existing tools and technologies thus, there are limitations to accuracy that can be obtained. One of that being the suitability of the tools, there are no open-source sentiment analysers for stock market prediction, thus finding a specifically trained analyser for the chosen domain in highly unlikely. In relation, finding the most suitable machine learning or neural network is equally important as this will determine the accuracy of the predictions and should be discussed in the literature review.
 		
-		The accuracy and suitability of various machine learning methods and neural networks are a known issue in their respective domains, this investigation should be carried out to determine their suitability for their needed use in this project.
+		The accuracy and suitability of various machine learning methods and neural networks are a known issue in their respective domains, this investigation should be carried out to determine their suitability for their needed use in this project and should be detailed in the literature review.
 		
-		This project will focus on the investigation of these technologies and whether it is feasible to predict the price of BTC based on historical price and the sentiment gathered from Twitter. The accuracy of the system will be compared to other technologies to identify limitations in the proposed solution and to determine the for other technologies if this is the case. 
-		
-		A system will be created that will utilise  
+		This project will focus on the investigation of these technologies and tools to justify whether it is feasible to predict the price of BTC based on historical price and the sentiment gathered from Twitter. Limitations of the system and it's accuracy in predictions should be investigated and discussed to determine the implemented solution is the more suitable compared to other methods.  
 		
 		\subsection{Stakeholders}\label{stakeholders}
+		The stakeholders of this system would be those looking to invest in the cryptocurrency markets, in this projects regard, specifically into Bitcoin. Private, Business and public investors would benefit from an open-source system such as this as it will both provide a basis for decisions on whether to invest or not. 
+		Public investors, general people looking to invest in the cryptocurrency market, will be those stakeholders that will benefit the most from such a system. Due to the lack of any open-source tools available, these stakeholders could be seen as being left in the dark when it comes to predicting the direction of Bitcoin where Businesses and Enterprises will have a one up, due to having an internal system for predictions.
 		
 		\subsection{Project Constraints}\label{constraints}
+		This project will not attempt to justify the accuracy of the chosen algorithm or tools over other algorithms. It will be discussed in the literature review the justifications made on why the chosen algorithm and tools have been used for this project over the others, but accuracy will not be directly compared.
+		
+		This project will only be coded to predict an hour ahead as the model will be trained on an hourly basis as the data is gathered per hour. Predictions for further in the future can be modelled but will be seen as a future improvement to the system.
+		
+		The detail of a interface may be subject of change through this project due to time contraints and the focus being the investigation of the impact social media has on market predictions.
 	
 	\newpage
 	
 	\begin{center}
 		\section{Literature Review}\label{literature}
 	\end{center}
-			\subsection{Existing Tools}
-			
-			\subsection{Related Work}
-			
-			\subsection{Tweet Collection}\label{tweet_collection}
+		\subsection{Existing Tools}
+		An aspect that this project will be attempting to address is that, at the time of writing, there are a limited amount of systems available to the public that either provide sentiment analysis or predictions of the crypto-market. Additionally, none known that combine both sentiment and price analysis to make said predictions on the direction of the market.
 		
-			\subsection{Sentiment Analysis}\label{sentiment}
-	
-			\subsubsection{Algorithms}\label{algorithms}
-			\subsubsection{Techniques}\label{techniques}
+		Such tools are usually provided by exchanges which correspond the amount of positive and negative sentiments with a suggestion to buy and sell. These tools, however, are vague in their suggestions as they don't provide any further analysis on when the best time would be to conduct an action on the market, and simply display the number of tweets per sentiment level. A well-known cryptocurrency tracking site,\href{https://www.coingecko.com}{Coingecko} provides a basic sentiment analysis tool for their top 30 ranking cryptocurrencies tracked on the site. This tool shows the sentiment analysis of tweets from Twitter every hour for a given cryptocurrency. This is displayed as a simple pill on the page showing the ratios of positive, neutral and negative tweets. \textit{See Appendix C for visual representation}
+			
+		\subsection{Related research}
+		
+		There has been a plentiful amount of research conducted in this problem domain. Numerous theses globally have been published in recent years on the topic of cryptocurrency market predictions and analysis, and even more, research conducted on general stock markets further back. 
+		
+		The thesis written by \textit{Evita Stenqvist and Jacob Lonno} of the \textit{KTH Royal Institute of Technology} \cite{2} investigates the use of sentiment expressed through micro-blogging such as Twitter can have on the price fluctuations of Bitcoin. Its primary focus was creating an analyser for the sentiment of tweets more accurately \textit{"by not only taking into account negation, but also valence, common slang and smileys"}, than that of former researchers that \textit{"mused that accounting for negations in text may be a step in the direction of more accurate predictions."}. This would be built upon the lexicon-based sentiment analyser VADER to ascertain the overall sentiment scores were grouped into time-series for each interval from 5 minutes to 4 hours, along with the interval prices for Bitcoin. The model chosen was a naive binary classified vectors of predictions for a certain threshold to \textit{"ultimately compare the predictions to actual historical price data"}. The results of this research suggest that a binary classification model of varying threshold over time-shifts in time-series data was "lackluster", seeing the number of predictions decreasing rapidly as the threshold changed. This research is a good basis of starting research upon, as it suggests tools such as VADER for sentiment analysis and that the use of a machine learning algorithm would be a next step in the project that would yield better more accurate results.
+		
+		Another thesis written by \textit{Pagolu, Venkata Sasank and Reddy Kamal Nayan, Panda Ganapati and Majhi, Babita} \cite{1} on "Sentiment Analysis of Twitter Data for Predicting Stock Market Movements" 2.5 million tweets on Microsoft were extracted from Twitter, sentiment analysis and logistical regression performed on the data yielded 69.01\% accuracy for a 3-day period on the increase/decrease in stock price. These results showed a "\textit{good correlation between stock market movements and the sentiments of the public expressed in Twitter}". Using various natural language pre-processing tweets for feature extraction such as N-gram representation the sentiment from tweets were extrapolated. Both Word2vec and a random forest classifier were compared for accuracy, Word2vec being chosen over the machine learning model. Word2vec, being a group of related shallow two-layer neural network models to produce word embeddings.
+		
+		A topic that reoccurs in various papers and theses is that of the use and focus of regression techniques and machine learning methods. Few implement a fully fledged neural network, the above paper attempts to use a simple network to achieve predictions of classification of sentiment for stock market movement then correlated this with historical data of prices. An article posted on "Code Project" by Intel Corporation \cite{3} compares the accuracy of three machine learning algorithms; Random Forest, Logistic Regression and Multi-Layer Perceptron (MLP) classifiers on predicting the price fluctuations of Bitcoin with embedded price indices. Results showing \textit{"that using the MLP classifier (a.k.a. neural networks) showed better results than logistic regression and random forest trained models"}. This assumption can be backed up by the results from a thesis posted on IEEE \cite{4} which compares a Bayesian optimised recurrent neural network and a Long Short Term Memory (LSTM) network. Showing the LSTM model achieving \textit{"the highest classification accuracy of 52\% and a RMSE of 8\%"}. With an interest in neural networks personally and with little papers utilising them for this purpose a neural network will thus be implemented, and the accuracy of one's predictions with use of sentiment analysis data analysed and discussed.
+			
+		\subsection{Data Collection}\label{tweet_collection}
+			
+			\subsubsection{Twitter and Twitter API}
+			Twitter is a micro-blogging platform that was launched in 2006 and provides it's users the ability to publish short messages of 140 characters. The messages published could be of any form, from news snippets, advertisement, or the prevalent publication of opinions which allowed a platform of extensive diversity and knowledge wealth. As of the time of writing, the message character limit was increased to 280 characters, the platform has over 300 million monthly active users and around 1 million tweets are published per day. Due to the length restriction and the primary use of the platform to express opinions Twitter is seen as a gold mine for opinion mining.
+			
+			The Twitter API has an extensive range of endpoints	that provide access from streaming tweets for a given hashtag, obtaining historical tweets for a given time-period and hashtag, posting tweets on a users account and to change settings on a user account with authentication. The exhaustive range of features provided by these endpoints makes data collection from Twitter straight forward as one can target a specific endpoint for the required data. Due to Twitter being the target for opinion mining within this project the Twitter API will ultimately need to be utilised. This can either be used for the gathering of historical tweets or streaming current tweets for the \#Bitcoin hashtag.
+			
+			There are, however, limitations and rate limits imposed on users of the API. Twitter employs a tiering system for the API - Standard, Premium and Enterprise tiers, each of which provides different amounts of access for data collection. If the API were used to capture historical data for a span of 3 months, each tier is allowed to obtain varying amounts of data for different durations; \cite{5}
+			
+			\begin{itemize}
+				\item A Standard user would be able to capture 100 recent tweets for the past 7 days
+				\item A Premium user would be allowed to capture up to 500 tweets per request for a 30-day span and will have access to a full-archive search to query up to 100 tweets per request for a given time period, with a 50 request limit per month
+				\item An Enterprise user would be able to capture up to 500 tweets per unlimited requests for a 30-day span and will be able to query the full-archive of tweets for a given hashtag up to 2000 tweets per unlimited amount of requests for a given time period
+			\end{itemize}
+		
+			Each tier has individual costs while the standard user negating this as a basic tier. Due to only being elegable for the Premium tier for educational purposes, historical data gathering will be limited to 100 tweets per request with a limitation of 50 requests per month. Furthermore streaming tweets is an Enterprise feature which rules out the the Twitter API for use of streaming current real-time data \cite{6}.
+		
+			\subsubsection{Tweepy Python Package}
+			Tweepy is a python package for accessing the Twitter API. It fundamentally accomplishes the same means if one to conduct a GET request to the Twitter API, except it simplifies this into a simple to use API that is easier to implement and automate in python \cite{7}. Consequently, it builds upon the existing Twitter API to provide features such as automated streaming of provided hashtags to the API. It realises this by initialising a listener instance for a provided set of API credentials, handling authentication, connections, creating and destroying sessions. Due to Twitter's streaming API being only available to Enterprise users \cite{6}, using Tweepy to stream data for a given hashtag will provide the real-time data needed.
+			
+		
+		\subsection{Sentiment Analysis}\label{sentiment}
+		In short, sentiment analysis is the process and discovery of computationally identifying and categorising the underlining opinions and subjectivity expressed in written language. This process determines the writer's attitude towards a particular topic as either being positive, neutral or negative in terms of opinion, known as polarity classification. 		
+			
+			\subsubsection{Natural Language Processing}\label{algorithms}
+			Polarity classification is the focus of sentiment analysis and is a well-known problem in natural language processing that has had significant attention by researchers in recent years \cite{1}\cite{2}\cite{4}\cite{8}. Traditional approaches to this have usually been classified to dictionary-based approaches that use a pre-constructed sentiment lexicons such as VADER or usually confined to machine learning approaches. The later requires an extensive amount of natural language pre-processing to extrapolate vectors and features from given text, this is then fed into a machine learning classifier which attempts to categorise words to a level of sentiment polarity. Natural language pre-processing techniques that would be required for this approach would consist of;
+			
+			\begin{itemize}
+				\item Tokenisation: The act of splitting a stream of text into smaller units of typographical tokens which isolate unneeded punctuation.
+				\item Removal of domain specific expressions that are not part of general purpose English tokenisers - a particular problem with the nature of the language used in tweets, with @-mentions and \#-hashtags
+				\item Stopword removal: Are commonly used words (such as "the","in","a") that provide no meaning to the sentiment of a given text
+				\item Stemming: Is used to replace words with common suffixes and prefixes, as in "go" and "goes" fundamentally convey the same meaning. A stemmer will replace such words with their reduced counterparts
+				\item Term Probability Identification and Feature Extraction: This is a process that involves identifying the most frequently used words in a given text, by using a probability type approach on a pre-defined dataset which classifies a range of texts as with overall negative or positive a machine learning algorithm is trained to classify these accordingly.
+			\end{itemize}
+			
+			The former, seen and has been proven to provide higher accuracy than traditional machine learning approaches \cite{9}, and need little pre-proeccesing conducted on the data as words have a pre-defined sentiment classification in a provided lexicon. Although these lexicons can be complex to create, they generally require little resources to use and add to.
+			
+			\subsubsection{Valence Aware Dictionary and sEntiment Reasoning}\label{Vader}
+				VADER is a combined lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media, and works well on texts from other domains. It is capable of detecting the polarity of a given text - positivity, neurality, and negativity \cite{10}. VADER uses a human-centric approach to sentiment analysis, combining qualitative analysis and empirical validation by using human raters to rate level of sentiment for words in it’s lexicon. Vader also has emoticon support which maps these colloquailisms have pre-defined intensities in its lexicon, which makes VADER specifically suitable for the social media domain where the used of emoticons, utf-8 emojis and slang such as "Lol" and "Yolo" are prevalent within text. Additionally, VADER is provided as a lexicon and a python library under the MIT license, thus means that it is open-source software. This means that the lexicon can be altered and added to making it able to being tailored to specific topic domains. 
+				
+				VADER was constructed by examining and extracting features from three pre-existing well-established and human-validated sentiment lexicons \cite{10} - (LIWC) Linguistic Inquiry and Word Count, (ANEW) Affective Norms for English Words, and (GI) General Inquirer. This is supplemented with additional lexicon features \textit{"commonly used to express sentiment in social media text (emoticons, acronyms and slang)"} \cite{10} and uses "wisdom-of-the-crowd" approach \cite{11} to establish a point of estimations of sentiment valance for each lexical feature candidate. This was evaluated for the impact of grammatical and syntactical rules and 7,500+ lexical features, with mean valence \textit{"<> zero, and SD <= 2.5"} as a human-validated "gold-standard" sentiment lexicon. \cite{10}\textit{Section 3.1}
+				
+				VADER is seen as a "Gold Standard" for sentiment analysis, in the paper for VADER, \cite{10} \textit{A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text}, it was compared against 11 other \textit{"highly regarded sentiment analysis tools/techniques on a corpus of over 4.2K tweets"} for polarity classification across 4 domains. Results showing VADER, across Social media text, Amazon reviews, movie reviews and Newspaper editorials, consistently outperforming other sentiment analysis tools and techniques showing a particular trend in performing significantly higher on analysis of sentiment in tweets. \cite{10} \textit{Section 4: Results}
 			
 		\subsection{Neural Networks}\label{networks}
-			\subsubsection{Types}\label{types}
-			\subsubsection{LSTMs}\label{lstms}
+			A neural network is a set of perceptrons modelled loosely after the human brain that is designed to recognise patterns in whatever domain it is intended to be trained on. A neural network can consist of multiple machine perceptrons or clustering layers in a large mesh network and the patterns they recognise are numerical which are contained in vectors. Pre-processed data, confined and processed into pre-defined vector labels, are used to teach a neural network for a given task. While this differs from how an algorithm is coded to a particular task, neural networks cannot be programmed directly for the task. The requirement is for them to learn from the information by use of different learning strategies; \cite{12}\cite{13}
+			
+			\begin{center}
+				\includegraphics[width=10cm,height=6cm]{images/perceptron.png}
+				\newline
+				\textit{Figure 1: Basic perceptron layout}
+			\end{center}
+			
+			\begin{itemize}
+				\item Supervised learning: Simplest of the learning forms, where a dataset have been labeled which indicate the correct classified data. The input data is learned upon until the desired result of the label is reached \cite{14}
+				\item Unsupervised learning: Is training the with a dataset without labels to learn from. The neural network analyses the dataset with a cost function which tells the neural network how far off target a prediction was. The neural network then adjusts input weights in attempt to increase accuracy. \cite{13}
+				\item Reinforced learning: The neural network is reinforced with positive results and punished for negative results causing a network to learn over iterations. 
+			\end{itemize}
+		
+			\subsubsection{Recurrent Neural Network (RNN)}\label{types}
+			The type of neural network that is of focus for this project will be that of a Long-Short Term Memory (LSTM), however, it is important to understand how this is an extension of a Recurrent Neural Network (RNN) and how the underlying network works.
+			
+			Recurrent Neural Networks (RNN) are a robust and powerful type of neural network and is considered to be among the most encouraging algorithms for use of classification, due to the fact of having internal memory. RNNs are designed to recognise patterns in sequences of presented data or most suitably, time-series data, genomes, handwriting and stock market data. Although RNNs were conceptualised and invented back in the 1980s \cite{15} they've only really shown their potential in recent years, with the increase of computational power due to the level of sequencing and internal memory store to retrain.
+			Due to this 'internal' memory loop, RNNs are able to remember data and adjust neurons based on failures and alternating parameters. The way this is accomplished, knowing how a standard neural network such as a feed-forward network, should initially be understood. \cite{16}
+			
+			A standard, feed-forward neural network has a single data flow with an input layer, through hidden computational layers, to an output layer. Therefore any node in the network will never see the same data again. However, in an RNN data is cycled through a loop over the same node, thus two inputs into the perceptron. Decisions are influenced by previous data that it has previously learned from if any, which in turn affects output and the weights of the network. \cite{17}
+			
+			\begin{center}
+				\includegraphics[width=15cm,height=6cm]{images/rnn_ffn.png}
+				\newline
+				\textit{Figure 2: Feed-forward network (left) vs Recurrent Neural network (right)}
+			\end{center}
+		
+			The act of tweaking weights to alter the processing of the next iteration of data in an RNN is called backpropagation, which in short means going back through the network to find the partial derivatives of the error with respect to the weights after output has occurred. Along with gradient descent, an algorithm that adjusts the weights up or down depending on which would reduce the error. There are however a few obstacles of RNNs;
+			
+			\begin{itemize}
+				\item Exploding Gradients: Is when gradient decsent assigns high importance to the weights. As in the algorithm assigns a ridiculously high or low value for the weights on iteration which can cause overlow and result in NaN values \cite{18}
+				\item Vanishing Gradients: Is when the values of a gradient are small enough that weights cannot be altered and the model stops learning. \cite{19}
+			\end{itemize}
+		
+			These issues are overcome by the concept of Long-Short Term Memory neural networks, coined by \textit{Sepp Hochreiter and Juergen Schmidhuber, 1997} \cite{20}. 
+			
+			\subsubsection{Long-Short Term Memory (LSTM)}\label{lstms}
+			LSTMs are an extension of recurrent neural networks capable of learning long-term dependancies and were conceptualised by \textit{Sepp Hochreiter and Juergen Schmidhuber, 1997} \cite{20}. LSTMs were explicity designed to avoid long-term dependancy problems such as exploding and vanishing gradients. As they are an extension of RNNs they operating in almost the exact same manner, but stores the actual gradients and weights in memory which allows for LSTMs to read, write and alter the values. A way of explaining how this works is seeing the memory block as a gated cell, where 'gated' is that the cell decides whether or not to store or alter data in it's memory based input data and the importance assigned to it. In a sense it learns over time of which values and data is important.
+			
+			\begin{center}
+				\includegraphics[width=10cm,height=8cm]{images/lstm.png}
+				\newline
+				\textit{Figure 3: A conceptual design of an LSTM cell bank - from Medium article by Shi Yan: Understanding LSTM and its diagrams}\cite{21}
+			\end{center}
+			
+			The network takes in three initial inputs, input of current time step, output from the previous LSTM unit if any, and the memory of the previous unit. Outputs, $H_t$ - output of current network, and $C_t$ - the memory of the current unit. \cite{21}
+			
+			The various steps of the network decide what information is thrown away from the cell state, through use of a 'forget gate' which is influencted by the calculations of sigmod memory gates which influence how much of old and new memory is used %$C_t_\--1$,UNCOMMENT %$H_t_\--1$% 
+			and $X_t$, and merged together based upon importance. The section of the cell that controls the outflow memory $H_t$ and $C_t$ determines how much of the new memory should be used by the next LSTM unit. 
+			\textit{For a more in-detailed explanation of exactly how the calculations are made see} \cite{20},\cite{21} and \cite{22}.
+			
+			As mentioned in the formost section of related work an LSTM network, the use of one would be optimal for the given problem domain over the use of machine learning algorithms. 
+			
+			\subsubsection{Kera and TensorFlow}
+			
+			\subsubsection{Optimisers}
+			ADAgrad optimizer, RMSprop, Adam
+			
+			\subsubsection{Loss}
+			
+			\subsubsection{Regularisation - Dropouts}
 		
 		\subsection{Machine Learning}\label{machine}
-			\subsubsection{Logistical Regression}
+			\subsubsection{Naive Bayes}
+			
+		\subsection{Other Techniques}
+			\subsubsection{Ngrams}
+			\subsubsection{Scoring and Validation}
+			F-score, Precision, Accuracy, Validation Datasets, Cross-Validation
 		
 	\newpage
 	
@@ -155,6 +309,8 @@
 	\end{center}
 	
 		\subsection{Solution Summary}\label{sumary}
+		
+		A system will be created that will utilise
 		
 		\subsection{Data flow Overview}\label{data-flow}
 		
@@ -166,6 +322,8 @@
 		\section{System Design and Implementation}\label{implementation}
 	\end{center}
 		\subsection{Data collection}\label{collection}
+			\subsubsection{Price Time-series Data}
+			Historical data of Bitcoin prices can be obtained through may means, 
 		
 		\subsection{Data processing}\label{processing}
 			\subsubsection{Preprocessing}
@@ -176,12 +334,14 @@
 			\subsubsection{Spam Filtering}
 				\paragraph{Tweet Processing}
 				\paragraph{Naive Bayes model}
-				\paragraph{Multinomial Naive Bayes}
-				\paragraph{Bernoullis Naive Bayes}
-				\paragraph{Gaussuan Naive Bayes}
 		
 		\subsection{Sentiment Analysis}
 			\subsubsection{VADER}
+			
+		\subsection{Recurrent Neural Network}
+			\subsubsection{Training and Testing Model}
+			\subsubsection{Validation}
+			\subsubsection{Future Prediction Forecasting}
 			
 	\newpage
 	
@@ -192,19 +352,16 @@
 	\section{Discussion: Contribution and Reflection}
 	\subsection{Limitations}
 	
-	\newpage
-	
-	\section{Social, Legal and Ethical Issues}
 	
 	\newpage
 	
 	\section{Conclusion and Future Improvements}
 		\subsection{Conclusion}
 		\subsection{Future Improvements}
+		Shifting the intial data by and hour and sequencing over previous data
 		
 	\newpage
 	
-	\section{References}
 	\nocite{*}
 	\printbibliography
 	

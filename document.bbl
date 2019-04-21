@@ -67,6 +67,665 @@
       \verb https://arxiv.org/pdf/1610.09225.pdf
       \endverb
     \endentry
+    \entry{2}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=f2e3d1233a4ae1ff0dc165a2561130e0}{%
+           family={Evita\bibnamedelima Stenqvist},
+           familyi={E\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={Jacob\bibnamedelima Lonno},
+           giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Diva}%
+      }
+      \strng{namehash}{f2e3d1233a4ae1ff0dc165a2561130e0}
+      \strng{fullhash}{f2e3d1233a4ae1ff0dc165a2561130e0}
+      \strng{bibnamehash}{f2e3d1233a4ae1ff0dc165a2561130e0}
+      \strng{authorbibnamehash}{f2e3d1233a4ae1ff0dc165a2561130e0}
+      \strng{authornamehash}{f2e3d1233a4ae1ff0dc165a2561130e0}
+      \strng{authorfullhash}{f2e3d1233a4ae1ff0dc165a2561130e0}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Predicting Bitcoin price fluctuation with Twitter sentiment analysis}
+      \field{year}{2017}
+      \verb{urlraw}
+      \verb http://www.diva-portal.org/smash/get/diva2:1110776/FULLTEXT01.pdf
+      \endverb
+      \verb{url}
+      \verb http://www.diva-portal.org/smash/get/diva2:1110776/FULLTEXT01.pdf
+      \endverb
+    \endentry
+    \entry{3}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=0082b92db99b10a1b0be2e2a81ee914f}{%
+           family={Intel-Corporation},
+           familyi={I\bibinithyphendelim C\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Code Project}%
+      }
+      \strng{namehash}{0082b92db99b10a1b0be2e2a81ee914f}
+      \strng{fullhash}{0082b92db99b10a1b0be2e2a81ee914f}
+      \strng{bibnamehash}{0082b92db99b10a1b0be2e2a81ee914f}
+      \strng{authorbibnamehash}{0082b92db99b10a1b0be2e2a81ee914f}
+      \strng{authornamehash}{0082b92db99b10a1b0be2e2a81ee914f}
+      \strng{authorfullhash}{0082b92db99b10a1b0be2e2a81ee914f}
+      \field{sortinit}{4}
+      \field{sortinithash}{11cdaee3b18e01d77f3f428b13c1fc76}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Stock Predictions through News Sentiment Analysis}
+      \field{year}{2017}
+      \verb{urlraw}
+      \verb https://www.codeproject.com/Articles/1201444/Stock-Predictions-through-News-Sentiment-Analysis
+      \endverb
+      \verb{url}
+      \verb https://www.codeproject.com/Articles/1201444/Stock-Predictions-through-News-Sentiment-Analysis
+      \endverb
+    \endentry
+    \entry{4}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=be03763696a3a6a39ccce2baf4fb6f4e}{%
+           family={Sean\bibnamedelima McNally},
+           familyi={S\bibinitperiod\bibinitdelim M\bibinitperiod},
+           given={Simon\bibnamedelima Caton},
+           giveni={S\bibinitperiod\bibinitdelim C\bibinitperiod},
+           suffix={Jason\bibnamedelima Roche},
+           suffixi={J\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{be03763696a3a6a39ccce2baf4fb6f4e}
+      \strng{fullhash}{be03763696a3a6a39ccce2baf4fb6f4e}
+      \strng{bibnamehash}{be03763696a3a6a39ccce2baf4fb6f4e}
+      \strng{authorbibnamehash}{be03763696a3a6a39ccce2baf4fb6f4e}
+      \strng{authornamehash}{be03763696a3a6a39ccce2baf4fb6f4e}
+      \strng{authorfullhash}{be03763696a3a6a39ccce2baf4fb6f4e}
+      \field{sortinit}{5}
+      \field{sortinithash}{3c19c3776b658b3558e9e2e4840c01e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2018 26th Euromicro International Conference on Parallel, Distributed and Network-based Processing (PDP)}
+      \field{title}{Predicting the Price of Bitcoin Using Machine Learning}
+      \field{year}{2018}
+      \field{pages}{344\bibrangedash 347}
+      \range{pages}{4}
+      \verb{urlraw}
+      \verb https://ieeexplore.ieee.org/abstract/document/8374483
+      \endverb
+      \verb{url}
+      \verb https://ieeexplore.ieee.org/abstract/document/8374483
+      \endverb
+    \endentry
+    \entry{5}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=2491bc9c7d8731e1ae33124093bc7026}{%
+           family={Twitter},
+           familyi={T\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Twitter Developers}%
+      }
+      \strng{namehash}{2491bc9c7d8731e1ae33124093bc7026}
+      \strng{fullhash}{2491bc9c7d8731e1ae33124093bc7026}
+      \strng{bibnamehash}{2491bc9c7d8731e1ae33124093bc7026}
+      \strng{authorbibnamehash}{2491bc9c7d8731e1ae33124093bc7026}
+      \strng{authornamehash}{2491bc9c7d8731e1ae33124093bc7026}
+      \strng{authorfullhash}{2491bc9c7d8731e1ae33124093bc7026}
+      \field{sortinit}{6}
+      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Search Tweets}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb https://developer.twitter.com/en/docs/tweets/search/overview
+      \endverb
+      \verb{url}
+      \verb https://developer.twitter.com/en/docs/tweets/search/overview
+      \endverb
+    \endentry
+    \entry{6}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=2491bc9c7d8731e1ae33124093bc7026}{%
+           family={Twitter},
+           familyi={T\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Twitter Developers}%
+      }
+      \strng{namehash}{2491bc9c7d8731e1ae33124093bc7026}
+      \strng{fullhash}{2491bc9c7d8731e1ae33124093bc7026}
+      \strng{bibnamehash}{2491bc9c7d8731e1ae33124093bc7026}
+      \strng{authorbibnamehash}{2491bc9c7d8731e1ae33124093bc7026}
+      \strng{authornamehash}{2491bc9c7d8731e1ae33124093bc7026}
+      \strng{authorfullhash}{2491bc9c7d8731e1ae33124093bc7026}
+      \field{sortinit}{7}
+      \field{sortinithash}{c818dd9105a2852444fc9f5e145c294e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Consuming streaming data}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb https://developer.twitter.com/en/docs/tutorials/consuming-streaming-data.html
+      \endverb
+      \verb{url}
+      \verb https://developer.twitter.com/en/docs/tutorials/consuming-streaming-data.html
+      \endverb
+    \endentry
+    \entry{7}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=1e48a059b3f2c3703bea8d54a9e002c9}{%
+           family={Roesslein},
+           familyi={R\bibinitperiod},
+           given={Joshua},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Tweepy}%
+      }
+      \strng{namehash}{1e48a059b3f2c3703bea8d54a9e002c9}
+      \strng{fullhash}{1e48a059b3f2c3703bea8d54a9e002c9}
+      \strng{bibnamehash}{1e48a059b3f2c3703bea8d54a9e002c9}
+      \strng{authorbibnamehash}{1e48a059b3f2c3703bea8d54a9e002c9}
+      \strng{authornamehash}{1e48a059b3f2c3703bea8d54a9e002c9}
+      \strng{authorfullhash}{1e48a059b3f2c3703bea8d54a9e002c9}
+      \field{sortinit}{8}
+      \field{sortinithash}{07edf88d4ea82509b9c4b4d13f41c452}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Streaming With Tweepy}
+      \field{year}{2009}
+      \verb{urlraw}
+      \verb http://docs.tweepy.org/en/v3.4.0/streaming_how_to.html
+      \endverb
+      \verb{url}
+      \verb http://docs.tweepy.org/en/v3.4.0/streaming_how_to.html
+      \endverb
+    \endentry
+    \entry{8}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=ae1fc492a61542a18835322c490c5af1}{%
+           family={Mehrnoush\bibnamedelima Shamsfard},
+           familyi={M\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={Samira\bibnamedelima Noferesti},
+           giveni={S\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{ae1fc492a61542a18835322c490c5af1}
+      \strng{fullhash}{ae1fc492a61542a18835322c490c5af1}
+      \strng{bibnamehash}{ae1fc492a61542a18835322c490c5af1}
+      \strng{authorbibnamehash}{ae1fc492a61542a18835322c490c5af1}
+      \strng{authornamehash}{ae1fc492a61542a18835322c490c5af1}
+      \strng{authorfullhash}{ae1fc492a61542a18835322c490c5af1}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Journal of Biomedical Informatics}
+      \field{title}{Using Linked Data for polarity classification of patients experiences}
+      \field{year}{2015}
+      \field{pages}{6\bibrangedash 19}
+      \range{pages}{14}
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S1532046415001276
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S1532046415001276
+      \endverb
+    \endentry
+    \entry{9}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=75d8d9e701bff6c60b3e05aa6c0c3f9f}{%
+           family={Chedia\bibnamedelima Dhaoui},
+           familyi={C\bibinitperiod\bibinitdelim D\bibinitperiod},
+           given={Lay\bibnamedelimb Peng\bibnamedelima Tan},
+           giveni={L\bibinitperiod\bibinitdelim P\bibinitperiod\bibinitdelim T\bibinitperiod},
+           suffix={Cynthia\bibnamedelimb M.\bibnamedelimi Webster},
+           suffixi={C\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Emerald Insight}%
+      }
+      \strng{namehash}{75d8d9e701bff6c60b3e05aa6c0c3f9f}
+      \strng{fullhash}{75d8d9e701bff6c60b3e05aa6c0c3f9f}
+      \strng{bibnamehash}{75d8d9e701bff6c60b3e05aa6c0c3f9f}
+      \strng{authorbibnamehash}{75d8d9e701bff6c60b3e05aa6c0c3f9f}
+      \strng{authornamehash}{75d8d9e701bff6c60b3e05aa6c0c3f9f}
+      \strng{authorfullhash}{75d8d9e701bff6c60b3e05aa6c0c3f9f}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Journal of Consumer Marketing, Volume 34. Issue 6}
+      \field{title}{Social media sentiment analysis: lexicon versus machine learning}
+      \field{year}{2017}
+      \verb{urlraw}
+      \verb https://www.emeraldinsight.com/doi/pdfplus/10.1108/JCM-03-2017-2141
+      \endverb
+      \verb{url}
+      \verb https://www.emeraldinsight.com/doi/pdfplus/10.1108/JCM-03-2017-2141
+      \endverb
+    \endentry
+    \entry{10}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=45764413ab79a1c3696604be19148c89}{%
+           family={Hutto},
+           familyi={H\bibinitperiod},
+           given={C.J.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=c3163690c9103d2541d6910886053ba6}{%
+           family={Gilbert},
+           familyi={G\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Ann Arbor, MI}%
+      }
+      \strng{namehash}{13e8125b59ac4c2baf7ccab9e513e9a5}
+      \strng{fullhash}{13e8125b59ac4c2baf7ccab9e513e9a5}
+      \strng{bibnamehash}{13e8125b59ac4c2baf7ccab9e513e9a5}
+      \strng{authorbibnamehash}{13e8125b59ac4c2baf7ccab9e513e9a5}
+      \strng{authornamehash}{13e8125b59ac4c2baf7ccab9e513e9a5}
+      \strng{authorfullhash}{13e8125b59ac4c2baf7ccab9e513e9a5}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Eighth International Conference on Weblogs and Social Media (ICWSM-14)}
+      \field{title}{VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text}
+      \field{year}{2014}
+      \verb{urlraw}
+      \verb https://www.aaai.org/ocs/index.php/ICWSM/ICWSM14/paper/download/8109/8122
+      \endverb
+      \verb{url}
+      \verb https://www.aaai.org/ocs/index.php/ICWSM/ICWSM14/paper/download/8109/8122
+      \endverb
+    \endentry
+    \entry{11}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=47a5d7268039bf86cea626bcaefd4877}{%
+           family={Kenton},
+           familyi={K\bibinitperiod},
+           given={Will},
+           giveni={W\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Investopedia}%
+      }
+      \strng{namehash}{47a5d7268039bf86cea626bcaefd4877}
+      \strng{fullhash}{47a5d7268039bf86cea626bcaefd4877}
+      \strng{bibnamehash}{47a5d7268039bf86cea626bcaefd4877}
+      \strng{authorbibnamehash}{47a5d7268039bf86cea626bcaefd4877}
+      \strng{authornamehash}{47a5d7268039bf86cea626bcaefd4877}
+      \strng{authorfullhash}{47a5d7268039bf86cea626bcaefd4877}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Wisdom of Crowds}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb https://www.investopedia.com/terms/w/wisdom-crowds.asp
+      \endverb
+      \verb{url}
+      \verb https://www.investopedia.com/terms/w/wisdom-crowds.asp
+      \endverb
+    \endentry
+    \entry{12}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=98de2b3b288cf4bd291e8937e5e28c49}{%
+           family={Skymind},
+           familyi={S\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Skymind}%
+      }
+      \strng{namehash}{98de2b3b288cf4bd291e8937e5e28c49}
+      \strng{fullhash}{98de2b3b288cf4bd291e8937e5e28c49}
+      \strng{bibnamehash}{98de2b3b288cf4bd291e8937e5e28c49}
+      \strng{authorbibnamehash}{98de2b3b288cf4bd291e8937e5e28c49}
+      \strng{authornamehash}{98de2b3b288cf4bd291e8937e5e28c49}
+      \strng{authorfullhash}{98de2b3b288cf4bd291e8937e5e28c49}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{A.I. Wiki}
+      \field{title}{A Beginner's Guide to Neural Networks and Deep Learning}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb https://skymind.ai/wiki/neural-network
+      \endverb
+      \verb{url}
+      \verb https://skymind.ai/wiki/neural-network
+      \endverb
+    \endentry
+    \entry{13}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=b5590c43c6c12766886d1cdcae8c5fc3}{%
+           family={DeMuro},
+           familyi={D\bibinitperiod},
+           given={Jonas},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {techradar}%
+      }
+      \strng{namehash}{b5590c43c6c12766886d1cdcae8c5fc3}
+      \strng{fullhash}{b5590c43c6c12766886d1cdcae8c5fc3}
+      \strng{bibnamehash}{b5590c43c6c12766886d1cdcae8c5fc3}
+      \strng{authorbibnamehash}{b5590c43c6c12766886d1cdcae8c5fc3}
+      \strng{authornamehash}{b5590c43c6c12766886d1cdcae8c5fc3}
+      \strng{authorfullhash}{b5590c43c6c12766886d1cdcae8c5fc3}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{World of tech}
+      \field{title}{What is a neural network}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb https://www.techradar.com/uk/news/what-is-a-neural-network
+      \endverb
+      \verb{url}
+      \verb https://www.techradar.com/uk/news/what-is-a-neural-network
+      \endverb
+    \endentry
+    \entry{14}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=7ec8fd610c35dade82ca0d76c0e6a7ee}{%
+           family={Bach},
+           familyi={B\bibinitperiod},
+           given={F.R.},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {NIPS Proceedings}%
+      }
+      \strng{namehash}{7ec8fd610c35dade82ca0d76c0e6a7ee}
+      \strng{fullhash}{7ec8fd610c35dade82ca0d76c0e6a7ee}
+      \strng{bibnamehash}{7ec8fd610c35dade82ca0d76c0e6a7ee}
+      \strng{authorbibnamehash}{7ec8fd610c35dade82ca0d76c0e6a7ee}
+      \strng{authornamehash}{7ec8fd610c35dade82ca0d76c0e6a7ee}
+      \strng{authorfullhash}{7ec8fd610c35dade82ca0d76c0e6a7ee}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Advances in neural information processing systems}
+      \field{title}{Supervised dictionary learning}
+      \field{year}{2009}
+      \field{pages}{1033\bibrangedash 1040}
+      \range{pages}{8}
+      \verb{urlraw}
+      \verb http://papers.nips.cc/paper/3448-supervised-dictionary-learning
+      \endverb
+      \verb{url}
+      \verb http://papers.nips.cc/paper/3448-supervised-dictionary-learning
+      \endverb
+      \warn{\item Name "Mairal, J., Ponce, J., Sapiro, G., Zisserman, A." has too many commas: skipping name}
+    \endentry
+    \entry{15}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=d198ae71c61c758b90826c452447133f}{%
+           family={Rumelhart},
+           familyi={R\bibinitperiod},
+           given={David\bibnamedelima E},
+           giveni={D\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=5aeb1de9b6c6f00a078230c628e6f41c}{%
+           family={Hinton},
+           familyi={H\bibinitperiod},
+           given={Geoffrey\bibnamedelima E},
+           giveni={G\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=f0fac00adb48128fc1f7750b2d8e7065}{%
+           family={Williams},
+           familyi={W\bibinitperiod},
+           given={Ronald\bibnamedelima J},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {California Univ San Diego La Jolla Inst for Cognitive Science}%
+      }
+      \strng{namehash}{6c0c2652b5e4e9258c40ce50c5704c6b}
+      \strng{fullhash}{6c0c2652b5e4e9258c40ce50c5704c6b}
+      \strng{bibnamehash}{6c0c2652b5e4e9258c40ce50c5704c6b}
+      \strng{authorbibnamehash}{6c0c2652b5e4e9258c40ce50c5704c6b}
+      \strng{authornamehash}{6c0c2652b5e4e9258c40ce50c5704c6b}
+      \strng{authorfullhash}{6c0c2652b5e4e9258c40ce50c5704c6b}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Learning internal representations by error propagation}
+      \field{year}{1985}
+      \verb{urlraw}
+      \verb https://apps.dtic.mil/docs/citations/ADA164453
+      \endverb
+      \verb{url}
+      \verb https://apps.dtic.mil/docs/citations/ADA164453
+      \endverb
+    \endentry
+    \entry{16}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=98de2b3b288cf4bd291e8937e5e28c49}{%
+           family={Skymind},
+           familyi={S\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Skymind}%
+      }
+      \strng{namehash}{98de2b3b288cf4bd291e8937e5e28c49}
+      \strng{fullhash}{98de2b3b288cf4bd291e8937e5e28c49}
+      \strng{bibnamehash}{98de2b3b288cf4bd291e8937e5e28c49}
+      \strng{authorbibnamehash}{98de2b3b288cf4bd291e8937e5e28c49}
+      \strng{authornamehash}{98de2b3b288cf4bd291e8937e5e28c49}
+      \strng{authorfullhash}{98de2b3b288cf4bd291e8937e5e28c49}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{A.I. Wiki}
+      \field{title}{A Beginner's Guide to LSTMs and Recurrent Neural Networks}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb https://skymind.ai/wiki/lstm
+      \endverb
+      \verb{url}
+      \verb https://skymind.ai/wiki/lstm
+      \endverb
+    \endentry
+    \entry{17}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=ad6e7c0188bc1f913c6dad630fde9e39}{%
+           family={Donges},
+           familyi={D\bibinitperiod},
+           given={Niklas},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Towards Data Science}%
+      }
+      \strng{namehash}{ad6e7c0188bc1f913c6dad630fde9e39}
+      \strng{fullhash}{ad6e7c0188bc1f913c6dad630fde9e39}
+      \strng{bibnamehash}{ad6e7c0188bc1f913c6dad630fde9e39}
+      \strng{authorbibnamehash}{ad6e7c0188bc1f913c6dad630fde9e39}
+      \strng{authornamehash}{ad6e7c0188bc1f913c6dad630fde9e39}
+      \strng{authorfullhash}{ad6e7c0188bc1f913c6dad630fde9e39}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Recurrent Neural Networks and LSTM}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb https://towardsdatascience.com/recurrent-neural-networks-and-lstm-4b601dd822a5
+      \endverb
+      \verb{url}
+      \verb https://towardsdatascience.com/recurrent-neural-networks-and-lstm-4b601dd822a5
+      \endverb
+    \endentry
+    \entry{18}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=37ec6490760a0f7d5715b2e904f6cf20}{%
+           family={Jason\bibnamedelima Brownlee},
+           familyi={J\bibinitperiod\bibinitdelim B\bibinitperiod},
+           given={PhD.},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Machine Larning Mastery}%
+      }
+      \strng{namehash}{37ec6490760a0f7d5715b2e904f6cf20}
+      \strng{fullhash}{37ec6490760a0f7d5715b2e904f6cf20}
+      \strng{bibnamehash}{37ec6490760a0f7d5715b2e904f6cf20}
+      \strng{authorbibnamehash}{37ec6490760a0f7d5715b2e904f6cf20}
+      \strng{authornamehash}{37ec6490760a0f7d5715b2e904f6cf20}
+      \strng{authorfullhash}{37ec6490760a0f7d5715b2e904f6cf20}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{A Gentle Introduction to Exploding Gradients in Neural Networks}
+      \field{year}{2017}
+      \verb{urlraw}
+      \verb https://machinelearningmastery.com/exploding-gradients-in-neural-networks/
+      \endverb
+      \verb{url}
+      \verb https://machinelearningmastery.com/exploding-gradients-in-neural-networks/
+      \endverb
+    \endentry
+    \entry{19}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=2397822f564bc95b5d3e07a3cc633029}{%
+           family={Team},
+           familyi={T\bibinitperiod},
+           given={Super\bibnamedelimb Data\bibnamedelima Science},
+           giveni={S\bibinitperiod\bibinitdelim D\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Super Data Science}%
+      }
+      \strng{namehash}{2397822f564bc95b5d3e07a3cc633029}
+      \strng{fullhash}{2397822f564bc95b5d3e07a3cc633029}
+      \strng{bibnamehash}{2397822f564bc95b5d3e07a3cc633029}
+      \strng{authorbibnamehash}{2397822f564bc95b5d3e07a3cc633029}
+      \strng{authornamehash}{2397822f564bc95b5d3e07a3cc633029}
+      \strng{authorfullhash}{2397822f564bc95b5d3e07a3cc633029}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Recurrent Neural Networks (RNN) - The Vanishing Gradient Problem}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb https://www.superdatascience.com/blogs/recurrent-neural-networks-rnn-the-vanishing-gradient-problem
+      \endverb
+      \verb{url}
+      \verb https://www.superdatascience.com/blogs/recurrent-neural-networks-rnn-the-vanishing-gradient-problem
+      \endverb
+    \endentry
+    \entry{20}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=41b31e29fb2bdbf9f5c9c1b0d5b3e815}{%
+           family={Hochreiter},
+           familyi={H\bibinitperiod},
+           given={Sepp},
+           giveni={S\bibinitperiod}}}%
+        {{hash=c3a004dc2b8b6fb4dd79c5b8c1469da7}{%
+           family={Schmidhuber},
+           familyi={S\bibinitperiod},
+           given={Jurgen},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{ed8d27cce26f5380dbdf235ccef1a4f6}
+      \strng{fullhash}{ed8d27cce26f5380dbdf235ccef1a4f6}
+      \strng{bibnamehash}{ed8d27cce26f5380dbdf235ccef1a4f6}
+      \strng{authorbibnamehash}{ed8d27cce26f5380dbdf235ccef1a4f6}
+      \strng{authornamehash}{ed8d27cce26f5380dbdf235ccef1a4f6}
+      \strng{authorfullhash}{ed8d27cce26f5380dbdf235ccef1a4f6}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Neural computation, Volume 9. 8}
+      \field{title}{Long short-term memory}
+      \field{year}{1997}
+      \field{pages}{1735\bibrangedash 1780}
+      \range{pages}{46}
+      \verb{urlraw}
+      \verb https://www.bioinf.jku.at/publications/older/2604.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.bioinf.jku.at/publications/older/2604.pdf
+      \endverb
+    \endentry
+    \entry{21}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=9979e7c606c1876cb09cf32b78628d71}{%
+           family={Yan},
+           familyi={Y\bibinitperiod},
+           given={Shi},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Medium}%
+      }
+      \strng{namehash}{9979e7c606c1876cb09cf32b78628d71}
+      \strng{fullhash}{9979e7c606c1876cb09cf32b78628d71}
+      \strng{bibnamehash}{9979e7c606c1876cb09cf32b78628d71}
+      \strng{authorbibnamehash}{9979e7c606c1876cb09cf32b78628d71}
+      \strng{authornamehash}{9979e7c606c1876cb09cf32b78628d71}
+      \strng{authorfullhash}{9979e7c606c1876cb09cf32b78628d71}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Understanding LSTM and its diagrams}
+      \field{year}{Mar 13, 2016}
+      \verb{urlraw}
+      \verb https://medium.com/mlreview/understanding-lstm-and-its-diagrams-37e2f46f1714
+      \endverb
+      \verb{url}
+      \verb https://medium.com/mlreview/understanding-lstm-and-its-diagrams-37e2f46f1714
+      \endverb
+    \endentry
+    \entry{22}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=dea937fb216bfbba25c1bfa1f36a63fe}{%
+           family={Olah},
+           familyi={O\bibinitperiod},
+           given={Christopher},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{dea937fb216bfbba25c1bfa1f36a63fe}
+      \strng{fullhash}{dea937fb216bfbba25c1bfa1f36a63fe}
+      \strng{bibnamehash}{dea937fb216bfbba25c1bfa1f36a63fe}
+      \strng{authorbibnamehash}{dea937fb216bfbba25c1bfa1f36a63fe}
+      \strng{authornamehash}{dea937fb216bfbba25c1bfa1f36a63fe}
+      \strng{authorfullhash}{dea937fb216bfbba25c1bfa1f36a63fe}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Understanding LSTM Networks}
+      \field{year}{2015}
+      \verb{urlraw}
+      \verb https://colah.github.io/posts/2015-08-Understanding-LSTMs
+      \endverb
+      \verb{url}
+      \verb https://colah.github.io/posts/2015-08-Understanding-LSTMs
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
