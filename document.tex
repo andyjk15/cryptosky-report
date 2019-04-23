@@ -269,7 +269,7 @@
 			Each tier has individual costs while the standard user negating this as a basic tier. Due to only being elegable for the Premium tier for educational purposes, historical data gathering will be limited to 100 tweets per request with a limitation of 50 requests per month. Furthermore streaming tweets is an Enterprise feature which rules out the the Twitter API for use of streaming current real-time data \cite{8}.
 		
 			\subsubsection{Tweepy Python Package}
-			Tweepy is a python package for accessing the Twitter API. It fundamentally accomplishes the same means if one to conduct a GET request to the Twitter API, except it simplifies this into a simple to use API that is easier to implement and automate in python \cite{9}. Consequently, it builds upon the existing Twitter API to provide features such as automated streaming of provided hashtags to the API. It realises this by initialising a listener instance for a provided set of API credentials, handling authentication, connections, creating and destroying sessions. Due to Twitter's streaming API being only available to Enterprise users \cite{7}, using Tweepy to stream data for a given hashtag will provide the real-time data needed.
+			Tweepy is a python package for accessing the Twitter API. It fundamentally accomplishes the same means if one to conduct a GET request to the Twitter API, except it simplifies this into a simple to use API that is easier to implement and automate in python \cite{9}. Consequently, it builds upon the existing Twitter API to provide features such as automated streaming of provided hashtags to the API. It realises this by initialising a listener instance for a provided set of API credentials, handling authentication, connections, creating and destroying sessions. Due to Twitter's streaming API being only available to Enterprise users \cite{7}, using Tweepy to stream data for a given hashtag will provide the real-time data needed. The streaming of current data by Tweepy is accomplished by setting up a stream which listens for new data for a given hashtag, which bypasses the need for the Enterprise tweet tracker provided by the Twitter API.
 			
 		
 		\subsection{Sentiment Analysis}\label{sentiment}
@@ -408,9 +408,9 @@
 		
 		\subsection{Machine Learning}\label{machine}
 			\subsubsection{Naive Bayes}
-			To get an understanding of both how probability works and how the neural network will predict the next hour value based on the concepts of probability, using a well-established probability algorithm will aid in this understanding.
+			To get an understanding of both how probability works and how a neural network will predict the next hour value based on the concepts of probability, using a well-established probability algorithm will aid in this understanding.
 			
-			Bayes theorem works on conditional probability and is the probability of how often an event will happen given that that event has already occurred. There are numerous variations of the theorem such as Multinomial, which supports categorical features where each conforms to a multinomial distribution, and Gaussian naive Bayes, which support continuous-valued features each of which conforming to a Gaussian (normal) distribution. The classical multinomial Bayes theorem is defined as;
+			Bayes theorem works on conditional probability and is the probability of how often an event will happen given that that event has already occurred. There are numerous variations of the theorem such as Multinomial, which supports categorical features where each conforms to a multinomial distribution, and Gaussian naive Bayes, which support continuous-valued features each of which conforming to a Gaussian (normal) distribution. The classical multinomial Bayes theorem is defined as; \cite{32}
 			
 			\[P(H\cap A) = \frac{P(A\cap H) * P(H)}{P(A)} \] 
 			
@@ -440,14 +440,45 @@
 			
 			\[Probability \ of \ Outcome \cap Evidence = \frac{Probability \ of \ Likelihood \ of \ evidence * Prior}{Probability \ of \ Evidence} \]
 			
-			The naive Bayes approach has many applications, especially for the topic of this project in classifying the probability occurance of the next price. Although it is a robust algorithm is does have its drawbacks which make it not as suitable as a neural network for the given need of this project. The naive Bayes trap is an issue that may occur due to the size of dataset that will be used. There are however other scenarios this algorithm could be used such as classification of spam data.
+			The naive Bayes approach has many applications, especially for the topic of this project in classifying the probability occurance of the next price. Although it is a robust algorithm is does have its drawbacks which make it not as suitable as a neural network for the given need of this project. The naive Bayes trap is an issue that may occur due to the size of dataset that will be used. There are however other scenarios this algorithm could be used such as classification of spam data.\cite{32}
 		
 	\newpage
 	
 	\begin{center}
 		\section{Solution Approach}\label{solution}
 	\end{center}
-	
+		This section will outline the solution intended to solve the problem that the problem statement identifies with justification and reference to the research conducted in the litrature review. This will lay out the development process for the project and will tools and technologies will be explained for the particular use case in this project.
+		\newline
+		
+		\subsection{Data gathering}
+		This will be the part of the system that will gather price data and tweets from relevent sources, twitter and cryptocurrency exchanges.
+		\newline
+		
+		\textbf{Price data}
+		\newline
+		\newline
+		Historical price data can be collected in a number methods, one being that of the exchange APIs, another through a historical price tracker who creates a CSV consisting of all prior historical data. Both have their merits and reliability for granting the needed data, however, a historical tracker who has been tracking the price every hour since the start of Bitcoin would be the better option. This is due to a couple of factors, the data in some historical trackers are an average unbiased price for Bitcoin - they track the price of all or a select few exchanges and average the hourly price. Whereas if the historical data was obtained directly from an exchange this would be biased and might not represent the true price of the currency, and thus would need averaging with other hourly prices from other exchanges. By using a historical tracker all the data is unbiased and averaged and readily available and doesn't require any requests to an API or coding needed to process data.
+		
+		Live price data can be collected through the same methods, a historical price tracker and an exchange API. However, this doesn't work the same way, unfortunately, a historical price tracker isn't updated as frequently as exchange APIs thus wouldn't provide on the hour accurate data. Therefore exchange APIs should be utilised in this case and multiple to provide an unbiased average for the hourly price.
+		\newline
+		
+		\textbf{Tweets}
+		\newline
+		\newline
+		Historical tweets can be obtained through the Twitter API, and however is not a feature of the Tweepy package - \textit{not mentioned or method on official Tweepy Documentation} \cite{33}. The Twitter API, as explained in the Litrature review, allows for historical tweets to be extracted from the platform, 100 per request and a maximum of 50 requests per month. This proposes an issue with not providing enough data, where sentiment will need to be calculated per hour. Simply put, for a year of hourly price data there will be 9050 records. Therefore the equivilent will be needed for sentiment, however the sentiment will be the average the sentiment per hour of tweets. Using one request, 100 tweets per hour, per hour, 905,000 tweets will need to be extracted to provide the data needed. A solution to this issue could be to use and create multiple accounts and manually extract data from the API and merge. Another option is the pay for the data from 3rd party companies whom have access to the Enterprise API and can pull more data, 2000 per request \\cite{7}\cite{8}. Due to price for data of these 3rd parties the former could be a suitable, but more time consuming option.
+		
+		Live tweets can be collected by two methods from Twitter, from the Twitter API and using Twitter Python package such as Tweepy, detailed in the Literature review. Additionally, the limitations of the Twitter API are also discussed in the review which states how the Twitter API has a tiering system: Standard, Premium and Enterprise. Each tier has different levels of access to the API and can extract a different amount of data from the platform. Thus concluding the section in the Literature review, the Twitter API will not be used for the extraction and streaming of live tweets due to it being restricted to Enterprise users. Therefore, Tweepy will be used to set up a looping authenticated streaming solution with the Twitter API which will allow the access of current recurring data.
+		
+		\subsection{Spam Filtering}
+		This part of the system will aim to detect whether or not the steamed and/or the historical tweet is spam - unwanted tweets that serve no purpose in determining opinion of the public. These types of tweets can be from advertisement - usually labeled with \textit{\#Airdrop} and can contain \textit{"tickets here" and "Token Sale"}, to job advertisments - usually containing word such as \textit{Firm, hire, hiring, jobs and careers}. It is important to filter out and remove such data from the network as these can be seen as outliers of the true needed data and will skew predictions will invalid sentiment.
+		
+		
+		
+		
+		\subsection{Language Detection}
+		Twitter provides this, but non-basic-latin characters can get through in tweets
+		
+		
 		\subsection{Solution Summary}\label{sumary}
 		
 		\subsection{Requirements}
@@ -455,6 +486,12 @@
 		
 		
 		\subsection{Data flow Overview}\label{data-flow}
+		
+		\begin{center}
+			\includegraphics[width=17cm,height=8cm]{images/Generic_Flow.png}
+			\newline
+			\textit{Figure 3: A conceptual design of an LSTM cell bank - from Medium article by Shi Yan: Understanding LSTM and its diagrams}\cite{23}
+		\end{center}
 		
 		\subsection{Packages, Tools and Techniques}\label{tools}
 		

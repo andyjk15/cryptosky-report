@@ -1081,8 +1081,8 @@
       \strng{authorbibnamehash}{baa9695b2bf77f7b33bb07b5d116d7e1}
       \strng{authornamehash}{baa9695b2bf77f7b33bb07b5d116d7e1}
       \strng{authorfullhash}{baa9695b2bf77f7b33bb07b5d116d7e1}
-      \field{sortinit}{8}
-      \field{sortinithash}{07edf88d4ea82509b9c4b4d13f41c452}
+      \field{sortinit}{5}
+      \field{sortinithash}{3c19c3776b658b3558e9e2e4840c01e2}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{IJCAI 2001 workshop on empirical methods in artificial intelligence}
@@ -1097,6 +1097,33 @@
       \endverb
       \verb{url}
       \verb https://www.cc.gatech.edu/~isbell/reading/papers/Rish.pdf
+      \endverb
+    \endentry
+    \entry{33}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=1e48a059b3f2c3703bea8d54a9e002c9}{%
+           family={Roesslein},
+           familyi={R\bibinitperiod},
+           given={Joshua},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{1e48a059b3f2c3703bea8d54a9e002c9}
+      \strng{fullhash}{1e48a059b3f2c3703bea8d54a9e002c9}
+      \strng{bibnamehash}{1e48a059b3f2c3703bea8d54a9e002c9}
+      \strng{authorbibnamehash}{1e48a059b3f2c3703bea8d54a9e002c9}
+      \strng{authornamehash}{1e48a059b3f2c3703bea8d54a9e002c9}
+      \strng{authorfullhash}{1e48a059b3f2c3703bea8d54a9e002c9}
+      \field{sortinit}{5}
+      \field{sortinithash}{3c19c3776b658b3558e9e2e4840c01e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Tweepy Documentation}
+      \field{year}{2009}
+      \verb{urlraw}
+      \verb http://docs.tweepy.org/en/v3.5.0/
+      \endverb
+      \verb{url}
+      \verb http://docs.tweepy.org/en/v3.5.0/
       \endverb
     \endentry
   \enddatalist
