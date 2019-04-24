@@ -1126,6 +1126,36 @@
       \verb http://docs.tweepy.org/en/v3.5.0/
       \endverb
     \endentry
+    \entry{34}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=974f50284a1994b00c1f04d211402eb0}{%
+           family={Deoras},
+           familyi={D\bibinitperiod},
+           given={Srishti},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Analytics India}%
+      }
+      \strng{namehash}{974f50284a1994b00c1f04d211402eb0}
+      \strng{fullhash}{974f50284a1994b00c1f04d211402eb0}
+      \strng{bibnamehash}{974f50284a1994b00c1f04d211402eb0}
+      \strng{authorbibnamehash}{974f50284a1994b00c1f04d211402eb0}
+      \strng{authornamehash}{974f50284a1994b00c1f04d211402eb0}
+      \strng{authorfullhash}{974f50284a1994b00c1f04d211402eb0}
+      \field{sortinit}{6}
+      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Tensorflow Vs. Theano: What Do Researchers Prefer As An Artificial Intelligence Framework}
+      \field{year}{2017}
+      \verb{urlraw}
+      \verb https://www.analyticsindiamag.com/tensorflow-vs-theano-researchers-prefer-artificial-intelligence-framework
+      \endverb
+      \verb{url}
+      \verb https://www.analyticsindiamag.com/tensorflow-vs-theano-researchers-prefer-artificial-intelligence-framework
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

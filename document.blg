@@ -1,20 +1,20 @@
 [0] Config.pm:302> INFO - This is Biber 2.9
 [0] Config.pm:305> INFO - Logfile is 'document.blg'
-[20] biber:313> INFO - === Wed Apr 24, 2019, 16:48:01
-[35] Biber.pm:371> INFO - Reading 'document.bcf'
-[84] Biber.pm:854> INFO - Using all citekeys in bib section 0
-[95] Biber.pm:3981> INFO - Processing section 0
-[103] Biber.pm:4154> INFO - Looking for bibtex format file 'report.bib' for section 0
-[105] bibtex.pm:1468> INFO - LaTeX decoding ...
-[134] bibtex.pm:1294> INFO - Found BibTeX data source 'report.bib'
-[184] Utils.pm:169> WARN - Name "Mairal, J., Ponce, J., Sapiro, G., Zisserman, A." has too many commas: skipping name
-[235] Utils.pm:169> WARN - year field 'Mar 13, 2016' in entry '23' is not an integer - this will probably not sort properly.
-[249] Utils.pm:169> WARN - BibTeX subsystem: warning: comma(s) at end of name (removing)
-[249] Utils.pm:169> WARN - BibTeX subsystem: author, warning: comma(s) at end of name (removing)
-[268] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[268] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[268] Biber.pm:3809> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
-[268] Biber.pm:3815> INFO - No sort tailoring available for locale 'en-US'
-[288] bbl.pm:617> INFO - Writing 'document.bbl' with encoding 'ascii'
-[299] bbl.pm:720> INFO - Output to document.bbl
-[300] Biber.pm:110> INFO - WARNINGS: 4
+[18] biber:313> INFO - === Thu Apr 25, 2019, 00:03:40
+[33] Biber.pm:371> INFO - Reading 'document.bcf'
+[79] Biber.pm:854> INFO - Using all citekeys in bib section 0
+[88] Biber.pm:3981> INFO - Processing section 0
+[96] Biber.pm:4154> INFO - Looking for bibtex format file 'report.bib' for section 0
+[97] bibtex.pm:1468> INFO - LaTeX decoding ...
+[125] bibtex.pm:1294> INFO - Found BibTeX data source 'report.bib'
+[133] Utils.pm:169> WARN - year field 'Mar 13, 2016' in entry '23' is not an integer - this will probably not sort properly.
+[206] Utils.pm:169> WARN - Name "Mairal, J., Ponce, J., Sapiro, G., Zisserman, A." has too many commas: skipping name
+[238] Utils.pm:169> WARN - BibTeX subsystem: warning: comma(s) at end of name (removing)
+[238] Utils.pm:169> WARN - BibTeX subsystem: author, warning: comma(s) at end of name (removing)
+[257] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[257] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[257] Biber.pm:3809> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
+[257] Biber.pm:3815> INFO - No sort tailoring available for locale 'en-US'
+[275] bbl.pm:617> INFO - Writing 'document.bbl' with encoding 'ascii'
+[287] bbl.pm:720> INFO - Output to document.bbl
+[288] Biber.pm:110> INFO - WARNINGS: 4
