@@ -122,9 +122,9 @@
 	\begin{center}
 		\section{Introduction}\label{introduction}
 	\end{center}
-	The premise of this project is to investigate into whether the sentiment in social media has a correlation to the prices of cryptocurrencies and how this could be used to predict future changes in the price. 
+	The premise of this project is to investigate into whether the sentiment expressed in social media has a correlation to the prices of cryptocurrencies and how this could be used to predict future changes in the price. 
 	
-	The chosen cryptocurrency that will be focused in this project will be the currency that has the most community and backing and has been known to lead other fiat currencies, Bitcoin (BTC). Bitcoin is seen as one, if not the first cryptocurrency to bring a wider following to the peer-to-peer token transaction scene since 2009. Although it was not the first token to utilise blockchain technology, it allowed investors to openly trade a public cryptocurrency which provided pseudonymous means of transferring funds through the internet. Thus it has been around longer than most of the other fiat currencies and is the most popular crypto-token due to it's larger community base.
+	The chosen cryptocurrency that will be of focus for this project will be the currency Bitcoin (BTC), due to having the largest community and backing and has been known to lead other fiat currencies. Bitcoin is seen as one, if not the first cryptocurrency to bring a wider following to the peer-to-peer token transaction scene since 2009. Although it was not the first token to utilise blockchain technology, it allowed investors to openly trade a public cryptocurrency which provided pseudonymous means of transferring funds through the internet. Thus it has been around longer than most of the other fiat currencies and is the most popular crypto-token due to it's larger community base.
 	
 	Most financial commodities are subject to the whim of public confidence and are the core of it's base value. A platform that is frequently used for the public to convey their opinions on a commodity is that of Twitter which provides arguably biased information and opinions. Whether the opinions present a basis in facts or not, they are usually taken at face value and can influence the public opinion of given topics. As Bitcoin has been around since 2009 the opinions and information on the commodity are prevalent through the platform. 
 	In the paper \textit{Sentiment Analysis of Twitter Data for Predicting Stock Market Movements} by \textit{Majhi et al.} \cite{1} 2.5 million tweets on Microsoft were extracted from Twitter, sentiment analysis and logistical regression performed on the data yielded 69.01\% accuracy for a 3-day period on the increase/decrease in stock price. These results showed a "\textit{good correlation between stock market movements and the sentiments of public expressed in Twitter}".
@@ -149,9 +149,9 @@
 		
 		The key problems this project attempts to address are that of, an open-source system available to the public that aids in the analysis and prediction of BTC. The accuracy of open-source tools and technology when applied to the trading market scene and to identify whether there is a correlation between Twitter sentiment and BTC price fluctuation. While there are existing tools only a few are available to the public and only provide basic functionality, while others are kept in-house of major corporations who invest into this problem domain.
 		
-		The other issue presented here is that assuming perfect accuracy can be achieved is naive. As this project will only be using existing tools and technologies thus, there are limitations to accuracy that can be obtained. One of that being the suitability of the tools, there are no open-source sentiment analysers for stock market prediction, thus finding a specifically trained analyser for the chosen domain in highly unlikely. In relation, finding the most suitable machine learning or neural network is equally important as this will determine the accuracy of the predictions. Due to being a regression problem, machine learning techniques and neural networks that focus around this and forecasting should be considered.
+		The other issue presented here is that assuming perfect accuracy can be achieved is naive. As this project will only be using existing tools and technologies thus, there are limitations to the accuracy of what can be obtained. One of that being the suitability of the tools, there are no open-source sentiment analysers for stock market prediction, thus finding a specifically trained analyser for the chosen domain in highly unlikely. In relation, finding the most suitable machine learning or neural network is equally important as this will determine the accuracy of the predictions. Due to being a regression problem, machine learning techniques and neural networks that focus around this and forecasting should be considered.
 		
-		The accuracy and suitability of various machine learning methods and neural networks are a known issue in their respective domains, this investigation should be carried out to determine their suitability for their needed use in this project and should be detailed in the literature review.
+		The accuracy and suitability of various machine learning methods and neural networks are a known issue in their respective domains, this investigation should be carried out to determine their suitability for their needed use in this project and will be detailed in the literature review.
 		
 		This project will focus on the investigation of these technologies and tools to justify whether it is feasible to predict the price of BTC based on historical price and the sentiment gathered from Twitter. Limitations of the system and it's accuracy in predictions should be investigated and discussed to determine the implemented solution is the more suitable compared to other methods.  
 		
@@ -204,7 +204,7 @@
 			\item To produce a neural netowork which accomplished the same as the other above, but with out use of sentiment
 			\item To produce metrics to justify accuracy of the model
 			\item To produce data files containing, the current time of predictions alongside current hour price and sentiment. This should also include a suggested action based on a threshold for the price difference between hours. 
-			\item To produce JSON files containing the true and predicted price values of every hour for trained data, and another for current reoccuring predictions.
+			\item To produce data files containing the true and predicted price values of every hour for trained data, and another for current reoccuring predictions.
 			\newline
 		\end{itemize}
 		
@@ -222,13 +222,18 @@
 			\item This system, both prediction system and interface, should be deployed to a server due to the need to be constantly running
 		\end{itemize}
 		
-		\subsection{Project Constraints}\label{constraints}
-		
 		This project will not attempt to justify the accuracy of the chosen algorithm or tools over other algorithms. It will be discussed in the solution approach the justifications made on why the chosen algorithm and tools have been used for this project over the others, but accuracy will not be directly compared.
 		
 		This project will only be coded to predict an hour ahead as the model will be trained on an hourly basis as the data is gathered per hour. Predictions for further in the future can be modelled but will be seen as a future improvement to the system.
 		
 		The detail of a interface may be subject of change through this project due to time contraints and the focus being the investigation of the impact social media has on market predictions.
+		
+		\subsection{Project Constraints}\label{constraints}
+		The following constraints are recognisted in this project
+		
+		\begin{itemize}
+			\item ...
+		\end{itemize}
 		
 	
 	\newpage
@@ -276,7 +281,7 @@
 		In short, sentiment analysis is the process and discovery of computationally identifying and categorising the underlining opinions and subjectivity expressed in written language. This process determines the writer's attitude towards a particular topic as either being positive, neutral or negative in terms of opinion, known as polarity classification. 		
 			
 			\subsubsection{Natural Language Processing}\label{algorithms}
-			Polarity classification is the focus of sentiment analysis and is a well-known problem in natural language processing that has had significant attention by researchers in recent years \cite{1}\cite{3}\cite{6}\cite{10}. Traditional approaches to this have usually been classified to dictionary-based approaches that use a pre-constructed sentiment lexicons such as VADER or usually confined to machine learning approaches. The later requires an extensive amount of natural language pre-processing to extrapolate vectors and features from given text, this is then fed into a machine learning classifier which attempts to categorise words to a level of sentiment polarity. Natural language pre-processing techniques that would be required for this approach would consist of;
+			Polarity classification is the focus of sentiment analysis and is a well-known problem in natural language processing that has had significant attention by researchers in recent years \cite{1}\cite{3}\cite{6}\cite{10}. Traditional approaches to this have usually been classified to dictionary-based approaches that use a pre-constructed sentiment lexicons such as VADER or usually confined to machine learning approaches. The later requires an extensive amount of natural language pre-processing to extrapolate vectors and features from given text, this is then fed into a machine learning classifier which attempts to categorise words to a level of sentiment polarity. Natural language pre-processing techniques, supported by the NLTK (Natural Language Toolkit) python package , that would be required for this approach would consist of;
 			
 			\begin{itemize}
 				\item Tokenisation: The act of splitting a stream of text into smaller units of typographical tokens which isolate unneeded punctuation.
@@ -284,6 +289,7 @@
 				\item Stopword removal: Are commonly used words (such as "the","in","a") that provide no meaning to the sentiment of a given text
 				\item Stemming: Is used to replace words with common suffixes and prefixes, as in "go" and "goes" fundamentally convey the same meaning. A stemmer will replace such words with their reduced counterparts
 				\item Term Probability Identification and Feature Extraction: This is a process that involves identifying the most frequently used words in a given text, by using a probability type approach on a pre-defined dataset which classifies a range of texts as with overall negative or positive a machine learning algorithm is trained to classify these accordingly.
+				\item Ngrams: ...
 			\end{itemize}
 			
 			The former, seen and has been proven to provide higher accuracy than traditional machine learning approaches \cite{11}, and need little pre-proeccesing conducted on the data as words have a pre-defined sentiment classification in a provided lexicon. Although these lexicons can be complex to create, they generally require little resources to use and add to.
@@ -447,7 +453,7 @@
 	\begin{center}
 		\section{Solution Approach}\label{solution}
 	\end{center}
-		This section will outline the solution intended to solve the problem that the problem statement identifies with justification and reference to the research conducted in the litrature review. This will lay out the development process for the project and will tools and technologies will be explained for the particular use case in this project.
+		This section will outline the solution intended to solve the problem that the problem statement identifies, with justification and reference to the research conducted in the litrature review. This will lay out the development process for the project and will tools and technologies will be explained for the particular use case in this project.
 		\newline
 		
 		\subsection{Data gathering}
@@ -459,7 +465,7 @@
 		\newline
 		Historical price data can be collected in a number methods, one being that of the exchange APIs, another through a historical price tracker who creates a CSV consisting of all prior historical data. Both have their merits and reliability for granting the needed data, however, a historical tracker who has been tracking the price every hour since the start of Bitcoin would be the better option. This is due to a couple of factors, the data in some historical trackers are an average unbiased price for Bitcoin - they track the price of all or a select few exchanges and average the hourly price. Whereas if the historical data was obtained directly from an exchange this would be biased and might not represent the true price of the currency, and thus would need averaging with other hourly prices from other exchanges. By using a historical tracker all the data is unbiased and averaged and readily available and doesn't require any requests to an API or coding needed to process data.
 		
-		Live price data can be collected through the same methods, a historical price tracker and an exchange API. However, this doesn't work the same way, unfortunately, a historical price tracker isn't updated as frequently as exchange APIs thus wouldn't provide on the hour accurate data. Therefore exchange APIs should be utilised in this case and multiple to provide an unbiased average for the hourly price.
+		Live price data can be collected through the same methods, a historical price tracker and an exchange API. However, this doesn't work the same way, unfortunately, a historical price tracker isn't updated as frequently as exchange APIs thus wouldn't provide on the hour accurate data. Therefore exchange APIs should be utilised in this case and multiple to provide an unbiased average for the hourly price. Three exchanges will provide an sufficient average and the exchanges most likely to be used would be the more popular exchanges such as Coinbase, Bitfinex and Gemini
 		\newline
 		
 		\textbf{Tweets}
@@ -469,37 +475,197 @@
 		
 		Live tweets can be collected by two methods from Twitter, from the Twitter API and using Twitter Python package such as Tweepy, detailed in the Literature review. Additionally, the limitations of the Twitter API are also discussed in the review which states how the Twitter API has a tiering system: Standard, Premium and Enterprise. Each tier has different levels of access to the API and can extract a different amount of data from the platform. Thus concluding the section in the Literature review, the Twitter API will not be used for the extraction and streaming of live tweets due to it being restricted to Enterprise users. Therefore, Tweepy will be used to set up a looping authenticated streaming solution with the Twitter API which will allow the access of current recurring data.
 		
+		\subsection{Data pre-processing}
+		Natural language pre-processing will be apart of most systems in this project. Techniques such as tokenisation, stemming, stopword removal and character filtering will be prevalent, as these will be used to remove unwanted data and to sanitise the data for classification.
+		
 		\subsection{Spam Filtering}
 		This part of the system will aim to detect whether or not the steamed and/or the historical tweet is spam - unwanted tweets that serve no purpose in determining opinion of the public. These types of tweets can be from advertisement - usually labeled with \textit{\#Airdrop} and can contain \textit{"tickets here" and "Token Sale"}, to job advertisments - usually containing word such as \textit{Firm, hire, hiring, jobs and careers}. It is important to filter out and remove such data from the network as these can be seen as outliers of the true needed data and will skew predictions will invalid sentiment.
 		
-		
+		The spam filter should use a probability-based algorithms such as Naive Bayes, other algorithms such as ... could be used, but due to this being a probability related problem using an algorithm such as Naive Bayes would be more suitable. This classifier should be trained on a hand created dataset containing both spam and ham (\textit{wanted data}) tweets, and should not be exclusive to either category.
 		
 		
 		\subsection{Language Detection}
-		Twitter provides this, but non-basic-latin characters can get through in tweets
+		Pior to performing any kind of natural languge pre-processing and spam filtering non-English tweets will need to be avoided. This can be introduced through various language detection filtering using techniques such as ngrams alongside other natural language pre-processing techniques to filter out non-English characters. Fortunatly both Tweepy and the Twitter API have methods for specifying the desired language to recieve tweets in - \textit{filter=['en']} for the Tweepy streaming method and \textit{query=\{...,language='en',...\}} on the JSON parameters for the Twitter API. This does provide a simply means of filtering out non-English tweets, but this only filters based on region and user settings which indicate the users desired language. Thus if a user has their region set to \textit{'en'} or has their desired language set also as \textit{'en'} the tweet will be classified as English but may contain non-English characters. 
 		
+		As being the case a suitable language detection system will be implemented to identify any tweets that contain non-English character make it past the inital API filters, and will drop the tweets if it contains more non-English characters. If, however, the majority of the text is English but contains some non-English characters, these will be removed from the tweet.
 		
-		\subsection{Solution Summary}\label{sumary}
-		
-		\subsection{Requirements}
-		
-		
-		
-		\subsection{Data flow Overview}\label{data-flow}
-		
+		\subsection{Sentiment Analysis}
+		As mentioned in the Litrature review, the VADER sentiment analysis performs exceptionally well on the social media domain when compared to idividual human rates and 10 other highly regarded sentiment analysers, stated in the results section of the paper \textit{VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text} \cite{12}. \newline Extraction of results from paper \cite{12}:
+
 		\begin{center}
-			\includegraphics[width=17cm,height=8cm]{images/Generic_Flow.png}
-			\newline
-			\textit{Figure 3: A conceptual design of an LSTM cell bank - from Medium article by Shi Yan: Understanding LSTM and its diagrams}\cite{23}
+			\begin{tabular}{l|c|c|c}
+				\textbf{Analyser} & \textbf{Overall Precision} & \textbf{Overall Recall} & \textbf{Overall F1 Score}\\
+				\hline
+				\multirow{1}{*}{Ind. Humans} & 0.95 & 0.75 & 0.84 \\
+				\multirow{1}{*}{VADER} & \textbf{0.99} & \textbf{0.94} & \textbf{0.96} \\
+				\multirow{1}{*}{Hu-Liu04} & 0.94 & 0.66 & 0.77 \\
+				\multirow{1}{*}{SCN} & 0.81 & 0.75 & 0.75 \\
+				\multirow{1}{*}{GI} & 0.84 & 0.58 & 0.69 \\
+				\multirow{1}{*}{SWN} & 0.75 & 0.62 & 0.67 \\
+				\multirow{1}{*}{LIWC} & 0.94 & 0.48 & 0.63 \\
+				\multirow{1}{*}{ANEW} & 0.83 & 0.48 & 0.60 \\
+				\multirow{1}{*}{WSD} & 0.70 & 0.49 & 0.56 \\
+			\end{tabular}
+		
+				\textbf{Analysis of Social Media Text (4,200 Tweets)}\cite{12}
 		\end{center}
 		
-		\subsection{Packages, Tools and Techniques}\label{tools}
+		Due to the suitability for the given domain of social media and with the customisability, due to VADER's lexicon-dictionary based approach, makes this sentiment analyser most suitable for use in this project. This analyser will be utilised as the sentiment analyser of this project due to its feature set and need for little data pre-processing prior to polarity classification of the provided text. \cite{11} \textit{"extract"}.
+		
+		This will be an itermediate system between the neural network and the data collection pre-processing system, as the later will provide the cleaned processed data for analysis and the former to feed in the classified polarity of each tweet alongside price data for model learning.
+		
+		\subsection{Neural Network}
+		The \textit{Neural Network} section in the litrature review details how Recurrent Neural networks work alongside how an Long-short term memory networks build upon and overcome limitations and known issues with a standard RNN network. A recurrent neural network is the focus of this project, this is due to:
+		
+		\begin{itemize}
+			\item Nature of an RNN - Allows for backpropagation to find partial derivatives of the error with respect to the weights after an output has occured, to tweak the current weights of the LSTM cell. In short, allows the tweaking of weights of the network based on previous seen data by looping the same node thus influencing decisions made on current data based on old weights and errors from previous.
+			\item Nature of an LSTM over RNN - LSTMs are extensions of RNNs \cite{22} that were designed to avoid long-term dependancy problems such as exploding and vanishing gradients. Weights are not only just reused but are stored in memory and are propogated through the network.
+			\item Lack of use for the projects purose - Other papers tend to focus on machine learning techniques, other neural networks such as Multi-layer Perceptron (MPL) and standard Recurrent Neural Networks, with use of time-series data. Especially with use of a standard RNN, not overcomming its common issues with gradient decsent. Stated in related research section of the litrature review, \cite{5} - \textit{"using the MLP classifier (a.k.a neural networks) showed better results than logistical regression and random forest trained models"}
+			\item Pior use for time-series data and data forecasting - Although RNN LSTM networks have been used for the prediction of Bitcoin price there are a few papers on this \cite{25}. Regardless, LSTMs have been notably used with use for time-series data forecasting due to being able to remember previous data and weights over long sequence spans \cite{22} - \textit{""}, \cite{25} - \textit{""}.
+		\end{itemize}
+	
+		Therefore, a recurrent long-short term memory neural network will be used for this for this project to predict the next hour interval of Bitcoin price based on previous historical prices and hourly sentiment. This system will read in historical data, both price and sentiment - depending on the network for prediction with and without sentiment, this data will be merged, split and used to trained and test the network model for use for forecasting prices. The relative sizes for the training and test data can be decided upon system creation but the standard sizing is 75:25 respectivly.
+		
+		Tensorflow will also be used for the backend implementation and the Kera API use upon it to make development more straight forward. There are other tools that are comparable to TensorFlow that are also supported by Keras, such as \textit{"TABLE COMPARING TOOLS"} ...
+		
+		\subsection{Price Forecasting}
+		This part of the system will be responsible for prediction the next time-step of Bitcoin's price for the next hour based on past data. It will use the trained model from the neural network to predict the next hour price when given live hourly data, price and sentiment. I will also have a look back of 5 which will allow it to see historical data to aid in the predictions. This will ocurr on the hour every hour when new data is recieved and processed, this data should also be merged and the split into training and testing data, the sizing can be decided upon system creation but the standard sizing is 75:25, training and testing respectivly.
+		
+		\subsection{Frontend Application}
+		The frontend appliction will display the predicted data to the stakeholders and users of the system, along with charting True hourly prices against Predicted, for both with and without sentiment embedded in the predictions. The interface will display this data in both tabular and chart form to provide variety to the user. Performance metrics will also be disayed at the bottom of the appliction to show the accuracy of the model. Due to this project focusing around the backend, how the predictions are made and the accuracy of the model, the interface will be somewhat of a second thought. It will aim to display the information in a clear and concise manner which will start to solve the problem of providing a system to the public to aid in investment decisions, the design will not be complex but more basic and functional. Therefore a basic webpage coded in HTML with Jquery to plot data, and Ajax requests to obtain and load data, will be sufficient.
+		
+		%\includegraphics[width=18cm,height=8cm]{images/interface_design.png}
+		\begin{center}
+			\textit{Figure 3: Initial Interface design}
+		\end{center}
+	
+		\subsection{With reference to Initial PID}
+		Both the problem and solution has changed considerably from the initial project initiation document (PID), which outlines the inital ideas, objectives and specification for the project. The reason for this was due to a change in direction which was caused by a number of factors; one being a change in passion after intial research into machine learning techniques and neural networks, instead of creating an application that just performed sentiment analysis the direction turned towards how this could be used to predict future prices. This change does still loosly keeps in-line with the intial idea of wanting to create a platform that will aid in investor decision making, but takes it a step further by directly giving them predictions on market direction price as a basis for these decisions rather than just idenifying opinion direction of the market. 
+		Another point was simplicity of the inital idea, which consisted of focusing more work on the design of the frontend appliction to display opinion data and general price data on a range of cryptocurrencies which will simply by just consuming exchange APIs. Both the developer and project supervisor came to the conclusion that this inital idea was too simple and a more complex approach needed to be formed.
+		The intial PID did however give an initial basis to base ideas and inital research from and was the begining drive of this project.
+		
+		\subsection{Solution Summary}\label{summary}
+		The overall solution, with reference to the problem statement, is to create a system mainly consisting of; a frontend application that will display plotting, predicted and true, performance metric data to the user as a clear and concise form. A backend system that'll be behind the price forecasting, which will consist of various subsystem responsible for data collection, filtering, data pre-processing, sentiment analysis, network training, validation and training and future price predictions. Each stage will consist of revelent tools and techniques for performing their required task.
+		
+		%The tools and techniques that will be used for this project are as follows, with relation to the relevent part of the system.
+		
+		%\begin{itemize}
+		%	\item Data Collector
+		%	\subitem Prices: Historical - None, will be extrapolated from a historical price CSV, Live - Request and Coinbase Client api package
+		%	\subitem Tweets: Historical - Request or Curl from the Twitter API, Live - Tweepy
+		%	\item Natural Language pre-processing - Regex,  (Tokenisation, Stemming, Stopword removal), ngrams, language detection
+		%	\item Spam filter - Natural language pre-processing techniques (above), Naive Bayes Classifier
+		%	\item Neural Network - Tensorflow, Keras, Sc
+			
+		%\end{itemize}
+		
+		\subsection{Data flow Overview}\label{data-flow}
+		To get an understanding of how the system will be put together, a dataflow diagram is a useful method for view how systems are integrated and how data could possibly flow through a system.
+		
+		\includegraphics[width=18cm,height=8cm]{images/Generic_Flow.png}
+		\begin{center}
+			\textit{Figure 4: Basic Dataflow diagram of systems in the project and how data could possibly flow}
+		\end{center}
 		
 	\newpage
 	
 	\begin{center}	
-		\section{System Design and Implementation}\label{implementation}
+		\section{System Design}\label{Design}
 	\end{center}
+		\subsection{Dataflow Designs}
+		This section will describe and outline how the system will be formed and will work with each component, a good way of displaying this is as a dataflow diagram. A dataflow is a way of representing the flow of data through a process or system, as a result it also provides information about how inputs and outputs of each component works and how they're connected to other components. It can also give either broad or in-depth overview of the specific workings of each component through how the data is processed and manipulated.
+		\newline
+		
+		\textbf{Dataflow overview of entire system:}
+		\begin{center}
+			\includegraphics[width=18cm,height=8cm]{images/Dataflow.png}
+			\textit{Figure 5: Overall Dataflow diagram of the entire system}
+		\end{center}
+		This dataflow diagram shows the overall concept of how the data is intended to flow through the system, from being processed and manipulated through each components and what the outputs are of each. Due to the size this will be broken up and individually explained.
+		\newpage
+		
+		\textbf{Data collector}
+		\begin{center}
+			\includegraphics[width=15cm,height=8cm]{images/Data_Collector.png}
+			\textit{Figure 6: Data collector Dataflow diagram}
+		\end{center}
+		This dataflow diagram shows the part of the system responsible for the collection and processing of both historical data. This is split into three parts: Price collector, Tweet collector and tweet normalisation and natural language pre-processing.
+		\begin{itemize}
+			\item Price Collector - Processes two forms of data, Historical and Live price data. 
+			\subitem Historical data is extrapolated from three CSVs that contain the historical price every hour for the past year, from a historical price tracker. At this point in the project it was identified that historical price trackers do not average price data from exchanges as previously identified, therefore this data will need to be merged and averaged to create the unbiased hourly price needed. 
+			\subitem Live data is extracted directly from the three exchanges APIs shown through REST endpoint requests.
+			\subitem Data from both, as separate processes independant from one another, are averaged by extracting the \textit{High}, \textit{Mid} and \textit{Low} hourly prices. This averaged price per hour for each exchange are then averaged together to obtain an unbiased hourly average. This is then saved to a CSV of historical or live prices respectivly. The difference in the flow of data is that of Live prices, in which the process is looped every hour to extract the new hourly prices. 
+			\item Tweet Collector - Streams tweets from Twitter using Tweepy, historical tweets are manually collected directly from the Twitter API. Both are fed through the normalisation and data pre-processing stage.
+			\item Data pre-processing - This involves cleaning the intial data by removing line breaks and new lines that occur in the data, removal of special characters that are standard in tweets (\textit{'\#','\@' and urls}). This is then fed into a language detection system which tokenises and compares stopwords in text to NLTK package supported languages. Depending on whether the text is idendified as majoritly English or not determines whether or not the tweet is dropped and not used in the network. If the majority is in English, non-English characters are removed as these can still be present in the text.
+		\end{itemize}
+	
+		\textbf{Analysis Engine}
+		\begin{center}
+			\includegraphics[width=17cm,height=8cm]{images/Analysis_Engine.png}
+			\textit{Figure 7: Analysis Engine Dataflow diagram}
+		\end{center}
+		This dataflow diagram shows the part of the system that is responsible for training a spam filter, creating the model that'll be used to identify if the tweets from the data collector are unwanted - spam. This system is also responsible for assigning the polarity classifiction to the tweet through sentiment analysis conducted by the VADER package \cite{12}.
+		\begin{itemize}
+			\item Spam filter training - The inital step in this system is to train the Naive Bayes Classifier using the pre-labeled spam dataset which contains an unbiased amount of either spam or ham tweets with their respective labels.
+			\subitem This data is split into two samples, training and test sets 75:25 respectively and the Naive Bayes classifier trained and validated against these datasets after pre-processing of the data occurs on the data to prepare it.
+			\item Data pre-processing - The tweets from both training and testing the filter and from live and historical tweets are processed through this section. 
+			\subitem This section of the system is primarily used to process the tweets for the filter to classify the data and doesn't directly modify the live and historical tweets. The data is processed through various natural language processing techniques such as; Tokenisation, Ngram generation, stopword removal and stemming.
+			\item Classifier Modelling and Model creation - Once the data is pre-processed the data is classified and the prediction model created, which later used to classify the historical and live tweets.
+			\item Sentiment Analysis (VADER) - On a separate route from the spam filter training, using the historical and live tweets, the sentiment analysier VADER performs analysis on the tweets and assigns a polarity classification to each text (\textit{Negative, Neutral, Positive} and calculates the compound score which is the difference between the negative and positive scores \textit{compound}).
+			\item Storage - The polarity classification and tweets are saved to their respective CSV files for historical and live data.
+		\end{itemize}
+	
+		\textbf{Neural Network}
+		\begin{center}
+			\includegraphics[width=17cm,height=12cm]{images/Neural_Network.png}
+			\textit{Figure 8: Neural Network layout Dataflow diagram}
+		\end{center}
+		The dataflow diagram in \textit{figure 8} shows the part of the system that is responsible for training and creating the neural network model. The dataflow diagram show how this will be trained and the layers of a possible solution to the network, which shows 4 layers which may not be the solution that will be implemented but are there to show a representation of an amount of layer that could be implemented.
+		\begin{itemize}
+			\item Merging of Datasets - Data from both historical datasets are merged to create one dataset with mapped price and sentiment for each hour. *This is a specific process that is different with the system that does not include sentiment for predictions, the merge process doesn't occur in that system/model.
+			\item Training and Testing - Data is split into two samples of training and testing, 75:25 respectively. **This also doesn't occur in the system that doesn't model with the sentiment.
+			\item Training network - The training sets, X and Y coords are used to train the network.
+			\item Testing network - The testing sets, X and Y coords of 25\% of the initial data are used to test the validation and accuracy of predictions as these contain the true data of what the predictions should be.
+			\item Outputs - Accuracy Statistics, true price data and predicted next hour prices are outputted to respective files for use on the front-end application. The model is then later used for hourly forecasting. 
+		\end{itemize}
+		
+		\textbf{Future Price Forecasting}
+		\begin{center}
+			\includegraphics[width=18cm,height=8cm]{images/Future_Predictions.png}
+			\textit{Figure 9: Price Forecasting Dataflow diagram}
+		\end{center}
+		The dataflow diagram in \textit{figure 9} shows how the forecasting system would be implemented. This dataflow shows how it will read live data of both sentiment and price data, merge, split and conduct regression using the trained neural network model to predict the next hour price.
+		\begin{itemize}
+			 \item Data merging - (Doesn't occur with the system that doesn't include sentiment in price predictions) Data is merged from both historical and live data up to 5 iterations. This is due to after the initial hour there will only be one record of price and sentiment data, in which not prediction will be made from this as there isn't sufficient amount of data.
+			 \item Prediction - This data is then fitted to the neural network model and predictions for the next time-step hour are made.
+			 \item Hour Loop - This will then proceed to loop every hour to make the hourly predictions. Historical price data will cease to be used when there are 5 or more live price records.
+			 \item Outputs - Accuracy Statistics, true price data and predicted next hour prices are ouptutted to respective files for use on the front-end application for charting.
+		\end{itemize}
+	
+		\newpage
+		\textbf{Front-end Application}
+		\begin{center}
+			\includegraphics[width=10cm,height=9cm]{images/Frontend_Application.png}
+			\newline
+			\textit{Figure 10: Front-end Application Dataflow diagram}
+		\end{center}
+		The above dataflow diagram shows the data flow for the front-end application and how the data is read into the system from the data files generated by the backend application (Neural network).
+		\begin{itemize}
+			\item Ajax Requests - These are api file requests for files hosted on the server in which the system is running on. This loads the data files into the application for use.
+			\item CSS Styling - Contains design styling for page and charts, loaded upon loading of webpage.
+			\item Charting and Tables - Accesses the loaded data from the Ajax requests and plots the data. Prediction data, only with sentiment and prices are plotted into a table. There will be separate charts and tables displaying the data from the backend that hasn't used sentiment in predictions to aid in establishing a correlation between sentiment and price and whether it affects the hourly price (Aiming to solve problem statement)
+			\item Stakeholders - There will be the four stakeholder, outline in the problem articulation section, that would be the primary users of this application.
+		\end{itemize}
+		\newpage
+		\subsection{UML Component Design}
+		
+		\subsection{Interface Design}
+		
+	\newpage 
+	\begin{center}
+		\section{Implementation}\label{implementation}
+	\end{center}
+
 		\subsection{Data collection}\label{collection}
 			\subsubsection{Price Time-series Data}
 			Historical data of Bitcoin prices can be obtained through may means, 
@@ -527,6 +693,7 @@
 	\newpage
 	
 	\section{Testing: Verification and Reflection}
+	mean bias Error
 	
 	\newpage
 	
