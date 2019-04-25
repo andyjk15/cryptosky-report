@@ -98,50 +98,42 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{Live Tweet Collection}{50}{section*.52}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Data processing}{55}{section*.53}
+\contentsline {subsection}{Data pre-processing}{55}{section*.53}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Preprocessing}{55}{section*.54}
+\contentsline {subsubsection}{Spam Filtering}{57}{section*.54}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Text Cleaning}{55}{section*.56}
+\contentsline {subsection}{Sentiment Analysis}{59}{section*.55}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Ngram based Language detection filtering}{55}{section*.57}
+\contentsline {subsubsection}{VADER}{59}{section*.56}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Spam Filtering}{55}{section*.58}
+\contentsline {subsection}{Recurrent Neural Network - LSTM}{59}{section*.57}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Naive Bayes model}{57}{section*.59}
+\contentsline {subsubsection}{Training and Testing Model}{59}{section*.58}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Sentiment Analysis}{57}{section*.60}
+\contentsline {subsubsection}{Scoring and Validation}{59}{section*.59}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{VADER}{57}{section*.61}
+\contentsline {subsection}{Future Prediction Forecasting}{59}{section*.60}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Recurrent Neural Network - LSTM}{57}{section*.62}
+\contentsline {subsection}{Main File 'Main.py'}{59}{section*.61}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Training and Testing Model}{57}{section*.63}
+\contentsline {subsection}{Miscellaneous}{59}{section*.62}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Scoring and Validation}{57}{section*.64}
+\contentsline {section}{Testing Metrics and Accuracy}{60}{section*.63}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Future Prediction Forecasting}{58}{section*.65}
+\contentsline {section}{Project Evaluation}{61}{section*.64}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Main File 'Main.py'}{58}{section*.66}
+\contentsline {section}{Discussion: Contribution and Reflection}{61}{section*.65}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Miscellaneous}{58}{section*.67}
+\contentsline {subsection}{Limitations}{61}{section*.66}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Testing Metrics and Accuracy}{59}{section*.68}
+\contentsline {section}{Conclusion and Future Improvements}{62}{section*.67}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Project Evaluation}{60}{section*.69}
+\contentsline {subsection}{Conclusion}{62}{section*.68}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Discussion: Contribution and Reflection}{60}{section*.70}
+\contentsline {subsection}{Future Improvements}{62}{section*.69}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Limitations}{60}{section*.71}
+\contentsline {section}{Appendices}{67}{section*.71}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Conclusion and Future Improvements}{61}{section*.72}
+\contentsline {subsection}{Appendix A - Project Initiation Document}{67}{section*.72}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Conclusion}{61}{section*.73}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Future Improvements}{61}{section*.74}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{Appendices}{66}{section*.76}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Appendix A - Project Initiation Document}{66}{section*.77}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Appendix B - Log book}{79}{section*.78}
+\contentsline {subsection}{Appendix B - Log book}{80}{section*.73}

@@ -1181,6 +1181,35 @@
       \verb http://api.bitcoincharts.com/v1/csv/
       \endverb
     \endentry
+    \entry{36}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=41b3b5daa9b33f52b08087b54f96f115}{%
+           family={Nolla},
+           familyi={N\bibinitperiod},
+           given={Alejandro},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Alejandro Nolla Blog}%
+      }
+      \strng{namehash}{41b3b5daa9b33f52b08087b54f96f115}
+      \strng{fullhash}{41b3b5daa9b33f52b08087b54f96f115}
+      \strng{bibnamehash}{41b3b5daa9b33f52b08087b54f96f115}
+      \strng{authorbibnamehash}{41b3b5daa9b33f52b08087b54f96f115}
+      \strng{authornamehash}{41b3b5daa9b33f52b08087b54f96f115}
+      \strng{authorfullhash}{41b3b5daa9b33f52b08087b54f96f115}
+      \field{sortinit}{6}
+      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Detecting Text Language With Python and NLTK}
+      \verb{urlraw}
+      \verb http://blog.alejandronolla.com/2013/05/15/detecting-text-language-with-python-and-nltk/
+      \endverb
+      \verb{url}
+      \verb http://blog.alejandronolla.com/2013/05/15/detecting-text-language-with-python-and-nltk/
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

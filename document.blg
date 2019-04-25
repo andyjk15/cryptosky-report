@@ -1,20 +1,20 @@
 [0] Config.pm:302> INFO - This is Biber 2.9
 [0] Config.pm:305> INFO - Logfile is 'document.blg'
-[22] biber:313> INFO - === Thu Apr 25, 2019, 20:17:38
-[39] Biber.pm:371> INFO - Reading 'document.bcf'
-[92] Biber.pm:854> INFO - Using all citekeys in bib section 0
-[103] Biber.pm:3981> INFO - Processing section 0
-[112] Biber.pm:4154> INFO - Looking for bibtex format file 'report.bib' for section 0
-[114] bibtex.pm:1468> INFO - LaTeX decoding ...
-[147] bibtex.pm:1294> INFO - Found BibTeX data source 'report.bib'
+[19] biber:313> INFO - === Thu Apr 25, 2019, 21:12:18
+[33] Biber.pm:371> INFO - Reading 'document.bcf'
+[78] Biber.pm:854> INFO - Using all citekeys in bib section 0
+[88] Biber.pm:3981> INFO - Processing section 0
+[95] Biber.pm:4154> INFO - Looking for bibtex format file 'report.bib' for section 0
+[96] bibtex.pm:1468> INFO - LaTeX decoding ...
+[127] bibtex.pm:1294> INFO - Found BibTeX data source 'report.bib'
+[184] Utils.pm:169> WARN - Name "Mairal, J., Ponce, J., Sapiro, G., Zisserman, A." has too many commas: skipping name
 [196] Utils.pm:169> WARN - year field 'Mar 13, 2016' in entry '23' is not an integer - this will probably not sort properly.
-[203] Utils.pm:169> WARN - Name "Mairal, J., Ponce, J., Sapiro, G., Zisserman, A." has too many commas: skipping name
-[266] Utils.pm:169> WARN - BibTeX subsystem: warning: comma(s) at end of name (removing)
-[266] Utils.pm:169> WARN - BibTeX subsystem: author, warning: comma(s) at end of name (removing)
-[286] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[286] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[286] Biber.pm:3809> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
-[286] Biber.pm:3815> INFO - No sort tailoring available for locale 'en-US'
-[306] bbl.pm:617> INFO - Writing 'document.bbl' with encoding 'ascii'
-[318] bbl.pm:720> INFO - Output to document.bbl
-[319] Biber.pm:110> INFO - WARNINGS: 4
+[238] Utils.pm:169> WARN - BibTeX subsystem: warning: comma(s) at end of name (removing)
+[238] Utils.pm:169> WARN - BibTeX subsystem: author, warning: comma(s) at end of name (removing)
+[257] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[257] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[257] Biber.pm:3809> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
+[257] Biber.pm:3815> INFO - No sort tailoring available for locale 'en-US'
+[275] bbl.pm:617> INFO - Writing 'document.bbl' with encoding 'ascii'
+[287] bbl.pm:720> INFO - Output to document.bbl
+[287] Biber.pm:110> INFO - WARNINGS: 4

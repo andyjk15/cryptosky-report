@@ -978,8 +978,7 @@ from tweepy import OAuthHandler
 from tweepy import Stream
 from tweepy.streaming import StreamListener
 import csv
-...
-			
+...	
 def on_data(self, data):
 	## Check time limit for under an hour - if limit reached kill script
 	if (time.time() - self.start_time) < self.limit:
@@ -1025,7 +1024,7 @@ def on_data(self, data):
 			# Check if tweet is long enough to perform polarity classification on (> 5 words (checked through tokenisation))
 			if tweetLength == True:
 				checkIfEnglish = utilityFuncs().detectLaguage(removedSpecialChars[0])
-				# Check if the text in tweet is predominatly English, if not drop
+				# Check if the text in tweet is predominantly English, if not drop
 				if checkIfEnglish == True:
 					tweetText = utilityFuncs().remove_non_ascii(removedSpacing)
 					print("Cleaned Tweet: ", tweetText)
@@ -1068,115 +1067,179 @@ def on_data(self, data):
 		...
 			\end{lstlisting}
 			
-			As for key facts about this function; the tweets length is checked to be above 5 (tokenised) due to any tweets will less words do not contain enough information to be given a proper polarity classification and almost always returns as 100\% neutral, which is of no use and will have no affect on the hours average sentiment. Entire code in the function is encapsulated in a try catch to check if data was recieved and handles non-responses and missing data by simply ignore that there was no data, unless a connection between the streamer and API is broken it otherwise exits the script.	
+			As for the key facts about this function; the length of the tweet is checked to be above 5 (tokenised) due to any tweets with fewer words will not contain enough information to be given a proper polarity classification and almost always returns as 100\% neutral, which is of no use and will have no effect on the hours average sentiment. The entire code in the function is encapsulated in a try-catch to check if data was received and handles non-responses and missing data. If there was no data the issue is ignored unless a connection between the streamer and API is broken it otherwise exits the script.	
 			
 		\newpage
-		\subsection{Data processing}\label{processing}
-			\subsubsection{Preprocessing}
+		\subsection{Data pre-processing}\label{processing}
+			
 			Various techniques and tools have been utilised throughout the development of the system to process the data appropriately so it can be parsed by VADER, spam filter and neural network. This section will cover the crucial functions that provide such functionalities and that are called throughout the system, as seen in some of the above code snippets.
-				\paragraph{Tweet Filtering}
+			\newline
+			
+			\textbf{Tweet Filtering}
+			
+			Various 'Utility Functions' have been used to initially filter out unwanted data from tweet text. These functions called by, both live tweet (\textit{tweet\_collector.py}) and historical tweet (\textit{sift\_text.py}) processing, prior any polarity classification or storing of tweet data to CSV files.
 				
 				\begin{lstlisting}[language=python, caption=Basic data filtering and processing function - defined in 'tweet\_collector.py']
 import re
 import emoji as ji
+## Key packages used
 ...
-
 class utilityFuncs():
 				
 	def cleanTweet(self, text):
 		# Function to clean tweets, removes links and special characters
 		return re.sub(r'([^0-9A-Za-z \-\%\£\$ \t])|(@[A-Za-z0-9]+)|(http\S+)', '', text), ' '.join(c for c in text if c in ji.UNICODE_EMOJI)
+		# Also removes emojis from text - later re-added due to VADER supporting emoticons
 				
 	def removeSpacing(self, text):
 		return re.sub(r'( +)', ' ', text)
+		# Removes extra spacing that may be left between words
 				
 	def fixLines(self, text):
 		return re.sub(r"([\r\n])", " ", text)
+		# Removes line breaks and new lines from text
 								
 	def remove_non_ascii(self, text):
 		return ''.join(i for i in text if ord(i)<128)
+		# User after language detections and removes non-English characters from text
+		
+	def checkLength(self, text):
+		tokens = text.split()
+		if len(tokens) <= 5:	# Tokenisation
+			return False
+		else:
+			return True
 				\end{lstlisting}
-				\paragraph{Text Cleaning}
-				\paragraph{Ngram based Language detection filtering}
+				
+		    Due to VADER being a lexicon-based sentiment analyser little data pre-processing needs conducting on the tweet text. The functions above primarily remove unnecessary text from the tweet that will either provide no insight into public opinion or can obstruct a proper classification of the sentiment - such as the existence of URLs in the given text. Additionally, the 'clean\_tweet' function removes the emojis in the given text if any are presently using the emoji package - which in turn is another lexicon that compares the given text to any emoticon contained within the lexicon. These are removed at this stage but are later re-added back to the text as VADER support emoticon classification. 
+			The last function in 'utility functions', 'checkLength' splits the text up into individual words (tokens - a process of tokenisation), this is used to check the total length of a tweet. If the tweet is less than five words it is dropped from classification, this is due to 
+			\newline
+			
+			\textbf{Language detection filtering}
+			This feature of the system is used as an additional filter for filtering out non-English tweets. As discussed in the solution approach, Tweepy/Twitter API provides a means to filter out non-English based tweets, this, however, doesn't work if the user has settings on Twitter set to be English as a prefered language and the region 'en'. Due to this non-English characters can still be within collected tweets; thus these are detected and filtered with the below function.
+			
+			\begin{lstlisting}[language=python, caption=Language detection and filter function \cite{36}]
+def detectLaguage(self, text):
+	"""
+	Calculate the probability of given text is written in several languages
+	Using nltk stopwords and comparing to all supported languages
+
+	There are other ways to identify this - TextBlob.detect_language and Ngrams
+	"""
+	language_ratios = {}
+	
+	# Split words up into tokens - tokenisation
+	tokens = wordpunct_tokenize(text)
+	
+	# Shift to lower case
+	words = [word.lower() for word in tokens]
+
+	# Compute per language in nltk number of stopwords in text
+	for language in stopwords.fileids():
+		stopwords_set = set(stopwords.words(language))
+		words_set = set(words)
+		common_elements = words_set.intersection(stopwords_set)
+
+		language_ratios[language] = len(common_elements) 
+		# Form ratio scores for each language detected from stopword comparison
+
+	ratios = language_ratios
+	highest_ratio = max(ratios, key=ratios.get)
+	# Extract highest ratio language used in given text
+
+	print("Console: Text is - ", highest_ratio)
+	sys.stdout.flush()
+
+	if highest_ratio == 'english':
+		return True
+	else:
+		return False
+	# If text is not predominately English drop tweet
+			\end{lstlisting}
+			
+			This function uses several natural languages pre-processing techniques to identify the most predominant language for a given text. It accomplishes this by first tokenising the text into tokens and converting them to lower case - this is so that the stopwords can be identified. For each of the languages supported by the Natural Language Toolkit Python package, the stopwords are identified in the text and compared to the stopwords in the language corpus' in NLTK. The ratios for the individual languages are formed, and then the predominant language identified. If the language is not predominantly English, the tweet is dropped.
+			
+			Ngrams could also be used
+			
+			\textbf{Spam filter - Tokenisation, Ngrams, Stopword removal and Stemming}
 			
 			\subsubsection{Spam Filtering}
 				\begin{lstlisting}[language=python, caption=Spam filter training Class]
-				class filterSpam(object):
+class filterSpam(object):
 				
-				def __init__(self, training_set):
-				self.training_set = training_set	
-				## initialises function and globalises training set for use in every function where needed
+	def __init__(self, training_set):
+		self.training_set = training_set	
+		## initialises function and globalises training set for use in every function where needed
 				
-				def trainFilter(self):
-				self.dataset()		## Split dataset 75:25
-				self.train()		## Train based on training dataset
+	def trainFilter(self):
+		self.dataset()		## Split dataset 75:25
+		self.train()		## Train based on training dataset
 				
-				def dataset(self):
-				self.data = pd.read_csv(self.training_set)
+	def dataset(self):
+		self.data = pd.read_csv(self.training_set)
 				
-				self.data['class'] = self.data['classes'].map({'ham': 0, 'spam': 1})
-				# Remap labels of 'Spam' and 'Ham' to 1:0 respectively
+		self.data['class'] = self.data['classes'].map({'ham': 0, 'spam': 1})
+		# Remap labels of 'Spam' and 'Ham' to 1:0 respectively
 				
-				self.data.drop(['classes'], axis=1, inplace=True)
-				# Drop old labels
+		self.data.drop(['classes'], axis=1, inplace=True)
+		# Drop old labels
 				
-				self.trainIndex, self.testIndex = list(), list()
-				for i in range(self.data.shape[0]):
-				if np.random.uniform(0, 1) < 0.75:	# Random shuffle data of 75%
+		self.trainIndex, self.testIndex = list(), list()
+		for i in range(self.data.shape[0]):
+			if np.random.uniform(0, 1) < 0.75:	# Random shuffle data of 75%
 				self.trainIndex += [i]	# Create training index
-				else:
+			else:
 				self.testIndex += [i]	# Create testing index
-				self.trainData = self.data.loc[self.trainIndex]
-				self.testData  = self.data.loc[self.testIndex]
-				# Define datasets by getting values from first 75% and then 25%
+		self.trainData = self.data.loc[self.trainIndex]
+		self.testData  = self.data.loc[self.testIndex]
+		# Define datasets by getting values from first 75% and then 25%
 				
-				self.trainData.reset_index(inplace=True)
-				self.testData.reset_index(inplace=True)		
-				# Reset indexes
+		self.trainData.reset_index(inplace=True)
+		self.testData.reset_index(inplace=True)		
+		# Reset indexes
 				
-				self.trainData.drop(['index'], axis=1, inplace=True)
-				self.testData.drop(['index'], axis=1, inplace=True)
-				# Drop old index
+		self.trainData.drop(['index'], axis=1, inplace=True)
+		self.testData.drop(['index'], axis=1, inplace=True)
+		# Drop old index
 				
-				def train(self):
-				self.spamFilter = spam_filter.classifier(self.trainData)
-				# Initialise the spam filter with the 75% dataset
+def train(self):
+	self.spamFilter = spam_filter.classifier(self.trainData)
+	# Initialise the spam filter with the 75% dataset
 				
-				self.spamFilter.train()
-				# Train
+	self.spamFilter.train()
+	# Train
 				
-				def testData_Prediction(self):
-				prediction = self.spamFilter.predict(self.testData['tweet'])
+def testData_Prediction(self):
+	prediction = self.spamFilter.predict(self.testData['tweet'])	
+	return prediction
 				
-				return prediction
+def testPrediction(self):
 				
-				def testPrediction(self):
+	# Test Spam/Ham tweets - should return True and False respectivly
+	spam = spam_filter.processTweet("Earn more than 0015 btc free No deposit No investment Free Bitcoins - Earn $65 free btc in 5 minutes bitcoin freebtc getbtc")
 				
-				# Test Spam/Ham tweets - should return True and False respectivly
-				spam = spam_filter.processTweet("Earn more than 0015 btc free No deposit No investment Free Bitcoins - Earn $65 free btc in 5 minutes bitcoin freebtc getbtc")
+	ham = spam_filter.processTweet("Bitcoin closed with some gains in month of February")
 				
-				ham = spam_filter.processTweet("Bitcoin closed with some gains in month of February")
+	hamTweet = self.spamFilter.classify(ham)
+	spamTweet = self.spamFilter.classify(spam)
 				
-				hamTweet = self.spamFilter.classify(ham)
-				spamTweet = self.spamFilter.classify(spam)
+	print("Console: ", "Spam Tweet -- ", spamTweet)
+	sys.stdout.flush()
+	print("Console: ", "Ham Tweet -- ", hamTweet)
+	sys.stdout.flush()
 				
-				print("Console: ", "Spam Tweet -- ", spamTweet)
-				sys.stdout.flush()
-				print("Console: ", "Ham Tweet -- ", hamTweet)
-				sys.stdout.flush()
+def filterStatistics(self, prediction):
+	spam_filter.metrics(self.testData['class'], prediction)
 				
-				def filterStatistics(self, prediction):
-				spam_filter.metrics(self.testData['class'], prediction)
+def testTweet(self, tweet):
 				
-				def testTweet(self, tweet):
+	processed = spam_filter.processTweet(tweet)
+	classified = self.spamFilter.classify(processed)
 				
-				processed = spam_filter.processTweet(tweet)
-				classified = self.spamFilter.classify(processed)
-				
-				return classified
+	return classified
 				\end{lstlisting}
 				
-				\paragraph{Naive Bayes model}
+				\textbf{Naive Bayes model}
 		
 		\subsection{Sentiment Analysis}
 			\subsubsection{VADER}
