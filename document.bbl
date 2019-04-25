@@ -1156,6 +1156,31 @@
       \verb https://www.analyticsindiamag.com/tensorflow-vs-theano-researchers-prefer-artificial-intelligence-framework
       \endverb
     \endentry
+    \entry{35}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=9fb73450a6ae06fd7652db34b9a3c981}{%
+           family={bitcoincharts},
+           familyi={b\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Bitcoin Charts}%
+      }
+      \strng{namehash}{9fb73450a6ae06fd7652db34b9a3c981}
+      \strng{fullhash}{9fb73450a6ae06fd7652db34b9a3c981}
+      \strng{bibnamehash}{9fb73450a6ae06fd7652db34b9a3c981}
+      \strng{authorbibnamehash}{9fb73450a6ae06fd7652db34b9a3c981}
+      \strng{authornamehash}{9fb73450a6ae06fd7652db34b9a3c981}
+      \strng{authorfullhash}{9fb73450a6ae06fd7652db34b9a3c981}
+      \field{sortinit}{6}
+      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
+      \field{labelnamesource}{author}
+      \verb{urlraw}
+      \verb http://api.bitcoincharts.com/v1/csv/
+      \endverb
+      \verb{url}
+      \verb http://api.bitcoincharts.com/v1/csv/
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

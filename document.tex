@@ -1,4 +1,4 @@
-\documentclass[oneside, 10pt]{article}
+\documentclass[oneside, 12pt]{article}
 
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -22,6 +22,34 @@
 \usepackage[acronym,toc]{glossaries}
 \usepackage[margin=1.2in]{geometry}
 \usepackage{titling}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\lstset{style=mystyle}
 
 \usepackage[style=ieee,backend=biber]{biblatex}
 \addbibresource{report.bib}
@@ -234,6 +262,8 @@
 		\begin{itemize}
 			\item ...
 		\end{itemize}
+	
+	\section{Quality Goals}
 		
 	
 	\newpage
@@ -289,13 +319,13 @@
 				\item Stopword removal: Are commonly used words (such as "the","in","a") that provide no meaning to the sentiment of a given text
 				\item Stemming: Is used to replace words with common suffixes and prefixes, as in "go" and "goes" fundamentally convey the same meaning. A stemmer will replace such words with their reduced counterparts
 				\item Term Probability Identification and Feature Extraction: This is a process that involves identifying the most frequently used words in a given text, by using a probability type approach on a pre-defined dataset which classifies a range of texts as with overall negative or positive a machine learning algorithm is trained to classify these accordingly.
-				\item Ngrams: ...
+				\item Ngrams: Are a contiguous sequence of n items from a given sample of text. The use of Ngrams in natural language processing can improve the accuracy of classification. For example: ‘Good’ and ‘Not Good’ have opposite meanings. By only using 1 token (1gram) ‘not good’ (‘not’ and ‘good’) can be incorrectly classified. As the english language contains a significant amount of 2gram type word chains using 2gram can improve the accuracy of classification.
 			\end{itemize}
 			
 			The former, seen and has been proven to provide higher accuracy than traditional machine learning approaches \cite{11}, and need little pre-processing conducted on the data as words have a pre-defined sentiment classification in a provided lexicon. Although these lexicons can be complex to create, they generally require little resources to use and alter.
 			
 			\subsubsection{Valence Aware Dictionary and sEntiment Reasoning}\label{Vader}
-				VADER is a combined lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media and works well on texts from other domains. It is capable of detecting the polarity of a given text - positivity, neutrality, and negativity \cite{12}. VADER uses a human-centric approach to sentiment analysis, combining qualitative analysis and empirical validation by using human raters to rate the level of sentiment for words in its lexicon. Vader also has emoticon support which maps these colloquialisms have pre-defined intensities in its lexicon, which makes VADER specifically suitable for the social media domain were the use of emoticons, utf-8 emojis and slang such as "Lol" and "Yolo" are prevalent within the text. Additionally, VADER is provided as a lexicon and a python library under the MIT license, this means that it is open-source software. This means that the lexicon can be altered and added to abling it to be tailored to specific topic domains. 
+				VADER is a combined lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media and works well on texts from other domains. It is capable of detecting the polarity of a given text - positivity, neutrality, and negativity \cite{12}, and also calculate the compound score which is calculated by summing the valence scores of each word in the lexicon. VADER uses a human-centric approach to sentiment analysis, combining qualitative analysis and empirical validation by using human raters to rate the level of sentiment for words in its lexicon. Vader also has emoticon support which maps these colloquialisms have pre-defined intensities in its lexicon, which makes VADER specifically suitable for the social media domain were the use of emoticons, utf-8 emojis and slang such as "Lol" and "Yolo" are prevalent within the text. Additionally, VADER is provided as a lexicon and a python library under the MIT license, this means that it is open-source software. This means that the lexicon can be altered and added to abling it to be tailored to specific topic domains. 
 				
 				VADER was constructed by examining and extracting features from three pre-existing well-established and human-validated sentiment lexicons \cite{12} - (LIWC) Linguistic Inquiry and Word Count, (ANEW) Affective Norms for English Words, and (GI) General Inquirer. This is supplemented with additional lexicon features \textit{"commonly used to express sentiment in social media text (emoticons, acronyms and slang)"} \cite{12} and uses "wisdom-of-the-crowd" approach \cite{13} to establish a point of estimations of sentiment valance for each lexical feature candidate. This was evaluated for the impact of grammatical and syntactical rules and 7,500+ lexical features, with mean valence \textit{"<> zero, and SD <= 2.5"} as a human-validated "gold-standard" sentiment lexicon. \cite{12}\textit{Section 3.1}
 				
@@ -447,6 +477,8 @@
 			\[Probability \ of \ Outcome \cap Evidence = \frac{Probability \ of \ Likelihood \ of \ evidence * Prior}{Probability \ of \ Evidence} \]
 			
 			The naive Bayes approach has many applications, especially for the topic of this project in classifying the probability occurrence of the next price. Although it is a robust algorithm has its drawbacks which make it not as suitable as a neural network for the given need of this project. The naive Bayes trap is an issue that may occur due to the size of the dataset that will be used. There are however other scenarios this algorithm could be used such as classification of spam data.\cite{32}
+			
+			\subsection{Random Forest}
 		
 	\newpage
 	
@@ -510,7 +542,7 @@
 				\textbf{Analysis of Social Media Text (4,200 Tweets)}\cite{12}
 		\end{center}
 		
-		Due to the suitability for the given domain of social media and with the customisability, due to VADER's lexicon-dictionary based approach, makes this sentiment analyser most suitable for use in this project. This analyser will be utilised as the sentiment analyser of this project due to its feature set and need for little data pre-processing before polarity classification of the provided text. \cite{11} \textit{"extract ..."}.
+		Due to the suitability for the given domain of social media and with the customisability, due to VADER's lexicon-dictionary based approach, makes this sentiment analyser most suitable for use in this project. This analyser will be utilised as the sentiment analyser of this project due to its feature set and need for little data pre-processing before polarity classification of the provided text. \cite{11} \textit{"is a widely used approach to sentiment analysis in the marketing research community, as it does not require any pre-processing or training of the classifier."}.
 		
 		This will be an intermediate system between the neural network and the data collection pre-processing system, as the later will provide the cleaned processed data for analysis and the former to feed in the classified polarity of each tweet alongside price data for model learning.
 		
@@ -521,7 +553,7 @@
 			\item Nature of an RNN - Allows for backpropagation to find partial derivatives of the error with respect to the weights after an output has occurred, to tweak the current weights of the LSTM cell. In short, allows the tweaking of weights of the network based on previously seen data by looping the same node thus influencing decisions made on current data based on old weights and errors from previous.
 			\item Nature of an LSTM over RNN - LSTMs are extensions of RNNs \cite{22} that were designed to avoid long-term dependency problems such as exploding and vanishing gradients. Weights are not only just reused but are stored in memory and are propagated through the network.
 			\item Lack of use for the project's purpose - Other papers tend to focus on machine learning techniques, other neural networks such as Multi-layer Perceptron (MPL) and standard Recurrent Neural Networks, with use of time-series data. Especially with the use of a standard RNN, not overcoming its common issues with gradient descent. Stated in related research section of the literature review, \cite{5} - \textit{"using the MLP classifier (a.k.a neural networks) showed better results than logistical regression and random forest trained models"}
-			\item Prior use for time-series data and data forecasting - Although RNN LSTM networks have been used for the prediction of Bitcoin price there are a few papers on this \cite{25}. Regardless, LSTMs have been notably used with use for time-series data forecasting due to being able to remember previous data and weights over long sequence spans \cite{22} - \textit{""}, \cite{25} - \textit{""}.
+			\item Prior use for time-series data and data forecasting - Although RNN LSTM networks have been used for the prediction of Bitcoin price there are a few papers on this \cite{25}. Regardless, LSTMs have been notably used with use for time-series data forecasting due to being able to remember previous data and weights over long sequence spans \cite{25} - \textit{"adds a great benefit in time series forecasting, where classical linear methods can be difficult to adapt to multivariate or multiple input forecasting problems"}.
 		\end{itemize}
 	
 		Therefore, a recurrent long-short-term memory neural network will be used for this project to predict the next hour interval of Bitcoin price based on previous historical prices and hourly sentiment. This system will read in historical data, both price and sentiment - depending on the network for prediction with and without sentiment, this data will be merged, split and used to trained and test the network model for use for forecasting prices. The relative sizes for the training and test data can be decided upon system creation, but the standard sizing for training neural networks is 75:25 respectively.
@@ -534,13 +566,15 @@
 				\hline
 				\multirow{6}{*}{TensorFlow} & Supports reinforcement learning and other algorithms & Doesn’t support matrix operations \\ & Offers computational graph abstraction & Doesn't have pertained models \\ & Faster compile time than Theano & Drops to Python to load each new training batch \\ & Data and model parallelism & Doesn't support dynamic typing on large scale projects \\ & Can be deployed over multiple CPUs and GPUs & \\
 				\hline
-				\multirow{4}{*}{Theano} & Computational Graph Abstraction & Is low-level \\ & Has multiple high-level wrappers similar to Keras & Can only be deployed to a single GPU \\ &  & Much slower compile times on large models than competition \\ &  & Unhelpful and vague error messages \\ 
+				\multirow{5}{*}{Theano} & Computational Graph Abstraction & Is low-level \\ & Has multiple high-level wrappers similar to Keras & Can only be deployed to a single GPU \\ &  & Much slower compile times on large models than competition \\ &  & Unhelpful and vague error messages \\ & & Development ceased in 2017 \\
 				\hline
 				\multirow{3}{*}{Pytorch} & Graph definition is more imperative and dynamic than other frameworks & Not as widley adopted as TensorFlow \\ & Graph computation defined at runtime, allowing standard popular IDEs to support it & Visualisation is not as robust as TensorBoard \\ & Natively support common python deployment frameworks such as Flask & Not as deployable as TensorFlow, doesn't supper gRPC \\ & & \\
 			\end{tabular}}
 			
 			\textbf{Comparison between TensorFlow, Theano and Pytorch}\cite{34}
 		\end{table}
+	
+		Due to the continued support and development of TensorFlow, the board community and support of a high-level wrapper - Keras, this library will be used for this project. Although, Pytorch is a good alternative it is not as easy to use as implement when compared to TensorFlow using Keras.
 		
 		\subsection{Price Forecasting}
 		This part of the system will be responsible for prediction the next time-step of Bitcoin's price for the next hour based on past data. It will use the trained model from the neural network to predict the future hour price when given live hourly data, price and sentiment. The system will also have a look back of 5 which will allow it to see historical data to aid in the predictions. This will occur on the hour every hour when new data is received and processed, this data will also be merged and the split into training and testing data. The sizing can be decided upon system creation, but the standard sizing for training is 75:25, training and testing respectively.
@@ -567,6 +601,7 @@
 		%	\item Neural Network - Tensorflow, Keras, Sc
 			
 		%\end{itemize}
+		\newpage
 		
 		\subsection{Data flow Overview}\label{data-flow}
 		To get an understanding of how the system will be put together, a dataflow diagram is a useful method for view how systems are integrated and how data could possibly flow through a system.
@@ -651,7 +686,6 @@
 			 \item Outputs - Accuracy Statistics, true price data and predicted next hour prices are outputted to respective files for use on the front-end application for charting.
 		\end{itemize}
 	
-		\newpage
 		\textbf{Front-end Application}
 		\begin{center}
 			\includegraphics[width=10cm,height=9cm]{images/Frontend_Application.png}
@@ -665,8 +699,8 @@
 			\item Charting and Tables - Accesses the loaded data from the Ajax requests and plots the data. Prediction data, only with sentiment and prices are plotted into a table. There will be separate charts and tables displaying the data from the backend that hasn't used sentiment in predictions to aid in establishing a correlation between sentiment and price and whether it affects the hourly price (Aiming to solve the problem statement)
 			\item Stakeholders - There will be the four stakeholders, outlined in the problem articulation section, that would be the primary users of this application.
 		\end{itemize}
-		\newpage
-		\subsection{UML Component Design}
+
+		%\subsection{UML Component Design}
 		
 		\subsection{Interface Design}
 		
@@ -678,25 +712,470 @@
 		\begin{center}
 			\textit{Figure 10: Interface design}
 		\end{center}
-		Figure 10 above shows the basic idea of the interface design that will be presented to the stakeholders and aims to be the interface that these stakeholders will use to aid in their market decisions of Bitcoin. The interface, although simplistic, provides all the necassary information that any of these stakeholders would need, it also provides information to allow visual comparision on how sentiment affects the hourly price of Bitcoin, represented as the two charts.
+		\textit{Figure 10} above shows the basic idea of the interface design that will be presented to the stakeholders and aims to be the interface that these stakeholders will use to aid in their market decisions of Bitcoin. The interface, although simplistic, provides all the necessary information that any of these stakeholders would need, it also provides information to allow visual comparison on how sentiment affects the hourly price of Bitcoin, represented as the two charts. The comparison will aid in solving the problem statement later in the conclusion of the project.
 		
 	\newpage 
 	\begin{center}
 		\section{Implementation}\label{implementation}
 	\end{center}
-
-		\subsection{Data collection}\label{collection}
-			\subsubsection{Price Time-series Data}
-			Historical data of Bitcoin prices can be obtained through may means, 
+		This section will outline the method and process of development of this system to satisfy the chosen solution, technical specification and the problem statement. Each section of the system will be outlined and discussed with relevant codes snippets of essential methods from the system to highlight the processing of data throughout.
+		\newline
 		
+		\subsection{Data collection}\label{collection}
+			\subsubsection{Price Time-Series Historical Data}
+			Historical price data were extracted from a CSV historical price tracker, \textit{Bitcoin Charts} \cite{35}. This tracker provided the historical data from the three exchanges used for Live price collection - Coinbase, Bitfinex and Gemini, since the exchanges supported the cryptocurrency. The data used spans from \textit{2018-01-06} to \textit{2019-01-06}.
+			
+			\begin{lstlisting}[language=Python, caption=Historical price collection and averaging per exchange]
+...
+coinbase = pd.read_csv('coinbase_btcusd.csv')
+bitfinex = pd.read_csv('bitfinex_btcusd.csv')
+gemini = pd.read_csv('gemini_btcusd.csv')
+			
+coinbase.drop(columns=["Currency", "24h Open (USD)", "24h High (USD)", "24h Low (USD)"], axis=1, inplace=True)
+			
+coinbase.columns = ["timestamp", "price"]
+			
+coinbase['timestamp'] = pd.to_datetime(coinbase['timestamp'])
+			
+coinbase = coinbase.set_index('timestamp').resample('1D').mean().resample('1H').mean()
+... # similar code for the other 2 exchanges
+			
+data.set_index(coinbase['timestamp'])
+for i in data:
+	data['price'] = (coinbase['price'][i] + gemini['price'][i] + bitfinex['price'][i])/3
+			
+data = data.fillna(method='backfill')
+data = data.round(3)
+			\end{lstlisting}
+			
+			Due to each of the hourly prices in each CSV for each exchange were averaged from the \textit{'high'}, \textit{'mid'} and \textit{low} prices, the data from each exchange only needed to be averaged together. This data is averaged and then saved to a CSV containing historical prices of Bitcoin for the past year.
+			
+			\subsubsection{Price Time-Series Live Data}
+			Live price data, as described in the solution approach, were extracted every hour from three exchanges - Coinbase, Bitfinex and Gemini were chosen for providing this data due to being the most popular exchange platforms that provide an API for retrieving live price data.
+			
+			Key packages used:
+			\begin{lstlisting}[language=Python, caption=]
+import requests
+				
+from coinbase.wallet.client import Client
+				
+from dotenv import load_dotenv
+from pathlib import Path 
+env_path = Path('.')/'data_collector/prices/config/coinbase.env'
+load_dotenv(dotenv_path=env_path)
+			\end{lstlisting}
+			
+			\textbf{\textit{Requests}} was used to make the API endpoint calls to obtain the response that contained the three prices for the hour needed.
+			
+			The \textbf{\textit{Coinbase}} package was mandatory for establishing a connection with the Coinbase API, and regardless this exchange was still used as it is regarded as the most popular exchange to the general public with one of the highest flow of traffic through the site to purchase cryptocurrencies.
+			
+			Both the \textbf{\textit{dotenv}} and \textbf{\textit{pathlib}} packages were used to extract the API keys - access and secret keys, from the relevant \textit{'.env'} file used alongside the Coinbase package for connection to the Coinbase API.
+			
+			The \textit{'high'}, \textit{'mid'} and \textit{low} prices were extracted from the endpoint response and averaged to provide an overall hourly price per exchange.
+			
+			\begin{lstlisting}[language=Python, caption=Extraction of Price from exchanges]				
+def coinbase():
+				
+	api_key = keys().api_key
+	api_secret = keys().api_secret
+				
+	try:
+		client = Client(api_key, api_secret)
+		repsonse = client.get_spot_price(currency_pair = 'BTC-USD')
+		price = (float(repsonse['amount']))
+		price = round(price, 3)
+		return price
+	except KeyError as e:
+		print("Error: %s" % str(e))
+		sys.stdout.flush()
+		price = 0
+		return price
+				
+def bitfinex():
+				
+	try:
+		response = requests.request("GET", "https://api.bitfinex.com/v1/pubticker/btcusd")
+		response = json.loads(response.text)
+				
+		price = (float(response['low'])+ float(response['mid']) + float(response['high']))/3
+		price = round(price, 3)
+		return price
+	except KeyError as e:
+		print("Error: %s" % str(e))
+		sys.stdout.flush()
+		price = 0
+		return price
+				
+def gemini():
+	... # Exact code to bitfinex()
+			\end{lstlisting}
+			
+			The above code shows how this was implemented as a system for the price extraction from the APIs.
+			
+			These functions are called every hour by a master function which uses the averaged price from each exchange to average and creates a fair, unbiased hourly price, which is the saved to a CSV containing the live unbiased price for the hour along with the time of creation. The below code shows how this is implemented:
+			
+			\begin{lstlisting}[language=Python, caption=Creation of the unbiased hourly price]
+def collector(priceCSV, fieldnames):
+				
+	now = datetime.now()
+				
+	coinbase_P = coinbase()
+	bitfinex_P = bitfinex()
+	gemini_P = gemini()
+				
+	if coinbase_P == 0 or bitfinex_P == 0 or gemini_P == 0:
+		if coinbase_P and bitfinex_P == 0:
+			averagePrice = gemini_P
+			return
+		elif coinbase_P and gemini_P == 0:
+			averagePrice = bitfinex_P
+			return
+		elif bitfinex_P and gemini_P == 0:
+			averagePrice = coinbase_P
+			return
+		averagePrice = (coinbase_P + bitfinex_P + gemini_P)/2
+	else:
+		averagePrice = (coinbase_P + bitfinex_P + gemini_P)/3
+				
+	averagePrice = round(averagePrice, 3)
+			\end{lstlisting}
+			
+			\subsubsection{Historical Tweet Collection}
+			Historical tweets were obtained directly from the Twitter API through a simple Curl command for the given date range of the past year. Multiple accounts were created to obtain the amount of data needed, as detailed in the data gathering section under the solution approach. Due to the vast amount need, 5 tweets averaged per hour for the past year would require 1.2 requests per day (40320 total to get a whole year's worth), totalling 9,050,000 tweets. As this was highly unfeasible with the API access available for this project, 1 tweet per hour (25 per day, 1 request per 4 days) was obtained rather than the average, which resulted in only ~92 requests needed to get the required data. 
+			
+			\begin{lstlisting}[language=, caption=Sample Curl request - data saved to json and python scripted called to process data]
+curl --request POST \
+	--url https://api.twitter.com/1.1/tweets/search/fullarchive/boop.json \
+	--header 'authorization: Bearer TOKEN' --header 'content-type: application/json' \
+	--data '{"query": "bitcoin", "maxResults":100, "fromDate":"201904050000", "toDate":"201904050200"}' -o data_collector/twitter/temp_hist_tweets.json \
+	&& python3 data_collector/twitter/sift_text.py
+			\end{lstlisting}
+			
+			These tweets are processed through the spam filter to detect if they were included unwanted text, cleaned and a polarity classification assigned to each for each hour. The process of how both the spam classification, pre-processing of the data and polarity classifications work will be detailed in their relevant sections of the system below.
+			
+			\begin{lstlisting}[language=Python, caption=Sift-text python script - used alongside Curl command in Listing 4]
+import tweet_collector	## pre-processing functions
+import spam_filter			## spam filter classification
+import analysis_engine.sentiment_analysis as sentiment_analysis	
+## Sentiment analysis and polarity classification (symbolic link to file)
+			
+def processTweet(tweet, tweetFilter):
+			
+	now = datetime.datetime.now()
+				
+	#Data preprocessing
+	removedLines = tweet_collector.utilityFuncs().fixLines(tweet)
+	removedSpecialChars = tweet_collector.utilityFuncs().cleanTweet(removedLines)
+	removedSpacing = tweet_collector.utilityFuncs().removeSpacing(removedSpecialChars[0])
+	tweetLength = tweet_collector.utilityFuncs().checkLength(removedSpacing)
+			
+	if tweetLength == True:
+	## Drop tweet if too short
+				
+		##Check if the tweet is predominantly English				
+		checkIfEnglish = tweet_collector.utilityFuncs().detectLaguage(removedSpecialChars[0])
+			
+			
+		if checkIfEnglish == True:
+			## Remove non-English Characters
+			tweetText = tweet_collector.utilityFuncs().remove_non_ascii(removedSpacing)
+			print("Cleaned Tweet: ", tweetText)
+			sys.stdout.flush()
+			
+			cleanedTweet = tweetText+' '+removedSpecialChars[1]
+			
+			## Check with spam filter - drop if classified as spam
+			classification = tweetFilter.testTweet(cleanedTweet)
+			
+			if classification == False:
+				## Perform Sentiment Analysis
+				ovSentiment, compound = analyser.get_vader_sentiment(cleanedTweet)
+							
+				try:
+					## Save to historical tweets file
+					with open('data_collector/historical_tweets.csv', mode='a') as csv_file:
+						writer = csv.DictWriter(csv_file, fieldnames=['created_at', 'tweet', 'sentiment', 'compound'])
+						writer.writerow({'created_at': now.strftime("%Y-%m-%d %H:%M"), 'tweet': cleanedTweet, 'sentiment': ovSentiment, 'compound': compound})
+						return True
+				except BaseException as exception:
+					print("Error: %s" % str(exception))
+					sys.stdout.flush()
+					return False
+			else:
+	.... # other finished else statements with print statements
+			\end{lstlisting}
+			
+			As detailed in the comments for the code, this function conducts multiple methods on the data, all of which are predefined in other files. These are not redefined in this function to reduce code duplication throughout the system and hence are imported at the beginning of the file. Due to the nature of spam filtering tweets were inevitably removed; therefore a few hours were missing data. This resolved by making another request for that specific hour and averaging the sentiment for the given hour to fill missing data.
+			
+			\subsubsection{Live Tweet Collection}
+			Live tweets were obtained through the use of the Tweepy package to stream current tweets per hour from the Twitter API. Spam filter detection,, data pre-processing and language detection are also conducted on this data and are defined within this python script \textit{'tweet\_collector.py'}, these functions will be described in the relevant sections in Data processing section.
+			
+			When this script, \textit{'tweet\_collector.py'}, is ran it firstly initialises the CSV files for storing tweets and tweets that have been assigned polarities by the VADER. More importantly it initialises the spam filter and trains it based on the pre-labelled spam dataset.
+			\begin{lstlisting}[language=python, caption=Spam filter initialisation and training functions]
+## In __main__ when script is first ran
+...
+			
+	tweetFilter = filterSpam(training_set)
+	tweetFilter.trainFilter()
+	## Initialise with loaded training_set and train
+			
+	prediction = tweetFilter.testData_Prediction()
+	# test classification model with test tweets
+			
+	tweetFilter.filterStatistics(prediction)
+	# Print metric accuracys for test data
+			
+	tweetFilter.testPrediction()
+	# Test classifier with hard specified tweets - to check if it correctly classifies
+			\end{lstlisting}
+			
+			Said functions relate to a function defined under the \textit{filterSpam} class which are used to create the training and test datasets. This function will be described in the Spam Filtering section below.
+			
+			The streaming of tweets are handled by the Tweepy package and is first initialised upon starting of the python script. The streaming method works by establishing a listener and authenticated with the Twitter API; it then listens on that connection for data. This streamer can also filter on language and a specified hashtag which is loaded from a \textit{'.env'} file also containing the API keys for authentication.
+			\newline
+			
+			
+			\begin{lstlisting}[language=python, caption=Tweepy Streamer setup]
+...# in __main__ #Code ran first on script run
+	twitter_streamer = Streamer()
+	twitter_streamer.stream_tweets(tweets_file, temp_tweets, hashtag, tweetFilter, analyser)
+				
+#========================================
+	class Streamer():
+				
+		def __init__(self):
+			pass
+			# Initialise stream object
+				
+		def stream_tweets(self, tweets_file, temp_tweets, hashtag, tweetFilter, analyser):
+			listener = Listener(tweets_file, temp_tweets, tweetFilter, analyser)
+			auth = OAuthHandler(keys().api_key, keys().api_secret)
+			# Load API keys from env file and set auth
+				
+			print("Console: ", "Authorising with twitter API")
+			sys.stdout.flush()
+				
+			auth.set_access_token(keys().access_token, keys().access_secret)
+			# Set access keys
+						
+			print("Console: ", "Streaming Tweets")
+			sys.stdout.flush()
+				
+			stream = Stream(auth, listener, tweet_mode='extended')
+			stream.filter(languages=["en"], track=hashtag)
+			## Execute streamer and filter for only English region tweets and by specified hashtag ('Bitcoin')
+			\end{lstlisting}
+			
+			Once the listener and streamer are declared, and Tweepy begins listening all data is processed through the \textit{on\_data} method. In this function, the tweet is extracted from the response and performs data pre-processing, language detection, spam classification and sentiment analysis on the data. Additionally, there is an initial time interval that checks for a time limit - this is used to ensure that the script runs for just under an hour and restarts every hour. This allows the average of the gathered tweets' sentiment to be summed for that hour and then used for the network price predictions. 
+			
+			The tweet text can be nested in multiple attributes in the response; this depends on a few factors of what the tweet is and how it was posted on Twitter. If a user retweeted the tweet, the text of the tweet would be nested under \textit{'retweeted\_status'} in the JSON response, also there is a check to see if the tweets are above the original twitter tweet character limit (140 characters). This is a possible legacy parameter in the Twitter API but is checked upon data response. If an attribute \textit{'extended\_tweet'} exists the character limit for the tweet exceeds 140 but is under the 280 characters hard limit of Twitter, this exact filtering is the same if it in a non-retweeted tweet.
+			\newline
+			
+			\begin{lstlisting}[language=python, caption=Tweepy Stream: 'on\_data' method]
+import spam_filter
+import analysis_engine.sentiment_analysis as sentiment_analysis
+from tweepy import OAuthHandler
+from tweepy import Stream
+from tweepy.streaming import StreamListener
+import csv
+...
+			
+def on_data(self, data):
+	## Check time limit for under an hour - if limit reached kill script
+	if (time.time() - self.start_time) < self.limit:
+			
+		now = datetime.now() + timedelta(hours=1)
+		## Sets current time, add 1 hour due to script finished before the completed hour is finished
+			
+		data = json.loads(data)
+					
+		# Tweet Extraction from response
+		try:
+			# Check if tweet is a retweet
+			if 'retweeted_status' in data:
+				if 'extended_tweet' in data['retweeted_status']:
+				#if tweet is over the 140 word limit
+					text = data['retweeted_status']['extended_tweet']['full_text']
+					print("Uncleaned Tweet:", text)
+					sys.stdout.flush()
+				else:
+					text = data['retweeted_status']['text']
+					print("Uncleaned Tweet:", text)
+					sys.stdout.flush()
+			else:
+				# Else if a normal Tweet
+				if 'extended_tweet' in data:
+					# If tweet is over 140 word limit
+					text = data['extended_tweet']['full_text']
+					print("Uncleaned Tweet:", text)
+					sys.stdout.flush()
+				else:
+					# Else if not found in nested attributes look in top-level
+					text = data['text']
+					print("Uncleaned Tweet: ", text)
+					sys.stdout.flush()
+			
+			# Data cleaning and pre-processing prior to polarity classification
+			removedLines = utilityFuncs().fixLines(text)
+			removedSpecialChars = utilityFuncs().cleanTweet(removedLines)
+			removedSpacing = utilityFuncs().removeSpacing(removedSpecialChars[0])
+			
+			tweetLength = utilityFuncs().checkLength(removedSpacing)
+						
+			# Check if tweet is long enough to perform polarity classification on (> 5 words (checked through tokenisation))
+			if tweetLength == True:
+				checkIfEnglish = utilityFuncs().detectLaguage(removedSpecialChars[0])
+				# Check if the text in tweet is predominatly English, if not drop
+				if checkIfEnglish == True:
+					tweetText = utilityFuncs().remove_non_ascii(removedSpacing)
+					print("Cleaned Tweet: ", tweetText)
+					sys.stdout.flush()
+								
+					# re-combine emojis onto end of tweet (Due to VADER supporting emoticon sentiment assignment)
+					cleanedTweet = tweetText+' '+removedSpecialChars[1]
+			
+					## Check if spam, drop if classified as such
+					classification = self.tweetFilter.testTweet(cleanedTweet)
+			
+					if classification == False:
+						## Perform Sentiment Analysis using VADER
+						ovSentiment, compound = self.analyser.get_vader_sentiment(cleanedTweet)
+									
+						# Save date/hour, tweet text, highest sentiment score from Positive or Negative and compound score
+						try:
+							# temp file which is used at end of hour streaming to average sentiment for hour
+							with open(temp_tweets, mode='a') as csv_file:
+								writer = csv.DictWriter(csv_file, fieldnames=temp_fieldnames)
+								writer.writerow({'created_at': now.strftime("%Y-%m-%d %H:%M:%S"), 'tweet': cleanedTweet, 'sentiment': ovSentiment, 'compound': compound})
+						except BaseException as exception:
+								print("1 Error: %s" % str(exception))
+								sys.stdout.flush()
+									
+						# Save date/hour, tweet text, highest sentiment score from Positive or Negative and compound score
+						try:
+							# tweet file for storing all collected tweets from every hour
+							with open(tweets_file, mode='a') as csv_file:
+								writer = csv.DictWriter(csv_file, fieldnames=fieldnames_tweet)
+								writer.writerow({'created_at': now.strftime("%Y-%m-%d %H:%M:%S"), 'tweet': cleanedTweet, 'sentiment': ovSentiment, 'compound': compound})
+						except BaseException as exception:
+							print("2 Error: %s" % str(exception))
+							sys.stdout.flush()
+					else:
+						print("Console: ", "Tweet is spam. Not storing tweet in dataset")
+						sys.stdout.flush()
+				...
+			... # Closing Else statments with print statments for when the tweet doesn't meet criteria
+		...
+			\end{lstlisting}
+			
+			As for key facts about this function; the tweets length is checked to be above 5 (tokenised) due to any tweets will less words do not contain enough information to be given a proper polarity classification and almost always returns as 100\% neutral, which is of no use and will have no affect on the hours average sentiment. Entire code in the function is encapsulated in a try catch to check if data was recieved and handles non-responses and missing data by simply ignore that there was no data, unless a connection between the streamer and API is broken it otherwise exits the script.	
+			
+		\newpage
 		\subsection{Data processing}\label{processing}
 			\subsubsection{Preprocessing}
+			Various techniques and tools have been utilised throughout the development of the system to process the data appropriately so it can be parsed by VADER, spam filter and neural network. This section will cover the crucial functions that provide such functionalities and that are called throughout the system, as seen in some of the above code snippets.
 				\paragraph{Tweet Filtering}
+				
+				\begin{lstlisting}[language=python, caption=Basic data filtering and processing function - defined in 'tweet\_collector.py']
+import re
+import emoji as ji
+...
+
+class utilityFuncs():
+				
+	def cleanTweet(self, text):
+		# Function to clean tweets, removes links and special characters
+		return re.sub(r'([^0-9A-Za-z \-\%\£\$ \t])|(@[A-Za-z0-9]+)|(http\S+)', '', text), ' '.join(c for c in text if c in ji.UNICODE_EMOJI)
+				
+	def removeSpacing(self, text):
+		return re.sub(r'( +)', ' ', text)
+				
+	def fixLines(self, text):
+		return re.sub(r"([\r\n])", " ", text)
+								
+	def remove_non_ascii(self, text):
+		return ''.join(i for i in text if ord(i)<128)
+				\end{lstlisting}
 				\paragraph{Text Cleaning}
 				\paragraph{Ngram based Language detection filtering}
 			
 			\subsubsection{Spam Filtering}
-				\paragraph{Tweet Processing}
+				\begin{lstlisting}[language=python, caption=Spam filter training Class]
+				class filterSpam(object):
+				
+				def __init__(self, training_set):
+				self.training_set = training_set	
+				## initialises function and globalises training set for use in every function where needed
+				
+				def trainFilter(self):
+				self.dataset()		## Split dataset 75:25
+				self.train()		## Train based on training dataset
+				
+				def dataset(self):
+				self.data = pd.read_csv(self.training_set)
+				
+				self.data['class'] = self.data['classes'].map({'ham': 0, 'spam': 1})
+				# Remap labels of 'Spam' and 'Ham' to 1:0 respectively
+				
+				self.data.drop(['classes'], axis=1, inplace=True)
+				# Drop old labels
+				
+				self.trainIndex, self.testIndex = list(), list()
+				for i in range(self.data.shape[0]):
+				if np.random.uniform(0, 1) < 0.75:	# Random shuffle data of 75%
+				self.trainIndex += [i]	# Create training index
+				else:
+				self.testIndex += [i]	# Create testing index
+				self.trainData = self.data.loc[self.trainIndex]
+				self.testData  = self.data.loc[self.testIndex]
+				# Define datasets by getting values from first 75% and then 25%
+				
+				self.trainData.reset_index(inplace=True)
+				self.testData.reset_index(inplace=True)		
+				# Reset indexes
+				
+				self.trainData.drop(['index'], axis=1, inplace=True)
+				self.testData.drop(['index'], axis=1, inplace=True)
+				# Drop old index
+				
+				def train(self):
+				self.spamFilter = spam_filter.classifier(self.trainData)
+				# Initialise the spam filter with the 75% dataset
+				
+				self.spamFilter.train()
+				# Train
+				
+				def testData_Prediction(self):
+				prediction = self.spamFilter.predict(self.testData['tweet'])
+				
+				return prediction
+				
+				def testPrediction(self):
+				
+				# Test Spam/Ham tweets - should return True and False respectivly
+				spam = spam_filter.processTweet("Earn more than 0015 btc free No deposit No investment Free Bitcoins - Earn $65 free btc in 5 minutes bitcoin freebtc getbtc")
+				
+				ham = spam_filter.processTweet("Bitcoin closed with some gains in month of February")
+				
+				hamTweet = self.spamFilter.classify(ham)
+				spamTweet = self.spamFilter.classify(spam)
+				
+				print("Console: ", "Spam Tweet -- ", spamTweet)
+				sys.stdout.flush()
+				print("Console: ", "Ham Tweet -- ", hamTweet)
+				sys.stdout.flush()
+				
+				def filterStatistics(self, prediction):
+				spam_filter.metrics(self.testData['class'], prediction)
+				
+				def testTweet(self, tweet):
+				
+				processed = spam_filter.processTweet(tweet)
+				classified = self.spamFilter.classify(processed)
+				
+				return classified
+				\end{lstlisting}
+				
 				\paragraph{Naive Bayes model}
 		
 		\subsection{Sentiment Analysis}
@@ -707,14 +1186,33 @@
 			Dropouts?
 			\subsubsection{Scoring and Validation}
 			Loss?
-			\subsubsection{Future Prediction Forecasting}
-			
+		\subsection{Future Prediction Forecasting}
+		
+		
+		\subsection{Main File 'Main.py'}
+		
+		\subsection{Miscellaneous}
+		
+		API keys for accessing the Twitter API - use by Tweepy to access said API, along with loading the defined hashtag filtering. This parameter allows for the streaming of the hashtag specified, as for this project it is set for the \textit{'\#Bitcoin'} and \textit{'\#bitcoin'} hashtags.
+		\begin{lstlisting}[language=python, caption=keys class - loads API keys for access]
+		if __name__ == '__main__':
+		
+		...
+		hashtag = keys().currency_hashtags
+		hashtag = hashtag.split(', ')
+		\end{lstlisting}	
 	\newpage
 	
-	\section{Testing: Verification and Reflection}
+	\section{Testing Metrics and Accuracy}
 	mean bias Error
 	
 	\newpage
+	
+	\section{Project Evaluation}
+	Reflection
+	
+	Quality
+	
 	
 	\section{Discussion: Contribution and Reflection}
 	\subsection{Limitations}
