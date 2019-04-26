@@ -478,7 +478,35 @@
 			
 			The naive Bayes approach has many applications, especially for the topic of this project in classifying the probability occurrence of the next price. Although it is a robust algorithm has its drawbacks which make it not as suitable as a neural network for the given need of this project. The naive Bayes trap is an issue that may occur due to the size of the dataset that will be used. There are however other scenarios this algorithm could be used such as classification of spam data.\cite{32}
 			
-			\subsection{Random Forest}
+			\subsection{Bag Of Words}
+			The Bag Of Words algorithm counts the occurance ('Term-Frequency') of a word in a given text or document. The counts allow the comparison for text classification and is used prior to TF-IDF (detailed below) to aid in identifying the probability of words in a given text and classify accordingly. \cite{33}
+			
+			\[P(w) \ and\ P(w|spam) = \frac{Total\ number\ of\ occurrences\ of\ w\ in\ dataset}{Total\ number\ of\ words\ in\ dataset}\]
+			
+			\subsection{TF-IDF}
+			Stands for Term Frequency-Inverse Document Frequency is another way similar to Bag of Words that are used to judge the topic of a given text. Each word is given a weight (relevance not frequency) for how many times it occurs in the given text \cite{33}. 
+			Term-frequency measures the number of times that a word appears in the text, but due to words such as 'and', 'the' and 'a' can frequently appear in text Inverse Document Frequency is used to change the weight of words that appear the most. Therefore words that appear the most are signalled to be less important and valuable, and therefore will not be used for classifications when used with such models as Naive Bayes for a given purpose. \cite{33}
+			\newline
+			
+			IDF is defined as:
+			
+			\[IDF(w) = log\frac{Total\ number\ of\ messages}{Total\ number\ of\ messages\ containing\ w}\]
+			
+			TF-IDF is thus defined as both:
+			
+			\[P(w) = \frac{TF(w)*IDF(w)}{\sum _{a\ words\ x\ \epsilon\ train\ dataset} TF(x)*IDF(x)}\]
+			
+			\[P(w|spam) = \frac{TF(w)*IDF(w)}{\sum _{a\ words\ x\ \epsilon\ train\ dataset} TF(x|spam)*IDF(x)}\]
+				
+			\cite{34}
+			
+			\subsection{Addictive Smoothing}
+			Used alongside Bag Of Words, is a method of handling data that is in the test data but not in the training dataset. In case of $P(w)$ it would evaluate to 0, which will make the $P(w|spam)$ undefined as it will not be able to classify the word. Addictive smoothing tackles this by adding a number $\alpha$ to the numerator, and adding $alpha$ time the number of classes over the probability that is found in the denominator. \cite{34}
+			\newline
+			
+			For TF-IDF:
+			
+			\[P(w|spam) = \frac{TF(w)*IDF(w) + \alpha}{\sum _{a\ words\ x\ \epsilon\ train\ dataset} TF(x|spam)*IDF(x) + \alpha\sum_{a\ words\ x\ \epsilon\ train\ dataset}}\]
 		
 	\newpage
 	
@@ -503,7 +531,7 @@
 		\textbf{Tweets}
 		\newline
 		\newline
-		Historical tweets can be obtained through the Twitter API, and however is not a feature of the Tweepy package - \textit{not mentioned or method on official Tweepy Documentation} \cite{33}. The Twitter API, as explained in the Literature review, allows for historical tweets to be extracted from the platform, 100 per request and a maximum of 50 requests per month. This proposes an issue with not providing enough data, where the sentiment will need to be calculated per hour. Simply put, for a year of hourly price data, there will be 9050 records. Therefore the equivalent will be required for sentiment; however, the sentiment will be the average the sentiment per hour of tweets. Using a single request with 100 tweets per hour, per hour; 905,000 tweets will need to be extracted to provide the data required. A solution to this issue could be to use and create multiple accounts and manually extract data from the API and merge. Another option is the pay for the data from 3rd party companies who have access to the Enterprise API and can pull more data, 2000 per request \\cite{7}\cite{8}. Due to the price for data of these 3rd parties the former could be a suitable, but more time-consuming option. 
+		Historical tweets can be obtained through the Twitter API, and however is not a feature of the Tweepy package - \textit{not mentioned or method on official Tweepy Documentation} \cite{35}. The Twitter API, as explained in the Literature review, allows for historical tweets to be extracted from the platform, 100 per request and a maximum of 50 requests per month. This proposes an issue with not providing enough data, where the sentiment will need to be calculated per hour. Simply put, for a year of hourly price data, there will be 9050 records. Therefore the equivalent will be required for sentiment; however, the sentiment will be the average the sentiment per hour of tweets. Using a single request with 100 tweets per hour, per hour; 905,000 tweets will need to be extracted to provide the data required. A solution to this issue could be to use and create multiple accounts and manually extract data from the API and merge. Another option is the pay for the data from 3rd party companies who have access to the Enterprise API and can pull more data, 2000 per request \cite{7}\cite{8}. Due to the price for data of these 3rd parties the former could be a suitable, but more time-consuming option. 
 		
 		Live tweets can be collected by two methods from Twitter, from the Twitter API and using Twitter Python package such as Tweepy, detailed in the Literature review. Additionally, the limitations of the Twitter API are also discussed in the literature review which states how the Twitter API has a tiering system: Standard, Premium and Enterprise. Each tier has different levels of access to the API and can extract varying amounts of data from the platform. Thus concluding the section in the Literature review, the Twitter API will not be used for the extraction and streaming of live tweets due to it being restricted to Enterprise users. Therefore, Tweepy will be used to set up a looping authenticated streaming solution with the Twitter API which will allow the access of current recurring data. Natural language pre-processing will be apart of most systems in this project. Techniques such as tokenisation, stemming, stopword removal and character filtering will be prevalent, as these will be used to remove unwanted data and to sanitise the data for classification.
 		
@@ -571,7 +599,7 @@
 				\multirow{3}{*}{Pytorch} & Graph definition is more imperative and dynamic than other frameworks & Not as widley adopted as TensorFlow \\ & Graph computation defined at runtime, allowing standard popular IDEs to support it & Visualisation is not as robust as TensorBoard \\ & Natively support common python deployment frameworks such as Flask & Not as deployable as TensorFlow, doesn't supper gRPC \\ & & \\
 			\end{tabular}}
 			
-			\textbf{Comparison between TensorFlow, Theano and Pytorch}\cite{34}
+			\textbf{Comparison between TensorFlow, Theano and Pytorch}\cite{36}
 		\end{table}
 	
 		Due to the continued support and development of TensorFlow, the board community and support of a high-level wrapper - Keras, this library will be used for this project. Although, Pytorch is a good alternative it is not as easy to use as implement when compared to TensorFlow using Keras.
@@ -659,6 +687,8 @@
 			\item Storage - The polarity classification and tweets are then saved to their relevant CSV files for historical and live data.
 		\end{itemize}
 	
+	\newpage
+	
 		\textbf{Neural Network}
 		\begin{center}
 			\includegraphics[width=17cm,height=12cm]{images/Neural_Network.png}
@@ -723,7 +753,7 @@
 		
 		\subsection{Data collection}\label{collection}
 			\subsubsection{Price Time-Series Historical Data}
-			Historical price data were extracted from a CSV historical price tracker, \textit{Bitcoin Charts} \cite{35}. This tracker provided the historical data from the three exchanges used for Live price collection - Coinbase, Bitfinex and Gemini, since the exchanges supported the cryptocurrency. The data used spans from \textit{2018-01-06} to \textit{2019-01-06}.
+			Historical price data were extracted from a CSV historical price tracker, \textit{Bitcoin Charts} \cite{37}. This tracker provided the historical data from the three exchanges used for Live price collection - Coinbase, Bitfinex and Gemini, since the exchanges supported the cryptocurrency. The data used spans from \textit{2018-01-06} to \textit{2019-01-06}.
 			
 			\begin{lstlisting}[language=Python, caption=Historical price collection and averaging per exchange]
 ...
@@ -1116,9 +1146,10 @@ class utilityFuncs():
 			\newline
 			
 			\textbf{Language detection filtering}
+			
 			This feature of the system is used as an additional filter for filtering out non-English tweets. As discussed in the solution approach, Tweepy/Twitter API provides a means to filter out non-English based tweets, this, however, doesn't work if the user has settings on Twitter set to be English as a prefered language and the region 'en'. Due to this non-English characters can still be within collected tweets; thus these are detected and filtered with the below function.
 			
-			\begin{lstlisting}[language=python, caption=Language detection and filter function \cite{36}]
+			\begin{lstlisting}[language=python, caption=Language detection and filter function \cite{38}]
 def detectLaguage(self, text):
 	"""
 	Calculate the probability of given text is written in several languages
@@ -1157,14 +1188,69 @@ def detectLaguage(self, text):
 	# If text is not predominately English drop tweet
 			\end{lstlisting}
 			
-			This function uses several natural languages pre-processing techniques to identify the most predominant language for a given text. It accomplishes this by first tokenising the text into tokens and converting them to lower case - this is so that the stopwords can be identified. For each of the languages supported by the Natural Language Toolkit Python package, the stopwords are identified in the text and compared to the stopwords in the language corpus' in NLTK. The ratios for the individual languages are formed, and then the predominant language identified. If the language is not predominantly English, the tweet is dropped.
+			This function uses several natural languages pre-processing techniques to identify the most predominant language for a given text. It accomplishes this by first tokenising the text into tokens and converting them to lower case - this is so that the stopwords can be identified. For each of the languages supported by the Natural Language Toolkit Python package, the stopwords are identified in the text and compared to the stopwords in the language corpus' in NLTK. The ratios for the individual languages are formed, and then the predominant language identified. If the language is not predominantly English, the tweet is dropped. There is however an issue with this approach, if a tweet contains too many special characters - characters that are allowed, the tweet occasionally is not classified as English even when it predominantly is upon visual inspection; therefore the tweet is dropped and not processed. This isn't a significant issue as about 3000 tweets can be collected in an hour, and some of these would be filtered out by the spam filter regardless.
 			
-			Ngrams could also be used
+			Additionally, an n-grams method could be used to distinguish the language of a given text and may perform more accurately than the word-based approach that was implemented \cite{39}. This could be a later improvement as the word-based approach is sufficient and requires a corpus for each language to compare against to be presented. Therefore it could be used as a comparison between approaches and seen as a possible improvement.
+			\newline
 			
 			\textbf{Spam filter - Tokenisation, Ngrams, Stopword removal and Stemming}
 			
-			\subsubsection{Spam Filtering}
-				\begin{lstlisting}[language=python, caption=Spam filter training Class]
+			Prior to any text being processed to both train the Naive Bayes classifier of the spam filter or to classify live tweets, the data needs to be pre-processed to extract the features from the text so that the classifier can identify the probability of each word in the given text. The explanation of how this classifier functions will be detailed in the 'Spam Filtering' Section.
+			
+			\begin{lstlisting}[language=python, caption=pre-processing of data prior to being used by the spam filter]
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+...
+			
+def processTweet(tweet, gram = 2):
+	tweet = tweet.lower() # convert to lower case
+				
+	words = word_tokenize(tweet)    # Tokenise words in text
+	words = [w for w in words if len(w) > 2]  
+	# remove words that are not greater than 2 characters
+				
+	if gram > 2:    ## Increasing grams can increase accuracy
+		w = []
+		for i in range(len(words) - gram + 1):
+			w += [' '.join(words[i:i + gram])]
+		return w
+				
+	# Remove stopwords
+	sw = stopwords.words('english')
+	words = [word for word in words if word not in sw]
+	# Create new dict without stopwords
+				
+	stemmer = PorterStemmer()           # Stem words
+	words = [stemmer.stem(word) for word in words]
+	# Create new dict of stemmed words
+				
+	return words
+			\end{lstlisting}
+			
+			The actions performed on the text consist of:
+			\begin{itemize}
+				\item Convert to lower case: This is due to that 'DROP' and 'drop', and likewise words convay the same meaning thus these are simply converted to all lower case.
+				\item Tokenise words: This splits the text into individual words. A dictionary is then created from the tokens that are above the length of 2 - due to words that are of less 'is', 'he' and 'if' will not contribute to spam detection and are seen as generic words in the English language
+				\item Ngrams: This is implemented to provide richer word sequences for the spam filter classification, as explained in the litrature review use of ngrams can increase accuracy.
+				\item Stop words Removal: This removes stopwords such as 'this', 'we' and 'now' from the text. Due to these common words carrying less importance for sentiment analysis.
+				\item Stemming: Reduces words down to their smaller form, as in it remove suffixes from inflected words - 'studying' become 'study' \cite{40}. The Porter Stemmer works by removing the suffixes from the text - 'going' becomes 'go', however, this applies to other words such as 'leaves' becomes 'leav' which is not a word. However, this method will be applied equally to all words containing such suffixes so all variations will become so, thus still allowing the probability classifications to occur on the word as all variations will be the same. 
+			\end{itemize}
+			
+			As discovered from \cite{40}, lemmatisation could be an alternative and arguably a better solution to stemming. Lemmatization works fundamentally the same as stemming but reduces the inflected words properly ensuring that a root word belongs to a language. Using the same words that are used to describe stemming, lemmatisation reduces 'goes' to 'go' and 'leaves' to 'leaf' - removing the suffixes down to create the actual root word.
+			Although lemmatisation will provide the classifier with an actual English word, regardless stemming will still reduce the words down to the same form, this added with a lemmatiser needing a corpus for classifying the words to their root words and additional computational time to do so, the former of using a stemmer is sufficient.
+			
+		\subsection{Spam Filtering}
+			This section of the implementation will describe how the spam filter is initialised in the \textit{tweet\_collector}, how it is trained and how it classifies tweets as being either spam or ham (wanted data).
+			
+			\textit{Listing 12} shows the initalisation and method functions used within the \textit{tweet\_collector}, that creates the training and testing datasets, and tests classifier on hard specified tweets and checks their classification.
+			
+			\begin{lstlisting}[language=python, caption=Spam filter training Class - \textit{tweet\_collector.py}]
+import pandas as pd
+import spam_filter
+import numpy as np
+...			
+			
 class filterSpam(object):
 				
 	def __init__(self, training_set):
@@ -1210,6 +1296,7 @@ def train(self):
 	# Train
 				
 def testData_Prediction(self):
+	# Classify data from test dataset
 	prediction = self.spamFilter.predict(self.testData['tweet'])	
 	return prediction
 				
@@ -1219,9 +1306,12 @@ def testPrediction(self):
 	spam = spam_filter.processTweet("Earn more than 0015 btc free No deposit No investment Free Bitcoins - Earn $65 free btc in 5 minutes bitcoin freebtc getbtc")
 				
 	ham = spam_filter.processTweet("Bitcoin closed with some gains in month of February")
-				
+	# Process Tweets - Tokenise and Stem
+	
+	
 	hamTweet = self.spamFilter.classify(ham)
 	spamTweet = self.spamFilter.classify(spam)
+	# Classify both tweets
 				
 	print("Console: ", "Spam Tweet -- ", spamTweet)
 	sys.stdout.flush()
@@ -1229,17 +1319,136 @@ def testPrediction(self):
 	sys.stdout.flush()
 				
 def filterStatistics(self, prediction):
+	# Get performance metrics for prediction data compared to actual test data
 	spam_filter.metrics(self.testData['class'], prediction)
 				
 def testTweet(self, tweet):
-				
+	# Used for live tweets classification
 	processed = spam_filter.processTweet(tweet)
 	classified = self.spamFilter.classify(processed)
 				
 	return classified
-				\end{lstlisting}
-				
-				\textbf{Naive Bayes model}
+		\end{lstlisting}
+		
+		\begin{itemize}
+			\item filterSpam - \_\_init\_\_: is called when the \textit{tweet\_collector} script is first executed which initialises the object, first described in the 'Live Tweet Collection' section above.
+			\item trainFilter: is a function that calls the dataset function which created the training and testing dataset, followed by the train function which trains the initialised classifier. This function's sole purpose is to serve as a parent function that only needs to be called to perform the child functions once.
+			\item dataset: This function loads the pre-labelled spam dataset, remaps the labels to integers 0:1 to ham:spam respectively, creates a dictionary with an index of 75\% of the original data for the training dataset and 25\% for the testing dataset. This function does this by extracting the data at the set point from the spam dataset into the relevant new datasets which resetting indexes and dropping old columns to form appropriate data.
+			\item train: Is used to call the classifier function defined in the \textit{spam\_filter} script and passes the training data for it to initialise then train on.
+			\item testData\_Prediction: Is a function similar to the 'train' function, but calls the 'predict' function defined in \textit{spam\_filter} to test the classifier on the test data and returns the predictions made, which is used later on in the 'filterStatistics' function to calculate the accuracy of the classifier.
+			\item testPredictions: This function is used to test the accuracy of the trained classifier with pre-defined tweets that are assumed to be either spam or ham. The primary goal of this function is to ensure that the classifier correctly classifies the two tweets as either spam or ham appropriately. The text is processed through the 'processTweet' function previously described to transform the tweets into tokens ready for classification.
+			\item filterStatistics: Is used by the 'testData\_Predictions' function to calculate the accuracy of the classification model using the test data and prediction data. The 'metrics' function is defined in the \textit{spam\_filter} script.
+			\item testTweet: Is a function used on the live tweets by the 'on\_data' function also outlined previously to process the tweets data and classify it as either being spam or not, the 'on\_data' function then handles the result accordingly.
+		\end{itemize}		
+		
+		\textbf{Naive Bayes model}
+		
+		The spam filter classifier, using a Naive Bayes model, was coded from scratch. Ultimately unneeded as the Scikit-learn python package comes with four inbuilt Naive Bayes classification models (Bernoulli, Complement, Multinomial, Gaussian)\cite{41}. The Naive Bayes model implemented was a multinomial Bayes model as the data used for classification was of multinomial distribution and categorical. This algorithm was not compared to the Scikit-learn's inbuilt model for accuracy as this was not the focus of this project. The model was coded from scratch due to finding information on how this would be done with techniques such as TFIDF and Additive Smoothing as detailed in the literature review, the tutorial that helped the greatest \textit{Spam Classifier in Python from scratch} \cite{34} \cite{42}. For an explanation of how the maths work behind this classifier see Literature review sections 'Bag Of Words', 'TF-IDF' and 'Addictive Smoothing'.
+		
+		\begin{lstlisting}[language=python, caption=classifer class of spam\_filter.py]
+class classifier(object):
+	def __init__(self, trainData):
+		self.tweet = trainData['tweet']
+		self.labels = trainData['class']
+
+	def TF_and_IDF(self):
+		noTweets = self.tweet.shape[0]
+		self.spam = self.labels.value_counts()[1]
+		self.ham = self.labels.value_counts()[0]
+		self.total = self.spam + self.ham
+
+		# Initialise spam vars
+		self.spamCount = 0
+		self.hamCount = 0
+		self.tfSpam = dict()
+		self.tfHam = dict()
+		self.idfSpam = dict()
+		self.idfHam = dict()
+
+		# Bag Of Words implementation - pro
+
+		for entry in range(noTweets):
+			processed = processTweet(self.tweet[entry])
+			count = list() 
+			#To keep track of whether the word has ocured in the message or not. IDF count
+
+			for word in processed:
+				if self.labels[entry]:
+					self.tfSpam[word] = self.tfSpam.get(word, 0) + 1
+					self.spamCount += 1	
+					## If label for data is spam then add words to spam list
+				else:
+					self.tfHam[word] = self.tfHam.get(word, 0) + 1
+					self.hamCount += 1
+					# If label for data is ham then add words to ham list
+				# Addictive Smoothing - if current word is not seen add count list
+				if word not in count:
+					count += [word]
+			for word in count:
+				# Loop unseen word list
+				if self.labels[entry]:
+					self.idfSpam[word] = self.idfSpam.get(word, 0) + 1
+				else:
+					self.idfHam[word] = self.idfHam.get(word, 0) + 1
+
+	def TF_IDF(self):
+		self.probSpam = dict()
+		self.probHam = dict()
+		self.sumSpam = 0
+		self.sumHam = 0
+		
+		# Calculate probability of word being spam or ham based on occurance in text compared to counted sets along with relevant keys
+		for word in self.tfSpam:
+			self.probSpam[word] = (self.tfSpam[word]) * log((self.spam + self.ham) / (self.idfSpam[word] + self.idfHam.get(word, 0)))
+			self.sumSpam += self.probSpam[word]
+			
+		for word in self.tfSpam:
+			self.probSpam[word] = (self.probSpam[word] + 1) / (self.sumSpam + len(list(self.probSpam.keys())))
+		
+		for word in self.tfHam:
+			self.probHam[word] = (self.tfHam[word]) * log((self.spam + self.ham) / (self.idfSpam.get(word, 0) + self.idfHam[word]))
+			self.sumHam += self.probHam[word]
+		for word in self.tfHam:
+			self.probHam[word] = (self.probHam[word] + 1) / (self.sumHam + len(list(self.probHam.keys())))
+			
+		# Calculate total amount of spam words identified
+		self.probSpamTotal, self.probHamTotal = self.spam / self.total, self.ham / self.total
+		\end{lstlisting}
+		
+		\textbf{Classification}
+		
+		This function aims to classify the pre-processed tweet data as either spam or ham based on the term-frequency and probabilities calculated in the 'TF\_IDF' function. This conducted for each word in the processed tweet is identified if the word is contained in the spam set, based on the level of occurrence the probability is assigned a weight (The more it occures, the more likely it is a generic word), this is also identified for the level of occurrence in the ham set. Totals for the probability are formed, and the total count for both spam and ham are added to the spam and ham probabilities for the processed tweet. If the spam probability \textit{pSpam} is higher than the ham probability \textit{pHam} based on the level of occurrence of each word in the modelled respective sets, a boolean is returned based on which probability is higher - which identifies if the tweet is predominantly spam or ham (\textit{True} or \textit{False}).
+		
+		\begin{lstlisting}[language=python, caption=Classify Function of Parent classifier class of spam\_filter.py]
+def classify(self, processed):
+	pSpam, pHam = 0, 0
+	
+	for word in processed:
+		if word in self.probSpam:
+			pSpam += log(self.probSpam[word])
+		else:
+			pSpam -= log(self.sumSpam + len(list(self.probSpam.keys())))
+		if word in self.probHam:
+			pHam += log(self.probHam[word])
+		else:
+			pHam -= log(self.sumHam + len(list(self.probHam.keys())))
+		pSpam += log(self.probSpamTotal)
+		pHam += log(self.probHamTotal)
+	return pSpam >= pHam
+		\end{lstlisting}
+		
+		\textbf{Predict}
+		
+		\begin{lstlisting}[language=python, caption=Predict function of parent classifier class of spam\_filter.py]
+def predict(self, testData):
+	result = dict()
+	for (i, tweet) in enumerate(testData):
+		processed = processTweet(tweet)
+		result[i] = int(self.classify(processed))
+	return result
+		\end{lstlisting}
+		
+		\textbf{Metrics}
 		
 		\subsection{Sentiment Analysis}
 			\subsubsection{VADER}
@@ -1290,6 +1499,9 @@ def testTweet(self, tweet):
 		
 		Another could be to predict the hour of sentiment and create a threshold for it.
 		
+		Identify whether or not use of ngrams improved accuracy of spam classification
+		
+		Identify whether use lemmatisation would change how spam classification occured
 	\newpage
 	
 	\nocite{*}

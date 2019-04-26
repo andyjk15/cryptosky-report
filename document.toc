@@ -54,86 +54,90 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{Naive Bayes}{27}{section*.28}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Random Forest}{28}{section*.29}
+\contentsline {subsection}{Bag Of Words}{28}{section*.29}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Solution Approach}{29}{section*.30}
+\contentsline {subsection}{TF-IDF}{28}{section*.30}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Data gathering}{29}{section*.31}
+\contentsline {subsection}{Addictive Smoothing}{29}{section*.31}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Data pre-processing}{30}{section*.32}
+\contentsline {section}{Solution Approach}{30}{section*.32}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Spam Filtering}{30}{section*.33}
+\contentsline {subsection}{Data gathering}{30}{section*.33}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Language Detection}{31}{section*.34}
+\contentsline {subsection}{Data pre-processing}{31}{section*.34}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Sentiment Analysis}{31}{section*.35}
+\contentsline {subsection}{Spam Filtering}{31}{section*.35}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Neural Network}{32}{section*.36}
+\contentsline {subsection}{Language Detection}{32}{section*.36}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Price Forecasting}{34}{section*.38}
+\contentsline {subsection}{Sentiment Analysis}{32}{section*.37}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Frontend Application}{34}{section*.39}
+\contentsline {subsection}{Neural Network}{33}{section*.38}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{With reference to Initial PID}{34}{section*.40}
+\contentsline {subsection}{Price Forecasting}{35}{section*.40}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Solution Summary}{35}{section*.41}
+\contentsline {subsection}{Frontend Application}{35}{section*.41}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Data flow Overview}{36}{section*.42}
+\contentsline {subsection}{With reference to Initial PID}{35}{section*.42}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{System Design}{37}{section*.43}
+\contentsline {subsection}{Solution Summary}{36}{section*.43}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Dataflow Designs}{37}{section*.44}
+\contentsline {subsection}{Data flow Overview}{37}{section*.44}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Interface Design}{44}{section*.45}
+\contentsline {section}{System Design}{38}{section*.45}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Implementation}{45}{section*.47}
+\contentsline {subsection}{Dataflow Designs}{38}{section*.46}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Data collection}{45}{section*.48}
+\contentsline {subsection}{Interface Design}{45}{section*.47}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Price Time-Series Historical Data}{45}{section*.49}
+\contentsline {section}{Implementation}{46}{section*.49}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Price Time-Series Live Data}{46}{section*.50}
+\contentsline {subsection}{Data collection}{46}{section*.50}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Historical Tweet Collection}{48}{section*.51}
+\contentsline {subsubsection}{Price Time-Series Historical Data}{46}{section*.51}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Live Tweet Collection}{50}{section*.52}
+\contentsline {subsubsection}{Price Time-Series Live Data}{47}{section*.52}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Data pre-processing}{55}{section*.53}
+\contentsline {subsubsection}{Historical Tweet Collection}{49}{section*.53}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Spam Filtering}{57}{section*.54}
+\contentsline {subsubsection}{Live Tweet Collection}{51}{section*.54}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Sentiment Analysis}{59}{section*.55}
+\contentsline {subsection}{Data pre-processing}{56}{section*.55}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{VADER}{59}{section*.56}
+\contentsline {subsection}{Spam Filtering}{60}{section*.56}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Recurrent Neural Network - LSTM}{59}{section*.57}
+\contentsline {subsection}{Sentiment Analysis}{66}{section*.57}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Training and Testing Model}{59}{section*.58}
+\contentsline {subsubsection}{VADER}{66}{section*.58}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Scoring and Validation}{59}{section*.59}
+\contentsline {subsection}{Recurrent Neural Network - LSTM}{66}{section*.59}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Future Prediction Forecasting}{59}{section*.60}
+\contentsline {subsubsection}{Training and Testing Model}{66}{section*.60}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Main File 'Main.py'}{59}{section*.61}
+\contentsline {subsubsection}{Scoring and Validation}{66}{section*.61}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Miscellaneous}{59}{section*.62}
+\contentsline {subsection}{Future Prediction Forecasting}{66}{section*.62}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Testing Metrics and Accuracy}{60}{section*.63}
+\contentsline {subsection}{Main File 'Main.py'}{66}{section*.63}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Project Evaluation}{61}{section*.64}
+\contentsline {subsection}{Miscellaneous}{66}{section*.64}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Discussion: Contribution and Reflection}{61}{section*.65}
+\contentsline {section}{Testing Metrics and Accuracy}{67}{section*.65}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Limitations}{61}{section*.66}
+\contentsline {section}{Project Evaluation}{68}{section*.66}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Conclusion and Future Improvements}{62}{section*.67}
+\contentsline {section}{Discussion: Contribution and Reflection}{68}{section*.67}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Conclusion}{62}{section*.68}
+\contentsline {subsection}{Limitations}{68}{section*.68}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Future Improvements}{62}{section*.69}
+\contentsline {section}{Conclusion and Future Improvements}{69}{section*.69}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Appendices}{67}{section*.71}
+\contentsline {subsection}{Conclusion}{69}{section*.70}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Appendix A - Project Initiation Document}{67}{section*.72}
+\contentsline {subsection}{Future Improvements}{69}{section*.71}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Appendix B - Log book}{80}{section*.73}
+\contentsline {section}{Appendices}{74}{section*.73}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{Appendix A - Project Initiation Document}{74}{section*.74}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{Appendix B - Log book}{87}{section*.75}
