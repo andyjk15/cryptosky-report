@@ -55,9 +55,9 @@
 \addbibresource{report.bib}
 
 
-\providecommand{\tightlist}{%
-	\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{0}
+%\providecommand{\tightlist}{%
+%	\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+%\setcounter{secnumdepth}{0}
 
 \PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
 \usepackage[unicode=true]{hyperref}
@@ -1105,7 +1105,7 @@ def on_data(self, data):
 			Various techniques and tools have been utilised throughout the development of the system to process the data appropriately so it can be parsed by VADER, spam filter and neural network. This section will cover the crucial functions that provide such functionalities and that are called throughout the system, as seen in some of the above code snippets.
 			\newline
 			
-			\textbf{Tweet Filtering}
+			\subsubsection{Tweet Filtering}
 			
 			Various 'Utility Functions' have been used to initially filter out unwanted data from tweet text. These functions called by, both live tweet (\textit{tweet\_collector.py}) and historical tweet (\textit{sift\_text.py}) processing, prior any polarity classification or storing of tweet data to CSV files.
 				
@@ -1145,7 +1145,7 @@ class utilityFuncs():
 			The last function in 'utility functions', 'checkLength' splits the text up into individual words (tokens - a process of tokenisation), this is used to check the total length of a tweet. If the tweet is less than five words it is dropped from classification, this is due to 
 			\newline
 			
-			\textbf{Language detection filtering}
+			\subsubsection{Language detection filtering}
 			
 			This feature of the system is used as an additional filter for filtering out non-English tweets. As discussed in the solution approach, Tweepy/Twitter API provides a means to filter out non-English based tweets, this, however, doesn't work if the user has settings on Twitter set to be English as a prefered language and the region 'en'. Due to this non-English characters can still be within collected tweets; thus these are detected and filtered with the below function.
 			
@@ -1193,7 +1193,7 @@ def detectLaguage(self, text):
 			Additionally, an n-grams method could be used to distinguish the language of a given text and may perform more accurately than the word-based approach that was implemented \cite{39}. This could be a later improvement as the word-based approach is sufficient and requires a corpus for each language to compare against to be presented. Therefore it could be used as a comparison between approaches and seen as a possible improvement.
 			\newline
 			
-			\textbf{Spam filter - Tokenisation, Ngrams, Stopword removal and Stemming}
+			\subsubsection{Spam filter - Tokenisation, Ngrams, Stopword removal and Stemming}
 			
 			Prior to any text being processed to both train the Naive Bayes classifier of the spam filter or to classify live tweets, the data needs to be pre-processed to extract the features from the text so that the classifier can identify the probability of each word in the given text. The explanation of how this classifier functions will be detailed in the 'Spam Filtering' Section.
 			
@@ -1341,7 +1341,7 @@ def testTweet(self, tweet):
 			\item testTweet: Is a function used on the live tweets by the 'on\_data' function also outlined previously to process the tweets data and classify it as either being spam or not, the 'on\_data' function then handles the result accordingly.
 		\end{itemize}		
 		
-		\textbf{Naive Bayes model}
+		\subsubsection{Naive Bayes model}
 		
 		The spam filter classifier, using a Naive Bayes model, was coded from scratch. Ultimately unneeded as the Scikit-learn python package comes with four inbuilt Naive Bayes classification models (Bernoulli, Complement, Multinomial, Gaussian)\cite{41}. The Naive Bayes model implemented was a multinomial Bayes model as the data used for classification was of multinomial distribution and categorical. This algorithm was not compared to the Scikit-learn's inbuilt model for accuracy as this was not the focus of this project. The model was coded from scratch due to finding information on how this would be done with techniques such as TFIDF and Additive Smoothing as detailed in the literature review, the tutorial that helped the greatest \textit{Spam Classifier in Python from scratch} \cite{34} \cite{42}. For an explanation of how the maths work behind this classifier see Literature review sections 'Bag Of Words', 'TF-IDF' and 'Addictive Smoothing'.
 		
@@ -1415,7 +1415,7 @@ class classifier(object):
 		self.probSpamTotal, self.probHamTotal = self.spam / self.total, self.ham / self.total
 		\end{lstlisting}
 		
-		\textbf{Classification}
+		\subsubsection{Classification}
 		
 		This function aims to classify the pre-processed tweet data as either spam or ham based on the term-frequency and probabilities calculated in the 'TF\_IDF' function. This conducted for each word in the processed tweet is identified if the word is contained in the spam set, based on the level of occurrence the probability is assigned a weight (The more it occures, the more likely it is a generic word), this is also identified for the level of occurrence in the ham set. Totals for the probability are formed, and the total count for both spam and ham are added to the spam and ham probabilities for the processed tweet. If the spam probability \textit{pSpam} is higher than the ham probability \textit{pHam} based on the level of occurrence of each word in the modelled respective sets, a boolean is returned based on which probability is higher - which identifies if the tweet is predominantly spam or ham (\textit{True} or \textit{False}).
 		
@@ -1437,7 +1437,9 @@ def classify(self, processed):
 	return pSpam >= pHam
 		\end{lstlisting}
 		
-		\textbf{Predict}
+		\subsubsection{Predict}
+		
+		The predict function under the classify parent class used by the \textit{tweet\_collector} to test the trained classifier on the test dataset. For each tweet in the dataset, the data is processed through the \textit{processTweet} function previously described, this returns a dictionary of words in the text which then used in the \textit{classify} function described above to identify whether or not each tweet is predominantly spam or ham, the result of all tweets are returned. The \textit{tweet\_collector then uses the returned array} in the \textit{filterStatistics} function, also previously described, to calculate the performance and accuracy of the trained model.
 		
 		\begin{lstlisting}[language=python, caption=Predict function of parent classifier class of spam\_filter.py]
 def predict(self, testData):
@@ -1448,12 +1450,83 @@ def predict(self, testData):
 	return result
 		\end{lstlisting}
 		
-		\textbf{Metrics}
+		\subsubsection{Metrics}
+		
+		The metrics function calculates the F-score, precision, recall and accuracy (Suitable performance metrics for classification models) of the model when comparing the predicted class labels to the real class labels of the test dataset used in testing the model. By using these metrics, the performance of the model can be evaluated and later compared to a competitor model - for this reason, the metrics are calculated. A discussion of what these metrics show and the level of accuracy of the model are  discussed in the Testing section later.
+		
+		\begin{lstlisting}[language=python, caption=Metrics function for calculating the performance and accuracy of the model]
+def metrics(labels, predictions):
+	true_pos, true_neg, false_pos, false_neg = 0, 0, 0, 0
+	
+	# Identify the true pos/negs and false pos/negs of the predicted model of predicted values compared to the actual true values of the test dataset class labels
+	for i in range(len(labels)):
+		true_pos += int(labels[i] == 1 and predictions[i] == 1)
+		true_neg += int(labels[i] == 0 and predictions[i] == 0)
+		false_pos += int(labels[i] == 0 and predictions[i] == 1)
+		false_neg += int(labels[i] == 1 and predictions[i] == 0)
+	precision = true_pos / (true_pos + false_pos)
+	recall = true_pos / (true_pos + false_neg)
+	Fscore = 2 * precision * recall / (precision + recall)
+	accuracy = (true_pos + true_neg) / (true_pos + true_neg + false_pos + false_neg)
+
+	print("Precision: ", precision)
+	print("Recall: ", recall)
+	print("F-score: ", Fscore)
+	print("Accuracy: ", accuracy)
+		\end{lstlisting}
+		
+		\newpage
 		
 		\subsection{Sentiment Analysis}
-			\subsubsection{VADER}
+		
+		This section of the implementation outlines how VADER sentiment analyser is implemented and performs with the rest of the system. The \textit{get\_sentiment} class and its \textit{\_\_init\_\_} function are called in the \textit{tweet\_collector} script upon starting and by the \textit{historical tweets} script to initialise the analyser from the VADER package. Both scripts then call \textit{get\_vader\_sentiment} when needed to give polarity classification to a tweet.
+		
+		\begin{lstlisting}[language=python, caption=]
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+...
+class get_sentiment(object):
+
+	def __init__(self):
+		## Initialse object and analyser as global objects
+		self.analyser = SentimentIntensityAnalyzer()
+		self.sentiment = {}
+		self.compound = {}
+		
+	def get_vader_sentiment(self, sentence):
+	
+		# Calculate the polarity scores of the provided tweet
+		score = self.analyser.polarity_scores(sentence)
+		
+		# Split dict into overall sentiment and compound
+		sentiment = list(score.values())
+		compound = sentiment[3:]
+		compound = compound[0]
+		sentiment = sentiment[:3]
+		
+		# Compare and find overall sentiment
+		score = max(sentiment)
+		pos = [i for i, j in enumerate(sentiment) if j == score]
+		
+		if pos[0] == 1:
+			print("Console: ", "Tweet is overal Neutral - Score: ", score)
+			# return neg or pos which ever is higher
+			if sentiment[0] > sentiment[2]:
+				score = sentiment[0]
+			else:
+				score = sentiment[2]
+			return score, compound
+		else:
+		return score, compound
+		\end{lstlisting}
+		
+		The \textit{get\_vader\_sentiment} function provides the polarity scores for the provided tweet. The scores are split into polarity and compound to compare the positive and negative scores to identify the overall greater sentiment in the given tweet. By doing so helps to identify if the tweet was overall negative or positive. The compound score is separated and used separately.
+		
+		\newpage
 			
 		\subsection{Recurrent Neural Network - LSTM}
+		
+		
+		
 			\subsubsection{Training and Testing Model}
 			Dropouts?
 			\subsubsection{Scoring and Validation}
@@ -1473,6 +1546,85 @@ def predict(self, testData):
 		hashtag = keys().currency_hashtags
 		hashtag = hashtag.split(', ')
 		\end{lstlisting}	
+		
+		VADER lexicon customisation to a specific topic domain
+		
+		\begin{lstlisting}[language=python, caption=VADER sentiment analyser function]
+def set_newSentiment(self):
+	print("Console: ", "Adding marketing words and sentiment to lexicon...")
+	new_sentiment = {
+		'bull'      : 2,
+		'bear'      : -2,
+		'bullish'   : 3.5,
+		'bearish'   : -3.5,
+		'up'        : 1.5,
+		'down'      : -1.5,
+		'high'      : 2.9,
+		'low'       : -2.9,
+		'higher'    : 2.8,
+		'lower'     : -2.8,
+		'absconded' : -2.0,
+		'maximalists' : -2.4,
+		'regulate' : -2.3,
+		'infamous'  : 2.2,
+		'trade higher' : 2.0,
+		'trade lower'   : -2.0,
+		'revival'   : 2.8,
+		'centralized' : -2.2,
+		'decentralized' : 2.2,
+		'centralised' : -2.2,
+		'decentralised' : 2.2,
+		'decentralization' : 2.3,
+		'decentralisation' : 2.3,
+		'centralization' : -2.3,
+		'centralisation' : -2.3,
+		'bans' : -2.6,
+		'hodl' : 2.8,
+		'ambiguity' : -2.4,
+		'revolutionize' : 2.1,
+		'revolutionise' : 2.1,
+		'consolidation' : 2.5,
+		'shorts' : -2.3,
+		'longs' : 2.3,
+		'long' : 2.2,
+		'short' : -2.2,
+		'shorting' : -2.8,
+		'grow' : 2.2,
+		'volatile' : -1.9,
+		'rally' : 2.9,
+		'rallying' : 2.7,
+		'noob' : -1.7,
+		'noobs' : -1.9,
+		'innovation' : 1.4,
+		'bottom' : -1.4,
+		'top' : 1.4,
+		'topped' : 1.5,
+		'bottomed' : -1.5,
+		'upwards' : 1.7,
+		'downwards' : -1.7,
+		'invest' : 2.0,
+		'raging' : 3.0,
+		'rocketing' : 3.1,
+		'swing' : 1.3,
+		'swinging' : 1.2,
+		'stake' : 1.4,
+		'whale' : -2.2,
+		'whales' : -2.3,
+		'lull' : -2.1,
+		'moon' : 2.7,
+		'choppy' : -1.2,
+		'buy' : 1.9,
+		'buying' : 1.7,
+		'sell' : -1.7,
+		'selling' : -1.9,
+		'start selling' : -2.3,
+		'stop selling' : 1.4,
+		'start buying' : 2.3,
+		'stop buying' : -1.4  
+	}
+
+	self.analyser.lexicon.update(new_sentiment)
+		\end{lstlisting}
 	\newpage
 	
 	\section{Testing Metrics and Accuracy}
