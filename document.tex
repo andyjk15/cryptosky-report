@@ -22,6 +22,7 @@
 \usepackage[acronym,toc]{glossaries}
 \usepackage[margin=1.2in]{geometry}
 \usepackage{titling}
+\usepackage[T1]{fontenc}
 
 \usepackage{listings}
 \usepackage{color}
@@ -47,6 +48,22 @@
 	showstringspaces=false,
 	showtabs=false,                  
 	tabsize=2
+}
+
+\lstdefinelanguage{JavaScript}{
+	backgroundcolor=\color{backcolour},
+	keywords={\$, script, for, Object, typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+	keywordstyle=\color{magenta}\bfseries,
+	ndkeywords={class, export, boolean, throw, implements, import, this},
+	ndkeywordstyle=\color{darkgray}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{codegreen},
+	stringstyle=\color{codepurple},
+	morestring=[b]',
+	morestring=[b]"
 }
 
 \lstset{style=mystyle}
@@ -155,7 +172,7 @@
 	The chosen cryptocurrency that will be of focus for this project will be the currency Bitcoin (BTC), due to having the largest community and backing and has been known to lead other fiat currencies. Bitcoin is seen as one, if not the first cryptocurrency to bring a broader following to the peer-to-peer token transaction scene since 2009. Although it was not the first token to utilise blockchain technology, it allowed investors to openly trade a public cryptocurrency which provided pseudonymous means of transferring funds through the internet. Thus it has been around longer than most of the other fiat currencies and is the most popular crypto-token due to it's more extensive community base.
 	
 	Most financial commodities are subject to the whim of public confidence and are the core of its base value. A platform that is frequently used for the public to convey their opinions on a commodity is that of Twitter which provides arguably biased information and opinions. Whether the opinions present a basis in facts or not, they are usually taken at face value and can influence the public opinion of given topics. As Bitcoin has been around since 2009 the opinions and information on the commodity are prevalent through the platform. 
-	In the paper \textit{Sentiment Analysis of Twitter Data for Predicting Stock Market Movements} by \textit{Majhi et al.} \cite{1} 2.5 million tweets on Microsoft were extracted from Twitter, sentiment analysis and logistical regression performed on the data yielded 69.01\% accuracy for a 3-day period on the increase/decrease in stock price. These results showed a "\textit{good correlation between stock market movements and the sentiments of the public expressed in Twitter}".
+	In the paper \textit{Sentiment Analysis of Twitter Data for Predicting Stock Market Movements} by \textit{Majhi et al.} \cite{SaTdpsmm} 2.5 million tweets on Microsoft were extracted from Twitter, sentiment analysis and logistical regression performed on the data yielded 69.01\% accuracy for a 3-day period on the increase/decrease in stock price. These results showed a "\textit{good correlation between stock market movements and the sentiments of the public expressed in Twitter}".
 	
 	The background of this project is in response to the volatility of the cryptocurrency market, which can fluctuate at a moments notice and can be seen to be social media driven. The history of the price of Bitcoin and what was being discussed on the currency around it's most volatile period to-date, Nov-2017 to Feb-2018, shows a strong bullish trend which saw Bitcoin reach a \$19,500 high in mid-Dec. While social media, such as Twitter, during that period was had an extremely positive outlook on the cryptocurrency. The trend was short lived and saw the market crash only a month later, with only a couple of sell-offs, expected for the holidays rush, accompanied by negative outlooks posted on social media turned the market against itself which saw the longest bearish market in Bitcoin's history and is still trying to recover today.
 	
@@ -199,7 +216,7 @@
 		\subsection{Project Motivation}
 		The motivation behind the project stems from a range of points, from personal and public issues with the volatility if the crypto-market, and how losses specifically could be mitigated. The personal motivations behind the conceptualisation of this began two years ago during the crash of late 2017-2018, which saw new investors blindly jump into the trend that was buying cryptocurrencies. During this period of November to December 2017 saw Bitcoin's price reach \$20,000 from \$5,000, new public investors jumped on the chance to buy into the trend of possibly making quick profits and the fear of missing out (FOMO). In late December, a few holiday sell-offs occurred from business and big investors, this coupled with a few negative outlooks posted on social media by news outlets caused the market to implode causing investors to panic sell one after the other and posting negativity on social, thus causing more decline in the market. As a result, this caused personal monetary loss and distress as being a long-term investor.
 		
-		Another motivation is that at the time of writing, there are no publically available systems that combine sentiment analysis with a historical price to forecast the price of Bitcoin or any other cryptocurrency. There are papers and a few code repositories that implement a similar concepts \cite{2} - \textit{Use of a Multi-layer Perceptron network for moving averages in Bitcoin price}, \cite{3} - \textit{Predicting Bitcoin price fluctuation with Twitter sentiment analysis}, \cite{4} - \textit{Predict Tomorrows Bitcoin (BTC) Price with Recurrent Neural Networks} but are not operational. A system such as \cite{1} hosted on Coingecko, a popular cryptocurrency track site, provides a tool for basic sentiment analysis but doesn't give an evaluated indication of the direction of the market as a prediction. This leaves the public to the whim of volatility of the market without a means to know what the next, say an hour, could entail to possibly reduce losses if the market drops. Such systems are usually kept in-house of major corporations who invest significant time into tackling such a problem. Additionlly, this could be seen as a positive for major investors, as such a system could cause panic selling if public investors solely trusted such a system.
+		Another motivation is that at the time of writing, there are no publically available systems that combine sentiment analysis with a historical price to forecast the price of Bitcoin or any other cryptocurrency. There are papers and a few code repositories that implement a similar concepts \cite{nlAeiBTCPSO} - \textit{Use of a Multi-layer Perceptron network for moving averages in Bitcoin price}, \cite{BTCFTsent} - \textit{Predicting Bitcoin price fluctuation with Twitter sentiment analysis}, \cite{BTCRNN} - \textit{Predict Tomorrows Bitcoin (BTC) Price with Recurrent Neural Networks} but are not operational. A system such as \cite{SaTdpsmm} hosted on Coingecko, a popular cryptocurrency track site, provides a tool for basic sentiment analysis but doesn't give an evaluated indication of the direction of the market as a prediction. This leaves the public to the whim of volatility of the market without a means to know what the next, say an hour, could entail to possibly reduce losses if the market drops. Such systems are usually kept in-house of major corporations who invest significant time into tackling such a problem. Additionlly, this could be seen as a positive for major investors, as such a system could cause panic selling if public investors solely trusted such a system.
 			
 		\newpage
 		\subsection{Technical Specification}
@@ -263,8 +280,31 @@
 			\item ...
 		\end{itemize}
 	
+	\newpage
 	\section{Quality Goals}
-		
+	Although this project will be an investigation it is important to ensure that a specific level of quality is met and maintained throughout development to produce a final solution that fully meets the requirements set out in the technical specifiction. This section will outline the quality objectives, processes used to aid in ensuring quality, quality goals and the deveopment pipeline.
+	
+	\textit{Goals}
+	
+	\subsection{Process Description}
+	To maintain a level of quality through the project's development lifecycle various processes are to be defined. As stated in ISO 9001:2015 \cite{ISO9000} "Consistent and predictable results are achieved more effectively and efficiently when activities are understood and managed as interrelated processes". To achieve this, clearly defined processes of how this system should be developed along with tools to achieve this will need to be defined before the development of this project, to ensure an effective, transparent and well-tested system is created, of which should be outlined in the solution approach.
+	
+	\subsection{Quality Objectives}
+	The objective of testing is to determine that the functionality provided works according to the specifications and satisfies the problem statement. This is to ensure that the system is performing both as intended and without failure.
+	
+	The most important aspect of testing of the system is to ensure that predictions for Bitcoin price are calculated for the next hour interval. Testing should be conducted around this to both determine the accuracy of the predictions made by the system, and to validate the optimisers and other methods used for model creation. Suitable performance and accuracy metrics should be chosen and implemented to aid in justifying the accuracy of the developed solution for a regression model.
+	
+	The development of this project should follow an agile methodology as closely as and when possible. Prior to functions and components being created after another has finished development, said completed function should be tested and fully operational with the existing functions and components it uses or provides for. Component testing should be conducted to determine what functions are operating as intended along with the development of the system.
+	
+	Lastly, the testing of the user interface shouldn't be considered as part of the testing of the system due to the focus of this project not formulating around the development of the interface, but rather around the back-end prediction system. As long as what is intended to be displayed to the user and are displayed correctly as per the user interface design such testing will be sufficient.
+	
+	\subsection{Tools to Ensure Quality}
+	
+	\begin{itemize}
+		\item Version Control: A version control system will be used for the development of this project, such as Git - (Github), and will provide a means to track the versions of the code and to store it on a remote server as a backup.
+		\item Linting and Static code analysis: This will allow for an on-the-fly bug detection and code quality measures to be set for the python language. This will ensure that code is written in the best practice for the language and all code will conform to the same standard. The type of linting analyser that will be used will be determined by the Text editor used for development.
+		\item Text Editor/IDE: Visual Studio Editor will be used as the sole text editor for the development of this project, due to having an in-built python linter.
+	\end{itemize}
 	
 	\newpage
 	
@@ -280,11 +320,11 @@
 		
 		There has been an abundant amount of research conducted in this problem domain. Many theses globally have been published in recent years on the topic of cryptocurrency market predictions and analysis, and even more, research conducted on general stock markets further back. 
 		
-		The thesis written by \textit{Evita Stenqvist and Jacob Lonno} of the \textit{KTH Royal Institute of Technology} \cite{3} investigates the use of sentiment expressed through micro-blogging such as Twitter can have on the price fluctuations of Bitcoin. Its primary focus was creating an analyser for the sentiment of tweets more accurately \textit{"by not only taking into account negation, but also valence, common slang and smileys"}, than that of former researchers that \textit{"mused that accounting for negations in text may be a step in the direction of more accurate predictions."}. This would be built upon the lexicon-based sentiment analyser VADER to ascertain the overall sentiment scores were grouped into time-series for each interval from 5 minutes to 4 hours, along with the interval prices for Bitcoin. The model chosen was a naive binary classified vectors of predictions for a certain threshold to \textit{"ultimately compare the predictions to actual historical price data"}. The results of this research suggest that a binary classification model of varying threshold over time-shifts in time-series data was "lackluster", seeing the number of predictions decreasing rapidly as the threshold changed. This research is a reasonable basis of starting research upon, as it suggests tools such as VADER for sentiment analysis and that the use of a machine learning algorithm would be a next step in the project that would yield better more accurate results.
+		The thesis written by \textit{Evita Stenqvist and Jacob Lonno} of the \textit{KTH Royal Institute of Technology} \cite{BTCFTsent} investigates the use of sentiment expressed through micro-blogging such as Twitter can have on the price fluctuations of Bitcoin. Its primary focus was creating an analyser for the sentiment of tweets more accurately \textit{"by not only taking into account negation, but also valence, common slang and smileys"}, than that of former researchers that \textit{"mused that accounting for negations in text may be a step in the direction of more accurate predictions."}. This would be built upon the lexicon-based sentiment analyser VADER to ascertain the overall sentiment scores were grouped into time-series for each interval from 5 minutes to 4 hours, along with the interval prices for Bitcoin. The model chosen was a naive binary classified vectors of predictions for a certain threshold to \textit{"ultimately compare the predictions to actual historical price data"}. The results of this research suggest that a binary classification model of varying threshold over time-shifts in time-series data was "lackluster", seeing the number of predictions decreasing rapidly as the threshold changed. This research is a reasonable basis of starting research upon, as it suggests tools such as VADER for sentiment analysis and that the use of a machine learning algorithm would be a next step in the project that would yield better more accurate results.
 		
-		Another thesis written by \textit{Pagolu, Venkata Sasank and Reddy Kamal Nayan, Panda Ganapati and Majhi, Babita} \cite{1} on "Sentiment Analysis of Twitter Data for Predicting Stock Market Movements" 2.5 million tweets on Microsoft were extracted from Twitter, sentiment analysis and logistical regression performed on the data yielded 69.01\% accuracy for a 3-day period on the increase/decrease in stock price. These results showed a "\textit{good correlation between stock market movements and the sentiments of the public expressed in Twitter}". Using various natural language pre-processing tweets for feature extraction such as N-gram representation the sentiment from tweets were extrapolated. Both Word2vec and a random forest classifier were compared for accuracy, Word2vec being chosen over the machine learning model. Word2vec, being a group of related shallow two-layer neural network models to produce word embeddings.
+		Another thesis written by \textit{Pagolu, Venkata Sasank and Reddy Kamal Nayan, Panda Ganapati and Majhi, Babita} \cite{SaTdpsmm} on "Sentiment Analysis of Twitter Data for Predicting Stock Market Movements" 2.5 million tweets on Microsoft were extracted from Twitter, sentiment analysis and logistical regression performed on the data yielded 69.01\% accuracy for a 3-day period on the increase/decrease in stock price. These results showed a "\textit{good correlation between stock market movements and the sentiments of the public expressed in Twitter}". Using various natural language pre-processing tweets for feature extraction such as N-gram representation the sentiment from tweets were extrapolated. Both Word2vec and a random forest classifier were compared for accuracy, Word2vec being chosen over the machine learning model. Word2vec, being a group of related shallow two-layer neural network models to produce word embeddings.
 		
-		A topic that reoccurs in various papers and theses is that of the use and focus of regression techniques and machine learning methods. Few implement a fully fledged neural network; the above paper attempts to use a simple network to achieve predictions of classification of sentiment for stock market movement then correlated this with historical data of prices. An article posted on "Code Project" by Intel Corporation \cite{5} compares the accuracy of three machine learning algorithms; Random Forest, Logistic Regression and Multi-Layer Perceptron (MLP) classifiers on predicting the price fluctuations of Bitcoin with embedded price indices. Results showing \textit{"that using the MLP classifier (a.k.a. neural networks) showed better results than logistic regression and random forest trained models"}. This assumption can be backed up by the results from a thesis posted on IEEE \cite{6} which compares a Bayesian optimised recurrent neural network and a Long Short Term Memory (LSTM) network - showing the LSTM model achieving \textit{"the highest classification accuracy of 52\% and a RMSE of 8\%"}. With interest in neural networks personally and with little papers utilising them for this purpose a neural network will thus be implemented, and the accuracy of one's predictions with use of sentiment analysis data analysed and discussed.
+		A topic that reoccurs in various papers and theses is that of the use and focus of regression techniques and machine learning methods. Few implement a fully fledged neural network; the above paper attempts to use a simple network to achieve predictions of classification of sentiment for stock market movement then correlated this with historical data of prices. An article posted on "Code Project" by Intel Corporation \cite{StPNSentA} compares the accuracy of three machine learning algorithms; Random Forest, Logistic Regression and Multi-Layer Perceptron (MLP) classifiers on predicting the price fluctuations of Bitcoin with embedded price indices. Results showing \textit{"that using the MLP classifier (a.k.a. neural networks) showed better results than logistic regression and random forest trained models"}. This assumption can be backed up by the results from a thesis posted on IEEE \cite{MLBTCpred} which compares a Bayesian optimised recurrent neural network and a Long Short Term Memory (LSTM) network - showing the LSTM model achieving \textit{"the highest classification accuracy of 52\% and a RMSE of 8\%"}. With interest in neural networks personally and with little papers utilising them for this purpose a neural network will thus be implemented, and the accuracy of one's predictions with use of sentiment analysis data analysed and discussed.
 			
 		\subsection{Data Collection}\label{tweet_collection}
 			
@@ -293,7 +333,7 @@
 			
 			The Twitter API has an extensive range of endpoints that provide access from streaming tweets for a given hashtag, obtaining historical tweets for a given time-period and hashtag, posting tweets on a users account and to change settings on a user account with authentication. The exhaustive range of features provided by these endpoints makes data collection from Twitter straight forward as one can target a specific endpoint for the required data. Due to Twitter being the target for opinion mining within this project the Twitter API will ultimately need to be utilised. This can either be used for the gathering of historical tweets or streaming current tweets for the \#Bitcoin hashtag.
 			
-			There are, however, limitations and rate limits imposed on users of the API. Twitter employs a tiering system for the API - Standard, Premium and Enterprise tiers, each of which provides different amounts of access for data collection. If the API were to be used to capture historical data for a span of 3 months, each tier is allowed to obtain varying amounts of data for different durations; \cite{7}
+			There are, however, limitations and rate limits imposed on users of the API. Twitter employs a tiering system for the API - Standard, Premium and Enterprise tiers, each of which provides different amounts of access for data collection. If the API were to be used to capture historical data for a span of 3 months, each tier is allowed to obtain varying amounts of data for different durations; \cite{SearchTweets}
 			
 			\begin{itemize}
 				\item A Standard user would be able to capture 100 recent tweets for the past 7 days
@@ -301,17 +341,17 @@
 				\item An Enterprise user would be able to capture up to 500 tweets per unlimited requests for a 30-day span and will be able to query the full-archive of tweets for a given hashtag up to 2000 tweets per unlimited amount of requests for a given time period
 			\end{itemize}
 		
-			Each tier has individual costs while the standard user negating this as a basic tier. Due to only being elegable for the Premium tier for educational purposes, historical data gathering will be limited to 100 tweets per request with a limitation of 50 requests per month. Furthermore streaming tweets is an Enterprise feature which rules out the the Twitter API for use of streaming current real-time data \cite{8}.
+			Each tier has individual costs while the standard user negating this as a basic tier. Due to only being elegable for the Premium tier for educational purposes, historical data gathering will be limited to 100 tweets per request with a limitation of 50 requests per month. Furthermore streaming tweets is an Enterprise feature which rules out the the Twitter API for use of streaming current real-time data \cite{ConStream}.
 		
 			\subsubsection{Tweepy Python Package}
-			Tweepy is a python package for accessing the Twitter API. It fundamentally accomplishes the same means if one to conduct a GET request to the Twitter API, except it simplifies this into a simple to use API that is easier to implement and automate in python \cite{9}. Consequently, it builds upon the existing Twitter API to provide features such as automated streaming of provided hashtags to the API. It realises this by initialising a listener instance for a provided set of API credentials, handling authentication, connections, creating and destroying sessions. Due to Twitter's streaming API being only available to Enterprise users \cite{7}, using Tweepy to stream data for a given hashtag will provide the real-time data needed. The streaming of current data by Tweepy is accomplished by setting up a stream which listens for new data for a given hashtag, which bypasses the need for the Enterprise tweet tracker provided by the Twitter API.
+			Tweepy is a python package for accessing the Twitter API. It fundamentally accomplishes the same means if one to conduct a GET request to the Twitter API, except it simplifies this into a simple to use API that is easier to implement and automate in python \cite{TweepyStream}. Consequently, it builds upon the existing Twitter API to provide features such as automated streaming of provided hashtags to the API. It realises this by initialising a listener instance for a provided set of API credentials, handling authentication, connections, creating and destroying sessions. Due to Twitter's streaming API being only available to Enterprise users \cite{SearchTweets}, using Tweepy to stream data for a given hashtag will provide the real-time data needed. The streaming of current data by Tweepy is accomplished by setting up a stream which listens for new data for a given hashtag, which bypasses the need for the Enterprise tweet tracker provided by the Twitter API.
 			
 		
 		\subsection{Sentiment Analysis}\label{sentiment}
 		In short, sentiment analysis is the process and discovery of computationally identifying and categorising the underlining opinions and subjectivity expressed in written language. This process determines the writer's attitude towards a particular topic as either being positive, neutral or negative in terms of opinion, known as polarity classification. 		
 			
 			\subsubsection{Natural Language Processing}\label{algorithms}
-			Polarity classification is the focus of sentiment analysis and is a well-known problem in natural language processing that has had significant attention by researchers in recent years \cite{1}\cite{3}\cite{6}\cite{10}. Traditional approaches to this have usually been classified to dictionary-based approaches that use pre-constructed sentiment lexicons such as VADER or usually confined to machine learning approaches. The latter requires an extensive amount of natural language pre-processing to extrapolate vectors and features from the given text; this is then fed into a machine learning classifier which attempts to categorise words to a level of sentiment polarity. Natural language pre-processing techniques, supported by the NLTK (Natural Language Toolkit) python package that would be required for this approach would consist of;
+			Polarity classification is the focus of sentiment analysis and is a well-known problem in natural language processing that has had significant attention by researchers in recent years \cite{SaTdpsmm}\cite{BTCFTsent}\cite{MLBTCpred}\cite{PolClassPatients}. Traditional approaches to this have usually been classified to dictionary-based approaches that use pre-constructed sentiment lexicons such as VADER or usually confined to machine learning approaches. The latter requires an extensive amount of natural language pre-processing to extrapolate vectors and features from the given text; this is then fed into a machine learning classifier which attempts to categorise words to a level of sentiment polarity. Natural language pre-processing techniques, supported by the NLTK (Natural Language Toolkit) python package that would be required for this approach would consist of;
 			
 			\begin{itemize}
 				\item Tokenisation: The act of splitting a stream of text into smaller units of typographical tokens which isolate unneeded punctuation.
@@ -322,17 +362,17 @@
 				\item Ngrams: Are a contiguous sequence of n items from a given sample of text. The use of Ngrams in natural language processing can improve the accuracy of classification. For example: ‘Good’ and ‘Not Good’ have opposite meanings. By only using 1 token (1gram) ‘not good’ (‘not’ and ‘good’) can be incorrectly classified. As the english language contains a significant amount of 2gram type word chains using 2gram can improve the accuracy of classification.
 			\end{itemize}
 			
-			The former, seen and has been proven to provide higher accuracy than traditional machine learning approaches \cite{11}, and need little pre-processing conducted on the data as words have a pre-defined sentiment classification in a provided lexicon. Although these lexicons can be complex to create, they generally require little resources to use and alter.
+			The former, seen and has been proven to provide higher accuracy than traditional machine learning approaches \cite{LexiconSocSent}, and need little pre-processing conducted on the data as words have a pre-defined sentiment classification in a provided lexicon. Although these lexicons can be complex to create, they generally require little resources to use and alter.
 			
 			\subsubsection{Valence Aware Dictionary and sEntiment Reasoning}\label{Vader}
-				VADER is a combined lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media and works well on texts from other domains. It is capable of detecting the polarity of a given text - positivity, neutrality, and negativity \cite{12}, and also calculate the compound score which is calculated by summing the valence scores of each word in the lexicon. VADER uses a human-centric approach to sentiment analysis, combining qualitative analysis and empirical validation by using human raters to rate the level of sentiment for words in its lexicon. Vader also has emoticon support which maps these colloquialisms have pre-defined intensities in its lexicon, which makes VADER specifically suitable for the social media domain were the use of emoticons, utf-8 emojis and slang such as "Lol" and "Yolo" are prevalent within the text. Additionally, VADER is provided as a lexicon and a python library under the MIT license, this means that it is open-source software. This means that the lexicon can be altered and added to abling it to be tailored to specific topic domains. 
+				VADER is a combined lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media and works well on texts from other domains. It is capable of detecting the polarity of a given text - positivity, neutrality, and negativity \cite{VADERPaper}, and also calculate the compound score which is calculated by summing the valence scores of each word in the lexicon. VADER uses a human-centric approach to sentiment analysis, combining qualitative analysis and empirical validation by using human raters to rate the level of sentiment for words in its lexicon. Vader also has emoticon support which maps these colloquialisms have pre-defined intensities in its lexicon, which makes VADER specifically suitable for the social media domain were the use of emoticons, utf-8 emojis and slang such as "Lol" and "Yolo" are prevalent within the text. Additionally, VADER is provided as a lexicon and a python library under the MIT license, this means that it is open-source software. This means that the lexicon can be altered and added to abling it to be tailored to specific topic domains. 
 				
-				VADER was constructed by examining and extracting features from three pre-existing well-established and human-validated sentiment lexicons \cite{12} - (LIWC) Linguistic Inquiry and Word Count, (ANEW) Affective Norms for English Words, and (GI) General Inquirer. This is supplemented with additional lexicon features \textit{"commonly used to express sentiment in social media text (emoticons, acronyms and slang)"} \cite{12} and uses "wisdom-of-the-crowd" approach \cite{13} to establish a point of estimations of sentiment valance for each lexical feature candidate. This was evaluated for the impact of grammatical and syntactical rules and 7,500+ lexical features, with mean valence \textit{"<> zero, and SD <= 2.5"} as a human-validated "gold-standard" sentiment lexicon. \cite{12}\textit{Section 3.1}
+				VADER was constructed by examining and extracting features from three pre-existing well-established and human-validated sentiment lexicons \cite{VADERPaper} - (LIWC) Linguistic Inquiry and Word Count, (ANEW) Affective Norms for English Words, and (GI) General Inquirer. This is supplemented with additional lexicon features \textit{"commonly used to express sentiment in social media text (emoticons, acronyms and slang)"} \cite{VADERPaper} and uses "wisdom-of-the-crowd" approach \cite{WisCrowds} to establish a point of estimations of sentiment valance for each lexical feature candidate. This was evaluated for the impact of grammatical and syntactical rules and 7,500+ lexical features, with mean valence \textit{"<> zero, and SD <= 2.5"} as a human-validated "gold-standard" sentiment lexicon. \cite{VADERPaper}\textit{Section 3.1}
 				
-				VADER is seen as a "Gold Standard" for sentiment analysis, in the paper for VADER, \cite{12} \textit{A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text}, it was compared against 11 other \textit{"highly regarded sentiment analysis tools/techniques on a corpus of over 4.2K tweets"} for polarity classification across 4 domains. Results showing VADER, across Social media text, Amazon reviews, movie reviews and Newspaper editorials, consistently outperforming other sentiment analysis tools and techniques showing a particular trend in performing significantly higher on analysis of sentiment in tweets. \cite{12} \textit{Section 4: Results}
+				VADER is seen as a "Gold Standard" for sentiment analysis, in the paper for VADER, \cite{VADERPaper} \textit{A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text}, it was compared against 11 other \textit{"highly regarded sentiment analysis tools/techniques on a corpus of over 4.2K tweets"} for polarity classification across 4 domains. Results showing VADER, across Social media text, Amazon reviews, movie reviews and Newspaper editorials, consistently outperforming other sentiment analysis tools and techniques showing a particular trend in performing significantly higher on analysis of sentiment in tweets. \cite{VADERPaper} \textit{Section 4: Results}
 			
 		\subsection{Neural Networks}\label{networks}
-			A neural network is a set of perceptrons modelled loosely after the human brain that is designed to recognise patterns in whatever domain it is intended to be trained using. A neural network can consist of multiple machine perceptrons or clustering layers in a large mesh network, and the patterns they recognise are numerical which are contained in vectors. Pre-processed data, confined and processed into pre-defined vector labels, are used to teach a neural network for a given task. While this differs from how an algorithm is coded to a particular task, neural networks cannot be programmed directly for the task. The requirement is for them to learn from the information by use of different learning strategies; \cite{14}\cite{15}
+			A neural network is a set of perceptrons modelled loosely after the human brain that is designed to recognise patterns in whatever domain it is intended to be trained using. A neural network can consist of multiple machine perceptrons or clustering layers in a large mesh network, and the patterns they recognise are numerical which are contained in vectors. Pre-processed data, confined and processed into pre-defined vector labels, are used to teach a neural network for a given task. While this differs from how an algorithm is coded to a particular task, neural networks cannot be programmed directly for the task. The requirement is for them to learn from the information by use of different learning strategies; \cite{NNDLBegin}\cite{WhatNN}
 			
 			\begin{center}
 				\includegraphics[width=10cm,height=6cm]{images/perceptron.png}
@@ -341,18 +381,18 @@
 			\end{center}
 			
 			\begin{itemize}
-				\item Supervised learning: Simplest of the learning forms, where a dataset have been labeled which indicate the correct classified data. The input data is learned upon until the desired result of the label is reached \cite{16}
-				\item Unsupervised learning: Is training the with a dataset without labels to learn from. The neural network analyses the dataset with a cost function which tells the neural network how far off target a prediction was. The neural network then adjusts input weights in attempt to increase accuracy. \cite{15}
+				\item Supervised learning: Simplest of the learning forms, where a dataset have been labeled which indicate the correct classified data. The input data is learned upon until the desired result of the label is reached \cite{SupdictL}
+				\item Unsupervised learning: Is training the with a dataset without labels to learn from. The neural network analyses the dataset with a cost function which tells the neural network how far off target a prediction was. The neural network then adjusts input weights in attempt to increase accuracy. \cite{WhatNN}
 				\item Reinforced learning: The neural network is reinforced with positive results and punished for negative results causing a network to learn over iterations. 
 			\end{itemize}
 		
 			\subsubsection{Recurrent Neural Network (RNN)}\label{types}
 			The type of neural network that is of focus for this project will be that of a Long-Short Term Memory (LSTM); however, it is crucial to understand how this is an extension of a Recurrent Neural Network (RNN) and how the underlying network works.
 			
-			Recurrent Neural Networks (RNN) are a robust and powerful type of neural network and is considered to be among the most encouraging algorithms for the use of classification, due to the fact of having internal memory. RNNs are designed to recognise patterns in sequences of presented data or most suitably, time-series data, genomes, handwriting and stock market data. Although RNNs were conceptualised and invented back in the 1980s \cite{17}, they've only really shown their potential in recent years, with the increase of computational power due to the level of sequencing and internal memory store to retrain.
-			Due to this 'internal' memory loop, RNNs are able to remember data and adjust neurons based on failures and alternating parameters. The way this is accomplished, knowing how a standard neural network such as a feed-forward network, should initially be understood. \cite{18}
+			Recurrent Neural Networks (RNN) are a robust and powerful type of neural network and is considered to be among the most encouraging algorithms for the use of classification, due to the fact of having internal memory. RNNs are designed to recognise patterns in sequences of presented data or most suitably, time-series data, genomes, handwriting and stock market data. Although RNNs were conceptualised and invented back in the 1980s \cite{ErrorProp}, they've only really shown their potential in recent years, with the increase of computational power due to the level of sequencing and internal memory store to retrain.
+			Due to this 'internal' memory loop, RNNs are able to remember data and adjust neurons based on failures and alternating parameters. The way this is accomplished, knowing how a standard neural network such as a feed-forward network, should initially be understood. \cite{BeginLSTMRNN}
 			
-			A standard, feed-forward neural network has a single data flow with an input layer, through hidden computational layers, to an output layer. Therefore any node in the network will never see the same data again. However, in an RNN data is cycled through a loop over the same node, thus two inputs into the perception. Decisions are influenced by previous data that it has previously learned from if any, which in turn affects output and the weights of the network. \cite{19}
+			A standard, feed-forward neural network has a single data flow with an input layer, through hidden computational layers, to an output layer. Therefore any node in the network will never see the same data again. However, in an RNN data is cycled through a loop over the same node, thus two inputs into the perception. Decisions are influenced by previous data that it has previously learned from if any, which in turn affects output and the weights of the network. \cite{RNNLSTMtds}
 			
 			\begin{center}
 				\includegraphics[width=15cm,height=6cm]{images/rnn_ffn.png}
@@ -363,64 +403,64 @@
 			The act of tweaking weights to alter the processing of the next iteration of data in an RNN is called backpropagation, which in short means going back through the network to find the partial derivatives of the error with respect to the weights after output has occurred. Along with gradient descent, an algorithm that adjusts the weights up or down depending on which would reduce the error. There are however a few obstacles of RNNs;
 			
 			\begin{itemize}
-				\item Exploding Gradients: Is when gradient decsent assigns high importance to the weights. As in the algorithm assigns a ridiculously high or low value for the weights on iteration which can cause overlow and result in NaN values \cite{20}
-				\item Vanishing Gradients: Is when the values of a gradient are small enough that weights cannot be altered and the model stops learning. \cite{21}
+				\item Exploding Gradients: Is when gradient decsent assigns high importance to the weights. As in the algorithm assigns a ridiculously high or low value for the weights on iteration which can cause overlow and result in NaN values \cite{NNEgrad}
+				\item Vanishing Gradients: Is when the values of a gradient are small enough that weights cannot be altered and the model stops learning. \cite{RNNvanishGrad}
 			\end{itemize}
 		
-			These issues are overcome by the concept of Long-Short Term Memory neural networks, coined by \textit{Sepp Hochreiter and Juergen Schmidhuber, 1997} \cite{22}. 
+			These issues are overcome by the concept of Long-Short Term Memory neural networks, coined by \textit{Sepp Hochreiter and Juergen Schmidhuber, 1997} \cite{LSTM}. 
 			
 			\subsubsection{Long-Short Term Memory (LSTM)}\label{lstms}
-			LSTMs are an extension of recurrent neural networks capable of learning long-term dependancies and were conceptualised by \textit{Sepp Hochreiter and Juergen Schmidhuber, 1997} \cite{22}. LSTMs were explicity designed to avoid long-term dependancy problems such as exploding and vanishing gradients. As they are an extension of RNNs they operating in almost the exact same manner, but stores the actual gradients and weights in memory which allows for LSTMs to read, write and alter the values. A way of explaining how this works is seeing the memory block as a gated cell, where 'gated' is that the cell decides whether or not to store or alter data in it's memory based input data and the importance assigned to it. In a sense it learns over time of which values and data is important.
+			LSTMs are an extension of recurrent neural networks capable of learning long-term dependancies and were conceptualised by \textit{Sepp Hochreiter and Juergen Schmidhuber, 1997} \cite{LSTM}. LSTMs were explicity designed to avoid long-term dependancy problems such as exploding and vanishing gradients. As they are an extension of RNNs they operating in almost the exact same manner, but stores the actual gradients and weights in memory which allows for LSTMs to read, write and alter the values. A way of explaining how this works is seeing the memory block as a gated cell, where 'gated' is that the cell decides whether or not to store or alter data in it's memory based input data and the importance assigned to it. In a sense it learns over time of which values and data is important.
 			
 			\begin{center}
 				\includegraphics[width=9cm,height=7cm]{images/lstm.png}
 				\newline
-				\textit{Figure 3: A conceptual design of an LSTM cell bank - from Medium article by Shi Yan: Understanding LSTM and its diagrams}\cite{23}
+				\textit{Figure 3: A conceptual design of an LSTM cell bank - from Medium article by Shi Yan: Understanding LSTM and its diagrams}\cite{LSTMdia}
 			\end{center}
 			
-			The network takes in three initial inputs, the input of the current time step, output from the previous LSTM unit if any, and the memory of the previous unit. Outputs, $H_t$ - output of current network, and $C_t$ - the memory of the current unit. \cite{23}
+			The network takes in three initial inputs, the input of the current time step, output from the previous LSTM unit if any, and the memory of the previous unit. Outputs, $H_t$ - output of current network, and $C_t$ - the memory of the current unit. \cite{LSTMdia}
 			
 			The various steps of the network decide what information is thrown away from the cell state, through use of a 'forget gate' which is influenced by the calculations of sigmoid memory gates which influence how much of old and new memory is used $C_{t_-1}$, $H_{t-1}$
 			and $X_t$, and merged based upon importance. The section of the cell that controls the outflow memory $H_t$ and $C_t$ determines how much of the new memory should be used by the next LSTM unit. 
-			\textit{For a more in-detailed explanation of exactly how the calculations are made see} \cite{22},\cite{23} and \cite{24}.
+			\textit{For a more in-detailed explanation of exactly how the calculations are made see} \cite{LSTM},\cite{LSTMdia} and \cite{LSTMmaths}.
 			
-			As mentioned in the foremost section of related work the use of an LSTM network would be optimal for the given problem domain over the use of machine learning algorithms, for time-series data. As detailed above, LSTMs are widely used for time-series data forecasting due to being able to remember previous data and weights over long sequence spans\cite{22}\cite{25}. The flexibility of LSTMs such as many-to-many models, useful \textit{"to predict multiple future time steps at once given all the previous inputs"} due to use of look-back windows and control of multiple 3D input parameters.\cite{25}
+			As mentioned in the foremost section of related work the use of an LSTM network would be optimal for the given problem domain over the use of machine learning algorithms, for time-series data. As detailed above, LSTMs are widely used for time-series data forecasting due to being able to remember previous data and weights over long sequence spans\cite{LSTM}\cite{LSTMforetime}. The flexibility of LSTMs such as many-to-many models, useful \textit{"to predict multiple future time steps at once given all the previous inputs"} due to use of look-back windows and control of multiple 3D input parameters.\cite{LSTMforetime}
 			
 			\subsubsection{Keras and TensorFlow}
-			TensorFlow is an open-source numerical math computational library framework for dataflow differentiable programming, primarily used for machine and deep learning applications such as neural networks. TensorFlow bundles various machine learning and deep learning models and algorithms into one package for the Python language, but executes as byte code executed in C++ for performance. TensorFlow provides a range of conveniences to developers for the types of algorithms it supports such as debugging models and modifying graph operations separately instead of constructing and evaluating all at once, and compatibility to execute on CPUs or GPUs \cite{26}. However, TensorFlow's implementation and API, although provides an abstraction for development for machine and deep learning algorithms and simplifies implementation, it isn't all too friendly to programmers to use, especially new developers to the field of machine and deep learning.
+			TensorFlow is an open-source numerical math computational library framework for dataflow differentiable programming, primarily used for machine and deep learning applications such as neural networks. TensorFlow bundles various machine learning and deep learning models and algorithms into one package for the Python language, but executes as byte code executed in C++ for performance. TensorFlow provides a range of conveniences to developers for the types of algorithms it supports such as debugging models and modifying graph operations separately instead of constructing and evaluating all at once, and compatibility to execute on CPUs or GPUs \cite{TensorFlow}. However, TensorFlow's implementation and API, although provides an abstraction for development for machine and deep learning algorithms and simplifies implementation, it isn't all too friendly to programmers to use, especially new developers to the field of machine and deep learning.
 			
 			Keras is a high-level built to run atop of deep learning libraries such as Tensorflow and Theanos - another deep learning library similar to Tensorflow. It is designed to further simplify the use and application of such deep learning libraries thus making implementing a neural network and similar supported algorithms friendlier to developers working in Python. It accomplishes this by being a modular API; neural layers, cost functions, optimisers, activation functions, and regularisation schemes are all standalone features of the API that can be combined to create functional or sequential models. Due to being a high-level API for a more refined and more natural development of deep learning libraries, it does not provide these low-level operations and algorithms; Keras relies on a back-end engine such as TensorFlow and supports a wide range of others.
 			
 			\subsubsection{Optimisers}
 			There are three distinct optimisers used for LSTM networks; ADAgrad optimizer, RMSprop, Adam. The role of an optimiser
-			All three of which is a type of Stochastic Gradient Descent, which $\theta$ (weights of LSTM) is changed according to the gradient of the loss with respect to $\theta$. Where $\alpha$ is the learning rate and $L$ is the gradient loss. \cite{27}
+			All three of which is a type of Stochastic Gradient Descent, which $\theta$ (weights of LSTM) is changed according to the gradient of the loss with respect to $\theta$. Where $\alpha$ is the learning rate and $L$ is the gradient loss. \cite{OptSGD}
 			
 			\[\theta_{t+1} = \theta_t - \alpha \delta L(\theta_t)\]
 			
-			This is primarily used in recurrent LSTM neural networks to adjust weights up or down depending on which would reduce the error, \textit{see RNN section for non LSTM limitations}. The concept of using momentum $\mu$ in stochastic gradient decent helps to negate significant convergance and divergance during calculation of the weights and dampens the oscillation, by increasing the speed of the learning rate upon each iteration. \cite{28}
+			This is primarily used in recurrent LSTM neural networks to adjust weights up or down depending on which would reduce the error, \textit{see RNN section for non LSTM limitations}. The concept of using momentum $\mu$ in stochastic gradient decent helps to negate significant convergance and divergance during calculation of the weights and dampens the oscillation, by increasing the speed of the learning rate upon each iteration. \cite{Optimisers}
 			
 			\[\theta_{t+1} = \theta_t + v_{t+1} \] 
 			\begin{center}
 				where
 			\end{center} 
-			\[v_{t+1} = \mu v_t - \alpha \delta L(\theta_t)\]\cite{28}		
+			\[v_{t+1} = \mu v_t - \alpha \delta L(\theta_t)\]\cite{Optimisers}		
 			
 			\begin{itemize}
-				\item Adagrad (Adaptive Gradient): Is a method for adaptive rate learning through adaptively changing the learning parameters. This involves performing more substantial updates for infrequent parameters and smaller updates for frequent parameters. This algorithm fundamentally eliminates the need to tune the learning rate of the neural network manually and is well suited with sparse data in a large scale network. \cite{28}
+				\item Adagrad (Adaptive Gradient): Is a method for adaptive rate learning through adaptively changing the learning parameters. This involves performing more substantial updates for infrequent parameters and smaller updates for frequent parameters. This algorithm fundamentally eliminates the need to tune the learning rate of the neural network manually and is well suited with sparse data in a large scale network. \cite{Optimisers}
 				\[\theta_{t+1} = \theta_t + v_{t+1} \frac{\eta}{\sqrt{G_t + \epsilon}} \cdot g_t\]
 				\begin{center}
 					($G_t$ is the sum of the squares of the past gradients to $\theta$)
 				\end{center}
 				
-				\item RMSProp (Root Mean Square Propagation): Aims to resolve Adagrad’s radically diminishing learning rates by using a moving average of the squared gradient. Thus utilises the magnitude of the recent gradient descent to normalise it, and gets adjusted automatically by choosing different learning rate for each parameter. \cite{29}
+				\item RMSProp (Root Mean Square Propagation): Aims to resolve Adagrad’s radically diminishing learning rates by using a moving average of the squared gradient. Thus utilises the magnitude of the recent gradient descent to normalise it, and gets adjusted automatically by choosing different learning rate for each parameter. \cite{OptVariants}
 				
 				\[\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{(1 - \gamma) g^2_{t-1} + \gamma g_t + \epsilon}} \cdot g_t\]
 				
 				\begin{center}
 					($\gamma$ - decay that takes value from 0-1. $g_t$ - moving average of squared gradients)
-				\end{center} \cite{30}
+				\end{center} \cite{OverOpt}
 				
-				\item Adam (Adaptive Moment Estimation): Also aims to resolve Adagrad’s diminishing learning rates, by calculates the adaptive learning rate for each parameter. Being one of the most popular gradient descent optimisation algorithms, it estimates from the 1st and 2nd moments of gradients. Adam implements the exponential moving average of the gradients to scale the learning rate of the network and keeps an average of past gradients. \cite{31}
+				\item Adam (Adaptive Moment Estimation): Also aims to resolve Adagrad’s diminishing learning rates, by calculates the adaptive learning rate for each parameter. Being one of the most popular gradient descent optimisation algorithms, it estimates from the 1st and 2nd moments of gradients. Adam implements the exponential moving average of the gradients to scale the learning rate of the network and keeps an average of past gradients. \cite{Adam}
 				
 				\[m_t = \beta_1 m_{t-1} + (1 - \beta_1) g_t\]
 				\[v_t = \beta_2 v_{t-1} + (1 - \beta_2) g^2_t\]
@@ -438,7 +478,7 @@
 				\[\theta_{t+1} = \theta_t - \frac{\eta \vec{m}_t}{\sqrt{\vec{v}_t + \epsilon}} \]
 				
 				\begin{center}
-					\textit{Diederik P. Kingma, Jimmy Lei Ba - Adam: A method for Stochastic Optimization}\cite{30}
+					\textit{Diederik P. Kingma, Jimmy Lei Ba - Adam: A method for Stochastic Optimization}\cite{Adam}
 				\end{center}
 			\end{itemize}
 		
@@ -446,7 +486,7 @@
 			\subsubsection{Naive Bayes}
 			To get an understanding of both how probability works and how a neural network will predict the next hour value based on the concepts of probability, using a well-established probability algorithm will aid in this understanding.
 			
-			Bayes theorem works on conditional probability and is the probability of how often an event will happen given that that event has already occurred. There are numerous variations of the theorem such as Multinomial, which supports categorical features where each conforms to a multinomial distribution, and Gaussian naive Bayes, which support continuous-valued features each of which conforming to a Gaussian (normal) distribution. The classical multinomial Bayes theorem is defined as; \cite{32}
+			Bayes theorem works on conditional probability and is the probability of how often an event will happen given that that event has already occurred. There are numerous variations of the theorem such as Multinomial, which supports categorical features where each conforms to a multinomial distribution, and Gaussian naive Bayes, which support continuous-valued features each of which conforming to a Gaussian (normal) distribution. The classical multinomial Bayes theorem is defined as; \cite{StudyNBC}
 			
 			\[P(H\cap A) = \frac{P(A\cap H) * P(H)}{P(A)} \] 
 			
@@ -476,16 +516,16 @@
 			
 			\[Probability \ of \ Outcome \cap Evidence = \frac{Probability \ of \ Likelihood \ of \ evidence * Prior}{Probability \ of \ Evidence} \]
 			
-			The naive Bayes approach has many applications, especially for the topic of this project in classifying the probability occurrence of the next price. Although it is a robust algorithm has its drawbacks which make it not as suitable as a neural network for the given need of this project. The naive Bayes trap is an issue that may occur due to the size of the dataset that will be used. There are however other scenarios this algorithm could be used such as classification of spam data.\cite{32}
+			The naive Bayes approach has many applications, especially for the topic of this project in classifying the probability occurrence of the next price. Although it is a robust algorithm has its drawbacks which make it not as suitable as a neural network for the given need of this project. The naive Bayes trap is an issue that may occur due to the size of the dataset that will be used. There are however other scenarios this algorithm could be used such as classification of spam data.\cite{StudyNBC}
 			
 			\subsection{Bag Of Words}
-			The Bag Of Words algorithm counts the occurance ('Term-Frequency') of a word in a given text or document. The counts allow the comparison for text classification and is used prior to TF-IDF (detailed below) to aid in identifying the probability of words in a given text and classify accordingly. \cite{33}
+			The Bag Of Words algorithm counts the occurance ('Term-Frequency') of a word in a given text or document. The counts allow the comparison for text classification and is used prior to TF-IDF (detailed below) to aid in identifying the probability of words in a given text and classify accordingly. \cite{TFIDFBOW}
 			
 			\[P(w) \ and\ P(w|spam) = \frac{Total\ number\ of\ occurrences\ of\ w\ in\ dataset}{Total\ number\ of\ words\ in\ dataset}\]
 			
 			\subsection{TF-IDF}
-			Stands for Term Frequency-Inverse Document Frequency is another way similar to Bag of Words that are used to judge the topic of a given text. Each word is given a weight (relevance not frequency) for how many times it occurs in the given text \cite{33}. 
-			Term-frequency measures the number of times that a word appears in the text, but due to words such as 'and', 'the' and 'a' can frequently appear in text Inverse Document Frequency is used to change the weight of words that appear the most. Therefore words that appear the most are signalled to be less important and valuable, and therefore will not be used for classifications when used with such models as Naive Bayes for a given purpose. \cite{33}
+			Stands for Term Frequency-Inverse Document Frequency is another way similar to Bag of Words that are used to judge the topic of a given text. Each word is given a weight (relevance not frequency) for how many times it occurs in the given text \cite{TFIDFBOW}. 
+			Term-frequency measures the number of times that a word appears in the text, but due to words such as 'and', 'the' and 'a' can frequently appear in text Inverse Document Frequency is used to change the weight of words that appear the most. Therefore words that appear the most are signalled to be less important and valuable, and therefore will not be used for classifications when used with such models as Naive Bayes for a given purpose. \cite{TFIDFBOW}
 			\newline
 			
 			IDF is defined as:
@@ -498,10 +538,10 @@
 			
 			\[P(w|spam) = \frac{TF(w)*IDF(w)}{\sum _{a\ words\ x\ \epsilon\ train\ dataset} TF(x|spam)*IDF(x)}\]
 				
-			\cite{34}
+			\cite{SpamCScratch}
 			
 			\subsection{Addictive Smoothing}
-			Used alongside Bag Of Words, is a method of handling data that is in the test data but not in the training dataset. In case of $P(w)$ it would evaluate to 0, which will make the $P(w|spam)$ undefined as it will not be able to classify the word. Addictive smoothing tackles this by adding a number $\alpha$ to the numerator, and adding $alpha$ time the number of classes over the probability that is found in the denominator. \cite{34}
+			Used alongside Bag Of Words, is a method of handling data that is in the test data but not in the training dataset. In case of $P(w)$ it would evaluate to 0, which will make the $P(w|spam)$ undefined as it will not be able to classify the word. Addictive smoothing tackles this by adding a number $\alpha$ to the numerator, and adding $alpha$ time the number of classes over the probability that is found in the denominator. \cite{SpamCScratch}
 			\newline
 			
 			For TF-IDF:
@@ -531,7 +571,7 @@
 		\textbf{Tweets}
 		\newline
 		\newline
-		Historical tweets can be obtained through the Twitter API, and however is not a feature of the Tweepy package - \textit{not mentioned or method on official Tweepy Documentation} \cite{35}. The Twitter API, as explained in the Literature review, allows for historical tweets to be extracted from the platform, 100 per request and a maximum of 50 requests per month. This proposes an issue with not providing enough data, where the sentiment will need to be calculated per hour. Simply put, for a year of hourly price data, there will be 9050 records. Therefore the equivalent will be required for sentiment; however, the sentiment will be the average the sentiment per hour of tweets. Using a single request with 100 tweets per hour, per hour; 905,000 tweets will need to be extracted to provide the data required. A solution to this issue could be to use and create multiple accounts and manually extract data from the API and merge. Another option is the pay for the data from 3rd party companies who have access to the Enterprise API and can pull more data, 2000 per request \cite{7}\cite{8}. Due to the price for data of these 3rd parties the former could be a suitable, but more time-consuming option. 
+		Historical tweets can be obtained through the Twitter API, and however is not a feature of the Tweepy package - \textit{not mentioned or method on official Tweepy Documentation} \cite{TweepyDoc}. The Twitter API, as explained in the Literature review, allows for historical tweets to be extracted from the platform, 100 per request and a maximum of 50 requests per month. This proposes an issue with not providing enough data, where the sentiment will need to be calculated per hour. Simply put, for a year of hourly price data, there will be 9050 records. Therefore the equivalent will be required for sentiment; however, the sentiment will be the average the sentiment per hour of tweets. Using a single request with 100 tweets per hour, per hour; 905,000 tweets will need to be extracted to provide the data required. A solution to this issue could be to use and create multiple accounts and manually extract data from the API and merge. Another option is the pay for the data from 3rd party companies who have access to the Enterprise API and can pull more data, 2000 per request \cite{SearchTweets}\cite{ConStream}. Due to the price for data of these 3rd parties the former could be a suitable, but more time-consuming option. 
 		
 		Live tweets can be collected by two methods from Twitter, from the Twitter API and using Twitter Python package such as Tweepy, detailed in the Literature review. Additionally, the limitations of the Twitter API are also discussed in the literature review which states how the Twitter API has a tiering system: Standard, Premium and Enterprise. Each tier has different levels of access to the API and can extract varying amounts of data from the platform. Thus concluding the section in the Literature review, the Twitter API will not be used for the extraction and streaming of live tweets due to it being restricted to Enterprise users. Therefore, Tweepy will be used to set up a looping authenticated streaming solution with the Twitter API which will allow the access of current recurring data. Natural language pre-processing will be apart of most systems in this project. Techniques such as tokenisation, stemming, stopword removal and character filtering will be prevalent, as these will be used to remove unwanted data and to sanitise the data for classification.
 		
@@ -550,7 +590,7 @@
 		As is the case, a suitable language detection system will be implemented to identify any tweets that contain non-English characters. Some tweet will regrettably make it past the initial API filters; thus such a system will be implemented that will drop the tweets if it predominately contains non-English characters. If however, the majority of the text in English but includes some non-English characters, these will be removed from the tweet.
 		
 		\subsection{Sentiment Analysis}
-		As mentioned in the Litrature review, the VADER sentiment analysis performs exceptionally well on the social media domain when compared to idividual human rates and 10 other highly regarded sentiment analysers, stated in the results section of the paper \textit{VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text} \cite{12}. \newline Extraction of results from paper \cite{12}:
+		As mentioned in the Litrature review, the VADER sentiment analysis performs exceptionally well on the social media domain when compared to idividual human rates and 10 other highly regarded sentiment analysers, stated in the results section of the paper \textit{VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text} \cite{VADERPaper}. \newline Extraction of results from paper \cite{VADERPaper}:
 
 		\begin{center}
 			\begin{tabular}{l|c|c|c}
@@ -567,10 +607,10 @@
 				\multirow{1}{*}{WSD} & 0.70 & 0.49 & 0.56 \\
 			\end{tabular}
 		
-				\textbf{Analysis of Social Media Text (4,200 Tweets)}\cite{12}
+				\textbf{Analysis of Social Media Text (4,200 Tweets)}\cite{VADERPaper}
 		\end{center}
 		
-		Due to the suitability for the given domain of social media and with the customisability, due to VADER's lexicon-dictionary based approach, makes this sentiment analyser most suitable for use in this project. This analyser will be utilised as the sentiment analyser of this project due to its feature set and need for little data pre-processing before polarity classification of the provided text. \cite{11} \textit{"is a widely used approach to sentiment analysis in the marketing research community, as it does not require any pre-processing or training of the classifier."}.
+		Due to the suitability for the given domain of social media and with the customisability, due to VADER's lexicon-dictionary based approach, makes this sentiment analyser most suitable for use in this project. This analyser will be utilised as the sentiment analyser of this project due to its feature set and need for little data pre-processing before polarity classification of the provided text. \cite{LexiconSocSent} \textit{"is a widely used approach to sentiment analysis in the marketing research community, as it does not require any pre-processing or training of the classifier."}.
 		
 		This will be an intermediate system between the neural network and the data collection pre-processing system, as the later will provide the cleaned processed data for analysis and the former to feed in the classified polarity of each tweet alongside price data for model learning.
 		
@@ -579,9 +619,9 @@
 		
 		\begin{itemize}
 			\item Nature of an RNN - Allows for backpropagation to find partial derivatives of the error with respect to the weights after an output has occurred, to tweak the current weights of the LSTM cell. In short, allows the tweaking of weights of the network based on previously seen data by looping the same node thus influencing decisions made on current data based on old weights and errors from previous.
-			\item Nature of an LSTM over RNN - LSTMs are extensions of RNNs \cite{22} that were designed to avoid long-term dependency problems such as exploding and vanishing gradients. Weights are not only just reused but are stored in memory and are propagated through the network.
-			\item Lack of use for the project's purpose - Other papers tend to focus on machine learning techniques, other neural networks such as Multi-layer Perceptron (MPL) and standard Recurrent Neural Networks, with use of time-series data. Especially with the use of a standard RNN, not overcoming its common issues with gradient descent. Stated in related research section of the literature review, \cite{5} - \textit{"using the MLP classifier (a.k.a neural networks) showed better results than logistical regression and random forest trained models"}
-			\item Prior use for time-series data and data forecasting - Although RNN LSTM networks have been used for the prediction of Bitcoin price there are a few papers on this \cite{25}. Regardless, LSTMs have been notably used with use for time-series data forecasting due to being able to remember previous data and weights over long sequence spans \cite{25} - \textit{"adds a great benefit in time series forecasting, where classical linear methods can be difficult to adapt to multivariate or multiple input forecasting problems"}.
+			\item Nature of an LSTM over RNN - LSTMs are extensions of RNNs \cite{LSTM} that were designed to avoid long-term dependency problems such as exploding and vanishing gradients. Weights are not only just reused but are stored in memory and are propagated through the network.
+			\item Lack of use for the project's purpose - Other papers tend to focus on machine learning techniques, other neural networks such as Multi-layer Perceptron (MPL) and standard Recurrent Neural Networks, with use of time-series data. Especially with the use of a standard RNN, not overcoming its common issues with gradient descent. Stated in related research section of the literature review, \cite{StPNSentA} - \textit{"using the MLP classifier (a.k.a neural networks) showed better results than logistical regression and random forest trained models"}
+			\item Prior use for time-series data and data forecasting - Although RNN LSTM networks have been used for the prediction of Bitcoin price there are a few papers on this \cite{LSTMforetime}. Regardless, LSTMs have been notably used with use for time-series data forecasting due to being able to remember previous data and weights over long sequence spans \cite{LSTMforetime} - \textit{"adds a great benefit in time series forecasting, where classical linear methods can be difficult to adapt to multivariate or multiple input forecasting problems"}.
 		\end{itemize}
 	
 		Therefore, a recurrent long-short-term memory neural network will be used for this project to predict the next hour interval of Bitcoin price based on previous historical prices and hourly sentiment. This system will read in historical data, both price and sentiment - depending on the network for prediction with and without sentiment, this data will be merged, split and used to trained and test the network model for use for forecasting prices. The relative sizes for the training and test data can be decided upon system creation, but the standard sizing for training neural networks is 75:25 respectively.
@@ -599,7 +639,7 @@
 				\multirow{3}{*}{Pytorch} & Graph definition is more imperative and dynamic than other frameworks & Not as widley adopted as TensorFlow \\ & Graph computation defined at runtime, allowing standard popular IDEs to support it & Visualisation is not as robust as TensorBoard \\ & Natively support common python deployment frameworks such as Flask & Not as deployable as TensorFlow, doesn't supper gRPC \\ & & \\
 			\end{tabular}}
 			
-			\textbf{Comparison between TensorFlow, Theano and Pytorch}\cite{36}
+			\textbf{Comparison between TensorFlow, Theano and Pytorch}\cite{TFvsThe}
 		\end{table}
 	
 		Due to the continued support and development of TensorFlow, the board community and support of a high-level wrapper - Keras, this library will be used for this project. Although, Pytorch is a good alternative it is not as easy to use as implement when compared to TensorFlow using Keras.
@@ -610,7 +650,7 @@
 		This part of the system will be responsible for prediction the next time-step of Bitcoin's price for the next hour based on past data. It will use the trained model from the neural network to predict the future hour price when given live hourly data, price and sentiment. The system will also have a look back of 5 which will allow it to see historical data to aid in the predictions. This will occur on the hour every hour when new data is received and processed, this data will also be merged and the split into training and testing data. The sizing can be decided upon system creation, but the standard sizing for training is 75:25, training and testing respectively.
 		
 		\subsection{Frontend Application}
-		The frontend application will display the predicted data to the stakeholders and users of the system, along with charting True hourly prices against Predicted, for both with and without sentiment embedded in the predictions. The interface will display this data in both tabular and chart form to provide variety to the user. Performance metrics will also be displayed at the bottom of the application to show the accuracy of the model. Due to this project focusing around the backend, how the predictions are made and the accuracy of the model, the interface will be somewhat of a second thought. It will aim to display the information in a clear and concise manner which will start to solve the problem of providing a system to the public to aid in investment decisions. The design will not be complicated but more basic and functional. Therefore a basic webpage coded in HTML with Jquery to plot data, and Ajax requests to obtain and load data, will be sufficient.
+		The frontend application will display the predicted data to the stakeholders and users of the system, along with charting True hourly prices against Predicted, for both with and without sentiment embedded in the predictions. The interface will display this data in both tabular and chart form to provide variety to the user. Performance metrics will also be displayed at the bottom of the application to show the accuracy of the model. Due to this project focusing around the backend, how the predictions are made and the accuracy of the model, the interface will be somewhat of a second thought. It will aim to display the information in a clear and concise manner which will start to solve the problem of providing a system to the public to aid in investment decisions. The design will not be complicated but more basic and functional. Therefore a basic webpage coded in HTML with JQuery to plot data, and AJAX requests to obtain and load data, will be sufficient.
 	
 		\subsection{With reference to Initial PID}
 		Both the problem and solution have changed considerably from the original project initiation document (PID), which outlines the initial ideas, objectives and specification for the project. The reason for this was due to a change in direction which was caused by a number of factors; one being a change in passion after initial research into machine learning techniques and neural networks, instead of creating an application that just performed sentiment analysis the direction turned towards how this could be used to predict future prices. This change does still loosely keeps in-line with the initial idea of wanting to create a platform that will aid in investor decision making but takes it a step further by directly giving them predictions on market direction price as a basis for these decisions rather than just identifying opinion direction of the market. 
@@ -678,7 +718,7 @@
 			\includegraphics[width=17cm,height=8cm]{images/Analysis_Engine.png}
 			\textit{Figure 6: Analysis Engine Dataflow diagram}
 		\end{center}
-		This dataflow diagram shows the part of the system that is responsible for training a spam filter, creating the model that'll be used to identify if the tweets from the data collector are unwanted - spam. This system is also responsible for assigning the polarity classification to the tweet through sentiment analysis conducted by the VADER package \cite{12}.
+		This dataflow diagram shows the part of the system that is responsible for training a spam filter, creating the model that'll be used to identify if the tweets from the data collector are unwanted - spam. This system is also responsible for assigning the polarity classification to the tweet through sentiment analysis conducted by the VADER package \cite{VADERPaper}.
 		\begin{itemize}
 			\item Spam filter training - The initial step in this system is to train the Naive Bayes Classifier using the pre-labelled spam dataset which contains an unbiased amount of either spam or ham tweets with their respective labels.
 			\subitem This data is split into two samples, training and test sets 75:25 respectively and the Naive Bayes classifier trained and validated against these datasets after pre-processing of the data occurs on the data to prepare it.
@@ -726,9 +766,9 @@
 		\end{center}
 		The above dataflow diagram shows the data flow for the front-end application and how the data is read into the system from the data files generated by the backend application (Neural network).
 		\begin{itemize}
-			\item Ajax Requests - These are API file requests for files hosted on the server in which the system is running on. This loads the data files into the application for use.
+			\item AJAX Requests - These are API file requests for files hosted on the server in which the system is running on. This loads the data files into the application for use.
 			\item CSS Styling - Contains design styling for page and charts, loaded upon loading of a webpage.
-			\item Charting and Tables - Accesses the loaded data from the Ajax requests and plots the data. Prediction data, only with sentiment and prices are plotted into a table. There will be separate charts and tables displaying the data from the backend that hasn't used sentiment in predictions to aid in establishing a correlation between sentiment and price and whether it affects the hourly price (Aiming to solve the problem statement)
+			\item Charting and Tables - Accesses the loaded data from the AJAX requests and plots the data. Prediction data, only with sentiment and prices are plotted into a table. There will be separate charts and tables displaying the data from the backend that hasn't used sentiment in predictions to aid in establishing a correlation between sentiment and price and whether it affects the hourly price (Aiming to solve the problem statement)
 			\item Stakeholders - There will be the four stakeholders, outlined in the problem articulation section, that would be the primary users of this application.
 		\end{itemize}
 
@@ -755,7 +795,7 @@
 		
 		\subsection{Data collection}\label{collection}
 			\subsubsection{Price Time-Series Historical Data}
-			Historical price data was extracted from a CSV historical price tracker, \textit{Bitcoin Charts} \cite{37}. This tracker provided the historical data from the three exchanges used for Live price collection - Coinbase, Bitfinex and Gemini, since the exchanges supported the cryptocurrency. The data used spans from \textit{2018-01-06} to \textit{2019-01-06}.
+			Historical price data was extracted from a CSV historical price tracker, \textit{Bitcoin Charts} \cite{btcCharts}. This tracker provided the historical data from the three exchanges used for Live price collection - Coinbase, Bitfinex and Gemini, since the exchanges supported the cryptocurrency. The data used spans from \textit{2018-01-06} to \textit{2019-01-06}.
 			
 			\begin{lstlisting}[language=Python, caption=Historical price collection and averaging per exchange]
 ...
@@ -973,7 +1013,7 @@ def processTweet(tweet, tweetFilter):
 			
 			The language detection feature of the system is used as an additional filter for filtering out non-English tweets. As discussed in the solution approach, Tweepy/Twitter API provides a means to filter out non-English based tweets. This, however, will not work if the user has settings on Twitter such as the prefered language and the region set to be English. Due to this, non-English characters can still be contained within the collected tweets; thus these are detected and filtered with the language detection function.
 			
-			\begin{lstlisting}[language=python, caption=Language detection and filter function \cite{38}]
+			\begin{lstlisting}[language=python, caption=Language detection and filter function \cite{langdectNLTK}]
 def detectLaguage(self, text):
 	...
 	
@@ -1010,7 +1050,7 @@ def detectLaguage(self, text):
 			
 			There is however an issue with this approach, if a tweet contains too many special characters - characters that are allowed, the tweet occasionally is not classified as English even when it predominantly is upon visual inspection; therefore the tweet is dropped and not processed. This isn't a significant issue as about 3000 tweets can be collected in an hour, and some of these would be filtered out by the spam filter regardless.
 			
-			Additionally, an n-gram method could be used to distinguish the language of the given text and may perform more accurately than the word-based approach that was implemented \cite{39}. This could be a later improvement, as the n-gram approach requires a corpus for each language to compare against to be presented, the word-based approach is sufficient for its use case. Therefore it could be used as a comparison between approaches and seen as a possible improvement at a later date.
+			Additionally, an n-gram method could be used to distinguish the language of the given text and may perform more accurately than the word-based approach that was implemented \cite{LanNgram}. This could be a later improvement, as the n-gram approach requires a corpus for each language to compare against to be presented, the word-based approach is sufficient for its use case. Therefore it could be used as a comparison between approaches and seen as a possible improvement at a later date.
 			
 			\newpage
 			
@@ -1050,10 +1090,10 @@ def processTweet(tweet, gram = 2):
 				\item Tokenise words: This splits the text into individual words. A dictionary is then created from the tokens that are above the length of 2 - due to words that are of less 'is', 'he' and 'if' will not contribute to spam detection and are seen as generic words in the English language
 				\item Ngrams: This is implemented to provide richer word sequences for the spam filter classification, as explained in the litrature review use of ngrams can increase accuracy.
 				\item Stop words Removal: This removes stopwords such as 'this', 'we' and 'now' from the text. Due to these common words carrying less importance for sentiment analysis.
-				\item Stemming: Reduces words down to their smaller form, as in it remove suffixes from inflected words - 'studying' become 'study' \cite{40}. The Porter Stemmer works by removing the suffixes from the text - 'going' becomes 'go', however, this applies to other words such as 'leaves' becomes 'leav' which is not a word. However, this method will be applied equally to all words containing such suffixes so all variations will become so, thus still allowing the probability classifications to occur on the word as all variations will be the same. 
+				\item Stemming: Reduces words down to their smaller form, as in it remove suffixes from inflected words - 'studying' become 'study' \cite{StemvsLem}. The Porter Stemmer works by removing the suffixes from the text - 'going' becomes 'go', however, this applies to other words such as 'leaves' becomes 'leav' which is not a word. However, this method will be applied equally to all words containing such suffixes so all variations will become so, thus still allowing the probability classifications to occur on the word as all variations will be the same. 
 			\end{itemize}
 			
-			As discovered from \cite{40}, lemmatisation could be an alternative and arguably a better solution to stemming. Lemmatization works fundamentally the same as stemming but reduces the inflected words properly ensuring that a root word belongs to a language. Using the same words that are used to describe stemming, lemmatisation reduces 'goes' to 'go' and 'leaves' to 'leaf' as an example - by removing the suffixes down to create the actual root word.
+			As discovered from \cite{StemvsLem}, lemmatisation could be an alternative and arguably a better solution to stemming. Lemmatization works fundamentally the same as stemming but reduces the inflected words properly ensuring that a root word belongs to a language. Using the same words that are used to describe stemming, lemmatisation reduces 'goes' to 'go' and 'leaves' to 'leaf' as an example - by removing the suffixes down to create the actual root word.
 			Although lemmatisation will provide the classifier with an actual English word, stemming regardless still reduces the words down to a similar form, this added with a lemmatiser needing a corpus for classifying the words to their root words and additional computational time to do so, the former of using a stemmer is sufficient for the use case.
 			
 		\subsection{Spam Filtering}
@@ -1142,7 +1182,7 @@ def testTweet(self, tweet):
 		
 		\subsubsection{Naive Bayes model}
 		
-		The spam filter classifier, using a Naive Bayes model, was coded from scratch. This was ultimately unneeded as the Scikit-learn python package comes with four inbuilt Naive Bayes classification models (Bernoulli, Complement, Multinomial, Gaussian)\cite{41}. The model was coded from scratch due to finding information on how this would be done with techniques such as TFIDF and Additive Smoothing as detailed in the literature review, the tutorial that helped the greatest \textit{Spam Classifier in Python from scratch} \cite{34} \cite{42}. For an explanation of how the maths work behind this classifier see Literature review sections 'Bag Of Words', 'TF-IDF' and 'Addictive Smoothing'. 
+		The spam filter classifier, using a Naive Bayes model, was coded from scratch. This was ultimately unneeded as the Scikit-learn python package comes with four inbuilt Naive Bayes classification models (Bernoulli, Complement, Multinomial, Gaussian)\cite{NValgor}. The model was coded from scratch due to finding information on how this would be done with techniques such as TFIDF and Additive Smoothing as detailed in the literature review, the tutorial that helped the greatest \textit{Spam Classifier in Python from scratch} \cite{SpamCScratch} \cite{SpamOrHamGit}. For an explanation of how the maths work behind this classifier see Literature review sections 'Bag Of Words', 'TF-IDF' and 'Addictive Smoothing'. 
 		
 		The Naive Bayes model implemented was a multinomial Bayes model as the data used for classification was of multinomial distribution and categorical. This algorithm was not compared to the Scikit-learn's inbuilt model for accuracy as this was not the focus of this project. 
 		
@@ -1470,13 +1510,135 @@ def create_sets(self, data, lookback, sentiment):
 		
 		\newpage
 		\subsection{User Interface}
+		This section describes and discusses how the user interface is implemented, and what functions were used to both load data from the server and to display this data as graphical plots and tables on the interface.
+		The aim of the interface, although simple in design, is to display relevant and useful information to the stakeholders in aiding in market decisions. 
+		
+		The interface is a simple HTML page that uses JQuery and AJAX requests in conjunction to display the required data and consists of three charts and two tables - each displaying predictions and performance metrics. A snippet of the final interface can be seen in \textit{Figure 11} later in the section. This section will describe the reasoning behind the data displayed and the layout.
+		
+		\subsubsection{Key Functions}
+		
+		\textbf{Table Generation}
+		
+		The below JQuery script, embedded in the HTML page, is one of two exact functions for loading data and generating a HTML table containing load data from an AJAX request, and fills a \textit{<div>} tag based on provided class name with the generated table data.  
+		
+		\begin{lstlisting}[language=JavaScript, caption=AJAX request and plotting performance data to HTML table]
+<script>
+	// Create table with records based on amount loaded from data from AJAX request
+	function arrayToTable(tableData) {
+		var table = $('<table cellpadding="0" cellspacing="0" border="0"></table');
+		$(tableData).each(function (i, rowData) {
+			var row = $('<tr style="border:0;"></tr>');
+			$(rowData).each(function (j, cellData) {
+				row.append($('<td style="border:0;">'+cellData+'</td>'));
+			});
+			// For each record present add separatly inside table tags
+			table.append(row);
+		});
+		return table;
+	}
+	
+	// Load data from server at base path
+	$.ajax({
+		type: "GET",
+		url: "metrics.csv",
+		success: function (data) {
+			$('.tbl-metrics').append(arrayToTable(Papa.parse(data).data));
+			// Fill div with class ^ with generated table
+		}
+	});
+</script>
+		\end{lstlisting}
+		
+		The data displayed in these tables consist of the perforance metrics of the trained model of the network: root mean squared error, mean squard error, mean absolute error, mean absolute percentage error and loss of the network. Another table on the interface shows the the hourly predictions made by the LSTM network, showing: date and time of prediction, next hourly prediction, current hourly price, hourly sentiment and the suggested market action (\textit{Buy} or \textit{Sell}) based on the hard-coded 0.25 (25\%) threshold in the network code. \textit{See figure 11 below for visual representation}
+\newline
+
+		\textbf{Graph Generation}
+		
+		The function shown in \textit{Listing 19} shows how charting is implemented as a function in the front-end application, likewise to the table function above in \textit{Listing 18}, this function is duplicated multiple times for each of the three graphs presented on the interface application. 
+		
+		This function uses an AJAX request to load the needed JSON data from the server and creates an array for each record present in the data. As shown in the function \textit{yhat\_inverse} and \textit{testY\_inverse} are the two data values generated by the neural network script, the former being the predicted next hour values time stepped by 1 record (1 hour), and the latter the true hourly data.
+		Each of the three charts uses the same parameters to plot data, but each represents different data and values that are saved to the JSON files by the neural network script.
+		
+		\begin{lstlisting}[language=JavaScript, caption=Chart creation with AJAX request]
+<script>
+	var chartData = unpack()
+	function unpack() {
+		var jsonD = {};
+		// Load relevant JSON files
+		$.ajax({ 
+			url: "updating.json", 
+			dataType: "json", 
+			type: "get", 
+			async: false, 
+			success: function(json){ 
+				jsonD = json;
+			} 
+		});
+		var chartData = [];
+		for (var i = 0; i < Object.keys(jsonD).length; i++)
+		{
+		// Extract Values at postions and create array for plotting
+			chartData.push({
+				index: jsonD[i]["index"],
+				predict: jsonD[i]["yhat_inverse"],
+				true: jsonD[i]["testY_inverse"]
+			});
+		}
+		return chartData;
+	};
+	// JSON attributes and parameters for plotting the array generated
+	var chart = AmCharts.makeChart("chartdiv", {
+		"type": "serial",
+		"theme": "dark",
+		"legend": {
+			"useGraphSettings": true
+		},
+		"dataProvider": chartData,
+		"synchronizeGrid":true,
+		"valueAxes": [{
+			"id":"v1",
+			"axisColor": "#FF6600",
+			"axisThickness": 2,
+			"axisAlpha": 1,
+			"position": "left"
+		}, {
+			"id":"v2",
+			...
+		}],
+		...
+		// other JSON attribute parameters for defining a chart
+	...
+</script>
+		\end{lstlisting}
+		
+		\newpage
+		\subsubsection{Final Interface}
+		
+		\begin{figure}[hbt!]
+			\centering
+			\includegraphics[width=14cm,height=19cm]{images/final_interface.png}
+			\begin{center}
+				\textit{Figure 11: Price Forecasting Dataflow diagram}
+			\end{center}
+		\end{figure}
 		
 	\newpage
 	
 	\section{Testing Metrics and Accuracy}
+	This section discusses the performance metrics used to validate the network, any additional validation step during training, speed of execution of the two networks, and outlines what these mean regarding the performance of the network. 
+	
+	Due to the project being primarily an investigation of the use of discussed tools on how these would be used for forecasting the price of the next hour of Bitcoin, based on both historical and live price, and sentiment data.
+	
 	mean bias Error
 	
 	k-fold cross validation was attempted, but issues with continuous data
+	How would this work what will it show or validate?
+	
+	Validation params for network compiling, what do that do?
+	
+	speed of execution - both networks are ~ 3:15 and no sent ~ 2:50 over 200 epochs on a batch size of 1000
+	
+	\section{Discussion of Results}
 	
 	\newpage
 	
@@ -1494,14 +1656,22 @@ def create_sets(self, data, lookback, sentiment):
 	
 	\section{Conclusion and Future Improvements}
 		\subsection{Conclusion}
+		
+		
 		\subsection{Future Improvements}
-		Shifting the intial data by and hour and sequencing over previous data - will also allow proper use of look-back windows
+		Shifting the predicted data by and hour and sequencing over previous data - will also allow proper use of look-back windows
 		
 		Another could be to predict the hour of sentiment and create a threshold for it.
 		
 		Identify whether or not use of ngrams improved accuracy of spam classification
 		
 		Identify whether use lemmatisation would change how spam classification occured
+		
+		Look into use of other ngrams for use with language detection
+		
+		Compare Scikit-learns in-built naive bayes algorithms and other variations performance for spam filtering against hand-coded version
+		
+		Look into adding to the VADER lexicon for increasing performance and accuracy for topic domain of stock market language and what sentiment would be assigned to words
 	\newpage
 	
 	\nocite{*}

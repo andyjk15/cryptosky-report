@@ -19,7 +19,7 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global}
-    \entry{1}{inproceedings}{}
+    \entry{SaTdpsmm}{inproceedings}{}
       \name{author}{4}{}{%
         {{hash=452dff749c5d03968381e376f46bf0a0}{%
            family={Pagolu},
@@ -67,7 +67,7 @@
       \verb https://arxiv.org/pdf/1610.09225.pdf
       \endverb
     \endentry
-    \entry{2}{inproceedings}{}
+    \entry{nlAeiBTCPSO}{inproceedings}{}
       \name{author}{4}{}{%
         {{hash=2a4d4d42d154959e1209b3434c0f35d9}{%
            family={Indera},
@@ -115,7 +115,7 @@
       \verb https://www.ajol.info/index.php/jfas/article/viewFile/165614/155073
       \endverb
     \endentry
-    \entry{3}{inproceedings}{}
+    \entry{BTCFTsent}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=f2e3d1233a4ae1ff0dc165a2561130e0}{%
            family={Evita\bibnamedelima Stenqvist},
@@ -145,7 +145,7 @@
       \verb http://www.diva-portal.org/smash/get/diva2:1110776/FULLTEXT01.pdf
       \endverb
     \endentry
-    \entry{4}{inproceedings}{}
+    \entry{BTCRNN}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=a0717771b02f10aa6a33d0602f6288db}{%
            family={Yalcin},
@@ -175,7 +175,35 @@
       \verb https://towardsdatascience.com/using-recurrent-neural-networks-to-predict-bitcoin-btc-prices-c4ff70f9f3e4
       \endverb
     \endentry
-    \entry{5}{inproceedings}{}
+    \entry{ISO9000}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=5b512ee8a59deb284ad0a6a035ba10b1}{%
+           family={ISO},
+           familyi={I\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {ISO}%
+      }
+      \strng{namehash}{5b512ee8a59deb284ad0a6a035ba10b1}
+      \strng{fullhash}{5b512ee8a59deb284ad0a6a035ba10b1}
+      \strng{bibnamehash}{5b512ee8a59deb284ad0a6a035ba10b1}
+      \strng{authorbibnamehash}{5b512ee8a59deb284ad0a6a035ba10b1}
+      \strng{authornamehash}{5b512ee8a59deb284ad0a6a035ba10b1}
+      \strng{authorfullhash}{5b512ee8a59deb284ad0a6a035ba10b1}
+      \field{sortinit}{6}
+      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Quality management principles:ISO9000-IS9001}
+      \field{year}{2015}
+      \verb{urlraw}
+      \verb https://www.iso.org/files/live/sites/isoorg/files/archive/pdf/en/pub100080.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.iso.org/files/live/sites/isoorg/files/archive/pdf/en/pub100080.pdf
+      \endverb
+    \endentry
+    \entry{StPNSentA}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=0082b92db99b10a1b0be2e2a81ee914f}{%
            family={Intel-Corporation},
@@ -190,8 +218,8 @@
       \strng{authorbibnamehash}{0082b92db99b10a1b0be2e2a81ee914f}
       \strng{authornamehash}{0082b92db99b10a1b0be2e2a81ee914f}
       \strng{authorfullhash}{0082b92db99b10a1b0be2e2a81ee914f}
-      \field{sortinit}{8}
-      \field{sortinithash}{07edf88d4ea82509b9c4b4d13f41c452}
+      \field{sortinit}{9}
+      \field{sortinithash}{1dd72ab054147731c9d824b49aba0534}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Stock Predictions through News Sentiment Analysis}
@@ -203,7 +231,7 @@
       \verb https://www.codeproject.com/Articles/1201444/Stock-Predictions-through-News-Sentiment-Analysis
       \endverb
     \endentry
-    \entry{6}{inproceedings}{}
+    \entry{MLBTCpred}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=be03763696a3a6a39ccce2baf4fb6f4e}{%
            family={Sean\bibnamedelima McNally},
@@ -222,8 +250,8 @@
       \strng{authorbibnamehash}{be03763696a3a6a39ccce2baf4fb6f4e}
       \strng{authornamehash}{be03763696a3a6a39ccce2baf4fb6f4e}
       \strng{authorfullhash}{be03763696a3a6a39ccce2baf4fb6f4e}
-      \field{sortinit}{9}
-      \field{sortinithash}{1dd72ab054147731c9d824b49aba0534}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{2018 26th Euromicro International Conference on Parallel, Distributed and Network-based Processing (PDP)}
@@ -238,7 +266,7 @@
       \verb https://ieeexplore.ieee.org/abstract/document/8374483
       \endverb
     \endentry
-    \entry{7}{inproceedings}{}
+    \entry{SearchTweets}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=2491bc9c7d8731e1ae33124093bc7026}{%
            family={Twitter},
@@ -266,7 +294,7 @@
       \verb https://developer.twitter.com/en/docs/tweets/search/overview
       \endverb
     \endentry
-    \entry{8}{inproceedings}{}
+    \entry{ConStream}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=2491bc9c7d8731e1ae33124093bc7026}{%
            family={Twitter},
@@ -294,7 +322,7 @@
       \verb https://developer.twitter.com/en/docs/tutorials/consuming-streaming-data.html
       \endverb
     \endentry
-    \entry{9}{inproceedings}{}
+    \entry{TweepyStream}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=1e48a059b3f2c3703bea8d54a9e002c9}{%
            family={Roesslein},
@@ -324,7 +352,7 @@
       \verb http://docs.tweepy.org/en/v3.4.0/streaming_how_to.html
       \endverb
     \endentry
-    \entry{10}{inproceedings}{}
+    \entry{PolClassPatients}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=ae1fc492a61542a18835322c490c5af1}{%
            family={Mehrnoush\bibnamedelima Shamsfard},
@@ -357,7 +385,7 @@
       \verb https://www.sciencedirect.com/science/article/pii/S1532046415001276
       \endverb
     \endentry
-    \entry{11}{inproceedings}{}
+    \entry{LexiconSocSent}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=75d8d9e701bff6c60b3e05aa6c0c3f9f}{%
            family={Chedia\bibnamedelima Dhaoui},
@@ -390,7 +418,7 @@
       \verb https://www.emeraldinsight.com/doi/pdfplus/10.1108/JCM-03-2017-2141
       \endverb
     \endentry
-    \entry{12}{inproceedings}{}
+    \entry{VADERPaper}{inproceedings}{}
       \name{author}{2}{}{%
         {{hash=45764413ab79a1c3696604be19148c89}{%
            family={Hutto},
@@ -412,8 +440,8 @@
       \strng{authorbibnamehash}{13e8125b59ac4c2baf7ccab9e513e9a5}
       \strng{authornamehash}{13e8125b59ac4c2baf7ccab9e513e9a5}
       \strng{authorfullhash}{13e8125b59ac4c2baf7ccab9e513e9a5}
-      \field{sortinit}{1}
-      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Eighth International Conference on Weblogs and Social Media (ICWSM-14)}
@@ -426,7 +454,7 @@
       \verb https://www.aaai.org/ocs/index.php/ICWSM/ICWSM14/paper/download/8109/8122
       \endverb
     \endentry
-    \entry{13}{inproceedings}{}
+    \entry{WisCrowds}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=47a5d7268039bf86cea626bcaefd4877}{%
            family={Kenton},
@@ -456,7 +484,7 @@
       \verb https://www.investopedia.com/terms/w/wisdom-crowds.asp
       \endverb
     \endentry
-    \entry{14}{inproceedings}{}
+    \entry{NNDLBegin}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=98de2b3b288cf4bd291e8937e5e28c49}{%
            family={Skymind},
@@ -485,7 +513,7 @@
       \verb https://skymind.ai/wiki/neural-network
       \endverb
     \endentry
-    \entry{15}{inproceedings}{}
+    \entry{WhatNN}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=b5590c43c6c12766886d1cdcae8c5fc3}{%
            family={DeMuro},
@@ -516,7 +544,7 @@
       \verb https://www.techradar.com/uk/news/what-is-a-neural-network
       \endverb
     \endentry
-    \entry{16}{inproceedings}{}
+    \entry{SupdictL}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=7ec8fd610c35dade82ca0d76c0e6a7ee}{%
            family={Bach},
@@ -550,7 +578,7 @@
       \endverb
       \warn{\item Name "Mairal, J., Ponce, J., Sapiro, G., Zisserman, A." has too many commas: skipping name}
     \endentry
-    \entry{17}{inproceedings}{}
+    \entry{ErrorProp}{inproceedings}{}
       \name{author}{3}{}{%
         {{hash=d198ae71c61c758b90826c452447133f}{%
            family={Rumelhart},
@@ -590,7 +618,7 @@
       \verb https://apps.dtic.mil/docs/citations/ADA164453
       \endverb
     \endentry
-    \entry{18}{inproceedings}{}
+    \entry{BeginLSTMRNN}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=98de2b3b288cf4bd291e8937e5e28c49}{%
            family={Skymind},
@@ -619,7 +647,7 @@
       \verb https://skymind.ai/wiki/lstm
       \endverb
     \endentry
-    \entry{19}{inproceedings}{}
+    \entry{RNNLSTMtds}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=ad6e7c0188bc1f913c6dad630fde9e39}{%
            family={Donges},
@@ -649,7 +677,7 @@
       \verb https://towardsdatascience.com/recurrent-neural-networks-and-lstm-4b601dd822a5
       \endverb
     \endentry
-    \entry{20}{inproceedings}{}
+    \entry{NNEgrad}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=37ec6490760a0f7d5715b2e904f6cf20}{%
            family={Jason\bibnamedelima Brownlee},
@@ -679,7 +707,7 @@
       \verb https://machinelearningmastery.com/exploding-gradients-in-neural-networks/
       \endverb
     \endentry
-    \entry{21}{inproceedings}{}
+    \entry{RNNvanishGrad}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=2397822f564bc95b5d3e07a3cc633029}{%
            family={Team},
@@ -709,7 +737,7 @@
       \verb https://www.superdatascience.com/blogs/recurrent-neural-networks-rnn-the-vanishing-gradient-problem
       \endverb
     \endentry
-    \entry{22}{inproceedings}{}
+    \entry{LSTM}{inproceedings}{}
       \name{author}{2}{}{%
         {{hash=41b31e29fb2bdbf9f5c9c1b0d5b3e815}{%
            family={Hochreiter},
@@ -747,7 +775,7 @@
       \verb https://www.bioinf.jku.at/publications/older/2604.pdf
       \endverb
     \endentry
-    \entry{23}{inproceedings}{}
+    \entry{LSTMdia}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=9979e7c606c1876cb09cf32b78628d71}{%
            family={Yan},
@@ -777,7 +805,7 @@
       \verb https://medium.com/mlreview/understanding-lstm-and-its-diagrams-37e2f46f1714
       \endverb
     \endentry
-    \entry{24}{inproceedings}{}
+    \entry{LSTMmaths}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=dea937fb216bfbba25c1bfa1f36a63fe}{%
            family={Olah},
@@ -804,7 +832,7 @@
       \verb https://colah.github.io/posts/2015-08-Understanding-LSTMs
       \endverb
     \endentry
-    \entry{25}{inproceedings}{}
+    \entry{LSTMforetime}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=7b57587d26dd7e449dd94fd493bd072e}{%
            family={Kompella},
@@ -834,7 +862,7 @@
       \verb https://towardsdatascience.com/using-lstms-to-forecast-time-series-4ab688386b1f
       \endverb
     \endentry
-    \entry{26}{inproceedings}{}
+    \entry{TensorFlow}{inproceedings}{}
       \true{moreauthor}
       \true{morelabelname}
       \name{author}{10}{}{%
@@ -911,7 +939,7 @@
       \verb https://www.usenix.org/system/files/conference/osdi16/osdi16-abadi.pdf
       \endverb
     \endentry
-    \entry{27}{inproceedings}{}
+    \entry{OptSGD}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=45ebe6bd838f67040a398bf6fd40841d}{%
            family={Stanford},
@@ -936,7 +964,7 @@
       \verb http://deeplearning.stanford.edu/tutorial/supervised/OptimizationStochasticGradientDescent
       \endverb
     \endentry
-    \entry{28}{inproceedings}{}
+    \entry{Optimisers}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=cec3f268402d95f21749575ae2e51941}{%
            family={Mitra},
@@ -966,7 +994,7 @@
       \verb https://www.quora.com/What-are-differences-between-update-rules-like-AdaDelta-RMSProp-AdaGrad-and-AdaM
       \endverb
     \endentry
-    \entry{29}{inproceedings}{}
+    \entry{OptVariants}{inproceedings}{}
       \name{author}{2}{}{%
         {{hash=ce674b69f5902bcf643d2e5e3b08dd23}{%
            family={Mukkamala},
@@ -1004,7 +1032,7 @@
       \verb https://arxiv.org/pdf/1706.05507.pdf
       \endverb
     \endentry
-    \entry{30}{inproceedings}{}
+    \entry{OverOpt}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=fd768606d546daa3f555605b7786517f}{%
            family={Khandelwal},
@@ -1034,7 +1062,7 @@
       \verb https://medium.com/datadriveninvestor/overview-of-different-optimizers-for-neural-networks-e0ed119440c3
       \endverb
     \endentry
-    \entry{31}{inproceedings}{}
+    \entry{Adam}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=2d6d5b61ff3872dbfed3eb5cbb52e470}{%
            family={Diederik\bibnamedelimb P.\bibnamedelimi Kingma},
@@ -1065,7 +1093,7 @@
       \verb https://arxiv.org/pdf/1412.6980.pdf
       \endverb
     \endentry
-    \entry{32}{inproceedings}{}
+    \entry{StudyNBC}{inproceedings}{}
       \true{moreauthor}
       \true{morelabelname}
       \name{author}{1}{}{%
@@ -1099,7 +1127,7 @@
       \verb https://www.cc.gatech.edu/~isbell/reading/papers/Rish.pdf
       \endverb
     \endentry
-    \entry{33}{inproceedings}{}
+    \entry{TFIDFBOW}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=98de2b3b288cf4bd291e8937e5e28c49}{%
            family={Skymind},
@@ -1128,7 +1156,7 @@
       \verb https://skymind.ai/wiki/bagofwords-tf-idf
       \endverb
     \endentry
-    \entry{34}{inproceedings}{}
+    \entry{SpamCScratch}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=66cc3e81d0437f8fcef4bb3cb3294bc5}{%
            family={Karmali},
@@ -1145,8 +1173,8 @@
       \strng{authorbibnamehash}{66cc3e81d0437f8fcef4bb3cb3294bc5}
       \strng{authornamehash}{66cc3e81d0437f8fcef4bb3cb3294bc5}
       \strng{authorfullhash}{66cc3e81d0437f8fcef4bb3cb3294bc5}
-      \field{sortinit}{5}
-      \field{sortinithash}{3c19c3776b658b3558e9e2e4840c01e2}
+      \field{sortinit}{6}
+      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Spam Classifier in Python from scratch}
@@ -1158,7 +1186,7 @@
       \verb https://towardsdatascience.com/spam-classifier-in-python-from-scratch-27a98ddd8e73
       \endverb
     \endentry
-    \entry{35}{inproceedings}{}
+    \entry{TweepyDoc}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=1e48a059b3f2c3703bea8d54a9e002c9}{%
            family={Roesslein},
@@ -1185,7 +1213,7 @@
       \verb http://docs.tweepy.org/en/v3.5.0/
       \endverb
     \endentry
-    \entry{36}{inproceedings}{}
+    \entry{TFvsThe}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=974f50284a1994b00c1f04d211402eb0}{%
            family={Deoras},
@@ -1215,7 +1243,7 @@
       \verb https://www.analyticsindiamag.com/tensorflow-vs-theano-researchers-prefer-artificial-intelligence-framework
       \endverb
     \endentry
-    \entry{37}{inproceedings}{}
+    \entry{btcCharts}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=9fb73450a6ae06fd7652db34b9a3c981}{%
            family={bitcoincharts},
@@ -1240,7 +1268,7 @@
       \verb http://api.bitcoincharts.com/v1/csv/
       \endverb
     \endentry
-    \entry{38}{inproceedings}{}
+    \entry{langdectNLTK}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=41b3b5daa9b33f52b08087b54f96f115}{%
            family={Nolla},
@@ -1269,7 +1297,7 @@
       \verb http://blog.alejandronolla.com/2013/05/15/detecting-text-language-with-python-and-nltk/
       \endverb
     \endentry
-    \entry{39}{inproceedings}{}
+    \entry{LanNgram}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=90ecaa1e27a33fbd3ab56223485ab402}{%
            family={Cryptography},
@@ -1298,7 +1326,7 @@
       \verb http://practicalcryptography.com/miscellaneous/machine-learning/tutorial-automatic-language-identification-ngram-b/
       \endverb
     \endentry
-    \entry{40}{inproceedings}{}
+    \entry{StemvsLem}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=b26f0ccdcc8e766bb4785cce3a550346}{%
            family={Risueno},
@@ -1328,7 +1356,7 @@
       \verb https://blog.bitext.com/what-is-the-difference-between-stemming-and-lemmatization/
       \endverb
     \endentry
-    \entry{41}{inproceedings}{}
+    \entry{NValgor}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=f8880822642687df3e50f74258165974}{%
            family={developers},
@@ -1357,7 +1385,7 @@
       \verb https://scikit-learn.org/stable/modules/naive_bayes.html
       \endverb
     \endentry
-    \entry{42}{inproceedings}{}
+    \entry{SpamOrHamGit}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=d757410543b5d3323e9db89d373ef2ac}{%
            family={tejank10},
