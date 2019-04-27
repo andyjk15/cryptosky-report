@@ -604,6 +604,8 @@
 	
 		Due to the continued support and development of TensorFlow, the board community and support of a high-level wrapper - Keras, this library will be used for this project. Although, Pytorch is a good alternative it is not as easy to use as implement when compared to TensorFlow using Keras.
 		
+		The Adam optimiser will be used for the neural network. This is due to that it accomplishes what both RMSProp and Adagrad set out for solving issues with gradient descent, but builds upon these by also using the average of the second moments of the gradients (uncentred variance).
+		
 		\subsection{Price Forecasting}
 		This part of the system will be responsible for prediction the next time-step of Bitcoin's price for the next hour based on past data. It will use the trained model from the neural network to predict the future hour price when given live hourly data, price and sentiment. The system will also have a look back of 5 which will allow it to see historical data to aid in the predictions. This will occur on the hour every hour when new data is received and processed, this data will also be merged and the split into training and testing data. The sizing can be decided upon system creation, but the standard sizing for training is 75:25, training and testing respectively.
 		
@@ -748,12 +750,12 @@
 	\begin{center}
 		\section{Implementation}\label{implementation}
 	\end{center}
-		This section will outline the method and process of development of this system to satisfy the chosen solution, technical specification and the problem statement. Each section of the system will be outlined and discussed with relevant codes snippets of essential methods from the system to highlight the processing of data throughout.
+		This section will outline the method and process of development of the system to satisfy the chosen solution, technical specification and the problem statement. Each section of the system will be outlined and discussed with relevant codes snippets of essential methods from the system to highlight the processing of data throughout. Some sections will reference code snippets in \textit{Appendix B}, due to the size of some crucial methods.
 		\newline
 		
 		\subsection{Data collection}\label{collection}
 			\subsubsection{Price Time-Series Historical Data}
-			Historical price data were extracted from a CSV historical price tracker, \textit{Bitcoin Charts} \cite{37}. This tracker provided the historical data from the three exchanges used for Live price collection - Coinbase, Bitfinex and Gemini, since the exchanges supported the cryptocurrency. The data used spans from \textit{2018-01-06} to \textit{2019-01-06}.
+			Historical price data was extracted from a CSV historical price tracker, \textit{Bitcoin Charts} \cite{37}. This tracker provided the historical data from the three exchanges used for Live price collection - Coinbase, Bitfinex and Gemini, since the exchanges supported the cryptocurrency. The data used spans from \textit{2018-01-06} to \textit{2019-01-06}.
 			
 			\begin{lstlisting}[language=Python, caption=Historical price collection and averaging per exchange]
 ...
@@ -782,33 +784,12 @@ data = data.round(3)
 			
 			\subsubsection{Price Time-Series Live Data}
 			Live price data, as described in the solution approach, were extracted every hour from three exchanges - Coinbase, Bitfinex and Gemini were chosen for providing this data due to being the most popular exchange platforms that provide an API for retrieving live price data.
-			
-			Key packages used:
-			\begin{lstlisting}[language=Python, caption=]
-import requests
-				
-from coinbase.wallet.client import Client
-				
-from dotenv import load_dotenv
-from pathlib import Path 
-env_path = Path('.')/'data_collector/prices/config/coinbase.env'
-load_dotenv(dotenv_path=env_path)
-			\end{lstlisting}
-			
-			\textbf{\textit{Requests}} was used to make the API endpoint calls to obtain the response that contained the three prices for the hour needed.
-			
-			The \textbf{\textit{Coinbase}} package was mandatory for establishing a connection with the Coinbase API, and regardless this exchange was still used as it is regarded as the most popular exchange to the general public with one of the highest flow of traffic through the site to purchase cryptocurrencies.
-			
-			Both the \textbf{\textit{dotenv}} and \textbf{\textit{pathlib}} packages were used to extract the API keys - access and secret keys, from the relevant \textit{'.env'} file used alongside the Coinbase package for connection to the Coinbase API.
-			
+								
 			The \textit{'high'}, \textit{'mid'} and \textit{low} prices were extracted from the endpoint response and averaged to provide an overall hourly price per exchange.
 			
 			\begin{lstlisting}[language=Python, caption=Extraction of Price from exchanges]				
 def coinbase():
-				
-	api_key = keys().api_key
-	api_secret = keys().api_secret
-				
+	...				
 	try:
 		client = Client(api_key, api_secret)
 		repsonse = client.get_spot_price(currency_pair = 'BTC-USD')
@@ -842,33 +823,8 @@ def gemini():
 			
 			The above code shows how this was implemented as a system for the price extraction from the APIs.
 			
-			These functions are called every hour by a master function which uses the averaged price from each exchange to average and creates a fair, unbiased hourly price, which is the saved to a CSV containing the live unbiased price for the hour along with the time of creation. The below code shows how this is implemented:
-			
-			\begin{lstlisting}[language=Python, caption=Creation of the unbiased hourly price]
-def collector(priceCSV, fieldnames):
-				
-	now = datetime.now()
-				
-	coinbase_P = coinbase()
-	bitfinex_P = bitfinex()
-	gemini_P = gemini()
-				
-	if coinbase_P == 0 or bitfinex_P == 0 or gemini_P == 0:
-		if coinbase_P and bitfinex_P == 0:
-			averagePrice = gemini_P
-			return
-		elif coinbase_P and gemini_P == 0:
-			averagePrice = bitfinex_P
-			return
-		elif bitfinex_P and gemini_P == 0:
-			averagePrice = coinbase_P
-			return
-		averagePrice = (coinbase_P + bitfinex_P + gemini_P)/2
-	else:
-		averagePrice = (coinbase_P + bitfinex_P + gemini_P)/3
-				
-	averagePrice = round(averagePrice, 3)
-			\end{lstlisting}
+			These functions are called every hour by a master function which uses the averaged price from each exchange to average and creates a fair, unbiased hourly price, which is the saved to a CSV containing the live unbiased price for the hour along with the time of creation. The function also checks if an error state is returned from any of the exchange functions and sets the default price to zero, instead of averaging the three exchanges only the responses that successfully returned a price are averaged.
+					
 			
 			\subsubsection{Historical Tweet Collection}
 			Historical tweets were obtained directly from the Twitter API through a simple Curl command for the given date range of the past year. Multiple accounts were created to obtain the amount of data needed, as detailed in the data gathering section under the solution approach. Due to the vast amount need, 5 tweets averaged per hour for the past year would require 1.2 requests per day (40320 total to get a whole year's worth), totalling 9,050,000 tweets. As this was highly unfeasible with the API access available for this project, 1 tweet per hour (25 per day, 1 request per 4 days) was obtained rather than the average, which resulted in only ~92 requests needed to get the required data. 
@@ -935,48 +891,21 @@ def processTweet(tweet, tweetFilter):
 	.... # other finished else statements with print statements
 			\end{lstlisting}
 			
-			As detailed in the comments for the code, this function conducts multiple methods on the data, all of which are predefined in other files. These are not redefined in this function to reduce code duplication throughout the system and hence are imported at the beginning of the file. Due to the nature of spam filtering tweets were inevitably removed; therefore a few hours were missing data. This resolved by making another request for that specific hour and averaging the sentiment for the given hour to fill missing data.
+			As detailed in the comments for the code, this function conducts external functions and data manipulation on the data, most of which are predefined in the \textit{tweet\_collector.py} script. These are not redefined in this function to reduce code duplication throughout the system and hence are imported at the beginning of the file. Due to the nature of spam filtering tweets were inevitably removed; therefore a few hours of data were missing. This was resolved by making another request for that specific hour and averaging the sentiment for the given hour to fill missing data.
 			
 			\subsubsection{Live Tweet Collection}
-			Live tweets were obtained through the use of the Tweepy package to stream current tweets per hour from the Twitter API. Spam filter detection,, data pre-processing and language detection are also conducted on this data and are defined within this python script \textit{'tweet\_collector.py'}, these functions will be described in the relevant sections in Data processing section.
+			Live tweets were obtained through the use of the Tweepy package to stream current tweets per hour from the Twitter API. Spam filter detection, data pre-processing and language detection are also conducted on this data and are defined within this python script \textit{'tweet\_collector.py'}, these functions are described in the relevant sections in the Data processing section.
 			
-			When this script, \textit{'tweet\_collector.py'}, is ran it firstly initialises the CSV files for storing tweets and tweets that have been assigned polarities by the VADER. More importantly it initialises the spam filter and trains it based on the pre-labelled spam dataset.
-			\begin{lstlisting}[language=python, caption=Spam filter initialisation and training functions]
-## In __main__ when script is first ran
-...
+			On the initial running of the \textit{'tweet\_collector.py'} script the CSV files for storing tweets and tweets are initialised, which will contain the polarities assigned by the VADER analyser. More importantly, it initialises the spam filter and trains it based on the pre-labelled spam dataset.
 			
-	tweetFilter = filterSpam(training_set)
-	tweetFilter.trainFilter()
-	## Initialise with loaded training_set and train
-			
-	prediction = tweetFilter.testData_Prediction()
-	# test classification model with test tweets
-			
-	tweetFilter.filterStatistics(prediction)
-	# Print metric accuracys for test data
-			
-	tweetFilter.testPrediction()
-	# Test classifier with hard specified tweets - to check if it correctly classifies
-			\end{lstlisting}
-			
-			Said functions relate to a function defined under the \textit{filterSpam} class which are used to create the training and test datasets. This function will be described in the Spam Filtering section below.
+			Functions used for training relate to relevant functions defined under the \textit{filterSpam} class which are used to create the training and test datasets. This function is described in the Spam Filtering section below.
 			
 			The streaming of tweets are handled by the Tweepy package and is first initialised upon starting of the python script. The streaming method works by establishing a listener and authenticated with the Twitter API; it then listens on that connection for data. This streamer can also filter on language and a specified hashtag which is loaded from a \textit{'.env'} file also containing the API keys for authentication.
 			\newline
 			
 			
 			\begin{lstlisting}[language=python, caption=Tweepy Streamer setup]
-...# in __main__ #Code ran first on script run
-	twitter_streamer = Streamer()
-	twitter_streamer.stream_tweets(tweets_file, temp_tweets, hashtag, tweetFilter, analyser)
-				
-#========================================
-	class Streamer():
-				
-		def __init__(self):
-			pass
-			# Initialise stream object
-				
+	class Streamer():				
 		def stream_tweets(self, tweets_file, temp_tweets, hashtag, tweetFilter, analyser):
 			listener = Listener(tweets_file, temp_tweets, tweetFilter, analyser)
 			auth = OAuthHandler(keys().api_key, keys().api_secret)
@@ -999,107 +928,10 @@ def processTweet(tweet, tweetFilter):
 			Once the listener and streamer are declared, and Tweepy begins listening all data is processed through the \textit{on\_data} method. In this function, the tweet is extracted from the response and performs data pre-processing, language detection, spam classification and sentiment analysis on the data. Additionally, there is an initial time interval that checks for a time limit - this is used to ensure that the script runs for just under an hour and restarts every hour. This allows the average of the gathered tweets' sentiment to be summed for that hour and then used for the network price predictions. 
 			
 			The tweet text can be nested in multiple attributes in the response; this depends on a few factors of what the tweet is and how it was posted on Twitter. If a user retweeted the tweet, the text of the tweet would be nested under \textit{'retweeted\_status'} in the JSON response, also there is a check to see if the tweets are above the original twitter tweet character limit (140 characters). This is a possible legacy parameter in the Twitter API but is checked upon data response. If an attribute \textit{'extended\_tweet'} exists the character limit for the tweet exceeds 140 but is under the 280 characters hard limit of Twitter, this exact filtering is the same if it in a non-retweeted tweet.
-			\newline
-			
-			\begin{lstlisting}[language=python, caption=Tweepy Stream: 'on\_data' method]
-import spam_filter
-import analysis_engine.sentiment_analysis as sentiment_analysis
-from tweepy import OAuthHandler
-from tweepy import Stream
-from tweepy.streaming import StreamListener
-import csv
-...	
-def on_data(self, data):
-	## Check time limit for under an hour - if limit reached kill script
-	if (time.time() - self.start_time) < self.limit:
-			
-		now = datetime.now() + timedelta(hours=1)
-		## Sets current time, add 1 hour due to script finished before the completed hour is finished
-			
-		data = json.loads(data)
-					
-		# Tweet Extraction from response
-		try:
-			# Check if tweet is a retweet
-			if 'retweeted_status' in data:
-				if 'extended_tweet' in data['retweeted_status']:
-				#if tweet is over the 140 word limit
-					text = data['retweeted_status']['extended_tweet']['full_text']
-					print("Uncleaned Tweet:", text)
-					sys.stdout.flush()
-				else:
-					text = data['retweeted_status']['text']
-					print("Uncleaned Tweet:", text)
-					sys.stdout.flush()
-			else:
-				# Else if a normal Tweet
-				if 'extended_tweet' in data:
-					# If tweet is over 140 word limit
-					text = data['extended_tweet']['full_text']
-					print("Uncleaned Tweet:", text)
-					sys.stdout.flush()
-				else:
-					# Else if not found in nested attributes look in top-level
-					text = data['text']
-					print("Uncleaned Tweet: ", text)
-					sys.stdout.flush()
-			
-			# Data cleaning and pre-processing prior to polarity classification
-			removedLines = utilityFuncs().fixLines(text)
-			removedSpecialChars = utilityFuncs().cleanTweet(removedLines)
-			removedSpacing = utilityFuncs().removeSpacing(removedSpecialChars[0])
-			
-			tweetLength = utilityFuncs().checkLength(removedSpacing)
-						
-			# Check if tweet is long enough to perform polarity classification on (> 5 words (checked through tokenisation))
-			if tweetLength == True:
-				checkIfEnglish = utilityFuncs().detectLaguage(removedSpecialChars[0])
-				# Check if the text in tweet is predominantly English, if not drop
-				if checkIfEnglish == True:
-					tweetText = utilityFuncs().remove_non_ascii(removedSpacing)
-					print("Cleaned Tweet: ", tweetText)
-					sys.stdout.flush()
-								
-					# re-combine emojis onto end of tweet (Due to VADER supporting emoticon sentiment assignment)
-					cleanedTweet = tweetText+' '+removedSpecialChars[1]
-			
-					## Check if spam, drop if classified as such
-					classification = self.tweetFilter.testTweet(cleanedTweet)
-			
-					if classification == False:
-						## Perform Sentiment Analysis using VADER
-						ovSentiment, compound = self.analyser.get_vader_sentiment(cleanedTweet)
-									
-						# Save date/hour, tweet text, highest sentiment score from Positive or Negative and compound score
-						try:
-							# temp file which is used at end of hour streaming to average sentiment for hour
-							with open(temp_tweets, mode='a') as csv_file:
-								writer = csv.DictWriter(csv_file, fieldnames=temp_fieldnames)
-								writer.writerow({'created_at': now.strftime("%Y-%m-%d %H:%M:%S"), 'tweet': cleanedTweet, 'sentiment': ovSentiment, 'compound': compound})
-						except BaseException as exception:
-								print("1 Error: %s" % str(exception))
-								sys.stdout.flush()
-									
-						# Save date/hour, tweet text, highest sentiment score from Positive or Negative and compound score
-						try:
-							# tweet file for storing all collected tweets from every hour
-							with open(tweets_file, mode='a') as csv_file:
-								writer = csv.DictWriter(csv_file, fieldnames=fieldnames_tweet)
-								writer.writerow({'created_at': now.strftime("%Y-%m-%d %H:%M:%S"), 'tweet': cleanedTweet, 'sentiment': ovSentiment, 'compound': compound})
-						except BaseException as exception:
-							print("2 Error: %s" % str(exception))
-							sys.stdout.flush()
-					else:
-						print("Console: ", "Tweet is spam. Not storing tweet in dataset")
-						sys.stdout.flush()
-				...
-			... # Closing Else statments with print statments for when the tweet doesn't meet criteria
-		...
-			\end{lstlisting}
 			
 			As for the key facts about this function; the length of the tweet is checked to be above 5 (tokenised) due to any tweets with fewer words will not contain enough information to be given a proper polarity classification and almost always returns as 100\% neutral, which is of no use and will have no effect on the hours average sentiment. The entire code in the function is encapsulated in a try-catch to check if data was received and handles non-responses and missing data. If there was no data the issue is ignored unless a connection between the streamer and API is broken it otherwise exits the script.	
 			
-		\newpage
+			\newpage
 		\subsection{Data pre-processing}\label{processing}
 			
 			Various techniques and tools have been utilised throughout the development of the system to process the data appropriately so it can be parsed by VADER, spam filter and neural network. This section will cover the crucial functions that provide such functionalities and that are called throughout the system, as seen in some of the above code snippets.
@@ -1109,12 +941,6 @@ def on_data(self, data):
 			Various 'Utility Functions' have been used to initially filter out unwanted data from tweet text. These functions called by, both live tweet (\textit{tweet\_collector.py}) and historical tweet (\textit{sift\_text.py}) processing, prior any polarity classification or storing of tweet data to CSV files.
 				
 				\begin{lstlisting}[language=python, caption=Basic data filtering and processing function - defined in 'tweet\_collector.py']
-import re
-import emoji as ji
-## Key packages used
-...
-class utilityFuncs():
-				
 	def cleanTweet(self, text):
 		# Function to clean tweets, removes links and special characters
 		return re.sub(r'([^0-9A-Za-z \-\%\£\$ \t])|(@[A-Za-z0-9]+)|(http\S+)', '', text), ' '.join(c for c in text if c in ji.UNICODE_EMOJI)
@@ -1141,21 +967,15 @@ class utilityFuncs():
 				\end{lstlisting}
 				
 		    Due to VADER being a lexicon-based sentiment analyser little data pre-processing needs conducting on the tweet text. The functions above primarily remove unnecessary text from the tweet that will either provide no insight into public opinion or can obstruct a proper classification of the sentiment - such as the existence of URLs in the given text. Additionally, the 'clean\_tweet' function removes the emojis in the given text if any are presently using the emoji package - which in turn is another lexicon that compares the given text to any emoticon contained within the lexicon. These are removed at this stage but are later re-added back to the text as VADER support emoticon classification. 
-			The last function in 'utility functions', 'checkLength' splits the text up into individual words (tokens - a process of tokenisation), this is used to check the total length of a tweet. If the tweet is less than five words it is dropped from classification, this is due to 
+		    The last function in 'utility functions', 'checkLength' splits the text up into individual words (tokens - a process of tokenisation), this is used to check the total length of a tweet. If the tweet is less than five words, it is dropped from classification. This is due to text containing less than five words are less likely to produce a meaningful polarity classification than texts above that word limit. Additionally, any meaningful information is unlikely to be forced into five words.
 			
 			\subsubsection{Language detection filtering}
 			
-			This feature of the system is used as an additional filter for filtering out non-English tweets. As discussed in the solution approach, Tweepy/Twitter API provides a means to filter out non-English based tweets, this, however, doesn't work if the user has settings on Twitter set to be English as a prefered language and the region 'en'. Due to this non-English characters can still be within collected tweets; thus these are detected and filtered with the below function.
+			The language detection feature of the system is used as an additional filter for filtering out non-English tweets. As discussed in the solution approach, Tweepy/Twitter API provides a means to filter out non-English based tweets. This, however, will not work if the user has settings on Twitter such as the prefered language and the region set to be English. Due to this, non-English characters can still be contained within the collected tweets; thus these are detected and filtered with the language detection function.
 			
 			\begin{lstlisting}[language=python, caption=Language detection and filter function \cite{38}]
 def detectLaguage(self, text):
-	"""
-	Calculate the probability of given text is written in several languages
-	Using nltk stopwords and comparing to all supported languages
-
-	There are other ways to identify this - TextBlob.detect_language and Ngrams
-	"""
-	language_ratios = {}
+	...
 	
 	# Split words up into tokens - tokenisation
 	tokens = wordpunct_tokenize(text)
@@ -1186,20 +1006,19 @@ def detectLaguage(self, text):
 	# If text is not predominately English drop tweet
 			\end{lstlisting}
 			
-			This function uses several natural languages pre-processing techniques to identify the most predominant language for a given text. It accomplishes this by first tokenising the text into tokens and converting them to lower case - this is so that the stopwords can be identified. For each of the languages supported by the Natural Language Toolkit Python package, the stopwords are identified in the text and compared to the stopwords in the language corpus' in NLTK. The ratios for the individual languages are formed, and then the predominant language identified. If the language is not predominantly English, the tweet is dropped. There is however an issue with this approach, if a tweet contains too many special characters - characters that are allowed, the tweet occasionally is not classified as English even when it predominantly is upon visual inspection; therefore the tweet is dropped and not processed. This isn't a significant issue as about 3000 tweets can be collected in an hour, and some of these would be filtered out by the spam filter regardless.
+			The language detection function uses several natural language pre-processing techniques to identify the most predominant language for the given text. This is accomplished by first tokenising the text into tokens and converting them to lower case - this is so that the stopwords can be identified. For each of the languages supported by the Natural Language Toolkit Python package, the stopwords are identified in the text and compared to the stopwords in the language corpus' in NLTK. The ratios for the individual languages are formed, and then the predominant language identified. If the language is not predominantly English, the tweet is dropped. 
 			
-			Additionally, an n-grams method could be used to distinguish the language of a given text and may perform more accurately than the word-based approach that was implemented \cite{39}. This could be a later improvement as the word-based approach is sufficient and requires a corpus for each language to compare against to be presented. Therefore it could be used as a comparison between approaches and seen as a possible improvement.
+			There is however an issue with this approach, if a tweet contains too many special characters - characters that are allowed, the tweet occasionally is not classified as English even when it predominantly is upon visual inspection; therefore the tweet is dropped and not processed. This isn't a significant issue as about 3000 tweets can be collected in an hour, and some of these would be filtered out by the spam filter regardless.
+			
+			Additionally, an n-gram method could be used to distinguish the language of the given text and may perform more accurately than the word-based approach that was implemented \cite{39}. This could be a later improvement, as the n-gram approach requires a corpus for each language to compare against to be presented, the word-based approach is sufficient for its use case. Therefore it could be used as a comparison between approaches and seen as a possible improvement at a later date.
+			
+			\newpage
 			
 			\subsubsection{Spam filter - Tokenisation, Ngrams, Stopword removal and Stemming}
 			
-			Prior to any text being processed to both train the Naive Bayes classifier of the spam filter or to classify live tweets, the data needs to be pre-processed to extract the features from the text so that the classifier can identify the probability of each word in the given text. The explanation of how this classifier functions will be detailed in the 'Spam Filtering' Section.
+			Prior to any text being processed to both train the Naive Bayes classifier of the spam filter or to classify live tweets, the data needs to be pre-processed to extract the feature vetors from the text, so that the classifier can identify the probability of each word in the given text. The explanation of how this classifier functions will be detailed in the 'Spam Filtering' Section.
 			
 			\begin{lstlisting}[language=python, caption=pre-processing of data prior to being used by the spam filter]
-from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer
-...
-			
 def processTweet(tweet, gram = 2):
 	tweet = tweet.lower() # convert to lower case
 				
@@ -1234,101 +1053,84 @@ def processTweet(tweet, gram = 2):
 				\item Stemming: Reduces words down to their smaller form, as in it remove suffixes from inflected words - 'studying' become 'study' \cite{40}. The Porter Stemmer works by removing the suffixes from the text - 'going' becomes 'go', however, this applies to other words such as 'leaves' becomes 'leav' which is not a word. However, this method will be applied equally to all words containing such suffixes so all variations will become so, thus still allowing the probability classifications to occur on the word as all variations will be the same. 
 			\end{itemize}
 			
-			As discovered from \cite{40}, lemmatisation could be an alternative and arguably a better solution to stemming. Lemmatization works fundamentally the same as stemming but reduces the inflected words properly ensuring that a root word belongs to a language. Using the same words that are used to describe stemming, lemmatisation reduces 'goes' to 'go' and 'leaves' to 'leaf' - removing the suffixes down to create the actual root word.
-			Although lemmatisation will provide the classifier with an actual English word, regardless stemming will still reduce the words down to the same form, this added with a lemmatiser needing a corpus for classifying the words to their root words and additional computational time to do so, the former of using a stemmer is sufficient.
-			\newpage
+			As discovered from \cite{40}, lemmatisation could be an alternative and arguably a better solution to stemming. Lemmatization works fundamentally the same as stemming but reduces the inflected words properly ensuring that a root word belongs to a language. Using the same words that are used to describe stemming, lemmatisation reduces 'goes' to 'go' and 'leaves' to 'leaf' as an example - by removing the suffixes down to create the actual root word.
+			Although lemmatisation will provide the classifier with an actual English word, stemming regardless still reduces the words down to a similar form, this added with a lemmatiser needing a corpus for classifying the words to their root words and additional computational time to do so, the former of using a stemmer is sufficient for the use case.
+			
 		\subsection{Spam Filtering}
 			This section of the implementation will describe how the spam filter is initialised in the \textit{tweet\_collector}, how it is trained and how it classifies tweets as being either spam or ham (wanted data).
 			
-			\textit{Listing 12} shows the initalisation and method functions used within the \textit{tweet\_collector}, that creates the training and testing datasets, and tests classifier on hard specified tweets and checks their classification.
+			The function is initialised within the \textit{tweet\_collector}, that creates the training and testing datasets, and tests classifier on hard specified tweets and checks their classification.
 			
-			\begin{lstlisting}[language=python, caption=Spam filter training Class - \textit{tweet\_collector.py}]
-import pandas as pd
-import spam_filter
-import numpy as np
-...			
+			\begin{lstlisting}[language=python, caption=Spam filter training Class - \textit{tweet\_collector.py}]			
+class filterSpam(object):		
+...		
+def trainFilter(self):
+	self.dataset()		## Split dataset 75:25
+	self.train()		## Train based on training dataset
 			
-class filterSpam(object):
-				
-	def __init__(self, training_set):
-		self.training_set = training_set	
-		## initialises function and globalises training set for use in every function where needed
-				
-	def trainFilter(self):
-		self.dataset()		## Split dataset 75:25
-		self.train()		## Train based on training dataset
-				
-	def dataset(self):
-		self.data = pd.read_csv(self.training_set)
-				
-		self.data['class'] = self.data['classes'].map({'ham': 0, 'spam': 1})
-		# Remap labels of 'Spam' and 'Ham' to 1:0 respectively
-				
-		self.data.drop(['classes'], axis=1, inplace=True)
-		# Drop old labels
-				
-		self.trainIndex, self.testIndex = list(), list()
-		for i in range(self.data.shape[0]):
-			if np.random.uniform(0, 1) < 0.75:	# Random shuffle data of 75%
-				self.trainIndex += [i]	# Create training index
-			else:
-				self.testIndex += [i]	# Create testing index
-		self.trainData = self.data.loc[self.trainIndex]
-		self.testData  = self.data.loc[self.testIndex]
-		# Define datasets by getting values from first 75% and then 25%
-				
-		self.trainData.reset_index(inplace=True)
-		self.testData.reset_index(inplace=True)		
-		# Reset indexes
-				
-		self.trainData.drop(['index'], axis=1, inplace=True)
-		self.testData.drop(['index'], axis=1, inplace=True)
-		# Drop old index
-				
+def dataset(self):
+	self.data = pd.read_csv(self.training_set)
+			
+	self.data['class'] = self.data['classes'].map({'ham': 0, 'spam': 1})
+	# Remap labels of 'Spam' and 'Ham' to 1:0 respectively
+			
+	self.data.drop(['classes'], axis=1, inplace=True)
+	# Drop old labels
+			
+	self.trainIndex, self.testIndex = list(), list()
+	for i in range(self.data.shape[0]):
+		if np.random.uniform(0, 1) < 0.75:	# Random shuffle data of 75%
+			self.trainIndex += [i]	# Create training index
+		else:
+			self.testIndex += [i]	# Create testing index
+	self.trainData = self.data.loc[self.trainIndex]
+	self.testData  = self.data.loc[self.testIndex]
+	# Define datasets by getting values from first 75% and then 25%
+			
+	self.trainData.reset_index(inplace=True)
+	self.testData.reset_index(inplace=True)		
+	# Reset indexes
+			
+	self.trainData.drop(['index'], axis=1, inplace=True)
+	self.testData.drop(['index'], axis=1, inplace=True)
+	# Drop old index
+			
 def train(self):
 	self.spamFilter = spam_filter.classifier(self.trainData)
 	# Initialise the spam filter with the 75% dataset
-				
+			
 	self.spamFilter.train()
 	# Train
-				
+			
 def testData_Prediction(self):
 	# Classify data from test dataset
 	prediction = self.spamFilter.predict(self.testData['tweet'])	
 	return prediction
-				
+			
 def testPrediction(self):
-				
 	# Test Spam/Ham tweets - should return True and False respectivly
 	spam = spam_filter.processTweet("Earn more than 0015 btc free No deposit No investment Free Bitcoins - Earn $65 free btc in 5 minutes bitcoin freebtc getbtc")
-				
+			
 	ham = spam_filter.processTweet("Bitcoin closed with some gains in month of February")
 	# Process Tweets - Tokenise and Stem
-	
-	
+					
 	hamTweet = self.spamFilter.classify(ham)
 	spamTweet = self.spamFilter.classify(spam)
 	# Classify both tweets
-				
-	print("Console: ", "Spam Tweet -- ", spamTweet)
-	sys.stdout.flush()
-	print("Console: ", "Ham Tweet -- ", hamTweet)
-	sys.stdout.flush()
-				
+
 def filterStatistics(self, prediction):
 	# Get performance metrics for prediction data compared to actual test data
 	spam_filter.metrics(self.testData['class'], prediction)
-				
+			
 def testTweet(self, tweet):
 	# Used for live tweets classification
 	processed = spam_filter.processTweet(tweet)
 	classified = self.spamFilter.classify(processed)
-				
+	
 	return classified
-		\end{lstlisting}
+			\end{lstlisting}
 		
 		\begin{itemize}
-			\item filterSpam - \_\_init\_\_: is called when the \textit{tweet\_collector} script is first executed which initialises the object, first described in the 'Live Tweet Collection' section above.
 			\item trainFilter: is a function that calls the dataset function which created the training and testing dataset, followed by the train function which trains the initialised classifier. This function's sole purpose is to serve as a parent function that only needs to be called to perform the child functions once.
 			\item dataset: This function loads the pre-labelled spam dataset, remaps the labels to integers 0:1 to ham:spam respectively, creates a dictionary with an index of 75\% of the original data for the training dataset and 25\% for the testing dataset. This function does this by extracting the data at the set point from the spam dataset into the relevant new datasets which resetting indexes and dropping old columns to form appropriate data.
 			\item train: Is used to call the classifier function defined in the \textit{spam\_filter} script and passes the training data for it to initialise then train on.
@@ -1340,81 +1142,61 @@ def testTweet(self, tweet):
 		
 		\subsubsection{Naive Bayes model}
 		
-		The spam filter classifier, using a Naive Bayes model, was coded from scratch. Ultimately unneeded as the Scikit-learn python package comes with four inbuilt Naive Bayes classification models (Bernoulli, Complement, Multinomial, Gaussian)\cite{41}. The Naive Bayes model implemented was a multinomial Bayes model as the data used for classification was of multinomial distribution and categorical. This algorithm was not compared to the Scikit-learn's inbuilt model for accuracy as this was not the focus of this project. The model was coded from scratch due to finding information on how this would be done with techniques such as TFIDF and Additive Smoothing as detailed in the literature review, the tutorial that helped the greatest \textit{Spam Classifier in Python from scratch} \cite{34} \cite{42}. For an explanation of how the maths work behind this classifier see Literature review sections 'Bag Of Words', 'TF-IDF' and 'Addictive Smoothing'.
+		The spam filter classifier, using a Naive Bayes model, was coded from scratch. This was ultimately unneeded as the Scikit-learn python package comes with four inbuilt Naive Bayes classification models (Bernoulli, Complement, Multinomial, Gaussian)\cite{41}. The model was coded from scratch due to finding information on how this would be done with techniques such as TFIDF and Additive Smoothing as detailed in the literature review, the tutorial that helped the greatest \textit{Spam Classifier in Python from scratch} \cite{34} \cite{42}. For an explanation of how the maths work behind this classifier see Literature review sections 'Bag Of Words', 'TF-IDF' and 'Addictive Smoothing'. 
+		
+		The Naive Bayes model implemented was a multinomial Bayes model as the data used for classification was of multinomial distribution and categorical. This algorithm was not compared to the Scikit-learn's inbuilt model for accuracy as this was not the focus of this project. 
 		
 		\begin{lstlisting}[language=python, caption=classifer class of spam\_filter.py]
-class classifier(object):
-	def __init__(self, trainData):
-		self.tweet = trainData['tweet']
-		self.labels = trainData['class']
+def TF_and_IDF(self):
+...
+	# Bag Of Words implementation 
+	
+	for entry in range(noTweets):
+		processed = processTweet(self.tweet[entry])
+		count = list() 
+	#To keep track of whether the word has ocured in the message or not. TF count
+		for word in processed:
+			if self.labels[entry]:
+				self.tfSpam[word] = self.tfSpam.get(word, 0) + 1
+				self.spamCount += 1	
+				## If label for data is spam then add words to spam list
+			else:
+				self.tfHam[word] = self.tfHam.get(word, 0) + 1
+				self.hamCount += 1
+				# If label for data is ham then add words to ham list
+			# Addictive Smoothing - if current word is not seen add count list
+			if word not in count:
+				count += [word]
+		for word in count:
+		# Loop unseen word list
+			if self.labels[entry]:
+				self.idfSpam[word] = self.idfSpam.get(word, 0) + 1
+			else:
+				self.idfHam[word] = self.idfHam.get(word, 0) + 1
 
-	def TF_and_IDF(self):
-		noTweets = self.tweet.shape[0]
-		self.spam = self.labels.value_counts()[1]
-		self.ham = self.labels.value_counts()[0]
-		self.total = self.spam + self.ham
-
-		# Initialise spam vars
-		self.spamCount = 0
-		self.hamCount = 0
-		self.tfSpam = dict()
-		self.tfHam = dict()
-		self.idfSpam = dict()
-		self.idfHam = dict()
-
-		# Bag Of Words implementation - pro
-
-		for entry in range(noTweets):
-			processed = processTweet(self.tweet[entry])
-			count = list() 
-			#To keep track of whether the word has ocured in the message or not. IDF count
-
-			for word in processed:
-				if self.labels[entry]:
-					self.tfSpam[word] = self.tfSpam.get(word, 0) + 1
-					self.spamCount += 1	
-					## If label for data is spam then add words to spam list
-				else:
-					self.tfHam[word] = self.tfHam.get(word, 0) + 1
-					self.hamCount += 1
-					# If label for data is ham then add words to ham list
-				# Addictive Smoothing - if current word is not seen add count list
-				if word not in count:
-					count += [word]
-			for word in count:
-				# Loop unseen word list
-				if self.labels[entry]:
-					self.idfSpam[word] = self.idfSpam.get(word, 0) + 1
-				else:
-					self.idfHam[word] = self.idfHam.get(word, 0) + 1
-
-	def TF_IDF(self):
-		self.probSpam = dict()
-		self.probHam = dict()
-		self.sumSpam = 0
-		self.sumHam = 0
+def TF_IDF(self):
+...
+	# Calculate probability of word being spam or ham based on occurance in text compared to counted sets along with relevant keys
+	for word in self.tfSpam:
+		self.probSpam[word] = (self.tfSpam[word]) * log((self.spam + self.ham) / (self.idfSpam[word] + self.idfHam.get(word, 0)))
+		self.sumSpam += self.probSpam[word]
+	
+	for word in self.tfSpam:
+		self.probSpam[word] = (self.probSpam[word] + 1) / (self.sumSpam + len(list(self.probSpam.keys())))
+	
+	for word in self.tfHam:
+		self.probHam[word] = (self.tfHam[word]) * log((self.spam + self.ham) / (self.idfSpam.get(word, 0) + self.idfHam[word]))
+		self.sumHam += self.probHam[word]
+	for word in self.tfHam:
+		self.probHam[word] = (self.probHam[word] + 1) / (self.sumHam + len(list(self.probHam.keys())))
 		
-		# Calculate probability of word being spam or ham based on occurance in text compared to counted sets along with relevant keys
-		for word in self.tfSpam:
-			self.probSpam[word] = (self.tfSpam[word]) * log((self.spam + self.ham) / (self.idfSpam[word] + self.idfHam.get(word, 0)))
-			self.sumSpam += self.probSpam[word]
-			
-		for word in self.tfSpam:
-			self.probSpam[word] = (self.probSpam[word] + 1) / (self.sumSpam + len(list(self.probSpam.keys())))
-		
-		for word in self.tfHam:
-			self.probHam[word] = (self.tfHam[word]) * log((self.spam + self.ham) / (self.idfSpam.get(word, 0) + self.idfHam[word]))
-			self.sumHam += self.probHam[word]
-		for word in self.tfHam:
-			self.probHam[word] = (self.probHam[word] + 1) / (self.sumHam + len(list(self.probHam.keys())))
-			
 		# Calculate total amount of spam words identified
 		self.probSpamTotal, self.probHamTotal = self.spam / self.total, self.ham / self.total
 		\end{lstlisting}
 		
 		\subsubsection{Classification}
 		
-		This function aims to classify the pre-processed tweet data as either spam or ham based on the term-frequency and probabilities calculated in the 'TF\_IDF' function. This conducted for each word in the processed tweet is identified if the word is contained in the spam set, based on the level of occurrence the probability is assigned a weight (The more it occures, the more likely it is a generic word), this is also identified for the level of occurrence in the ham set. Totals for the probability are formed, and the total count for both spam and ham are added to the spam and ham probabilities for the processed tweet. If the spam probability \textit{pSpam} is higher than the ham probability \textit{pHam} based on the level of occurrence of each word in the modelled respective sets, a boolean is returned based on which probability is higher - which identifies if the tweet is predominantly spam or ham (\textit{True} or \textit{False}).
+		The classification function aims to classify the pre-processed tweet data as either spam or ham based on the term-frequency and probabilities calculated in the 'TF\_IDF' function. This conducted for each word in the processed tweet is identified if the word is contained in the spam set, based on the level of occurrence the probability is assigned a weight (The more it occurs, the more likely it is a generic word), this is also identified for the level of occurrence in the ham set. Totals for the probability are formed, and the total count for both spam and ham are added to the spam and ham probabilities for the processed tweet. If the spam probability \textit{pSpam} is higher than the ham probability \textit{pHam} based on the level of occurrence of each word in the modelled respective sets, a boolean is returned based on which probability is higher - which identifies if the tweet is predominantly spam or ham (\textit{True} or \textit{False}).
 		
 		\begin{lstlisting}[language=python, caption=Classify Function of Parent classifier class of spam\_filter.py]
 def classify(self, processed):
@@ -1436,7 +1218,7 @@ def classify(self, processed):
 		
 		\subsubsection{Predict}
 		
-		The predict function under the classify parent class used by the \textit{tweet\_collector} to test the trained classifier on the test dataset. For each tweet in the dataset, the data is processed through the \textit{processTweet} function previously described, this returns a dictionary of words in the text which then used in the \textit{classify} function described above to identify whether or not each tweet is predominantly spam or ham, the result of all tweets are returned. The \textit{tweet\_collector then uses the returned array} in the \textit{filterStatistics} function, also previously described, to calculate the performance and accuracy of the trained model.
+		The predict function under the \textit{classify} parent class used by the \textit{tweet\_collector} to test the trained classifier on the test dataset. For each tweet in the dataset, the data is processed through the \textit{processTweet} function previously described, this returns a dictionary of words in the text which then used in the \textit{classify} function described above to identify whether or not each tweet is predominantly spam or ham, the result of all tweets are returned. The \textit{tweet\_collector} then uses the returned array in the \textit{filterStatistics} function, also previously described, to calculate the performance and accuracy of the trained model.
 		
 		\begin{lstlisting}[language=python, caption=Predict function of parent classifier class of spam\_filter.py]
 def predict(self, testData):
@@ -1472,23 +1254,13 @@ def metrics(labels, predictions):
 	print("Accuracy: ", accuracy)
 		\end{lstlisting}
 		
-		\newpage
-		
 		\subsection{Sentiment Analysis}
 		
-		This section of the implementation outlines how VADER sentiment analyser is implemented and performs with the rest of the system. The \textit{get\_sentiment} class and its \textit{\_\_init\_\_} function are called in the \textit{tweet\_collector} script upon starting and by the \textit{historical tweets} script to initialise the analyser from the VADER package. Both scripts then call \textit{get\_vader\_sentiment} when needed to give polarity classification to a tweet.
+		This section of the implementation outlines how the VADER sentiment analyser is implemented and performs with the rest of the system. The \textit{get\_sentiment} class and its \textit{\_\_init\_\_} function are called in the \textit{tweet\_collector} script upon starting and by the \textit{historical tweets} script to initialise the analyser from the VADER package. Both scripts then call \textit{get\_vader\_sentiment} when needed to give polarity classification to a tweet.
 		
-		\begin{lstlisting}[language=python, caption=]
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-...
+		\begin{lstlisting}[language=python, caption=VADER polarity classification]
 class get_sentiment(object):
-
-	def __init__(self):
-		## Initialse object and analyser as global objects
-		self.analyser = SentimentIntensityAnalyzer()
-		self.sentiment = {}
-		self.compound = {}
-		
+...
 	def get_vader_sentiment(self, sentence):
 	
 		# Calculate the polarity scores of the provided tweet
@@ -1517,71 +1289,17 @@ class get_sentiment(object):
 		\end{lstlisting}
 		
 		The \textit{get\_vader\_sentiment} function provides the polarity scores for the provided tweet. The scores are split into polarity and compound to compare the positive and negative scores to identify the overall greater sentiment in the given tweet. By doing so helps to identify if the tweet was overall negative or positive. The compound score is separated and used separately.
-		
-		\newpage
 			
 		\subsection{Recurrent Neural Network - LSTM}
 		This section of the implementation describes and discusses how the LSTM neural network is configured, trained, tested and used to create the model later used for price forecasting for both neural networks - with and without hourly sentiment embedded in datasets. Its performance metrics that were calculated to verify the accuracy for the model, appropriate to regression models and K-fold validation implementation are discussed.	
 		
-		Packages used for both neural networks, with and without hourly sentiment embedded with price data:
-		\begin{lstlisting}[language=python, caption=LSTM packages]
-import pandas as pd
-import numpy as np
-from math import sqrt
-import matplotlib.pyplot as plt
-from sklearn.preprocessing import MinMaxScaler, LabelEncoder
-from sklearn.metrics import mean_squared_error, classification_report 
-from keras.models import Sequential
-from keras.layers import Dense, LSTM, Dropout
-import keras.backend as K
-from sklearn.model_selection import StratifiedKFold, cross_val_score
-
-from time import sleep
-from datetime import datetime, timedelta
-
-import csv, sys, json
-
-from tqdm import tqdm
-from keras_tqdm import TQDMCallback			
-		\end{lstlisting}
-		
-		Additionally, this section only shows code from the neural network that has the sentiment embedded in the datasets; comments are made in the code snippets with the reduced code that consists of the neural network and is due to each neural network having almost the same code. The reasons behind not implementing both networks in the same Python script was down to perform. Due to Python executing code synchronously and due the neural networks needing to ran on the dot of an hour and at the same time the code was divided and executed individually. This also reduced the need to recode most of the functions to loop and perform tasks for each network at every given stage of the network even if the majority of the code was duplicated.
-		\newpage
-		
-		\subsubsection{Script Execution}
-		
-		\begin{lstlisting}[language=python, caption=Start of execution of the LSTM script]
-import pandas as pd
-import csv
-...
-
-class Network(object):
-
-	def __init__(self, merged_lstm_data):
-		self.lstm_data = merged_lstm_data
-
-...
-# Merges hourly and price data into one CSV
-### Occurs for both neural networks but only specific columns are used in each
-merged = pd.merge(left=price_file, right=tweet_file, how="inner")
-print("merge length", len(merged))
-merged.to_csv('merged_lstm_data.csv')
-
-# Initialise network and pass merged data
-network = Network(merged)
-
-# Calls the dataset creation function from the network class
-network.data()
-
-# Calls the future trading function which starts forecasting the price for next hour
-network.future_trading(live_price, live_sentiment, predictions_file)
-
-		\end{lstlisting}
+		Additionally, this section also discusses the code from the neural network that has the sentiment embedded in the datasets; comments are made in the code snippets with the reduced code that consists of the neural network and is due to each neural network having almost the same code. The reasons behind not implementing both networks in the same Python script was down to perform. Due to Python executing code synchronously and due the neural networks needing to ran on the dot of an hour and at the same time the code was divided and executed individually. This also reduced the need to recode most of the functions to loop and perform tasks for each network at every given stage of the network even if the majority of the code was duplicated.
 		
 		\subsubsection{Dataset Creation}
 		
-		\textit{Listing 19} shows how the datasets for training (train\_X and train\_Y) and testing (test\_X and test\_Y) are formed and shaped for model training. A look back of 2 is used to create a timestep of one record to ensure predictions are forecasted for the next record. Prices are also scaled between 0 and 1 due to sentiment ranging in the same values and is a standard for model creation to speed up regression and model training as the data is of smaller values - using the scikit-learns MinMaxScaler function.
-		\newline
+		The datasets for training (train\_X and train\_Y) and testing (test\_X and test\_Y) are formed and shaped for model training. A look back of 2 is used to create a timestep of one record to ensure predictions are forecasted for the next record. Prices are also scaled between 0 and 1 due to sentiment ranging in the same values and is a standard for model creation to speed up regression and model training as the data is of smaller values - using the scikit-learns MinMaxScaler function.
+		
+		A function for merging the two datasets, price and sentiment occurs using the look back, takes place prior to the training (train\_X and train\_Y) and testing (test\_X and test\_Y) are formed. This function is different for the two networks as one includes the sentiment at the position of its respective price.
 		
 		\begin{lstlisting}[language=python, caption=Dataset creation and preprocessing]
 def data(self):
@@ -1601,6 +1319,32 @@ def data(self):
 	self.model_network(train_X, train_Y, test_X, test_Y)
 	# Call network function to train network
 
+def preprocess(self):
+	self.model_data = self.lstm_data[['price','compound']].groupby(self.lstm_data['created_at']).mean()
+	#Extract price and compound columns from dataset
+	
+	self.sentiment_data = self.model_data['compound'].values.reshape(-1,1)
+	self.price_data = self.model_data['price'].values.reshape(-1,1)
+	## Reshape data to column-wise
+	
+	# convert types to float32 for consistancy
+	self.sentiment_data = self.sentiment_data.astype('float32')
+	self.price_data = self.price_data.astype('float32')
+	
+	self.scale = MinMaxScaler(feature_range=(0,1))
+	self.scaledPrice = self.scale.fit_transform(self.price_data)
+	# Scale price to values between 0 and 1
+	
+	self.price_train_size = int(len(self.scaledPrice) * 0.7 )            
+	# use 70% of dataset for training and 30% for testing
+	self.price_test_size = len(self.scaledPrice) - self.price_train_size
+	
+	# Get said train data on size
+	
+	self.price_train = self.scaledPrice[0:self.price_train_size:]
+	self.price_test = self.scaledPrice[self.price_train_size:len(self.scaledPrice):]
+	#set sizes of dataset to be mapped later
+	
 def create_sets(self, data, lookback, sentiment):
 	data_X, data_Y = [], []
 	for i in range(len(data) - lookback):
@@ -1608,10 +1352,10 @@ def create_sets(self, data, lookback, sentiment):
 			# Sets timestep if data by a record
 			pos = data[i-lookback:i+1, 0]
 			pos = pos.tolist()
-
+	
 			# Append sentiment at position of hours price
 			pos.append(sentiment[i].tolist()[0])
-				## Above pos is not conducted on neural network with no sentiment embedded pos.append(0) occurs instead
+			## Above pos is not conducted on neural network with no sentiment embedded pos.append(0) occurs instead
 			data_X.append(pos)
 			data_Y.append(data[i + lookback, 0])
 	return np.array(data_X), np.array(data_Y)
@@ -1619,7 +1363,7 @@ def create_sets(self, data, lookback, sentiment):
 		
 		\subsubsection{Training and Testing Model}
 		
-		The neural network is set up with four layers each of which configured with 100 LSTM cells, with a dropout of 0.2 each, and returning sequences to each other layer. A dropout was used to ensure that the data would not be overfitted, by setting the dropout to 0.2 probability, 80\% of the data on each layer would be retained for the next layer. Return sequences allow for the returning of the hidden state output for each time step and ensures the next LSTM layer has 2 inputs that carry over from the previous layer, which are the old weights and value outputs from the previous layer.
+		The neural network is set up with four layers each of which configured with 100 LSTM cells, with a dropout of 0.2 each, and returning sequences to each other layer. A dropout was used to ensure that the data would not be overfitted, by setting the dropout to 0.2 probability, 80\% of the data on each layer is retained for the next layer. Return sequences allows for the returning of the hidden state output for each time step and ensures the next LSTM layer has 2 inputs that carry over from the previous layer, which are the old weights and value outputs from the previous layer.
 			
 		\begin{lstlisting}[language=python, caption=LSTM model creation\, layering\, compiling and fitting]
 	self.model = Sequential()
@@ -1657,86 +1401,74 @@ def create_sets(self, data, lookback, sentiment):
 	testY_inverse_sent = scale.inverse_transform(test_Y.reshape(-1, 1))
 		\end{lstlisting}	
 		
-		As per the discussion in the literature review, the Adam optimiser was used for the compilation of the model. The loss was calculated using the mean squared error and the metrics calculated and returned to present the accuracy of the model in prediction were: mean squared error, root mean squared error, mean absolute error and mean absolute percentage error. Both the metrics and prediction made are saved to a CSV that is then presented to users in the server-hosted UI.
+		As per the discussion in the literature review and outlined in the solution approach, the Adam optimiser was used for the compilation of the model. The loss was calculated using the mean squared error and the metrics calculated and returned to present the accuracy of the model in prediction were: mean squared error, root mean squared error, mean absolute error and mean absolute percentage error. Both the metrics and predictions made are saved to a CSV that is then presented to users in the server-hosted UI.
 		
-		The model was fitted on the training sets (X, Y) over 200 epochs with a batch size of 1000 on about 11000 records - which was the total amount of data used to train for a year. Predictions are then made using the test set resulting in the predictions of 'yhat' which is inverted and rescaled to get original price values to save to a CSV and also displayed on the user interface.
+		The model was fitted on the training sets (X, Y) over 200 epochs with a batch size of 1000 on about ~11000 records - was about the total amount of data used to train for a year. Predictions are then made using the test set resulting in the predictions of \textit{'yhat'} which is inverted and rescaled to get original price values to save to a CSV and which are displayed on the user interface.
+		
+		\newpage
 		
 		\subsection{Future Prediction Forecasting}
 		
-		\begin{lstlisting}[language=python, caption=]
-def remodel(self, price_file, previous_sent, live_price, live_sentiment, predictions_file):
-	price = pd.read_csv(live_price)
-	sentiment = pd.read_csv(live_sentiment)
-	
-	price_tail = price.tail(5)
-	sentiment_tail = sentiment.tail(5)
-	## Get last 5 live prices and predict on them
-	
-	price_tail.index = price_tail['created_at']
-	sentiment_tail.index = sentiment_tail['created_at']
-	
-	## Example gets last 5 records for some reason
-	
-	price = price_tail['price'].values.reshape(-1,1)
-	sentiment = sentiment_tail['compound'].values.reshape(-1,1)
-	
-	price_scale = self.scale.fit_transform(price)
-	
-	testX, testY = self.create_sets(price_scale, 2, sentiment)
-	
-	testX = np.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
-	
-	yhat = self.model.predict(testX)
-	yhat_inverse = self.scale.inverse_transform(yhat.reshape(-1, 1))
-	testY_inverse = self.scale.inverse_transform(testY.reshape(-1, 1))
-	
-	rmse_sent = sqrt(mean_squared_error(testY_inverse, yhat_inverse))
-	print('Test RMSE: %.3f' % rmse_sent)
-	## Calculate RMSE for prediction
-	
-	difference = ((yhat_inverse[0][0]-self.previous_val)/self.previous_val)*100
-	# Caclulate difference between hour predictions for threshold action prediction (below)
-	
-	... 
-	## Suggest market action based on 0.25 threshold (2.5%)
-	
-	if difference >= self.threshold:
+		Future prediction forecasting is implemented as a loop which is executed every hour. This loads the previous five prices and sentiment data (minus sentiment for the non-sentiment model) and predicts the next hour price in a one-hour timestep. Due to the first four hours there is not enough live data, historical prices and sentiment are used until five hours have passed on initial executing of the network. After such the model predicts on all re-occurring data up to 1000 records to match the initial batch size the model is trained on, then only predicts using the past 1000 records due to the gradient descent of the model being averaged and modelled for a sample size of 1000.
+		
+		These predictions along with inverted test data are saved to relevant CSVs to be plotted as graphs on the interface. The function also forms a market prediction of either 'Buy' or 'Sell' based on a hard-coded difference threshold of 25\%, which suggest that at a given point between predictions when the best time for a user to either sell or buy Bitcoin.
+		
+		\begin{lstlisting}[language=python, caption=Forecasting future price of next hour for Bitcoin]
+		price = pd.read_csv(live_price)
+		sentiment = pd.read_csv(live_sentiment)
+		
+		price_tail = price.tail(i)
+		sentiment_tail = sentiment.tail(i)
+		## Get last 5 live prices and predict on them
+		
+		price_tail.index = price_tail['created_at']
+		sentiment_tail.index = sentiment_tail['created_at']
+		
+		## Example gets last 5 records for some reason
+		
+		price = price_tail['price'].values.reshape(-1,1)
+		sentiment = sentiment_tail['compound'].values.reshape(-1,1)
+		
+		price_scale = self.scale.fit_transform(price)
+		
+		testX, testY = self.create_sets(price_scale, 2, sentiment)
+		
+		testX = np.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
+		
+		yhat = self.model.predict(testX)
+		yhat_inverse = self.scale.inverse_transform(yhat.reshape(-1, 1))
+		testY_inverse = self.scale.inverse_transform(testY.reshape(-1, 1))
+		
+		rmse_sent = sqrt(mean_squared_error(testY_inverse, yhat_inverse))
+		print('Test RMSE: %.3f' % rmse_sent)
+		## Calculate RMSE for prediction
+		
+		difference = ((yhat_inverse[0][0]-self.previous_val)/self.previous_val)*100
+		# Caclulate difference between hour predictions for threshold action prediction (below)
+		... 
+		## Suggest market action based on 0.25 threshold (2.5%)
+		
+		if difference >= self.threshold:
 		print("Buy")
 		self.state = 'BUY'
-	elif difference < self.threshold:
+		elif difference < self.threshold:
 		print("Sell")
 		self.state = 'SELL'
-	else:
-		print("Prediction Error!")
-	
-	...
-	
-	self.test_Y_updating = np.concatenate((self.test_Y_updating, testY_inverse))
-	self.yhat_updating = np.concatenate((self.yhat_updating, yhat_inverse))
-	
-	## Output plots to json for display on UI
-	...
-	with open('data/updating.json', mode='w') as file:
-		for x in range(len(cat)):
-			xs[x] = {'index' : x, 'testY_inverse': cat[x][0], 'yhat_inverse' : cat[x][1]}
-		json.dump(xs, file, indent=3)
-	
-	...
-	
-	...
-	## Output prediction made for hour to CSV file for use in UI
-	try:
+		...
+		## Output prediction made for hour to CSV file for use in UI
+		try:
 		with open(predictions_file, mode='a') as csv_file:
-			...
-			writer.writerow({'created_at': now.strftime("%Y-%m-%d %H:00:00"), 'next_hour_price': hour, 'current_price': current, 'current_sentiment': senti, 'state': self.state})
-	except Exception as e:
+		...
+		writer.writerow({'created_at': now.strftime("%Y-%m-%d %H:00:00"), 'next_hour_price': hour, 'current_price': current, 'current_sentiment': senti, 'state': self.state})
+		except Exception as e:
 		print("Error: %s" % str(e))
 		sys.stdout.flush()
-	
-	# Set the predicted value of current hour
-	self.previous_val = yhat_inverse[0][0] ##THE NEXT PREDICTED VALUE IN AN HOUR
+		
+		# Set the predicted value of current hour
+		self.previous_val = yhat_inverse[0][0] ##THE NEXT PREDICTED VALUE IN AN HOUR
 		\end{lstlisting}
 		
+		\newpage
 		\subsection{User Interface}
 		
 	\newpage
@@ -1780,6 +1512,7 @@ def remodel(self, price_file, previous_sent, live_price, live_sentiment, predict
 		\subsection{Appendix A - Project Initiation Document}
 		Displayed on the following pages below.
 		\includepdf[pages=-]{PID}
+		
 		\subsection{Appendix B - Log book}
 		The log book for this project is a physical book and was handed to the School of Computer Science. Due to being a physical book, it cannot be inserted here.
 	

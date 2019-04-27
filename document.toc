@@ -98,58 +98,56 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {10.1.2}Price Time-Series Live Data}{47}{subsubsection.10.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {10.1.3}Historical Tweet Collection}{49}{subsubsection.10.1.3}
+\contentsline {subsubsection}{\numberline {10.1.3}Historical Tweet Collection}{48}{subsubsection.10.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {10.1.4}Live Tweet Collection}{51}{subsubsection.10.1.4}
+\contentsline {subsubsection}{\numberline {10.1.4}Live Tweet Collection}{50}{subsubsection.10.1.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {10.2}Data pre-processing}{56}{subsection.10.2}
+\contentsline {subsection}{\numberline {10.2}Data pre-processing}{52}{subsection.10.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {10.2.1}Tweet Filtering}{56}{subsubsection.10.2.1}
+\contentsline {subsubsection}{\numberline {10.2.1}Tweet Filtering}{52}{subsubsection.10.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {10.2.2}Language detection filtering}{57}{subsubsection.10.2.2}
+\contentsline {subsubsection}{\numberline {10.2.2}Language detection filtering}{53}{subsubsection.10.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {10.2.3}Spam filter - Tokenisation, Ngrams, Stopword removal and Stemming}{58}{subsubsection.10.2.3}
+\contentsline {subsubsection}{\numberline {10.2.3}Spam filter - Tokenisation, Ngrams, Stopword removal and Stemming}{55}{subsubsection.10.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {10.3}Spam Filtering}{61}{subsection.10.3}
+\contentsline {subsection}{\numberline {10.3}Spam Filtering}{56}{subsection.10.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {10.3.1}Naive Bayes model}{63}{subsubsection.10.3.1}
+\contentsline {subsubsection}{\numberline {10.3.1}Naive Bayes model}{59}{subsubsection.10.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {10.3.2}Classification}{65}{subsubsection.10.3.2}
+\contentsline {subsubsection}{\numberline {10.3.2}Classification}{60}{subsubsection.10.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {10.3.3}Predict}{66}{subsubsection.10.3.3}
+\contentsline {subsubsection}{\numberline {10.3.3}Predict}{61}{subsubsection.10.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {10.3.4}Metrics}{66}{subsubsection.10.3.4}
+\contentsline {subsubsection}{\numberline {10.3.4}Metrics}{61}{subsubsection.10.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {10.4}Sentiment Analysis}{68}{subsection.10.4}
+\contentsline {subsection}{\numberline {10.4}Sentiment Analysis}{62}{subsection.10.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {10.5}Recurrent Neural Network - LSTM}{69}{subsection.10.5}
+\contentsline {subsection}{\numberline {10.5}Recurrent Neural Network - LSTM}{63}{subsection.10.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {10.5.1}Script Execution}{70}{subsubsection.10.5.1}
+\contentsline {subsubsection}{\numberline {10.5.1}Dataset Creation}{63}{subsubsection.10.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {10.5.2}Dataset Creation}{70}{subsubsection.10.5.2}
+\contentsline {subsubsection}{\numberline {10.5.2}Training and Testing Model}{65}{subsubsection.10.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {10.5.3}Training and Testing Model}{72}{subsubsection.10.5.3}
+\contentsline {subsection}{\numberline {10.6}Future Prediction Forecasting}{67}{subsection.10.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {10.6}Future Prediction Forecasting}{73}{subsection.10.6}
+\contentsline {subsection}{\numberline {10.7}User Interface}{69}{subsection.10.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {10.7}User Interface}{75}{subsection.10.7}
+\contentsline {section}{\numberline {11}Testing Metrics and Accuracy}{70}{section.11}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {11}Testing Metrics and Accuracy}{76}{section.11}
+\contentsline {section}{\numberline {12}Project Evaluation}{71}{section.12}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {12}Project Evaluation}{77}{section.12}
+\contentsline {section}{\numberline {13}Discussion: Contribution and Reflection}{71}{section.13}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {13}Discussion: Contribution and Reflection}{77}{section.13}
+\contentsline {subsection}{\numberline {13.1}Limitations}{71}{subsection.13.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {13.1}Limitations}{77}{subsection.13.1}
+\contentsline {section}{\numberline {14}Conclusion and Future Improvements}{72}{section.14}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {14}Conclusion and Future Improvements}{78}{section.14}
+\contentsline {subsection}{\numberline {14.1}Conclusion}{72}{subsection.14.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {14.1}Conclusion}{78}{subsection.14.1}
+\contentsline {subsection}{\numberline {14.2}Future Improvements}{72}{subsection.14.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {14.2}Future Improvements}{78}{subsection.14.2}
+\contentsline {section}{\numberline {15}Appendices}{77}{section.15}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {15}Appendices}{83}{section.15}
+\contentsline {subsection}{\numberline {15.1}Appendix A - Project Initiation Document}{77}{subsection.15.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {15.1}Appendix A - Project Initiation Document}{83}{subsection.15.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {15.2}Appendix B - Log book}{96}{subsection.15.2}
+\contentsline {subsection}{\numberline {15.2}Appendix B - Log book}{90}{subsection.15.2}
