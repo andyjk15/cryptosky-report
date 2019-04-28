@@ -1122,6 +1122,65 @@
       \verb https://missinglink.ai/guides/neural-network-concepts/neural-network-bias-bias-neuron-overfitting-underfitting/
       \endverb
     \endentry
+    \entry{dropoutKeras}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=223bf2a82b36647ecfc4d214f4d21449}{%
+           family={Team},
+           familyi={T\bibinitperiod},
+           given={Keras},
+           giveni={K\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Keras}%
+      }
+      \strng{namehash}{223bf2a82b36647ecfc4d214f4d21449}
+      \strng{fullhash}{223bf2a82b36647ecfc4d214f4d21449}
+      \strng{bibnamehash}{223bf2a82b36647ecfc4d214f4d21449}
+      \strng{authorbibnamehash}{223bf2a82b36647ecfc4d214f4d21449}
+      \strng{authornamehash}{223bf2a82b36647ecfc4d214f4d21449}
+      \strng{authorfullhash}{223bf2a82b36647ecfc4d214f4d21449}
+      \field{sortinit}{5}
+      \field{sortinithash}{3c19c3776b658b3558e9e2e4840c01e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Dropout}
+      \verb{urlraw}
+      \verb https://keras.io/layers/core/#dropout
+      \endverb
+      \verb{url}
+      \verb https://keras.io/layers/core/#dropout
+      \endverb
+    \endentry
+    \entry{dropoutM}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=1d88603e0d71dfb04a604b7a2c8fdf1c}{%
+           family={Budhiraja},
+           familyi={B\bibinitperiod},
+           given={Amar},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Medium}%
+      }
+      \strng{namehash}{1d88603e0d71dfb04a604b7a2c8fdf1c}
+      \strng{fullhash}{1d88603e0d71dfb04a604b7a2c8fdf1c}
+      \strng{bibnamehash}{1d88603e0d71dfb04a604b7a2c8fdf1c}
+      \strng{authorbibnamehash}{1d88603e0d71dfb04a604b7a2c8fdf1c}
+      \strng{authornamehash}{1d88603e0d71dfb04a604b7a2c8fdf1c}
+      \strng{authorfullhash}{1d88603e0d71dfb04a604b7a2c8fdf1c}
+      \field{sortinit}{5}
+      \field{sortinithash}{3c19c3776b658b3558e9e2e4840c01e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Dropout in (Deep) Machine learning}
+      \field{year}{Dec 15, 2016}
+      \verb{urlraw}
+      \verb https://medium.com/@amarbudhiraja/https-medium-com-amarbudhiraja-learning-less-to-learn-better-dropout-in-deep-machine-learning-74334da4bfc5
+      \endverb
+      \verb{url}
+      \verb https://medium.com/@amarbudhiraja/https-medium-com-amarbudhiraja-learning-less-to-learn-better-dropout-in-deep-machine-learning-74334da4bfc5
+      \endverb
+    \endentry
     \entry{StudyNBC}{inproceedings}{}
       \true{moreauthor}
       \true{morelabelname}
@@ -1171,8 +1230,8 @@
       \strng{authorbibnamehash}{98de2b3b288cf4bd291e8937e5e28c49}
       \strng{authornamehash}{98de2b3b288cf4bd291e8937e5e28c49}
       \strng{authorfullhash}{98de2b3b288cf4bd291e8937e5e28c49}
-      \field{sortinit}{5}
-      \field{sortinithash}{3c19c3776b658b3558e9e2e4840c01e2}
+      \field{sortinit}{6}
+      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{A.I Wiki}
@@ -1347,8 +1406,8 @@
       \strng{authorbibnamehash}{974f50284a1994b00c1f04d211402eb0}
       \strng{authornamehash}{974f50284a1994b00c1f04d211402eb0}
       \strng{authorfullhash}{974f50284a1994b00c1f04d211402eb0}
-      \field{sortinit}{7}
-      \field{sortinithash}{c818dd9105a2852444fc9f5e145c294e}
+      \field{sortinit}{8}
+      \field{sortinithash}{07edf88d4ea82509b9c4b4d13f41c452}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Tensorflow Vs. Theano: What Do Researchers Prefer As An Artificial Intelligence Framework}
@@ -1519,8 +1578,8 @@
       \strng{authorbibnamehash}{d757410543b5d3323e9db89d373ef2ac}
       \strng{authornamehash}{d757410543b5d3323e9db89d373ef2ac}
       \strng{authorfullhash}{d757410543b5d3323e9db89d373ef2ac}
-      \field{sortinit}{8}
-      \field{sortinithash}{07edf88d4ea82509b9c4b4d13f41c452}
+      \field{sortinit}{9}
+      \field{sortinithash}{1dd72ab054147731c9d824b49aba0534}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Spam-or-Ham}
@@ -1530,6 +1589,62 @@
       \endverb
       \verb{url}
       \verb https://github.com/tejank10/Spam-or-Ham
+      \endverb
+    \endentry
+    \entry{MBE}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=eb9806a56e1e80b69cc9a606b36cfe4b}{%
+           family={JJ},
+           familyi={J\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Medium}%
+      }
+      \strng{namehash}{eb9806a56e1e80b69cc9a606b36cfe4b}
+      \strng{fullhash}{eb9806a56e1e80b69cc9a606b36cfe4b}
+      \strng{bibnamehash}{eb9806a56e1e80b69cc9a606b36cfe4b}
+      \strng{authorbibnamehash}{eb9806a56e1e80b69cc9a606b36cfe4b}
+      \strng{authornamehash}{eb9806a56e1e80b69cc9a606b36cfe4b}
+      \strng{authorfullhash}{eb9806a56e1e80b69cc9a606b36cfe4b}
+      \field{sortinit}{9}
+      \field{sortinithash}{1dd72ab054147731c9d824b49aba0534}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{MAE and RMSE Which Metric is Better}
+      \field{year}{Mar 23, 2016}
+      \verb{urlraw}
+      \verb https://medium.com/human-in-a-machine-world/mae-and-rmse-which-metric-is-better-e60ac3bde13d
+      \endverb
+      \verb{url}
+      \verb https://medium.com/human-in-a-machine-world/mae-and-rmse-which-metric-is-better-e60ac3bde13d
+      \endverb
+    \endentry
+    \entry{TwitterTerms}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=2491bc9c7d8731e1ae33124093bc7026}{%
+           family={Twitter},
+           familyi={T\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Twitter Corp.}%
+      }
+      \strng{namehash}{2491bc9c7d8731e1ae33124093bc7026}
+      \strng{fullhash}{2491bc9c7d8731e1ae33124093bc7026}
+      \strng{bibnamehash}{2491bc9c7d8731e1ae33124093bc7026}
+      \strng{authorbibnamehash}{2491bc9c7d8731e1ae33124093bc7026}
+      \strng{authornamehash}{2491bc9c7d8731e1ae33124093bc7026}
+      \strng{authorfullhash}{2491bc9c7d8731e1ae33124093bc7026}
+      \field{sortinit}{9}
+      \field{sortinithash}{1dd72ab054147731c9d824b49aba0534}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Developer Agreement and Policy}
+      \field{year}{Effective: May 25, 2018}
+      \verb{urlraw}
+      \verb https://developer.twitter.com/en/developer-terms/agreement-and-policy.html
+      \endverb
+      \verb{url}
+      \verb https://developer.twitter.com/en/developer-terms/agreement-and-policy.html
       \endverb
     \endentry
   \enddatalist

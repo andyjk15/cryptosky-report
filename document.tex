@@ -153,17 +153,27 @@
 	
 	Doubling Down - Is to take further risk on a stock by doubling effort/investment in a hope and attempt to raise the price
 	
-	RNN - Recurrent Neural Network
+	RNN - Recurrent Neural Network - A type of neural network that remembers weights and parameters for learning
 	
-	LSTM - Long-Short Term Memory Neural Network
+	LSTM - Long-Short Term Memory Neural Network - A type of recurrent neural network that overcomes limitations of standard RNNs
 	
-	RMSE - Root Mean Squared Error
+	RMSE - Root Mean Squared Error - Regression performance metric
 	
-	MSE - Mean Squared Error
+	MSE - Mean Squared Error - Regression performance metric
 	
-	MAE - Mean Absolute Error
+	MAE - Mean Absolute Error - Regression performance metric
 	
-	MAPE - Mean Absolute Percentage Error
+	MAPE - Mean Absolute Percentage Error - Regression performance metric
+	
+	HTML - Hyper-Text Markup Language - Scripting language used for forming web pages.
+	
+	CSS - Cascading Style Sheets - A scripting language used to customise the design of the interface of a webpage coded in HTML
+	
+	JSON - JavaScript Object Notation - Open Standard file format that uses human readable text to transmit data objects
+	
+	CSV - Comma-Separated Values - Tabular file format that uses commas to separate values
+	
+	API - Application Programming Interface - A set of web endpoints, communication protocols and tools for building software
 	
 	\newpage
 	
@@ -200,7 +210,7 @@
 		
 		\subsection{Problem Statement}\label{statement}
 		
-		The fundamental problems this project attempts to address are that of, an open-source system available to the public that aids in the analysis and prediction of BTC. The accuracy of open-source tools and technology when applied to the trading market scene and to identify whether there is a correlation between Twitter sentiment and BTC price fluctuation. While there are existing tools, only a few are available to the public and only provide basic functionality, while others are kept in-house of major corporations who invest in this problem domain.
+		The fundamental problems this project attempts to address are that of, an open-source system available to the public that aids in investor decision making on whether to invest at a given point, based on the analysis and prediction of BTC for each hour. The accuracy of open-source tools and technology when applied to the trading market scene and to identify whether there is a correlation between Twitter sentiment and BTC price fluctuation. While there are existing tools, only a few are available to the public and only provide basic functionality, while others are kept in-house of major corporations who invest in this problem domain.
 		
 		The other issue presented here is that assuming perfect accuracy can be achieved is naive. As this project will only be using existing tools and technologies; thus, there are limitations to the accuracy of what can be obtained. One of that being the suitability of the tools, there are no open-source sentiment analysers for stock market prediction, thus finding a specifically trained analyser for the chosen domain in highly unlikely. In relation, finding the most suitable machine learning or neural network is equally important as this will determine the accuracy of the predictions. Due to being a regression problem, machine learning techniques and neural networks that focus around this and forecasting should be considered.
 		
@@ -234,7 +244,7 @@
 		\textbf{General}:
 		\begin{itemize}
 			\item To investigate into the use of lexicon-dictionary based sentiment analyser approach in for sentiment analysis and it's customisability for a given topic domain
-			\item To create a system that can predict the next hour of Bitcoin’s price when given the price and sentiment for the past hour
+			\item To create a system that can predict the next hour of Bitcoin's price when given the price and sentiment for the past hour
 			\item To investigate into natural language data pre-processing techniques and how these could be used to filter out unwanted data
 			\item To investigate into the use of a neural network, specifically an LSTM for forecasting price data
 			\item Ultimatly, to investigate into how the use of sentiment effects the prediction of price for the next hour
@@ -358,7 +368,7 @@
 				\item Stopword removal: Are commonly used words (such as "the","in","a") that provide no meaning to the sentiment of a given text
 				\item Stemming: Is used to replace words with common suffixes and prefixes, as in "go" and "goes" fundamentally convey the same meaning. A stemmer will replace such words with their reduced counterparts
 				\item Term Probability Identification and Feature Extraction: This is a process that involves identifying the most frequently used words in a given text, by using a probability type approach on a pre-defined dataset which classifies a range of texts as with overall negative or positive a machine learning algorithm is trained to classify these accordingly.
-				\item Ngrams: Are a contiguous sequence of n items from a given sample of text. The use of Ngrams in natural language processing can improve the accuracy of classification. For example: ‘Good’ and ‘Not Good’ have opposite meanings. By only using 1 token (1gram) ‘not good’ (‘not’ and ‘good’) can be incorrectly classified. As the english language contains a significant amount of 2gram type word chains using 2gram can improve the accuracy of classification.
+				\item Ngrams: Are a contiguous sequence of n items from a given sample of text. The use of Ngrams in natural language processing can improve the accuracy of classification. For example: 'Good' and 'Not Good' have opposite meanings. By only using 1 token (1gram) 'not good' ('not' and 'good') can be incorrectly classified. As the english language contains a significant amount of 2gram type word chains using 2gram can improve the accuracy of classification.
 			\end{itemize}
 			
 			The former, seen and has been proven to provide higher accuracy than traditional machine learning approaches \cite{LexiconSocSent}, and need little pre-processing conducted on the data as words have a pre-defined sentiment classification in a provided lexicon. Although these lexicons can be complex to create, they generally require little resources to use and alter.
@@ -451,7 +461,7 @@
 					($G_t$ is the sum of the squares of the past gradients to $\theta$)
 				\end{center}
 				
-				\item RMSProp (Root Mean Square Propagation): Aims to resolve Adagrad’s radically diminishing learning rates by using a moving average of the squared gradient. Thus utilises the magnitude of the recent gradient descent to normalise it, and gets adjusted automatically by choosing different learning rate for each parameter. \cite{OptVariants}
+				\item RMSProp (Root Mean Square Propagation): Aims to resolve Adagrad's radically diminishing learning rates by using a moving average of the squared gradient. Thus utilises the magnitude of the recent gradient descent to normalise it, and gets adjusted automatically by choosing different learning rate for each parameter. \cite{OptVariants}
 				
 				\[\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{(1 - \gamma) g^2_{t-1} + \gamma g_t + \epsilon}} \cdot g_t\]
 				
@@ -459,7 +469,7 @@
 					($\gamma$ - decay that takes value from 0-1. $g_t$ - moving average of squared gradients)
 				\end{center} \cite{OverOpt}
 				
-				\item Adam (Adaptive Moment Estimation): Also aims to resolve Adagrad’s diminishing learning rates, by calculates the adaptive learning rate for each parameter. Being one of the most popular gradient descent optimisation algorithms, it estimates from the 1st and 2nd moments of gradients. Adam implements the exponential moving average of the gradients to scale the learning rate of the network and keeps an average of past gradients. \cite{Adam}
+				\item Adam (Adaptive Moment Estimation): Also aims to resolve Adagrad's diminishing learning rates, by calculates the adaptive learning rate for each parameter. Being one of the most popular gradient descent optimisation algorithms, it estimates from the 1st and 2nd moments of gradients. Adam implements the exponential moving average of the gradients to scale the learning rate of the network and keeps an average of past gradients. \cite{Adam}
 				
 				\[m_t = \beta_1 m_{t-1} + (1 - \beta_1) g_t\]
 				\[v_t = \beta_2 v_{t-1} + (1 - \beta_2) g^2_t\]
@@ -482,7 +492,10 @@
 			\end{itemize}
 		
 		\subsubsection{Regularisation}
-		To avoid issues such as overfitting of a neural networks model, techniques such as regularisation to produce better predictive performance and to improve variance of the model created. \cite{RegularisationSc}
+		To avoid issues such as overfitting of the model of a neural network, techniques such as regularisation to produce better predictive performance and to improve variance of the model created. \cite{RegularisationSc} Regularisation is a technique that involves modifying the error function of the network, calculated as the sum of squares errors for individual training and validation samples. This adds a term to the error function which decreases the weights and biases of the network to smooth out outputs of each layer and LSTM cell, thus making the network less likely to overfit. 
+		
+		\subsubsection{Dropout}
+		Dropout is a method of reducing under and overfitting of a network, by ignoring neurons during the training phase of model creation where a particular set of neurons are chosen at random to be ignored. Due to connected layers in a neural network, especially in an LSTM network, occupy the majority of the parameters neurons can develop a co-dependency on and from each other during the training phase of the network which reduces the individual efficiency of each neuron and can lead to the overfitting of training data. \cite{dropoutKeras}\cite{dropoutM}
 		
 		\subsection{Machine Learning}\label{machine}
 			\subsubsection{Naive Bayes}
@@ -516,7 +529,7 @@
 			
 			\[P(H\cap A_1 ... A_n) = \frac{P(A_1\cap H) * P(A_2\cap H) ... * P(A_n\cap H) * P(H)}{P(A_1) * P(A_2) ... * P(A_n)} \]
 			
-			\[Probability \ of \ Outcome \cap Evidence = \frac{Probability \ of \ Likelihood \ of \ evidence * Prior}{Probability \ of \ Evidence} \]
+			\[Probability \ of \ Outcome\ \cap \ Evidence = \frac{Probability \ of \ Likelihood \ of \ evidence * Prior}{Probability \ of \ Evidence} \]
 			
 			The naive Bayes approach has many applications, especially for the topic of this project in classifying the probability occurrence of the next price. Although it is a robust algorithm has its drawbacks which make it not as suitable as a neural network for the given need of this project. The naive Bayes trap is an issue that may occur due to the size of the dataset that will be used. There are however other scenarios this algorithm could be used such as classification of spam data.\cite{StudyNBC}
 			
@@ -674,8 +687,8 @@
 		
 		\newpage
 		
-		\subsection{Data flow Overview}\label{data-flow}
-		To get an understanding of how the system will be put together, a dataflow diagram is a useful method for view how systems are integrated and how data could possibly flow through a system.
+		\subsection{Initial Data flow Overview}\label{data-flow}
+		To get an understanding of how the system will be put together, a dataflow diagram is a useful method for view how systems are integrated and how data could possibly flow through a system. \textit{Figure 4} shows the initial idea of how the system will be constructed and how data will flow and possibly processed at each stage of the system, and will be expanded and built upon in the system design section.
 		
 		\includegraphics[width=18cm,height=8cm]{images/Generic_Flow.png}
 		\begin{center}
@@ -711,7 +724,7 @@
 			\subitem Live data is extracted directly from the three exchanges APIs shown through REST endpoint requests.
 			\subitem Data from both, as separate processes independent from one another, are averaged by extracting the \textit{High}, \textit{Mid} and \textit{Low} hourly prices. This averaged price per hour for each exchange are then averaged together to obtain an unbiased hourly average. The price is then saved to a CSV of historical or live prices respectively. The difference in the flow of data is that of Live prices, in which the process is looped every hour to extract the new hourly prices. 
 			\item Tweet Collector - Streams tweets from Twitter using Tweepy, historical tweets are manually collected directly from the Twitter API. Both are fed through the normalisation and data pre-processing stage.
-			\item Data pre-processing - This involves cleaning the initial data by removing line breaks and new lines that occur in the data, removal of special characters that are standard in tweets (\textit{'\#','\@' and urls}). The data is then fed into a language detection system which tokenises and compares stopwords in the text to NLTK package supported languages. Depending on whether the text is identified as being predominately English or not determines whether or not the tweet is dropped and not used in the network. If the majority is in English, non-English characters are removed as these can still be present in the text.
+			\item Data pre-processing - This involves cleaning the initial data by removing line breaks and new lines that occur in the data, removal of special characters that are standard in tweets (\textit{'\#','@' and urls}). The data is then fed into a language detection system which tokenises and compares stopwords in the text to NLTK package supported languages. Depending on whether the text is identified as being predominately English or not determines whether or not the tweet is dropped and not used in the network. If the majority is in English, non-English characters are removed as these can still be present in the text.
 		\end{itemize}
 	
 		\textbf{Analysis Engine}
@@ -788,7 +801,7 @@
 	\begin{center}
 		\section{Implementation}\label{implementation}
 	\end{center}
-		This section will outline the method and process of development of the system to satisfy the chosen solution, technical specification and the problem statement. Each section of the system will be outlined and discussed with relevant codes snippets of essential methods from the system to highlight the processing of data throughout. Additionally, the order in which the following sections are show was not the order in which they were developed, the order in which they are shown is to represent the order of how the data flows through the system, see \textit{section 9 - Ssytem Design} for an understanding of the flow of data through the system.
+		This section will outline the method and process of development of the system to satisfy the chosen solution, technical specification and the problem statement. Each section of the system will be outlined and discussed with relevant codes snippets of essential methods from the system to highlight the processing of data throughout. Additionally, the order in which the following sections are show was not the order in which they were developed, the order in which they are shown is to represent the order of how the data flows through the system, see \textit{section 9 - System Design} for an understanding of the flow of data through the system.
 		\newline
 		
 		\subsection{Data collection}\label{collection}
@@ -1401,7 +1414,7 @@ def create_sets(self, data, lookback, sentiment):
 		
 		\subsubsection{Training and Testing Model}
 		
-		The neural network is set up with four layers each of which configured with 100 LSTM cells, with a regularisation (dropout) of 0.2 each, and returning sequences to each other layer. A dropout was used to ensure that the data would not be overfitted, by setting the dropout to 0.2 probability, 80\% of the data on each layer is retained for the next layer. Return sequences allows for the returning of the hidden state output for each time step and ensures the next LSTM layer has 2 inputs that carry over from the previous layer, which are the old weights and value outputs from the previous layer.
+		The neural network is set up with four layers each of which configured with 100 LSTM cells, with a dropout of 0.2 each, and returning sequences to each other layer. A dropout was used to ensure that the data would not be overfitted, by setting the dropout to 0.2 probability, 80\% of the data on each layer is retained for the next layer. Return sequences allows for the returning of the hidden state output for each time step and ensures the next LSTM layer has 2 inputs that carry over from the previous layer, which are the old weights and value outputs from the previous layer.
 			
 		\begin{lstlisting}[language=python, caption=LSTM model creation\, layering\, compiling and fitting]
 	self.model = Sequential()
@@ -1612,12 +1625,13 @@ def create_sets(self, data, lookback, sentiment):
 		
 		\newpage
 		\subsubsection{Final Interface}
+		As briefly described throughout this section, the final interface consists of three graphs and two tables. The graphs display relevant data on predictions over true hour price, performance metrics and prediction over true price from the start of execution of the forecasting function. Tables showing the next hour predicted price alongside current hour prices and sentiment, with time created and suggested market action based on the hard-coded difference threshold of 2.5\%, and another table displaying the average performance metrics of the given run of the network model. The interface shown is that of the network model with sentiment embedded, but the model without sentiment embedded is exactly the same, hosted on separate websites - \url{cryptosky.me} and \url{nosent.cryptosky.me}.
 		
 		\begin{figure}[hbt!]
 			\centering
 			\includegraphics[width=14cm,height=19cm]{images/final_interface.png}
 			\begin{center}
-				\textit{Figure 12: Price Forecasting Dataflow diagram}
+				\textit{Figure 12: Final Interface - \url{cryptosky.me} and \url{nosent.cryptosky.me}}
 			\end{center}
 		\end{figure}
 		
@@ -1718,10 +1732,28 @@ def create_sets(self, data, lookback, sentiment):
 	
 	15 records of predictions - \textbf{without} sentiment embedded
 \end{center}
+
+	\begin{figure}[hbt!]
+		\centering
+		\includegraphics[width=16cm,height=6cm]{images/with_sentiment.png}
+		\begin{center}
+			\textit{Figure 13: \url{cryptosky.me} - model \textbf{with} sentiment embedded}
+		\end{center}
+	\end{figure}
+
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=16cm,height=6cm]{images/without_sentiment.png}
+	\begin{center}
+		\textit{Figure 14: \url{nosent.cryptosky.me} - model \textbf{without} sentiment embedded}
+	\end{center}
+\end{figure}
+
+\newpage
 	
 	On visual inspection, after both models had made 48 predictions, \textit{See above tables} showing 10 records as an example, it can be seen that the model with the sentiment embedded both follows the current price more closely and is not as conservative in its predictions as the model without sentiment. 
-	How conservative the model without sentiment embedded is can seen in the five values between, 1 am to 5 am, where it attempts to correct itself to the actual value but slow to do so, then predicts a higher price for the next hour. At a point, the predicted value somewhat resembles that of the actual price but only due to the exact price rising substantially.
-	This model through the data shown, shows that it takes much longer to change the prediction to the actual real value of the next hour compared to the model with the embedded sentiment. 
+	How conservative the model without sentiment embedded is can be seen in the five values between, 1 am to 5 am, where it attempts to correct itself to the actual value but slow to do so, then predicts a higher price for the next hour. At a point, the predicted value somewhat resembles that of the actual price but only due to the exact price rising substantially.
+	This model through the data shown shows that it takes much longer to change the prediction to the actual real value of the next hour compared to the model with the embedded sentiment. 
 	Also, neither model handles spikes in prices very well which is more noticeable with the model with sentiment as it follows the exact price more closely.
 	
 	Another factor that can be identified by the results shown above is that the model with the sentiment embedded in with the price data doesn't react adequately for when the sentiment spikes - regardless of a price spike. This could suggest that the data has not been predicted using enough data of both price and sentiment, due to only training on the last five live prices and sentiment and not 1000 samples to match the batch size the model was trained on during model creation. An improvement to the model could be made during predictions of the next hour price where it continuously predicts on the data available until it has 1000 records, then only predicts using the last 1000 records of live data. At this point, 1000 hours into predictions, said predictions might become more accurate than what is presented for evaluation at the time of writing due to matching the training batch sample size of the trained model of the network.
@@ -1746,25 +1778,64 @@ def create_sets(self, data, lookback, sentiment):
 	
 	\newpage
 	
-	\section{Project Evaluation}
-	Reflection
-	
-	Quality
-	
-	
 	\section{Discussion: Contribution and Reflection}
+	The testing performed and the results obtained show significant difference using sentiment alongside price can have on the forecasting of the next hours' price of Bitcoin, visually shown in \textit{figures 13 \& 14}. Results have also identified that both models do not handle spikes in both sentiment or price adequately, as seen in \textit{figures 13 \& 14} it usually takes another hour for the spike to be reflected in the predictions, longer so for the model without sentiment embedded. Also stated in the discussion of the results, it can be seen that the sentiment of the hour does not directly or immediately affect the next hours' actual price, even when there is a spike or drop in sentiment or price. As stated this could suggest that sentiment affects the price over a broader time range such as a few hours, and also shows that there is no direct correlation between, in the data presented, sentiment spikes to price spikes.
+	
+	With testing and results discussed it is important to discuss some of the general issues that occurred during the development that contribute to the results shown and identifying correlations to solve the problem statement. 
+	
+	One issue is that of deployment and the need to have the system continuously running to make hourly predictions and to satisfy the problem statement of providing a system to aid in investor decision making of the market. Additionally, the system needs to continuously run to meet the batch file size, which will aid in determining if predicting on 1000 records shows if predictions become more accurate on each iteration after 1000 records have been obtained, as mentioned and described in the discussion of the results section.
+	The current solution that has been used to during development is to run the system for training purposes on a work laptop while the front-end is hosted on an external cloud server. On each hour a prediction is made a bash script watches the relevant files that contain predictions, performance metrics and correct over predicted values for graph plotting for changes, and is then SCP'd (Secure Connection Protocol) to the relative path on the cloud server for the front-end to access and display to the stakeholders.
+	Due to the cost and computational power needed, and system not working when initially attempting to deploy it to the server, it was impractical to host it on an external server for the given time frame needed for completion of this project.
+	A proper solution would see both systems deployed at a production level with both fully operational on the external server.
+	
+	Another issue, relating to the issue just described is that on system execution being halted. The issue is that during the period in which the system is not running live prices and sentiment are not being collected, ignoring that predictions are not made. When the system is brought back online it will be missing the now 'historical' data for that given period when it was not running and collecting data; thus this data has to be manually entered. Due to the system not being deployed in 'production' and was ran from a personal laptop this issue frequently occurred, which would be mitigated if it was deployed to an external server. If the system were to crash on a production server, there are several try-catch statements throughout the system that will restart the processes if this issue occurs.
+	
 	\subsection{Limitations}
+	The limitations of the system can be quite clear, as described extensively already with both models performances. However, it is important to identify which points in the technical specifications the final developed system did not meet.
+	
+	Looking back at the technical specification laid out at the start of this project, there is only one point that this system does not meet. It is that of 'both prediction system and interface, should be deployed to a server due to the need to be constantly running'. As already discussed in the discussion section prior to this section, it was both unfeasible for several factors and to get fully operational. This was due to the difference in execution speeds of the laptop used compared to the server intended for deployment, timings in which the model was planned to train on did not match or work on the deployment server thus data collection and predictions made became increasingly later until an hour was left out. Additionally, a limitation that was presented was that of the server intended for deployment was in UTC and not on a GMT timezone in which the development laptop was on which further affected the timings of forecasting and system execution. 
+	
+	Additionally, limitations would be identified if future improvements were to be implemented in the system. Although these improvements are outlined below in the \textit{future improvements} section, one such one that would be suitable to discuss initially as an example would be that of comparing how tailoring the VADER lexicon with domain specific language. Language such as \textit{bullish}, \textit{bearish} and \textit{shorting} terms with identified and relevant weighted sentiment values would have on the outcome of the polarity classification of the VADER analyser, and how this also could more significantly affect the next hour forecasting of Bitcoin price. Due to the VADER sentiment analyser lexicon being open-source these additions would be reasonably easy to implement, the real task, however, would be on how to identify the suitable weighted sentiment value for the specific words added, which in itself could be an entirely new project.
+	
+	Lastly, a limitation that could be identified and is also discussed in the results section above is that of the performance metrics not showing a clear distinction between the two network models. This limitation could be overcome by using more suitable explanative metrics, rather than relying on a more visual inspection, such as: 
+	\begin{itemize}
+		\item Adjusted $R^2$ statistic - which shows how well the selected independant variables of the model explain the variability of the dependant variables, and shows how well the terms fit a regression line \cite{RMSEMAE}. 
+		\item Mean Bias Error (MBE) - Is the Mean Absolute Error (MAE), which is calculated, if the absolute value is not taken (the signs of the errors are not removed) the MAE becomes the mean biased error. The MBE is intended to measure the average model bias and can convay more useful information that the MAE, but should be interpeted with caution due to the positive and negative error cancelling out. \cite{MBE}
+	\end{itemize}
+	By calculating these metrics could aid in distinguishing a correlation between the models based on metrics rather than on visual analysis.
 	
 	
-	How would changing epoch and batch size affect performance?
+	\subsection{Reflection}
+	Developing this project has opened my eyes up to the development of exciting topics that have been used to make the solution of this project real. It has taught me the basics of natural language pre-processing the steps involved to form the data correctly for classification, both how this would be used for a spam classification algorithm like the one implemented and for a traditional machine learning based sentiment analyser. On top of this, it has allowed me to discover other methods for sentiment analysis such as lexicon-based approaches such as VADER and how customisable to a topic domain they are when the lexicon is either altered or added to - along with how the weighted sentiments are formed (based on knowledge from the VADER paper \cite{VADERPaper}). 
+	
+	This project has taught me the basics of how both neural networks, recurrent neural networks and LSTM recurrent neural networks function and how they compare to each other in terms of performance for a particular task of time-series forecasting and their suitability for this task - quantified as knowledge from relevant sources used within the literature review. Known issues of each network such as exploding gradients and how an LSTM network overcomes these standard RNN issues. An in-depth understanding of the low-level functionality of an LSTM network, optimisers available - use, suitability and operation, regularisation techniques and dropout for minimising overfitting and underfitting of the network with the training datasets.
+	
+	It has taught me how the classical (multinomial) naive Bayes probability model can be used for classification for spam or ham (wanted) data, and how the underlying maths and algorithm works - due to hand-coding the algorithm from scratch. Through the use of both the Bag Of Words algorithm for term-frequency identification: how it builds upon the base probability model of the Bayes algorithm. How TF-IDF (Term Frequency-Inverse Document Frequency) further builds upon this to both identify the amount of occurrence of words in a given text by assigning a weight, but also how it uses this to identify commonly used words that are of no relevance to classification. Further how the Addictive Smoothing method aids in dealing with words that have not been identified during training, due to not being initially presented in the training data.
+	
+	Development of this project has given me a further understanding of time management and priorities, in the sense of what needs to focused on during development prior to other features being coded or implemented. An excellent example of where priorities had changed can be seen from the original PID form, \textit{Appendix B}, in which the solution to this project changed from focusing on the front-end application to focusing on the back-end system. This was due to a few factors that have already been identified in the Solution approach section. Where both stakeholders, I the developer and the supervisor of the project concluded that the creation of a front-end application, with a basic back-end for predictions, would not be a satisfactory solution, and more focus should be invested into the price predictions of Bitcoin. Another point where time management had to be considered was when implementing the Naive Bayes Classifier for spam filtering. Time management was not considered during its development and saw the feature go out-of-scope for what was initially wanted - the initial idea was to use the scikit-learns in-built Multinomial Naive Bayes classifier for spam classification. However, tutorials were found on top of the papers used for describing the algorithm during the literature review, which further described how to implement such an algorithm from scratch. Thus this was undertaken and leading to arguably time wasted coded the classification model rather than spending more time on coding the neural network. Arguably in a sense, as detailed in the previous paragraph, it taught me a great deal of how the algorithm works and it's limitations.
+	
+	Furthermore, it has allowed me to form a better knowledge base and understanding of the Python language and data mining techniques used for the languages, to manipulate and used data for a required purpose, and has taught me relevant useful performance metrics for identifying the performance of a neural network and what the results of the metrics represent.
+	
+	Lastly, if I were to conduct this project again, I would create a new lexicon that is explicitly tailored to the type of language used in the stock market as it has a unique language, and how suitable sentiment weights would be assigned to the new words. I would also adjust and alter both the batch size and epoch amount to identify how this affects the training and accuracy of predictions for both networks - with and without sentiment. I would also create a more refined and developed user interface for production level, which will more appropriately satisfy the problem of the public not having a system available to aid in investment decision making. The current interface, although providing relevant and useful information which would still be the information displayed to the stakeholders and users, the interface could be significantly improved to meet a production level solution. More arguably I would build upon what this project has become and implement the future improvements laid out in the \textit{fucute improvements} section below. Most notably a future improvement that would be implemented would be that of additional performance metrics such as $R^2$ statistic and Mean Bias error along with K-fold Cross-Validation (which was not implemented due to time constraints and not knowing how to implement this for continuous data). This will be used to justify further both the performance of the two networks with validation of the model and to accurately identify a correlation between how sentiment affect the price of bitcoin and the accuracy of the network with it embedded, rather than relying on visual inspected as used for the majority of the results discussion.
+	
+	\section{Social, Legal and Ethical Issues}
+	During the creation of the Project Initiation Document, with the intended solution, no foreseeable Social, Legal or Ethical Issues were identified. As the concept and solution changed considerably both before proper development and also during development, no other Social, Legal or Ethical Issues presented themselves. There was however a developer agreement policy that was required to be agreed with prior being able to access the Twitter API, for both historical tweets and with use with the Tweepy Python package. This document outlined various limitations of the use of the API such as rate limits and security personal security of generated API keys, but nothing significant that affected the development of the project apart from the mentioned section of reverse engineering the Twitter API, in which this project had not set out to do. As tweets posted on Twitter are public and free to access by anyone there are no personal information issues that could be presented; thus this agreement was no a Social, Legal or Ethical issue. \textit{Twitter API - Developer Agreement and Policy} \cite{TwitterTerms}
 	
 	\newpage
 	
 	\section{Conclusion and Future Improvements}
 		\subsection{Conclusion}
+		What was aimed for?
+		
+		What was produced?
+		
 		Interesting what would a days prediction would show due to sentiment not directly affecting the next hour price
 		
 		\subsection{Future Improvements}
+		as such comparing recurrent neural network models, implementation and the affect of regularisation techniques, use of different optimisers would have on the network, how use of ngrams could be used to improve language detection, comparing hand-coded naive bayes model to that of scikit-learns in built classifiers, alterations and additions to the VADER lexicon to tailor it with domain specific language and relevant weighted sentiment values
+		
+		
+		
 		Shifting the predicted data by and hour and sequencing over previous data - will also allow proper use of look-back windows
 		
 		Another could be to predict the hour of sentiment and create a threshold for it.
@@ -1787,6 +1858,8 @@ def create_sets(self, data, lookback, sentiment):
 		
 		k-fold cross validation was attempted, but issues with continuous data
 		How would this work what will it show or validate?
+		
+		How would changing epoch and batch size affect performance?
 	\newpage
 	
 	\nocite{*}

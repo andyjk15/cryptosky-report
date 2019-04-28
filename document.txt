@@ -1,0 +1,5126 @@
+Opinion Mining and Social Media
+Sentiment Analysis in the Prediction of
+Cryptocurrency Prices
+School of Mathematical, Physical and Computational Sciences
+Indivdual Project - CS3IP16
+Student: Andrew Sotheran
+Student Number: fr005432
+Supervisor: Kenneth Boness
+Word Count: Place Holder
+Submission date: Place Holder
+
+1
+
+1
+
+Abstract
+
+The volatility of the stock markets is an aspect that is both hard to predict and to
+mitigate particularly when relating to the cryptocurrency market. Commodities such
+as cryptocurrencies are profoundly volatile and have attracted investors in an attempt
+to make quick profits on the market. These financial commodities are subject to
+the whim of public confidence and platforms such as Twitter and Facebook are most
+notably utilised to express opinions. Extrapolating sentiment from such platforms has
+been used to gain insight into topics across industries, thus applying it to crypto-market
+analysis could serve to show a relationship between public opinion and market change.
+This project looks into public perception of the cryptomarket, by analysing Bitcoinrelated tweets per hour for sentiment changes that could indicate a correlation to
+market fluctuations in the near future. This is achieved by training a recurrent neural
+network on the severity changes of historical sentiment and price over the past year
+every hour. The predictions are then shifted forward in time by 1 hour to indicate the
+corresponding Bitcoin price interval.
+
+2
+
+2
+
+Acknowledgements
+
+I would like to express my gratitude to Dr. Kenneth Boness for his continued support
+and guidance throughout this project.
+Secondly, I want to express gratitude to PhD. Jason Brownlee, of Machine Learning
+Mastery for having clear and thorough explanations of machine learning concepts and
+metrics.
+I would also like to thank my family for their support during the development of this
+project.
+
+3
+
+3
+
+Glossary
+
+Bull(ish)/Bear(ish) Markets - Relates to a trend of the market price increasing and
+decreasing respectively
+Highs/Lows - The highest and lowest trading price of a giving period
+Fiat Currency - A currency without intrinsic value that has been established as money
+BTC - Bitcoin’s stock symbol
+Twitter - Online social media platform, which allows users to post information or
+express opinions through messages called "Tweets"
+Tweets - The name given for messages posted on the Twitter platform, which are
+restricted to 280 characters.
+Hashtag - Is a keyword or phrase used to describe a topic and allows the tweets to be
+categorised.
+Fomo (Fear of Missing Out) - Is used to describe buying behaviour when stocks are
+moving suddenly and more buyers appear to enter all of a sudden.
+Shorting - Or short sale, is the sale of an asset that the investor buys shares and
+immediately sells them, hoping to make a profit from buying later at a lower price.
+Doubling Down - Is to take further risk on a stock by doubling effort/investment in a
+hope and attempt to raise the price
+RNN - Recurrent Neural Network
+LSTM - Long-Short Term Memory Neural Network
+RMSE - Root Mean Squared Error
+MSE - Mean Squared Error
+MAE - Mean Absolute Error
+MAPE - Mean Absolute Percentage Error
+
+4
+
+Contents
+1 Abstract
+
+2
+
+2 Acknowledgements
+
+3
+
+3 Glossary
+
+4
+
+4 Introduction
+
+9
+
+5 Problem Articulation
+
+11
+
+5.1
+
+Problem Statement . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+11
+
+5.2
+
+Stakeholders . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+11
+
+5.3
+
+Project Motivation . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+12
+
+5.4
+
+Technical Specification . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+14
+
+6 Quality Goals
+
+16
+
+6.1
+
+Process Description . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+16
+
+6.2
+
+Quality Objectives . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+16
+
+6.3
+
+Tools to Ensure Quality . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+17
+
+7 Literature Review
+
+18
+
+7.1
+
+Existing Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+18
+
+7.2
+
+Related research . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+18
+
+7.3
+
+Data Collection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+19
+
+7.3.1
+
+Twitter and Twitter API . . . . . . . . . . . . . . . . . . . . . .
+
+19
+
+7.3.2
+
+Tweepy Python Package . . . . . . . . . . . . . . . . . . . . . .
+
+20
+
+Sentiment Analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+21
+
+7.4.1
+
+Natural Language Processing . . . . . . . . . . . . . . . . . . .
+
+21
+
+7.4.2
+
+Valence Aware Dictionary and sEntiment Reasoning . . . . . . .
+
+22
+
+Neural Networks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+23
+
+7.5.1
+
+Recurrent Neural Network (RNN) . . . . . . . . . . . . . . . . .
+
+24
+
+7.5.2
+
+Long-Short Term Memory (LSTM) . . . . . . . . . . . . . . . .
+
+25
+
+7.5.3
+
+Keras and TensorFlow . . . . . . . . . . . . . . . . . . . . . . .
+
+26
+
+7.4
+
+7.5
+
+5
+
+7.5.4
+
+Optimisers . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+27
+
+7.5.5
+
+Regularisation . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+29
+
+7.5.6
+
+Dropout . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+29
+
+Machine Learning . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+29
+
+7.6.1
+
+Naive Bayes . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+29
+
+7.7
+
+Bag Of Words . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+30
+
+7.8
+
+TF-IDF . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+31
+
+7.9
+
+Addictive Smoothing . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+31
+
+7.10 Regression Performance Metrics . . . . . . . . . . . . . . . . . . . . . .
+
+32
+
+7.6
+
+8 Solution Approach
+
+33
+
+8.1
+
+Data gathering . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+33
+
+8.2
+
+Data pre-processing . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+34
+
+8.3
+
+Spam Filtering . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+34
+
+8.4
+
+Language Detection . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+35
+
+8.5
+
+Sentiment Analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+35
+
+8.6
+
+Neural Network . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+36
+
+8.7
+
+Price Forecasting . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+38
+
+8.8
+
+Frontend Application . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+38
+
+8.9
+
+With reference to Initial PID
+
+. . . . . . . . . . . . . . . . . . . . . . .
+
+38
+
+8.10 Solution Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+39
+
+8.11 Data flow Overview . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+40
+
+9 System Design
+
+41
+
+9.1
+
+Dataflow Designs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+41
+
+9.2
+
+Interface Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+48
+
+10 Implementation
+
+50
+
+10.1 Data collection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+50
+
+10.1.1 Price Time-Series Historical Data . . . . . . . . . . . . . . . . .
+
+50
+
+10.1.2 Price Time-Series Live Data . . . . . . . . . . . . . . . . . . . .
+
+51
+
+10.1.3 Historical Tweet Collection . . . . . . . . . . . . . . . . . . . . .
+
+52
+
+6
+
+10.1.4 Live Tweet Collection . . . . . . . . . . . . . . . . . . . . . . . .
+
+54
+
+10.2 Data pre-processing . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+56
+
+10.2.1 Tweet Filtering . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+56
+
+10.2.2 Language detection filtering . . . . . . . . . . . . . . . . . . . .
+
+57
+
+10.2.3 Spam filter - Tokenisation, Ngrams, Stopword removal and Stemming . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+59
+
+10.3 Spam Filtering . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+60
+
+10.3.1 Naive Bayes model . . . . . . . . . . . . . . . . . . . . . . . . .
+
+63
+
+10.3.2 Classification . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+64
+
+10.3.3 Predict . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+65
+
+10.3.4 Metrics
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+65
+
+10.4 Sentiment Analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+66
+
+10.5 Recurrent Neural Network - LSTM . . . . . . . . . . . . . . . . . . . .
+
+67
+
+10.5.1 Dataset Creation . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+67
+
+10.5.2 Training and Testing Model . . . . . . . . . . . . . . . . . . . .
+
+69
+
+10.6 Future Prediction Forecasting . . . . . . . . . . . . . . . . . . . . . . .
+
+71
+
+10.7 User Interface . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+73
+
+10.7.1 Key Functions . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+73
+
+10.7.2 Final Interface . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+76
+
+11 Testing Metrics and Accuracy
+
+77
+
+11.1 Integration Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+77
+
+11.2 Accuracy of Model & Results . . . . . . . . . . . . . . . . . . . . . . .
+
+78
+
+11.2.1 Results Discussion . . . . . . . . . . . . . . . . . . . . . . . . .
+
+78
+
+11.2.2 Execution Speeds . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+80
+
+12 Discussion: Contribution and Reflection
+12.1 Limitations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+13 Conclusion and Future Improvements
+
+81
+81
+82
+
+13.1 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+82
+
+13.2 Future Improvements . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+82
+
+7
+
+14 Appendices
+
+88
+
+14.1 Appendix A - Project Initiation Document . . . . . . . . . . . . . . . .
+
+88
+
+14.2 Appendix B - Log book . . . . . . . . . . . . . . . . . . . . . . . . . . . 101
+
+8
+
+4
+
+Introduction
+
+The premise of this project is to investigate whether the sentiment expressed in social
+media has a correlation to the prices of cryptocurrencies and how this could be used
+to predict future changes in the price.
+The chosen cryptocurrency that will be of focus for this project will be the currency
+Bitcoin (BTC), due to having the largest community and backing and has been known
+to lead other fiat currencies. Bitcoin is seen as one, if not the first cryptocurrency to
+bring a broader following to the peer-to-peer token transaction scene since 2009. Although it was not the first token to utilise blockchain technology, it allowed investors
+to openly trade a public cryptocurrency which provided pseudonymous means of transferring funds through the internet. Thus it has been around longer than most of the
+other fiat currencies and is the most popular crypto-token due to it’s more extensive
+community base.
+Most financial commodities are subject to the whim of public confidence and are the
+core of its base value. A platform that is frequently used for the public to convey their
+opinions on a commodity is that of Twitter which provides arguably biased information
+and opinions. Whether the opinions present a basis in facts or not, they are usually
+taken at face value and can influence the public opinion of given topics. As Bitcoin has
+been around since 2009 the opinions and information on the commodity are prevalent
+through the platform. In the paper Sentiment Analysis of Twitter Data for Predicting
+Stock Market Movements by Majhi et al. [1] 2.5 million tweets on Microsoft were
+extracted from Twitter, sentiment analysis and logistical regression performed on the
+data yielded 69.01% accuracy for a 3-day period on the increase/decrease in stock
+price. These results showed a "good correlation between stock market movements and
+the sentiments of the public expressed in Twitter ".
+The background of this project is in response to the volatility of the cryptocurrency
+market, which can fluctuate at a moments notice and can be seen to be social media
+driven. The history of the price of Bitcoin and what was being discussed on the
+currency around it’s most volatile period to-date, Nov-2017 to Feb-2018, shows a strong
+bullish trend which saw Bitcoin reach a $19,500 high in mid-Dec. While social media,
+such as Twitter, during that period was had an extremely positive outlook on the
+cryptocurrency. The trend was short lived and saw the market crash only a month
+later, with only a couple of sell-offs, expected for the holidays rush, accompanied by
+negative outlooks posted on social media turned the market against itself which saw
+the longest bearish market in Bitcoin’s history and is still trying to recover today.
+Due to how volatile the crypto-market can be, there is a need to either mitigate or
+to anticipate where the markets are heading. As the crypto-market and Bitcoin are
+affected by socially constructed opinions, either through Twitter, news articles or other
+forms of media, there is a way to perform the latter, where the prices of Bitcoin could
+be predicted based on the sentiment gathered from social media outlets.
+9
+
+This project aims to create a tool that gathers tweets from Twitter, obtains the overall
+sentiment score of the given text while gathering historical price data for the period
+gathering occurs. Features are then extracted from the gathered data and used in a
+neural network to ascertain whether the price of the currency can be predicted from
+the correlation between the sentiment and price history of the data.
+This report will discuss the justifications for the project and the problems it will be
+attempting to resolve, the stakeholders that would benefit the most from this system
+and what this project will not attempt to accomplish. Similar tools will be critiqued
+and examined for their feature set and credibility in the literature review along with
+current sentiment analysers, algorithms, natural language processing techniques and
+neural networks in their respective topics and comparing their accuracy for this project
+purpose. The solution approach will discuss the decisions and reasoning behind choosing the techniques and tools used for this project and will outline the requirements for
+this project. Implementation of the chosen techniques and tools, with the discussion
+of essential functions of the system will formulate the implementation section of this
+report with an in-detail explanation of the function’s use and data flow of the system.
+
+10
+
+5
+5.1
+
+Problem Articulation
+
+Problem Statement
+
+The fundamental problems this project attempts to address are that of, an open-source
+system available to the public that aids in the analysis and prediction of BTC. The
+accuracy of open-source tools and technology when applied to the trading market scene
+and to identify whether there is a correlation between Twitter sentiment and BTC price
+fluctuation. While there are existing tools, only a few are available to the public and
+only provide basic functionality, while others are kept in-house of major corporations
+who invest in this problem domain.
+The other issue presented here is that assuming perfect accuracy can be achieved is
+naive. As this project will only be using existing tools and technologies; thus, there are
+limitations to the accuracy of what can be obtained. One of that being the suitability
+of the tools, there are no open-source sentiment analysers for stock market prediction,
+thus finding a specifically trained analyser for the chosen domain in highly unlikely.
+In relation, finding the most suitable machine learning or neural network is equally
+important as this will determine the accuracy of the predictions. Due to being a
+regression problem, machine learning techniques and neural networks that focus around
+this and forecasting should be considered.
+The accuracy and suitability of various machine learning methods and neural networks
+are a known issue in their respective domains. This investigation should be carried out
+to determine their suitability for their needed use in this project and will be detailed
+in the literature review.
+This project will focus on the investigation of these technologies and tools to justify
+whether it is feasible to predict the price of BTC based on historical price and the
+sentiment gathered from Twitter. Limitations of the system and it’s accuracy in predictions should be investigated and discussed to determine the implemented solution
+is the more suitable compared to other methods.
+
+5.2
+
+Stakeholders
+
+The main stakeholders of this system would be those looking to invest in the cryptocurrency markets, in this projects regard, specifically into Bitcoin.
+• Public Investors - These are investors from the general public. These investors
+can decide to either actively or passively invest in the markets but are essential
+for the general use of a given cryptocurrency. This type of investor would benefit
+the most from an open-source system such as this, as it will aim to provide a basis
+11
+
+for decisions for buying or selling Bitcoin. Additionally, due to the lack of any
+open-source tools available, these stakeholders could be seen as being left in the
+dark when it comes to predicting the direction of Bitcoin where Businesses and
+Enterprises will have a one up, due to having an internal system for predictions.
+• Speculators - These stakeholders can be both public and business, who aim for the
+chance of the possibility fast. They actively invest at points where a market is an
+impending rise in price and tend to sell after a market makes them a reasonable
+amount of money before it possibly drops. These stakeholders would benefit from
+such a system as it will provide a means to identify and predict short term gains
+in the Bitcoin market, and if taken into decisions could make a profit.
+• Business Investors: These will be investors of a business who would be investing
+on the behalf of a company. A system such as that this project will provide may
+benefit such a stakeholder, but the information would be used as a collective
+with others to justify the investment. Additionally, this system may not benefit
+this stakeholder as the company they are investing for may have an equivalent
+or better system.
+• Prospect Investors: These are new investors to the cryptomarket scene who are
+looking to get into the market and are generally looking for initial information
+of the market movement. This system will benefit such a stakeholder in their
+initial decisions in market investment, but not as much as a generally more active
+investor. This is due to the extent to which a new investor invests compared to
+a establish active investor.
+• Developer - Andrew Sotheran: The developer responsible for this project by
+developing a solution that satisfies the problem and objective defined in the
+Technical Specification. As the sole developer of this project it should be ensured
+that the system is developed on time and the project runs smoothly.
+• Project Supervisor - Kenneth Boness: Is the projects supervisor whom will oversee the development through weekly project meetings. Weekly feedback will be
+given on the progress and direction of development, and will offer advice to ensure
+the quality of the solution.
+
+5.3
+
+Project Motivation
+
+The motivation behind the project stems from a range of points, from personal and
+public issues with the volatility if the crypto-market, and how losses specifically could
+be mitigated. The personal motivations behind the conceptualisation of this began two
+years ago during the crash of late 2017-2018, which saw new investors blindly jump
+into the trend that was buying cryptocurrencies. During this period of November to
+December 2017 saw Bitcoin’s price reach $20,000 from $5,000, new public investors
+12
+
+jumped on the chance to buy into the trend of possibly making quick profits and
+the fear of missing out (FOMO). In late December, a few holiday sell-offs occurred
+from business and big investors, this coupled with a few negative outlooks posted on
+social media by news outlets caused the market to implode causing investors to panic
+sell one after the other and posting negativity on social, thus causing more decline in
+the market. As a result, this caused personal monetary loss and distress as being a
+long-term investor.
+Another motivation is that at the time of writing, there are no publically available
+systems that combine sentiment analysis with a historical price to forecast the price
+of Bitcoin or any other cryptocurrency. There are papers and a few code repositories
+that implement a similar concepts [2] - Use of a Multi-layer Perceptron network for
+moving averages in Bitcoin price, [3] - Predicting Bitcoin price fluctuation with Twitter
+sentiment analysis, [4] - Predict Tomorrows Bitcoin (BTC) Price with Recurrent Neural
+Networks but are not operational. A system such as [1] hosted on Coingecko, a popular
+cryptocurrency track site, provides a tool for basic sentiment analysis but doesn’t give
+an evaluated indication of the direction of the market as a prediction. This leaves the
+public to the whim of volatility of the market without a means to know what the next,
+say an hour, could entail to possibly reduce losses if the market drops. Such systems are
+usually kept in-house of major corporations who invest significant time into tackling
+such a problem. Additionlly, this could be seen as a positive for major investors, as
+such a system could cause panic selling if public investors solely trusted such a system.
+
+13
+
+5.4
+
+Technical Specification
+
+This project will need to follow a specification to ensure that the quality and the problem statement is met. This section will outline what this project should include, what
+it will not consist of and will guide the development of this project.
+General:
+• To investigate into the use of lexicon-dictionary based sentiment analyser approach in for sentiment analysis and it’s customisability for a given topic domain
+• To create a system that can predict the next hour of BitcoinâĂŹs price when
+given the price and sentiment for the past hour
+• To investigate into natural language data pre-processing techniques and how these
+could be used to filter out unwanted data
+• To investigate into the use of a neural network, specifically an LSTM for forecasting price data
+• Ultimatly, to investigate into how the use of sentiment effects the prediction of
+price for the next hour
+
+Natural Language pre-processing (Spam and language detection filtering)
+• To produce a system that processes the historical and live tweets, removing unwanted characters, removing urls and punctuation.
+• To produce a system for spam filter using probability likelihood for processed
+tweets. A naive Bayes approach may be suitable for this given task
+• To produce a language detection and filtering system that removes all tweets that
+are not of the English language or containing non-basic-latin characters
+• To provide a means for stemming, tokenisation and stopword removal to aid in
+data pre-processing for language detection and spam filtering
+
+Neural Network
+• To produce a neural network which trains on collected, historical and live data,
+to forecast the future price of Bitcoin, based on price and sentiement
+
+14
+
+• To produce a neural netowork which accomplished the same as the other above,
+but with out use of sentiment
+• To produce metrics to justify accuracy of the model
+• To produce data files containing, the current time of predictions alongside current
+hour price and sentiment. This should also include a suggested action based on
+a threshold for the price difference between hours.
+• To produce data files containing the true and predicted price values of every hour
+for trained data, and another for current reoccuring predictions.
+
+Interface
+• To produce a basic interface which displays the predicted values alongside true
+price values with a time interval step of an hour. This can be displayed as both
+a table consisting of:
+Date of prediction, predicted price of next hour, current hour price and sentiment, and a suggested action based on a threshold for the price difference between
+hours.
+To produce charts displaying the true and predicted price values for every
+hour, from both start of new predictions made, and from training predictions
+• To display a table of performance metrics of the trained model
+
+Server
+• This system, both prediction system and interface, should be deployed to a server
+due to the need to be constantly running
+This project will not attempt to justify the accuracy of the chosen algorithm or tools
+over other algorithms. It will be discussed in the solution approach the justifications
+made on why the chosen algorithm and tools have been used for this project over the
+others, but accuracy will not be directly compared.
+This project will only be coded to predict an hour ahead as the model will be trained
+on an hourly basis as the data is gathered per hour. Predictions for further in the
+future can be modelled but will be seen as a future improvement to the system.
+The detail of a interface may be subject of change through this project due to time
+contraints and the focus being the investigation of the impact social media has on
+market predictions.
+15
+
+6
+
+Quality Goals
+
+Although this project will be an investigation it is important to ensure that a specific
+level of quality is met and maintained throughout development to produce a final
+solution that fully meets the requirements set out in the technical specifiction. This
+section will outline the quality objectives, processes used to aid in ensuring quality,
+quality goals and the deveopment pipeline.
+
+6.1
+
+Process Description
+
+To maintain a level of quality through the project’s development lifecycle various processes are to be defined. As stated in ISO 9001:2015 [5] "Consistent and predictable
+results are achieved more effectively and efficiently when activities are understood and
+managed as interrelated processes". To achieve this, clearly defined processes of how
+this system should be developed along with tools to achieve this will need to be defined before the development of this project, to ensure an effective, transparent and
+well-tested system is created, of which should be outlined in the solution approach.
+
+6.2
+
+Quality Objectives
+
+The objective of testing is to determine that the functionality provided works according
+to the specifications and satisfies the problem statement. This is to ensure that the
+system is performing both as intended and without failure.
+The most important aspect of testing of the system is to ensure that predictions for
+Bitcoin price are calculated for the next hour interval. Testing should be conducted
+around this to both determine the accuracy of the predictions made by the system, and
+to validate the optimisers and other methods used for model creation. Suitable performance and accuracy metrics should be chosen and implemented to aid in justifying
+the accuracy of the developed solution for a regression model.
+The development of this project should follow an agile methodology as closely as and
+when possible. Prior to functions and components being created after another has
+finished development, said completed function should be tested and fully operational
+with the existing functions and components it uses or provides for. Integration testing
+should be conducted to determine what functions are operating as intended along with
+the development of the system.
+Lastly, the testing of the user interface shouldn’t be considered as part of the testing
+of the system due to the focus of this project not formulating around the development
+of the interface, but rather around the back-end prediction system. As long as what is
+intended to be displayed to the user and are displayed correctly as per the user interface
+design such testing will be sufficient.
+16
+
+6.3
+
+Tools to Ensure Quality
+
+• Version Control: A version control system will be used for the development of this
+project, such as Git - (Github), and will provide a means to track the versions of
+the code and to store it on a remote server as a backup.
+• Linting and Static code analysis: This will allow for an on-the-fly bug detection
+and code quality measures to be set for the python language. This will ensure that
+code is written in the best practice for the language and all code will conform
+to the same standard. The type of linting analyser that will be used will be
+determined by the Text editor used for development.
+• Text Editor/IDE: Visual Studio Editor will be used as the sole text editor for the
+development of this project, due to having an in-built python linter.
+
+17
+
+7
+7.1
+
+Literature Review
+
+Existing Tools
+
+An aspect that this project will be attempting to address is that, at the time of writing, there are a limited amount of systems available to the public that either provide
+sentiment analysis or predictions of the crypto-market. Additionally, none known that
+combine both sentiment and price analysis to make said predictions on the direction
+of the market.
+Such tools are usually provided by exchanges which correspond the amount of positive
+and negative sentiments with a suggestion to buy and sell. These tools, however, are
+vague in their suggestions as they don’t provide any further analysis on when the best
+time would be to conduct an action on the market, and simply display the number of
+tweets per sentiment level. A well-known cryptocurrency tracking site,Coingecko provides a basic sentiment analysis tool for their top 30 ranking cryptocurrencies tracked
+on the site. This tool shows the sentiment analysis of tweets from Twitter every hour
+for a given cryptocurrency. This is displayed as a simple pill on the page showing the
+ratios of positive, neutral and negative tweets. See Appendix C for visual representation
+
+7.2
+
+Related research
+
+There has been an abundant amount of research conducted in this problem domain.
+Many theses globally have been published in recent years on the topic of cryptocurrency
+market predictions and analysis, and even more, research conducted on general stock
+markets further back.
+The thesis written by Evita Stenqvist and Jacob Lonno of the KTH Royal Institute of
+Technology [3] investigates the use of sentiment expressed through micro-blogging such
+as Twitter can have on the price fluctuations of Bitcoin. Its primary focus was creating
+an analyser for the sentiment of tweets more accurately "by not only taking into account
+negation, but also valence, common slang and smileys", than that of former researchers
+that "mused that accounting for negations in text may be a step in the direction of more
+accurate predictions.". This would be built upon the lexicon-based sentiment analyser
+VADER to ascertain the overall sentiment scores were grouped into time-series for
+each interval from 5 minutes to 4 hours, along with the interval prices for Bitcoin.
+The model chosen was a naive binary classified vectors of predictions for a certain
+threshold to "ultimately compare the predictions to actual historical price data". The
+results of this research suggest that a binary classification model of varying threshold
+over time-shifts in time-series data was "lackluster", seeing the number of predictions
+decreasing rapidly as the threshold changed. This research is a reasonable basis of
+starting research upon, as it suggests tools such as VADER for sentiment analysis and
+18
+
+that the use of a machine learning algorithm would be a next step in the project that
+would yield better more accurate results.
+Another thesis written by Pagolu, Venkata Sasank and Reddy Kamal Nayan, Panda
+Ganapati and Majhi, Babita [1] on "Sentiment Analysis of Twitter Data for Predicting
+Stock Market Movements" 2.5 million tweets on Microsoft were extracted from Twitter,
+sentiment analysis and logistical regression performed on the data yielded 69.01% accuracy for a 3-day period on the increase/decrease in stock price. These results showed
+a "good correlation between stock market movements and the sentiments of the public
+expressed in Twitter ". Using various natural language pre-processing tweets for feature
+extraction such as N-gram representation the sentiment from tweets were extrapolated.
+Both Word2vec and a random forest classifier were compared for accuracy, Word2vec
+being chosen over the machine learning model. Word2vec, being a group of related
+shallow two-layer neural network models to produce word embeddings.
+A topic that reoccurs in various papers and theses is that of the use and focus of
+regression techniques and machine learning methods. Few implement a fully fledged
+neural network; the above paper attempts to use a simple network to achieve predictions of classification of sentiment for stock market movement then correlated this with
+historical data of prices. An article posted on "Code Project" by Intel Corporation
+[6] compares the accuracy of three machine learning algorithms; Random Forest, Logistic Regression and Multi-Layer Perceptron (MLP) classifiers on predicting the price
+fluctuations of Bitcoin with embedded price indices. Results showing "that using the
+MLP classifier (a.k.a. neural networks) showed better results than logistic regression
+and random forest trained models". This assumption can be backed up by the results
+from a thesis posted on IEEE [7] which compares a Bayesian optimised recurrent neural
+network and a Long Short Term Memory (LSTM) network - showing the LSTM model
+achieving "the highest classification accuracy of 52% and a RMSE of 8%". With interest in neural networks personally and with little papers utilising them for this purpose
+a neural network will thus be implemented, and the accuracy of one’s predictions with
+use of sentiment analysis data analysed and discussed.
+
+7.3
+7.3.1
+
+Data Collection
+Twitter and Twitter API
+
+Twitter is a micro-blogging platform that was launched in 2006 and provides it’s users
+the ability to publish short messages of 140 characters. The messages published could
+be of any form, from news snippets, advertisement, or the prevalent publication of
+opinions which allowed a platform of extensive diversity and knowledge wealth. As of
+the time of writing, the message character limit was increased to 280 characters, the
+platform has over 300 million monthly active users, and around 1 million tweets are
+published per day. Due to the length restriction and the primary use of the platform
+19
+
+to express opinions Twitter is seen as a gold mine for opinion mining.
+The Twitter API has an extensive range of endpoints that provide access from streaming tweets for a given hashtag, obtaining historical tweets for a given time-period and
+hashtag, posting tweets on a users account and to change settings on a user account
+with authentication. The exhaustive range of features provided by these endpoints
+makes data collection from Twitter straight forward as one can target a specific endpoint for the required data. Due to Twitter being the target for opinion mining within
+this project the Twitter API will ultimately need to be utilised. This can either be
+used for the gathering of historical tweets or streaming current tweets for the #Bitcoin
+hashtag.
+There are, however, limitations and rate limits imposed on users of the API. Twitter
+employs a tiering system for the API - Standard, Premium and Enterprise tiers, each
+of which provides different amounts of access for data collection. If the API were to be
+used to capture historical data for a span of 3 months, each tier is allowed to obtain
+varying amounts of data for different durations; [8]
+• A Standard user would be able to capture 100 recent tweets for the past 7 days
+• A Premium user would be allowed to capture up to 500 tweets per request for
+a 30-day span and will have access to a full-archive search to query up to 100
+tweets per request for a given time period, with a 50 request limit per month
+• An Enterprise user would be able to capture up to 500 tweets per unlimited
+requests for a 30-day span and will be able to query the full-archive of tweets for
+a given hashtag up to 2000 tweets per unlimited amount of requests for a given
+time period
+Each tier has individual costs while the standard user negating this as a basic tier. Due
+to only being elegable for the Premium tier for educational purposes, historical data
+gathering will be limited to 100 tweets per request with a limitation of 50 requests per
+month. Furthermore streaming tweets is an Enterprise feature which rules out the the
+Twitter API for use of streaming current real-time data [9].
+7.3.2
+
+Tweepy Python Package
+
+Tweepy is a python package for accessing the Twitter API. It fundamentally accomplishes the same means if one to conduct a GET request to the Twitter API, except
+it simplifies this into a simple to use API that is easier to implement and automate in
+python [10]. Consequently, it builds upon the existing Twitter API to provide features
+such as automated streaming of provided hashtags to the API. It realises this by initialising a listener instance for a provided set of API credentials, handling authentication,
+connections, creating and destroying sessions. Due to Twitter’s streaming API being
+20
+
+only available to Enterprise users [8], using Tweepy to stream data for a given hashtag
+will provide the real-time data needed. The streaming of current data by Tweepy is
+accomplished by setting up a stream which listens for new data for a given hashtag,
+which bypasses the need for the Enterprise tweet tracker provided by the Twitter API.
+
+7.4
+
+Sentiment Analysis
+
+In short, sentiment analysis is the process and discovery of computationally identifying and categorising the underlining opinions and subjectivity expressed in written
+language. This process determines the writer’s attitude towards a particular topic
+as either being positive, neutral or negative in terms of opinion, known as polarity
+classification.
+7.4.1
+
+Natural Language Processing
+
+Polarity classification is the focus of sentiment analysis and is a well-known problem
+in natural language processing that has had significant attention by researchers in
+recent years [1][3][7][11]. Traditional approaches to this have usually been classified
+to dictionary-based approaches that use pre-constructed sentiment lexicons such as
+VADER or usually confined to machine learning approaches. The latter requires an
+extensive amount of natural language pre-processing to extrapolate vectors and features
+from the given text; this is then fed into a machine learning classifier which attempts
+to categorise words to a level of sentiment polarity. Natural language pre-processing
+techniques, supported by the NLTK (Natural Language Toolkit) python package that
+would be required for this approach would consist of;
+• Tokenisation: The act of splitting a stream of text into smaller units of typographical tokens which isolate unneeded punctuation.
+• Removal of domain specific expressions that are not part of general purpose
+English tokenisers - a particular problem with the nature of the language used in
+tweets, with @-mentions and #-hashtags
+• Stopword removal: Are commonly used words (such as "the","in","a") that provide no meaning to the sentiment of a given text
+• Stemming: Is used to replace words with common suffixes and prefixes, as in "go"
+and "goes" fundamentally convey the same meaning. A stemmer will replace such
+words with their reduced counterparts
+• Term Probability Identification and Feature Extraction: This is a process that
+involves identifying the most frequently used words in a given text, by using a
+probability type approach on a pre-defined dataset which classifies a range of
+21
+
+texts as with overall negative or positive a machine learning algorithm is trained
+to classify these accordingly.
+• Ngrams: Are a contiguous sequence of n items from a given sample of text.
+The use of Ngrams in natural language processing can improve the accuracy of
+classification. For example: âĂŸGoodâĂŹ and âĂŸNot GoodâĂŹ have opposite
+meanings. By only using 1 token (1gram) âĂŸnot goodâĂŹ (âĂŸnotâĂŹ and
+âĂŸgoodâĂŹ) can be incorrectly classified. As the english language contains
+a significant amount of 2gram type word chains using 2gram can improve the
+accuracy of classification.
+The former, seen and has been proven to provide higher accuracy than traditional
+machine learning approaches [12], and need little pre-processing conducted on the data
+as words have a pre-defined sentiment classification in a provided lexicon. Although
+these lexicons can be complex to create, they generally require little resources to use
+and alter.
+7.4.2
+
+Valence Aware Dictionary and sEntiment Reasoning
+
+VADER is a combined lexicon and rule-based sentiment analysis tool that is specifically
+attuned to sentiments expressed in social media and works well on texts from other
+domains. It is capable of detecting the polarity of a given text - positivity, neutrality,
+and negativity [13], and also calculate the compound score which is calculated by
+summing the valence scores of each word in the lexicon. VADER uses a human-centric
+approach to sentiment analysis, combining qualitative analysis and empirical validation
+by using human raters to rate the level of sentiment for words in its lexicon. Vader also
+has emoticon support which maps these colloquialisms have pre-defined intensities in
+its lexicon, which makes VADER specifically suitable for the social media domain were
+the use of emoticons, utf-8 emojis and slang such as "Lol" and "Yolo" are prevalent
+within the text. Additionally, VADER is provided as a lexicon and a python library
+under the MIT license, this means that it is open-source software. This means that the
+lexicon can be altered and added to abling it to be tailored to specific topic domains.
+VADER was constructed by examining and extracting features from three pre-existing
+well-established and human-validated sentiment lexicons [13] - (LIWC) Linguistic Inquiry and Word Count, (ANEW) Affective Norms for English Words, and (GI) General
+Inquirer. This is supplemented with additional lexicon features "commonly used to express sentiment in social media text (emoticons, acronyms and slang)" [13] and uses
+"wisdom-of-the-crowd" approach [14] to establish a point of estimations of sentiment
+valance for each lexical feature candidate. This was evaluated for the impact of grammatical and syntactical rules and 7,500+ lexical features, with mean valence "<> zero,
+and SD <= 2.5" as a human-validated "gold-standard" sentiment lexicon. [13]Section
+3.1
+22
+
+VADER is seen as a "Gold Standard" for sentiment analysis, in the paper for VADER,
+[13] A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text,
+it was compared against 11 other "highly regarded sentiment analysis tools/techniques
+on a corpus of over 4.2K tweets" for polarity classification across 4 domains. Results showing VADER, across Social media text, Amazon reviews, movie reviews and
+Newspaper editorials, consistently outperforming other sentiment analysis tools and
+techniques showing a particular trend in performing significantly higher on analysis of
+sentiment in tweets. [13] Section 4: Results
+
+7.5
+
+Neural Networks
+
+A neural network is a set of perceptrons modelled loosely after the human brain that
+is designed to recognise patterns in whatever domain it is intended to be trained using.
+A neural network can consist of multiple machine perceptrons or clustering layers in a
+large mesh network, and the patterns they recognise are numerical which are contained
+in vectors. Pre-processed data, confined and processed into pre-defined vector labels,
+are used to teach a neural network for a given task. While this differs from how
+an algorithm is coded to a particular task, neural networks cannot be programmed
+directly for the task. The requirement is for them to learn from the information by use
+of different learning strategies; [15][16]
+
+Figure 1: Basic perceptron layout
+• Supervised learning: Simplest of the learning forms, where a dataset have been
+labeled which indicate the correct classified data. The input data is learned upon
+until the desired result of the label is reached [17]
+• Unsupervised learning: Is training the with a dataset without labels to learn
+from. The neural network analyses the dataset with a cost function which tells
+the neural network how far off target a prediction was. The neural network then
+adjusts input weights in attempt to increase accuracy. [16]
+23
+
+• Reinforced learning: The neural network is reinforced with positive results and
+punished for negative results causing a network to learn over iterations.
+7.5.1
+
+Recurrent Neural Network (RNN)
+
+The type of neural network that is of focus for this project will be that of a Long-Short
+Term Memory (LSTM); however, it is crucial to understand how this is an extension
+of a Recurrent Neural Network (RNN) and how the underlying network works.
+Recurrent Neural Networks (RNN) are a robust and powerful type of neural network
+and is considered to be among the most encouraging algorithms for the use of classification, due to the fact of having internal memory. RNNs are designed to recognise
+patterns in sequences of presented data or most suitably, time-series data, genomes,
+handwriting and stock market data. Although RNNs were conceptualised and invented
+back in the 1980s [18], they’ve only really shown their potential in recent years, with
+the increase of computational power due to the level of sequencing and internal memory store to retrain. Due to this ’internal’ memory loop, RNNs are able to remember
+data and adjust neurons based on failures and alternating parameters. The way this is
+accomplished, knowing how a standard neural network such as a feed-forward network,
+should initially be understood. [19]
+A standard, feed-forward neural network has a single data flow with an input layer,
+through hidden computational layers, to an output layer. Therefore any node in the
+network will never see the same data again. However, in an RNN data is cycled through
+a loop over the same node, thus two inputs into the perception. Decisions are influenced
+by previous data that it has previously learned from if any, which in turn affects output
+and the weights of the network. [20]
+
+Figure 2: Feed-forward network (left) vs Recurrent Neural network (right)
+The act of tweaking weights to alter the processing of the next iteration of data in an
+RNN is called backpropagation, which in short means going back through the network
+24
+
+to find the partial derivatives of the error with respect to the weights after output has
+occurred. Along with gradient descent, an algorithm that adjusts the weights up or
+down depending on which would reduce the error. There are however a few obstacles
+of RNNs;
+• Exploding Gradients: Is when gradient decsent assigns high importance to the
+weights. As in the algorithm assigns a ridiculously high or low value for the
+weights on iteration which can cause overlow and result in NaN values [21]
+• Vanishing Gradients: Is when the values of a gradient are small enough that
+weights cannot be altered and the model stops learning. [22]
+These issues are overcome by the concept of Long-Short Term Memory neural networks,
+coined by Sepp Hochreiter and Juergen Schmidhuber, 1997 [23].
+7.5.2
+
+Long-Short Term Memory (LSTM)
+
+LSTMs are an extension of recurrent neural networks capable of learning long-term
+dependancies and were conceptualised by Sepp Hochreiter and Juergen Schmidhuber,
+1997 [23]. LSTMs were explicity designed to avoid long-term dependancy problems
+such as exploding and vanishing gradients. As they are an extension of RNNs they
+operating in almost the exact same manner, but stores the actual gradients and weights
+in memory which allows for LSTMs to read, write and alter the values. A way of
+explaining how this works is seeing the memory block as a gated cell, where ’gated’ is
+that the cell decides whether or not to store or alter data in it’s memory based input
+data and the importance assigned to it. In a sense it learns over time of which values
+and data is important.
+
+Figure 3: A conceptual design of an LSTM cell bank - from Medium article by Shi
+Yan: Understanding LSTM and its diagrams[24]
+25
+
+The network takes in three initial inputs, the input of the current time step, output
+from the previous LSTM unit if any, and the memory of the previous unit. Outputs,
+Ht - output of current network, and Ct - the memory of the current unit. [24]
+The various steps of the network decide what information is thrown away from the cell
+state, through use of a ’forget gate’ which is influenced by the calculations of sigmoid
+memory gates which influence how much of old and new memory is used Ct− 1 , Ht−1
+and Xt , and merged based upon importance. The section of the cell that controls
+the outflow memory Ht and Ct determines how much of the new memory should be
+used by the next LSTM unit. For a more in-detailed explanation of exactly how the
+calculations are made see [23],[24] and [25].
+As mentioned in the foremost section of related work the use of an LSTM network
+would be optimal for the given problem domain over the use of machine learning
+algorithms, for time-series data. As detailed above, LSTMs are widely used for timeseries data forecasting due to being able to remember previous data and weights over
+long sequence spans[23][26]. The flexibility of LSTMs such as many-to-many models,
+useful "to predict multiple future time steps at once given all the previous inputs" due
+to use of look-back windows and control of multiple 3D input parameters.[26]
+7.5.3
+
+Keras and TensorFlow
+
+TensorFlow is an open-source numerical math computational library framework for
+dataflow differentiable programming, primarily used for machine and deep learning applications such as neural networks. TensorFlow bundles various machine learning and
+deep learning models and algorithms into one package for the Python language, but
+executes as byte code executed in C++ for performance. TensorFlow provides a range
+of conveniences to developers for the types of algorithms it supports such as debugging models and modifying graph operations separately instead of constructing and
+evaluating all at once, and compatibility to execute on CPUs or GPUs [27]. However,
+TensorFlow’s implementation and API, although provides an abstraction for development for machine and deep learning algorithms and simplifies implementation, it isn’t
+all too friendly to programmers to use, especially new developers to the field of machine
+and deep learning.
+Keras is a high-level built to run atop of deep learning libraries such as Tensorflow and
+Theanos - another deep learning library similar to Tensorflow. It is designed to further
+simplify the use and application of such deep learning libraries thus making implementing a neural network and similar supported algorithms friendlier to developers working
+in Python. It accomplishes this by being a modular API; neural layers, cost functions,
+optimisers, activation functions, and regularisation schemes are all standalone features
+of the API that can be combined to create functional or sequential models. Due to being a high-level API for a more refined and more natural development of deep learning
+
+26
+
+libraries, it does not provide these low-level operations and algorithms; Keras relies on
+a back-end engine such as TensorFlow and supports a wide range of others.
+7.5.4
+
+Optimisers
+
+There are three distinct optimisers used for LSTM networks; ADAgrad optimizer,
+RMSprop, Adam. The role of an optimiser All three of which is a type of Stochastic
+Gradient Descent, which θ (weights of LSTM) is changed according to the gradient of
+the loss with respect to θ. Where α is the learning rate and L is the gradient loss. [28]
+θt+1 = θt − αδL(θt )
+This is primarily used in recurrent LSTM neural networks to adjust weights up or
+down depending on which would reduce the error, see RNN section for non LSTM
+limitations. The concept of using momentum µ in stochastic gradient decent helps
+to negate significant convergance and divergance during calculation of the weights
+and dampens the oscillation, by increasing the speed of the learning rate upon each
+iteration. [29]
+θt+1 = θt + vt+1
+where
+vt+1 = µvt − αδL(θt )
+[29]
+• Adagrad (Adaptive Gradient): Is a method for adaptive rate learning through
+adaptively changing the learning parameters. This involves performing more
+substantial updates for infrequent parameters and smaller updates for frequent
+parameters. This algorithm fundamentally eliminates the need to tune the learning rate of the neural network manually and is well suited with sparse data in a
+large scale network. [29]
+θt+1 = θt + vt+1 √
+
+η
+· gt
+Gt + 
+
+(Gt is the sum of the squares of the past gradients to θ)
+• RMSProp (Root Mean Square Propagation): Aims to resolve AdagradâĂŹs radically diminishing learning rates by using a moving average of the squared gradient. Thus utilises the magnitude of the recent gradient descent to normalise
+27
+
+it, and gets adjusted automatically by choosing different learning rate for each
+parameter. [30]
+η
+· gt
+θt+1 = θt − p
+2
++ γgt + 
+(1 − γ)gt−1
+(γ - decay that takes value from 0-1. gt - moving average of squared gradients)
+[31]
+• Adam (Adaptive Moment Estimation): Also aims to resolve AdagradâĂŹs diminishing learning rates, by calculates the adaptive learning rate for each parameter.
+Being one of the most popular gradient descent optimisation algorithms, it estimates from the 1st and 2nd moments of gradients. Adam implements the exponential moving average of the gradients to scale the learning rate of the network
+and keeps an average of past gradients. [32]
+mt = β1 mt−1 + (1 − β1 )gt
+vt = β2 vt−1 + (1 − β2 )gt2
+The algorithm updates the moving averages of the gradient (mt ) and the squared
+gradient (vt ) which are the estimates of the 1st and 2nd moments respectively.
+The hyperparameters β1 and β2 control the decay rates of the moving averages.
+These are initialised as 0 as a biased estimations for the initial timesteps, but an
+become bias-corrected by counteracting them with;
+m
+~t=
+
+mt
+1 − β1t
+
+and
+~vt =
+
+vt
+1 − β2t
+
+Thus the final formula for the Adam optimiser is;
+ηm
+~t
+θt+1 = θt − √
+~vt + 
+Diederik P. Kingma, Jimmy Lei Ba - Adam: A method for Stochastic
+Optimization[32]
+
+28
+
+7.5.5
+
+Regularisation
+
+To avoid issues such as overfitting of the model of a neural network, techniques such
+as regularisation to produce better predictive performance and to improve variance of
+the model created. [33] Regularisation is a technique that involves modifying the error
+function of the network, calculated as the sum of squares errors for individual training
+and validation samples. This adds a term to the error function which decreases the
+weights and biases of the network to smooth out outputs of each layer and LSTM cell,
+thus making the network less likely to overfit.
+7.5.6
+
+Dropout
+
+Dropout is a method of reducing under and overfitting of a network, by ignoring neurons
+during the training phase of model creation where a particular set of neurons are chosen
+at random to be ignored. Due to connected layers in a neural network, especially in
+an LSTM network, occupy the majority of the parameters neurons can develop a codependency on and from each other during the training phase of the network which
+reduces the individual efficiency of each neuron and can lead to the overfitting of
+training data. [34]
+
+7.6
+7.6.1
+
+Machine Learning
+Naive Bayes
+
+To get an understanding of both how probability works and how a neural network
+will predict the next hour value based on the concepts of probability, using a wellestablished probability algorithm will aid in this understanding.
+Bayes theorem works on conditional probability and is the probability of how often
+an event will happen given that that event has already occurred. There are numerous
+variations of the theorem such as Multinomial, which supports categorical features
+where each conforms to a multinomial distribution, and Gaussian naive Bayes, which
+support continuous-valued features each of which conforming to a Gaussian (normal)
+distribution. The classical multinomial Bayes theorem is defined as; [35]
+P (H ∩ A) =
+
+P (A ∩ H) ∗ P (H)
+P (A)
+
+and incase H and A are independant
+
+P (H ∩ A) = P (H) => P (H ∩ A) = P (H)P (A)
+29
+
+where:
+• P (H) is the probability of hypothesis being true
+• P (A) is the probability of evidence
+• P (A ∩ H) is the probability of the evidence such that the hypothesis is true
+• P (H ∩ A) is the probability of the hypothesis given the occurance of evidence of
+the probability
+The naive approach assumes the features that are used in the model are independent
+of one another, such that, changing the value of a feature doesn’t directly influence the
+value of the other features used in the model. When such features are independent,
+the Bayes algorithm can be expanded:
+P (H ∩ A) =
+
+P (A ∩ H) ∗ P (H)
+P (A)
+
+Becomes
+
+P (H ∩ A1 ...An ) =
+
+P (A1 ∩ H) ∗ P (A2 ∩ H)... ∗ P (An ∩ H) ∗ P (H)
+P (A1 ) ∗ P (A2 )... ∗ P (An )
+
+P robability of Outcome∩Evidence =
+
+P robability of Likelihood of evidence ∗ P rior
+P robability of Evidence
+
+The naive Bayes approach has many applications, especially for the topic of this project
+in classifying the probability occurrence of the next price. Although it is a robust
+algorithm has its drawbacks which make it not as suitable as a neural network for the
+given need of this project. The naive Bayes trap is an issue that may occur due to the
+size of the dataset that will be used. There are however other scenarios this algorithm
+could be used such as classification of spam data.[35]
+
+7.7
+
+Bag Of Words
+
+The Bag Of Words algorithm counts the occurance (’Term-Frequency’) of a word in a
+given text or document. The counts allow the comparison for text classification and is
+used prior to TF-IDF (detailed below) to aid in identifying the probability of words in
+a given text and classify accordingly. [36]
+P (w) and P (w|spam) =
+
+T otal number of occurrences of w in dataset
+T otal number of words in dataset
+30
+
+7.8
+
+TF-IDF
+
+Stands for Term Frequency-Inverse Document Frequency is another way similar to Bag
+of Words that are used to judge the topic of a given text. Each word is given a weight
+(relevance not frequency) for how many times it occurs in the given text [36]. Termfrequency measures the number of times that a word appears in the text, but due to
+words such as ’and’, ’the’ and ’a’ can frequently appear in text Inverse Document Frequency is used to change the weight of words that appear the most. Therefore words
+that appear the most are signalled to be less important and valuable, and therefore
+will not be used for classifications when used with such models as Naive Bayes for a
+given purpose. [36]
+IDF is defined as:
+IDF (w) = log
+
+T otal number of messages
+T otal number of messages containing w
+
+TF-IDF is thus defined as both:
+P (w) = P
+
+P (w|spam) = P
+
+a words x
+
+T F (w) ∗ IDF (w)
+ train dataset T F (x) ∗ IDF (x)
+
+a words x 
+
+T F (w) ∗ IDF (w)
+train dataset T F (x|spam) ∗ IDF (x)
+
+[37]
+
+7.9
+
+Addictive Smoothing
+
+Used alongside Bag Of Words, is a method of handling data that is in the test data
+but not in the training dataset. In case of P (w) it would evaluate to 0, which will
+make the P (w|spam) undefined as it will not be able to classify the word. Addictive
+smoothing tackles this by adding a number α to the numerator, and adding alpha time
+the number of classes over the probability that is found in the denominator. [37]
+For TF-IDF:
+
+P (w|spam) = P
+
+a words x  train
+
+T F (w) ∗ IDF (w) + α
+P
+T
+F
+(x|spam)
+∗
+IDF
+(x)
++
+α
+dataset
+a
+
+31
+
+words x  train dataset
+
+7.10
+
+Regression Performance Metrics
+
+Due to the problem statement and concept behind this project is that of a regression
+method, forecasting and predicting a future value, performance and accuracy of such
+a model will ultimatly need to be identified.
+• RMSE - Root Mean Squared Error: Represents the sample standard deviation
+of difference between predicted values and observed values, known as residuals.
+It identifies how concentrated the data is around the line of best fit, lower the
+better. [38]
+• MSE - Mean Squared Error: Is the average squared difference between the estimated values. "MSE is a risk function, corresponding to the expected value of
+the squared error loss." [39].
+• MAE - Mean Absolute Error: Is the average of the absolute difference between
+the predicted values and observed values, and is a linear score. This means that
+the idividual differences are weighted equally in the average. [38]
+• MAPE - Mean Absolute Percentage Error: Is a measure of how accuracte a
+forecast system is, it measures the accuracy as a percentage error for each time
+period minus the actual valuse divided by the actual values. [40]
+
+32
+
+8
+
+Solution Approach
+
+This section will outline the solution intended to solve the problem that the problem
+statement identifies, with justification and reference to the research conducted in the
+literature review. This will lay out the development process for the project and will
+tools and technologies will be explained for the particular use case in this project.
+
+8.1
+
+Data gathering
+
+This will be the part of the system that will gather price data and tweets from relevant
+sources, Twitter and cryptocurrency exchanges.
+Price data
+Historical price data can be collected in a number methods, one being that of the
+exchange APIs, another through a historical price tracker who creates a CSV consisting of all prior historical data. Both have their merits and reliability for granting the
+needed data; however, a historical tracker who has been tracking the price every hour
+since the start of Bitcoin would be the better option. This is due to a couple of factors,
+the data in some historical trackers are an average unbiased price for Bitcoin - they
+track the price of all or a select few exchanges and average the hourly price. Whereas
+if the historical data was obtained directly from an exchange this would be biased and
+might not represent the true price of the currency, and thus would need averaging with
+other hourly prices from other exchanges. By using a historical tracker, all the data
+is unbiased and averaged and readily available and doesn’t require any requests to an
+API or coding needed to process data.
+Live price data can be collected through the same methods, a historical price tracker
+and an exchange API. However, this doesn’t work the same way; unfortunately, a
+historical price tracker is not updated as frequently as exchange APIs thus wouldn’t
+provide on the hour accurate data. Therefore exchange APIs will be utilised in this
+case and multiple to give an unbiased average for the hourly price. Three exchanges
+will provide a sufficient average, and the exchanges most likely to be used would be
+the more popular exchanges such as Coinbase, Bitfinex and Gemini.
+Tweets
+Historical tweets can be obtained through the Twitter API, and however is not a
+feature of the Tweepy package - not mentioned or method on official Tweepy Documentation [41]. The Twitter API, as explained in the Literature review, allows for
+historical tweets to be extracted from the platform, 100 per request and a maximum
+33
+
+of 50 requests per month. This proposes an issue with not providing enough data,
+where the sentiment will need to be calculated per hour. Simply put, for a year of
+hourly price data, there will be 9050 records. Therefore the equivalent will be required
+for sentiment; however, the sentiment will be the average the sentiment per hour of
+tweets. Using a single request with 100 tweets per hour, per hour; 905,000 tweets will
+need to be extracted to provide the data required. A solution to this issue could be to
+use and create multiple accounts and manually extract data from the API and merge.
+Another option is the pay for the data from 3rd party companies who have access to
+the Enterprise API and can pull more data, 2000 per request [8][9]. Due to the price
+for data of these 3rd parties the former could be a suitable, but more time-consuming
+option.
+Live tweets can be collected by two methods from Twitter, from the Twitter API
+and using Twitter Python package such as Tweepy, detailed in the Literature review.
+Additionally, the limitations of the Twitter API are also discussed in the literature
+review which states how the Twitter API has a tiering system: Standard, Premium and
+Enterprise. Each tier has different levels of access to the API and can extract varying
+amounts of data from the platform. Thus concluding the section in the Literature
+review, the Twitter API will not be used for the extraction and streaming of live tweets
+due to it being restricted to Enterprise users. Therefore, Tweepy will be used to set up
+a looping authenticated streaming solution with the Twitter API which will allow the
+access of current recurring data. Natural language pre-processing will be apart of most
+systems in this project. Techniques such as tokenisation, stemming, stopword removal
+and character filtering will be prevalent, as these will be used to remove unwanted data
+and to sanitise the data for classification.
+
+8.2
+
+Data pre-processing
+
+Natural language pre-processing will be apart of most systems in this project. Techniques such as tokenisation, stemming, stopword removal and character filtering will
+be prevalent, as these will be used to remove unwanted data and to sanitise the data
+for classification.
+
+8.3
+
+Spam Filtering
+
+This part of the system will aim to detect whether or not the streamed data or the
+historical data is spam - unwanted tweets that serve no purpose in determining the
+opinion of the public. These types of tweets can be from advertisement - usually labelled
+with #Airdrop and can contain "tickets here" and "Token Sale", to job advertisements
+- usually containing word such as Firm, hire, hiring, jobs and careers. It is essential
+to filter out and remove such data from the network as these can be seen as outliers of
+the true data and will skew predictions will invalid sentiment.
+34
+
+The spam filter will use a probability-based algorithm such as Naive Bayes, other
+algorithms such as Random Forest could be used, but due to this being a probability
+related problem using an algorithm such as Naive Bayes would be more suitable. This
+classifier will be trained on a hand created dataset containing both spam and ham
+(wanted data) tweets, and should not be exclusive to either category.
+
+8.4
+
+Language Detection
+
+Before performing any natural language pre-processing and spam filtering, non-English
+tweets will need to be reduced. This can be introduced through various language detection filtering using techniques such as ngrams alongside other natural language preprocessing techniques to filter out non-English characters. Fortunately, both Tweepy
+and the Twitter API have methods for specifying the desired language to receive tweets
+in - filter=[’en’] for the Tweepy streaming method and query={...,language=’en’,...}
+on the JSON parameters for the Twitter API. This provides a simple means of filtering
+out non-English tweets, but this only filters based on region and user settings which
+indicate the users desired language. Thus if a user has their region set to ’en’ or has
+their desired language set also as ’en’ the tweet will be classified as English but may
+contain non-English characters.
+As is the case, a suitable language detection system will be implemented to identify
+any tweets that contain non-English characters. Some tweet will regrettably make it
+past the initial API filters; thus such a system will be implemented that will drop the
+tweets if it predominately contains non-English characters. If however, the majority
+of the text in English but includes some non-English characters, these will be removed
+from the tweet.
+
+8.5
+
+Sentiment Analysis
+
+As mentioned in the Litrature review, the VADER sentiment analysis performs exceptionally well on the social media domain when compared to idividual human rates and
+10 other highly regarded sentiment analysers, stated in the results section of the paper
+VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media
+Text [13].
+Extraction of results from paper [13]:
+
+35
+
+Analyser
+Ind. Humans
+VADER
+Hu-Liu04
+SCN
+GI
+SWN
+LIWC
+ANEW
+WSD
+
+Overall Precision
+0.95
+0.99
+0.94
+0.81
+0.84
+0.75
+0.94
+0.83
+0.70
+
+Overall Recall
+0.75
+0.94
+0.66
+0.75
+0.58
+0.62
+0.48
+0.48
+0.49
+
+Overall F1 Score
+0.84
+0.96
+0.77
+0.75
+0.69
+0.67
+0.63
+0.60
+0.56
+
+Analysis of Social Media Text (4,200 Tweets)[13]
+Due to the suitability for the given domain of social media and with the customisability,
+due to VADER’s lexicon-dictionary based approach, makes this sentiment analyser
+most suitable for use in this project. This analyser will be utilised as the sentiment
+analyser of this project due to its feature set and need for little data pre-processing
+before polarity classification of the provided text. [12] "is a widely used approach to
+sentiment analysis in the marketing research community, as it does not require any
+pre-processing or training of the classifier.".
+This will be an intermediate system between the neural network and the data collection
+pre-processing system, as the later will provide the cleaned processed data for analysis
+and the former to feed in the classified polarity of each tweet alongside price data for
+model learning.
+
+8.6
+
+Neural Network
+
+The Neural Network section in the literature review details how Recurrent Neural
+networks work alongside how a Long-short term memory networks build upon and
+overcome limitations and known issues with a standard RNN network. A recurrent
+neural network is the focus of this project, and this is due to:
+• Nature of an RNN - Allows for backpropagation to find partial derivatives of
+the error with respect to the weights after an output has occurred, to tweak the
+current weights of the LSTM cell. In short, allows the tweaking of weights of the
+network based on previously seen data by looping the same node thus influencing
+decisions made on current data based on old weights and errors from previous.
+• Nature of an LSTM over RNN - LSTMs are extensions of RNNs [23] that were
+designed to avoid long-term dependency problems such as exploding and vanishing gradients. Weights are not only just reused but are stored in memory and
+are propagated through the network.
+36
+
+• Lack of use for the project’s purpose - Other papers tend to focus on machine
+learning techniques, other neural networks such as Multi-layer Perceptron (MPL)
+and standard Recurrent Neural Networks, with use of time-series data. Especially
+with the use of a standard RNN, not overcoming its common issues with gradient
+descent. Stated in related research section of the literature review, [6] - "using
+the MLP classifier (a.k.a neural networks) showed better results than logistical
+regression and random forest trained models"
+• Prior use for time-series data and data forecasting - Although RNN LSTM networks have been used for the prediction of Bitcoin price there are a few papers
+on this [26]. Regardless, LSTMs have been notably used with use for time-series
+data forecasting due to being able to remember previous data and weights over
+long sequence spans [26] - "adds a great benefit in time series forecasting, where
+classical linear methods can be difficult to adapt to multivariate or multiple input
+forecasting problems".
+Therefore, a recurrent long-short-term memory neural network will be used for this
+project to predict the next hour interval of Bitcoin price based on previous historical
+prices and hourly sentiment. This system will read in historical data, both price and
+sentiment - depending on the network for prediction with and without sentiment, this
+data will be merged, split and used to trained and test the network model for use for
+forecasting prices. The relative sizes for the training and test data can be decided
+upon system creation, but the standard sizing for training neural networks is 75:25
+respectively.
+Tensorflow will be used for the network implementation, and the Keras API use upon it
+to make development more straight forward. Other tools are comparable to TensorFlow
+that are also supported by Keras.
+Framework
+
+TensorFlow
+
+Pros
+Supports reinforcement learning and other algorithms
+Offers computational graph abstraction
+Faster compile time than Theano
+Data and model parallelism
+Can be deployed over multiple CPUs and GPUs
+Computational Graph Abstraction
+Has multiple high-level wrappers similar to Keras
+
+Theano
+
+Pytorch
+
+Graph definition is more imperative and dynamic than other frameworks
+Graph computation defined at runtime, allowing standard popular IDEs to support it
+Natively support common python deployment frameworks such as Flask
+
+Cons
+DoesnâĂŹt support matrix operations
+Doesn’t have pertained models
+Drops to Python to load each new training batch
+Doesn’t support dynamic typing on large scale projects
+Is low-level
+Can only be deployed to a single GPU
+Much slower compile times on large models than competition
+Unhelpful and vague error messages
+Development ceased in 2017
+Not as widley adopted as TensorFlow
+Visualisation is not as robust as TensorBoard
+Not as deployable as TensorFlow, doesn’t supper gRPC
+
+Comparison between TensorFlow, Theano and Pytorch[42]
+Due to the continued support and development of TensorFlow, the board community
+and support of a high-level wrapper - Keras, this library will be used for this project.
+Although, Pytorch is a good alternative it is not as easy to use as implement when
+compared to TensorFlow using Keras.
+37
+
+The Adam optimiser will be used for the neural network. This is due to that it accomplishes what both RMSProp and Adagrad set out for solving issues with gradient
+descent, but builds upon these by also using the average of the second moments of the
+gradients (uncentred variance).
+
+8.7
+
+Price Forecasting
+
+This part of the system will be responsible for prediction the next time-step of Bitcoin’s
+price for the next hour based on past data. It will use the trained model from the
+neural network to predict the future hour price when given live hourly data, price
+and sentiment. The system will also have a look back of 5 which will allow it to see
+historical data to aid in the predictions. This will occur on the hour every hour when
+new data is received and processed, this data will also be merged and the split into
+training and testing data. The sizing can be decided upon system creation, but the
+standard sizing for training is 75:25, training and testing respectively.
+
+8.8
+
+Frontend Application
+
+The frontend application will display the predicted data to the stakeholders and users
+of the system, along with charting True hourly prices against Predicted, for both with
+and without sentiment embedded in the predictions. The interface will display this data
+in both tabular and chart form to provide variety to the user. Performance metrics
+will also be displayed at the bottom of the application to show the accuracy of the
+model. Due to this project focusing around the backend, how the predictions are made
+and the accuracy of the model, the interface will be somewhat of a second thought. It
+will aim to display the information in a clear and concise manner which will start to
+solve the problem of providing a system to the public to aid in investment decisions.
+The design will not be complicated but more basic and functional. Therefore a basic
+webpage coded in HTML with JQuery to plot data, and AJAX requests to obtain and
+load data, will be sufficient.
+
+8.9
+
+With reference to Initial PID
+
+Both the problem and solution have changed considerably from the original project
+initiation document (PID), which outlines the initial ideas, objectives and specification
+for the project. The reason for this was due to a change in direction which was caused
+by a number of factors; one being a change in passion after initial research into machine
+learning techniques and neural networks, instead of creating an application that just
+performed sentiment analysis the direction turned towards how this could be used to
+predict future prices. This change does still loosely keeps in-line with the initial idea
+
+38
+
+of wanting to create a platform that will aid in investor decision making but takes it a
+step further by directly giving them predictions on market direction price as a basis for
+these decisions rather than just identifying opinion direction of the market. Another
+point was the simplicity of the initial idea, which consisted of focusing more work on
+the design of the frontend application to display opinion data and general price data
+on a range of cryptocurrencies which will only by consuming exchange APIs. Both the
+developer and project supervisor concluded that this initial idea was too simple and
+a more sophisticated approach needed forming. The initial PID did, however, give an
+initial basis to base ideas and initial research from and was the beginning drive of this
+project.
+
+8.10
+
+Solution Summary
+
+The overall solution, concerning the problem statement, is to create a system mainly
+consisting of; a frontend application that will display plotting, predicted and true, performance metric data to the user as a clear and concise form. The backend system
+behind the price forecasting will consist of various subsystem responsible for data collection, filtering, data pre-processing, sentiment analysis, network training, validation
+and training and future price predictions. Each stage will consist of relevant tools and
+techniques for performing their required task.
+
+39
+
+8.11
+
+Data flow Overview
+
+To get an understanding of how the system will be put together, a dataflow diagram
+is a useful method for view how systems are integrated and how data could possibly
+flow through a system.
+
+Figure 4: Basic Dataflow diagram of systems in the project and how data could
+possibly flow
+
+40
+
+9
+9.1
+
+System Design
+
+Dataflow Designs
+
+This section will describe and outline how the system will be formed and will work with
+each component; a useful way of displaying this is as a dataflow diagram. A dataflow
+is a way of representing the flow of data through a process or system; as a result, it
+also provides information about how inputs and outputs of each component work and
+how they function with other components. It can also give either broad or in-depth
+overview of the specific workings of each component through how the data is processed
+and manipulated.
+Dataflow overview of entire system:
+
+Figure 5: Overall Dataflow diagram of the entire system
+This dataflow diagram shows the overall concept of how the data is intended to flow
+through the system, from being processed and manipulated through each component
+and what the outputs are of each. Due to the size, this will be broken up and individually explained.
+
+41
+
+Data collector
+
+Figure 6: Data collector Dataflow diagram
+This dataflow diagram shows the part of the system responsible for the collection and
+processing of both historical data. This is split into three parts: Price collector, Tweet
+collector and tweet normalisation and natural language pre-processing.
+• Price Collector - Processes two forms of data, Historical and Live price data.
+Historical data is extrapolated from three CSVs that contain the historical
+price every hour for the past year, from a historical price tracker. At this point
+in the project, it was identified that historical price trackers do not average the
+price data from exchanges as previously identified; therefore this data will need
+to be merged and averaged to create the unbiased hourly price needed.
+Live data is extracted directly from the three exchanges APIs shown through
+REST endpoint requests.
+Data from both, as separate processes independent from one another, are
+averaged by extracting the High, Mid and Low hourly prices. This averaged price
+per hour for each exchange are then averaged together to obtain an unbiased
+hourly average. The price is then saved to a CSV of historical or live prices
+respectively. The difference in the flow of data is that of Live prices, in which
+the process is looped every hour to extract the new hourly prices.
+• Tweet Collector - Streams tweets from Twitter using Tweepy, historical tweets
+are manually collected directly from the Twitter API. Both are fed through the
+normalisation and data pre-processing stage.
+42
+
+• Data pre-processing - This involves cleaning the initial data by removing line
+breaks and new lines that occur in the data, removal of special characters that
+are standard in tweets (’#’,’’ and urls). The data is then fed into a language
+detection system which tokenises and compares stopwords in the text to NLTK
+package supported languages. Depending on whether the text is identified as being predominately English or not determines whether or not the tweet is dropped
+and not used in the network. If the majority is in English, non-English characters
+are removed as these can still be present in the text.
+Analysis Engine
+
+Figure 7: Analysis Engine Dataflow diagram
+This dataflow diagram shows the part of the system that is responsible for training
+a spam filter, creating the model that’ll be used to identify if the tweets from the
+data collector are unwanted - spam. This system is also responsible for assigning
+the polarity classification to the tweet through sentiment analysis conducted by the
+VADER package [13].
+• Spam filter training - The initial step in this system is to train the Naive Bayes
+Classifier using the pre-labelled spam dataset which contains an unbiased amount
+of either spam or ham tweets with their respective labels.
+This data is split into two samples, training and test sets 75:25 respectively
+and the Naive Bayes classifier trained and validated against these datasets after
+pre-processing of the data occurs on the data to prepare it.
+43
+
+• Data pre-processing - The tweets from both training and testing the filter and
+from live and historical tweets are processed through this section.
+This section of the system is primarily used to process the tweets for the filter
+to classify the data and doesn’t directly modify the live and historical tweets. The
+data is processed through various natural language processing techniques such as;
+Tokenisation, Ngram generation, stopword removal and stemming.
+• Classifier Modelling and Model creation - Once the data is pre-processed, the
+data is classified, and the prediction model created, which later used to classify
+the historical and live tweets.
+• Sentiment Analysis (VADER) - On a separate route from the spam filter training,
+using the past and live tweets, the sentiment analyser VADER performs analysis
+on the tweets and assigns a polarity classification to each text (Negative, Neutral,
+Positive and calculates the compound score which is the difference between the
+negative and positive ratings compound ).
+• Storage - The polarity classification and tweets are then saved to their relevant
+CSV files for historical and live data.
+
+44
+
+Neural Network
+
+Figure 8: Neural Network layout Dataflow diagram
+The dataflow diagram in figure 8 shows the part of the system that is responsible for
+training and creating the neural network model. The dataflow diagram shows how
+the network will be trained, and the layers of a possible solution to the network. The
+model shows four layers which may not be the solution that will be implemented but
+is there to show a representation of a number of layers that could be applied.
+• Merging of Datasets - Data from both historical datasets are merged to create
+one dataset with mapped price and sentiment for each hour. *This is a specific
+process that is different from the system that does not include sentiment for
+predictions, the merge process doesn’t occur in that system/model.
+• Training and Testing - Data is split into two samples of training and testing,
+75:25 respectively. **This also doesn’t occur in the system that doesn’t model
+with the sentiment.
+45
+
+• Training network - The training sets, X and Y coordinates are used to train the
+network.
+• Testing network - The testing sets, X and Y coordinates of 25% of the initial
+data are used to test the validation and accuracy of predictions as these contain
+the true data of what the predictions should be.
+• Outputs - Accuracy Statistics, true price data and predicted next hour prices are
+outputted to respective files for use on the front-end application. The model is
+then later used for hourly forecasting.
+Future Price Forecasting
+
+Figure 9: Price Forecasting Dataflow diagram
+The dataflow diagram in figure 9 shows how the forecasting system would be implemented. This dataflow shows how it will read live data of both sentiment and price
+data, merge, split and conduct regression using the trained neural network model to
+predict the next hour price.
+• Data merging - (Doesn’t occur with the system that doesn’t include sentiment
+in price predictions). Data is consolidated from both historical and live data up
+to 5 iterations. This is due to after the initial hour there will only be a singular
+record of price and sentiment data, in which no prediction could be made from
+this as there isn’t a sufficient amount of data.
+• Prediction - This data is then fitted to the neural network model and predictions
+for the next time-step hour are made.
+46
+
+• Hour Loop - This will then proceed to loop every hour to make the hourly predictions. Historical price data will cease to be used when there are 5 or more live
+price records.
+• Outputs - Accuracy Statistics, true price data and predicted next hour prices are
+outputted to respective files for use on the front-end application for charting.
+Front-end Application
+
+Figure 10: Front-end Application Dataflow diagram
+The above dataflow diagram shows the data flow for the front-end application and
+how the data is read into the system from the data files generated by the backend
+application (Neural network).
+• AJAX Requests - These are API file requests for files hosted on the server in
+which the system is running on. This loads the data files into the application for
+use.
+• CSS Styling - Contains design styling for page and charts, loaded upon loading
+of a webpage.
+• Charting and Tables - Accesses the loaded data from the AJAX requests and
+plots the data. Prediction data, only with sentiment and prices are plotted
+into a table. There will be separate charts and tables displaying the data from
+the backend that hasn’t used sentiment in predictions to aid in establishing a
+47
+
+correlation between sentiment and price and whether it affects the hourly price
+(Aiming to solve the problem statement)
+• Stakeholders - There will be the four stakeholders, outlined in the problem articulation section, that would be the primary users of this application.
+
+9.2
+
+Interface Design
+
+Figure 11: Interface design
+Figure 11 above shows the basic idea of the interface design that will be presented to
+the stakeholders and aims to be the interface that these stakeholders will use to aid
+in their market decisions of Bitcoin. The interface, although simplistic, provides all
+the necessary information that any of these stakeholders would need, it also provides
+48
+
+information to allow visual comparison on how sentiment affects the hourly price of
+Bitcoin, represented as the two charts. The comparison will aid in solving the problem
+statement later in the conclusion of the project.
+
+49
+
+10
+
+Implementation
+
+This section will outline the method and process of development of the system to satisfy
+the chosen solution, technical specification and the problem statement. Each section
+of the system will be outlined and discussed with relevant codes snippets of essential
+methods from the system to highlight the processing of data throughout. Additionally,
+the order in which the following sections are show was not the order in which they were
+developed, the order in which they are shown is to represent the order of how the data
+flows through the system, see section 9 - Ssytem Design for an understanding of the
+flow of data through the system.
+
+10.1
+10.1.1
+
+Data collection
+Price Time-Series Historical Data
+
+Historical price data was extracted from a CSV historical price tracker, Bitcoin Charts
+[43]. This tracker provided the historical data from the three exchanges used for Live
+price collection - Coinbase, Bitfinex and Gemini, since the exchanges supported the
+cryptocurrency. The data used spans from 2018-01-06 to 2019-01-06.
+1
+2
+3
+4
+
+...
+c o i n b a s e = pd . read_csv ( ’ c o i n b a s e _ b t c u s d . c s v ’ )
+b i t f i n e x = pd . read_csv ( ’ b i t f i n e x _ b t c u s d . c s v ’ )
+g e m i n i = pd . read_csv ( ’ gemini_btcusd . c s v ’ )
+
+5
+6
+
+c o i n b a s e . drop ( columns =[" Currency " , " 24h Open (USD) " , " 24h High (USD) " , "
+24h Low (USD) " ] , a x i s =1, i n p l a c e=True )
+
+7
+8
+
+c o i n b a s e . columns = [ " timestamp " , " p r i c e " ]
+
+9
+10
+
+c o i n b a s e [ ’ timestamp ’ ] = pd . to_datetime ( c o i n b a s e [ ’ timestamp ’ ] )
+
+11
+12
+
+13
+
+c o i n b a s e = c o i n b a s e . s e t _ i n d e x ( ’ timestamp ’ ) . r e s a m p l e ( ’ 1D ’ ) . mean ( ) . r e s a m p l e
+( ’ 1H ’ ) . mean ( )
+. . . # s i m i l a r code f o r t h e o t h e r 2 e x c h a n g e s
+
+14
+15
+16
+17
+
+data . s e t _ i n d e x ( c o i n b a s e [ ’ timestamp ’ ] )
+f o r i i n data :
+data [ ’ p r i c e ’ ] = ( c o i n b a s e [ ’ p r i c e ’ ] [ i ] + g e m i n i [ ’ p r i c e ’ ] [ i ] + b i t f i n e x [ ’
+p r i c e ’ ] [ i ] ) /3
+
+18
+19
+20
+
+data = data . f i l l n a ( method= ’ b a c k f i l l ’ )
+data = data . round ( 3 )
+
+21
+
+Listing 1: Historical price collection and averaging per exchange
+
+50
+
+Due to each of the hourly prices in each CSV for each exchange were averaged from the
+’high’, ’mid’ and low prices, the data from each exchange only needed to be averaged
+together. This data is averaged and then saved to a CSV containing historical prices
+of Bitcoin for the past year.
+10.1.2
+
+Price Time-Series Live Data
+
+Live price data, as described in the solution approach, were extracted every hour from
+three exchanges - Coinbase, Bitfinex and Gemini were chosen for providing this data
+due to being the most popular exchange platforms that provide an API for retrieving
+live price data.
+The ’high’, ’mid’ and low prices were extracted from the endpoint response and averaged to provide an overall hourly price per exchange.
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+
+def coinbase () :
+...
+try :
+c l i e n t = C l i e n t ( api_key , a p i _ s e c r e t )
+r e p s o n s e = c l i e n t . g e t _ s p o t _ p r i c e ( c u r r e n c y _ p a i r = ’BTC−USD ’ )
+p r i c e = ( f l o a t ( r e p s o n s e [ ’ amount ’ ] ) )
+p r i c e = round ( p r i c e , 3 )
+return price
+e x c e p t KeyError a s e :
+p r i n t ( " E r r o r : %s " % s t r ( e ) )
+sys . stdout . f l u s h ()
+price = 0
+return price
+
+14
+15
+
+def b i t f i n e x () :
+
+16
+17
+18
+
+19
+
+try :
+r e s p o n s e = r e q u e s t s . r e q u e s t ( "GET" , " h t t p s : / / a p i . b i t f i n e x . com/ v1 /
+pubticker / btcusd " )
+response = json . loads ( response . text )
+
+20
+21
+
+22
+23
+24
+25
+26
+27
+28
+
+p r i c e = ( f l o a t ( r e s p o n s e [ ’ low ’ ] )+ f l o a t ( r e s p o n s e [ ’ mid ’ ] ) + f l o a t (
+r e s p o n s e [ ’ h i g h ’ ] ) ) /3
+p r i c e = round ( p r i c e , 3 )
+return price
+e x c e p t KeyError a s e :
+p r i n t ( " E r r o r : %s " % s t r ( e ) )
+sys . stdout . f l u s h ()
+price = 0
+return price
+
+29
+30
+31
+
+def gemini ( ) :
+. . . # Exact code t o b i t f i n e x ( )
+
+51
+
+32
+
+Listing 2: Extraction of Price from exchanges
+The above code shows how this was implemented as a system for the price extraction
+from the APIs.
+These functions are called every hour by a master function which uses the averaged
+price from each exchange to average and creates a fair, unbiased hourly price, which
+is the saved to a CSV containing the live unbiased price for the hour along with the
+time of creation. The function also checks if an error state is returned from any of the
+exchange functions and sets the default price to zero, instead of averaging the three
+exchanges only the responses that successfully returned a price are averaged.
+10.1.3
+
+Historical Tweet Collection
+
+Historical tweets were obtained directly from the Twitter API through a simple Curl
+command for the given date range of the past year. Multiple accounts were created to
+obtain the amount of data needed, as detailed in the data gathering section under the
+solution approach. Due to the vast amount need, 5 tweets averaged per hour for the
+past year would require 1.2 requests per day (40320 total to get a whole year’s worth),
+totalling 9,050,000 tweets. As this was highly unfeasible with the API access available
+for this project, 1 tweet per hour (25 per day, 1 request per 4 days) was obtained rather
+than the average, which resulted in only 92 requests needed to get the required data.
+1
+2
+3
+
+4
+
+5
+
+c u r l −−r e q u e s t POST \
+−−u r l h t t p s : / / a p i . t w i t t e r . com / 1 . 1 / t w e e t s / s e a r c h / f u l l a r c h i v e / boop . j s o n \
+−−h e a d e r ’ a u t h o r i z a t i o n : B e a r e r TOKEN’ −−h e a d e r ’ c o n t e n t −type :
+a p p l i c a t i o n / json ’ \
+−−data ’ { " query " : " b i t c o i n " , " maxResults " : 1 0 0 , " fromDate
+" : " 2 0 1 9 0 4 0 5 0 0 0 0 " , " toDate " : " 2 0 1 9 0 4 0 5 0 2 0 0 " } ’ −o d a t a _ c o l l e c t o r / t w i t t e r /
+temp_hist_tweets . j s o n \
+&& python3 d a t a _ c o l l e c t o r / t w i t t e r / s i f t _ t e x t . py
+
+6
+
+Listing 3: Sample Curl request - data saved to json and python scripted called to
+process data
+These tweets are processed through the spam filter to detect if they were included
+unwanted text, cleaned and a polarity classification assigned to each for each hour. The
+process of how both the spam classification, pre-processing of the data and polarity
+classifications work will be detailed in their relevant sections of the system below.
+1
+2
+3
+4
+
+import t w e e t _ c o l l e c t o r ## pre−p r o c e s s i n g f u n c t i o n s
+import s p a m _ f i l t e r
+## spam f i l t e r c l a s s i f i c a t i o n
+import a n a l y s i s _ e n g i n e . s e n t i m e n t _ a n a l y s i s a s s e n t i m e n t _ a n a l y s i s
+## Sentiment a n a l y s i s and p o l a r i t y c l a s s i f i c a t i o n ( s y m b o l i c l i n k t o f i l e )
+
+5
+
+52
+
+6
+
+d e f p r o c e s s T w e e t ( tweet , t w e e t F i l t e r ) :
+
+7
+8
+
+now = d a t e t i m e . d a t e t i m e . now ( )
+
+9
+10
+11
+12
+
+13
+
+14
+
+#Data p r e p r o c e s s i n g
+removedLines = t w e e t _ c o l l e c t o r . u t i l i t y F u n c s ( ) . f i x L i n e s ( t w e e t )
+r e m o v e d S p e c i a l C h a r s = t w e e t _ c o l l e c t o r . u t i l i t y F u n c s ( ) . cleanTweet (
+removedLines )
+removedSpacing = t w e e t _ c o l l e c t o r . u t i l i t y F u n c s ( ) . removeSpacing (
+removedSpecialChars [ 0 ] )
+tweetLength = t w e e t _ c o l l e c t o r . u t i l i t y F u n c s ( ) . checkLength ( removedSpacing
+)
+
+15
+16
+17
+
+i f tweetLength == True :
+## Drop t w e e t i f t o o s h o r t
+
+18
+19
+20
+
+##Check i f t h e t w e e t i s p r e d o m i n a n t l y E n g l i s h
+checkIfEnglish = tweet_collector . u t i l i t y F u n c s ( ) . detectLaguage (
+removedSpecialChars [ 0 ] )
+
+21
+22
+23
+24
+25
+
+26
+27
+
+i f c h e c k I f E n g l i s h == True :
+## Remove non−E n g l i s h C h a r a c t e r s
+tweetText = t w e e t _ c o l l e c t o r . u t i l i t y F u n c s ( ) . remove_non_ascii (
+removedSpacing )
+p r i n t ( " Cleaned Tweet : " , tweetText )
+sys . stdout . f l u s h ()
+
+28
+
+cleanedTweet = tweetText+ ’ ’+r e m o v e d S p e c i a l C h a r s [ 1 ]
+
+29
+30
+
+## Check with spam f i l t e r − drop i f c l a s s i f i e d a s spam
+c l a s s i f i c a t i o n = t w e e t F i l t e r . t e s t T w e e t ( cleanedTweet )
+
+31
+32
+33
+
+i f c l a s s i f i c a t i o n == F a l s e :
+## Perform Sentiment A n a l y s i s
+ovSentiment , compound = a n a l y s e r . get_vader_sentiment ( cleanedTweet
+
+34
+35
+36
+
+)
+37
+38
+39
+40
+
+41
+
+42
+
+43
+44
+45
+46
+
+try :
+## Save t o h i s t o r i c a l t w e e t s f i l e
+with open ( ’ d a t a _ c o l l e c t o r / h i s t o r i c a l _ t w e e t s . c s v ’ , mode= ’ a ’ ) a s
+csv_file :
+w r i t e r = c s v . D i c t W r i t e r ( c s v _ f i l e , f i e l d n a m e s =[ ’ c r e a t e d _ a t ’ , ’
+t w e e t ’ , ’ s e n t i m e n t ’ , ’ compound ’ ] )
+w r i t e r . w r i t e r o w ( { ’ c r e a t e d _ a t ’ : now . s t r f t i m e ( "%Y−%m−%d %H:%M" )
+, ’ t w e e t ’ : cleanedTweet , ’ s e n t i m e n t ’ : ovSentiment , ’ compound ’ :
+compound } )
+r e t u r n True
+e x c e p t BaseException a s e x c e p t i o n :
+p r i n t ( " E r r o r : %s " % s t r ( e x c e p t i o n ) )
+sys . stdout . f l u s h ()
+
+53
+
+47
+48
+49
+
+return False
+else :
+. . . . # o t h e r f i n i s h e d e l s e s t a t e m e n t s with p r i n t s t a t e m e n t s
+
+50
+
+Listing 4: Sift-text python script - used alongside Curl command in Listing 4
+As detailed in the comments for the code, this function conducts external functions and
+data manipulation on the data, most of which are predefined in the tweet_collector.py
+script. These are not redefined in this function to reduce code duplication throughout
+the system and hence are imported at the beginning of the file. Due to the nature of
+spam filtering tweets were inevitably removed; therefore a few hours of data were missing. This was resolved by making another request for that specific hour and averaging
+the sentiment for the given hour to fill missing data.
+10.1.4
+
+Live Tweet Collection
+
+Live tweets were obtained through the use of the Tweepy package to stream current
+tweets per hour from the Twitter API. Spam filter detection, data pre-processing and
+language detection are also conducted on this data and are defined within this python
+script ’tweet_collector.py’, these functions are described in the relevant sections in the
+Data processing section.
+On the initial running of the ’tweet_collector.py’ script the CSV files for storing tweets
+and tweets are initialised, which will contain the polarities assigned by the VADER
+analyser. More importantly, it initialises the spam filter and trains it based on the
+pre-labelled spam dataset.
+Functions used for training relate to relevant functions defined under the filterSpam
+class which are used to create the training and test datasets. This function is described
+in the Spam Filtering section below.
+The streaming of tweets are handled by the Tweepy package and is first initialised upon
+starting of the python script. The streaming method works by establishing a listener
+and authenticated with the Twitter API; it then listens on that connection for data.
+This streamer can also filter on language and a specified hashtag which is loaded from
+a ’.env’ file also containing the API keys for authentication.
+1
+2
+
+3
+
+4
+5
+
+c l a s s Streamer ( ) :
+d e f stream_tweets ( s e l f , t w e e t s _ f i l e , temp_tweets , hashtag ,
+tweetFilter , analyser ) :
+l i s t e n e r = L i s t e n e r ( t w e e t s _ f i l e , temp_tweets , t w e e t F i l t e r , a n a l y s e r
+)
+auth = OAuthHandler ( k e y s ( ) . api_key , k e y s ( ) . a p i _ s e c r e t )
+# Load API k e y s from env f i l e and s e t auth
+
+6
+
+54
+
+7
+8
+
+p r i n t ( " C o n s o l e : " , " A u t h o r i s i n g with t w i t t e r API" )
+sys . stdout . f l u s h ()
+
+9
+10
+11
+
+auth . s e t _ a c c e s s _ t o k e n ( k e y s ( ) . access_token , k e y s ( ) . a c c e s s _ s e c r e t )
+# Set a c c e s s keys
+
+12
+13
+14
+
+p r i n t ( " C o n s o l e : " , " Streaming Tweets " )
+sys . stdout . f l u s h ()
+
+15
+16
+17
+18
+
+stream = Stream ( auth , l i s t e n e r , tweet_mode= ’ extended ’ )
+stream . f i l t e r ( l a n g u a g e s =[" en " ] , t r a c k=h a s h t a g )
+## Execute s t r e a m e r and f i l t e r f o r o n l y E n g l i s h r e g i o n t w e e t s and
+by s p e c i f i e d h a s h t a g ( ’ B i t c o i n ’ )
+
+19
+
+Listing 5: Tweepy Streamer setup
+Once the listener and streamer are declared, and Tweepy begins listening all data is
+processed through the on_data method. In this function, the tweet is extracted from
+the response and performs data pre-processing, language detection, spam classification
+and sentiment analysis on the data. Additionally, there is an initial time interval that
+checks for a time limit - this is used to ensure that the script runs for just under an
+hour and restarts every hour. This allows the average of the gathered tweets’ sentiment
+to be summed for that hour and then used for the network price predictions.
+The tweet text can be nested in multiple attributes in the response; this depends on a
+few factors of what the tweet is and how it was posted on Twitter. If a user retweeted
+the tweet, the text of the tweet would be nested under ’retweeted_status’ in the JSON
+response, also there is a check to see if the tweets are above the original twitter tweet
+character limit (140 characters). This is a possible legacy parameter in the Twitter
+API but is checked upon data response. If an attribute ’extended_tweet’ exists the
+character limit for the tweet exceeds 140 but is under the 280 characters hard limit of
+Twitter, this exact filtering is the same if it in a non-retweeted tweet.
+As for the key facts about this function; the length of the tweet is checked to be above
+5 (tokenised) due to any tweets with fewer words will not contain enough information
+to be given a proper polarity classification and almost always returns as 100% neutral,
+which is of no use and will have no effect on the hours average sentiment. The entire
+code in the function is encapsulated in a try-catch to check if data was received and
+handles non-responses and missing data. If there was no data the issue is ignored unless
+a connection between the streamer and API is broken it otherwise exits the script. As
+for the processing of the tweet the code in Listing 4 is used.
+
+55
+
+10.2
+
+Data pre-processing
+
+Various techniques and tools have been utilised throughout the development of the
+system to process the data appropriately so it can be parsed by VADER, spam filter
+and neural network. This section will cover the crucial functions that provide such
+functionalities and that are called throughout the system, as seen in some of the above
+code snippets.
+10.2.1
+
+Tweet Filtering
+
+Various ’Utility Functions’ have been used to initially filter out unwanted data from
+tweet text. These functions called by, both live tweet (tweet_collector.py) and historical
+tweet (sift_text.py) processing, prior any polarity classification or storing of tweet data
+to CSV files.
+1
+2
+3
+
+4
+
+d e f cleanTweet ( s e l f , t e x t ) :
+# Function t o c l e a n t w e e t s , removes l i n k s and s p e c i a l c h a r a c t e r s
+r e t u r n r e . sub ( r ’ ([^0 −9A−Za−z \−\%\Âč\ $ \ t ] ) | (@[ A−Za−z0 −9]+) | ( h t t p \S+)
+’ , ’ ’ , t e x t ) , ’ ’ . j o i n ( c f o r c i n t e x t i f c i n j i .UNICODE_EMOJI)
+# Also removes e m o j i s from t e x t − l a t e r re−added due t o VADER
+supporting emoticons
+
+5
+6
+7
+8
+
+d e f removeSpacing ( s e l f , t e x t ) :
+r e t u r n r e . sub ( r ’ ( +) ’ , ’ ’ , t e x t )
+# Removes e x t r a s p a c i n g t h a t may be l e f t between words
+
+9
+10
+11
+12
+
+def fixLines ( s e l f , text ) :
+r e t u r n r e . sub ( r " ( [ \ r \n ] ) " , " " , t e x t )
+# Removes l i n e b r e a k s and new l i n e s from t e x t
+
+13
+14
+15
+16
+
+d e f remove_non_ascii ( s e l f , t e x t ) :
+r e t u r n ’ ’ . j o i n ( i f o r i i n t e x t i f ord ( i ) <128)
+# User a f t e r l a n g u a g e d e t e c t i o n s and removes non−E n g l i s h c h a r a c t e r s
+from t e x t
+
+17
+18
+19
+20
+21
+22
+23
+
+d e f checkLength ( s e l f , t e x t ) :
+tokens = text . s p l i t ()
+i f l e n ( t o k e n s ) <= 5 : # T o k e n i s a t i o n
+return False
+else :
+r e t u r n True
+
+24
+
+Listing 6: Basic data filtering and processing function - defined in ’tweet_collector.py’
+Due to VADER being a lexicon-based sentiment analyser little data pre-processing
+needs conducting on the tweet text. The functions above primarily remove unnecessary
+text from the tweet that will either provide no insight into public opinion or can obstruct
+56
+
+a proper classification of the sentiment - such as the existence of URLs in the given text.
+Additionally, the ’clean_tweet’ function removes the emojis in the given text if any are
+presently using the emoji package - which in turn is another lexicon that compares the
+given text to any emoticon contained within the lexicon. These are removed at this
+stage but are later re-added back to the text as VADER support emoticon classification.
+The last function in ’utility functions’, ’checkLength’ splits the text up into individual
+words (tokens - a process of tokenisation), this is used to check the total length of
+a tweet. If the tweet is less than five words, it is dropped from classification. This
+is due to text containing less than five words are less likely to produce a meaningful
+polarity classification than texts above that word limit. Additionally, any meaningful
+information is unlikely to be forced into five words.
+10.2.2
+
+Language detection filtering
+
+The language detection feature of the system is used as an additional filter for filtering
+out non-English tweets. As discussed in the solution approach, Tweepy/Twitter API
+provides a means to filter out non-English based tweets. This, however, will not work if
+the user has settings on Twitter such as the prefered language and the region set to be
+English. Due to this, non-English characters can still be contained within the collected
+tweets; thus these are detected and filtered with the language detection function.
+1
+2
+
+def detectLaguage ( s e l f , text ) :
+...
+
+3
+4
+5
+
+# S p l i t words up i n t o t o k e n s − t o k e n i s a t i o n
+t o k e n s = wordpunct_tokenize ( t e x t )
+
+6
+7
+8
+
+# S h i f t to lower case
+words = [ word . l o w e r ( ) f o r word i n t o k e n s ]
+
+9
+10
+11
+12
+13
+14
+
+# Compute p e r l a n g u a g e i n n l t k number o f st o pw o r ds i n t e x t
+f o r l a n g u a g e i n s t op w o rd s . f i l e i d s ( ) :
+st op wor ds _se t = s e t ( s t op w or d s . words ( l a n g u a g e ) )
+words_set = s e t ( words )
+common_elements = words_set . i n t e r s e c t i o n ( s top wor ds _se t )
+
+15
+16
+17
+
+l a n g u a g e _ r a t i o s [ l a n g u a g e ] = l e n ( common_elements )
+# Form r a t i o s c o r e s f o r each l a n g u a g e d e t e c t e d from stopword
+comparison
+
+18
+19
+20
+21
+
+r a t i o s = language_ratios
+h i g h e s t _ r a t i o = max( r a t i o s , key=r a t i o s . g e t )
+# E x t r a c t h i g h e s t r a t i o l a n g u a g e used i n g i v e n t e x t
+
+22
+23
+24
+
+p r i n t ( " C o n s o l e : Text i s − " , h i g h e s t _ r a t i o )
+sys . stdout . f l u s h ()
+
+25
+
+57
+
+26
+27
+28
+29
+30
+
+i f h i g h e s t _ r a t i o == ’ e n g l i s h ’ :
+r e t u r n True
+else :
+return False
+# I f t e x t i s not p r e d o m i n a t e l y E n g l i s h drop t w e e t
+
+31
+
+Listing 7: Language detection and filter function [44]
+The language detection function uses several natural language pre-processing techniques to identify the most predominant language for the given text. This is accomplished by first tokenising the text into tokens and converting them to lower case this is so that the stopwords can be identified. For each of the languages supported
+by the Natural Language Toolkit Python package, the stopwords are identified in the
+text and compared to the stopwords in the language corpus’ in NLTK. The ratios for
+the individual languages are formed, and then the predominant language identified. If
+the language is not predominantly English, the tweet is dropped.
+There is however an issue with this approach, if a tweet contains too many special
+characters - characters that are allowed, the tweet occasionally is not classified as
+English even when it predominantly is upon visual inspection; therefore the tweet is
+dropped and not processed. This isn’t a significant issue as about 3000 tweets can
+be collected in an hour, and some of these would be filtered out by the spam filter
+regardless.
+Additionally, an n-gram method could be used to distinguish the language of the given
+text and may perform more accurately than the word-based approach that was implemented [45]. This could be a later improvement, as the n-gram approach requires
+a corpus for each language to compare against to be presented, the word-based approach is sufficient for its use case. Therefore it could be used as a comparison between
+approaches and seen as a possible improvement at a later date.
+
+58
+
+10.2.3
+
+Spam filter - Tokenisation, Ngrams, Stopword removal and Stemming
+
+Prior to any text being processed to both train the Naive Bayes classifier of the spam
+filter or to classify live tweets, the data needs to be pre-processed to extract the feature
+vetors from the text, so that the classifier can identify the probability of each word in
+the given text. The explanation of how this classifier functions will be detailed in the
+’Spam Filtering’ Section.
+1
+2
+
+d e f p r o c e s s T w e e t ( tweet , gram = 2 ) :
+tweet = tweet . lower ( ) # convert to lower case
+
+3
+4
+5
+6
+
+words = word_tokenize ( t w e e t )
+# T o k e n i s e words i n t e x t
+words = [ w f o r w i n words i f l e n (w) > 2 ]
+# remove words t h a t a r e not g r e a t e r than 2 c h a r a c t e r s
+
+7
+8
+9
+10
+11
+12
+
+i f gram > 2 :
+## I n c r e a s i n g grams can i n c r e a s e a c c u r a c y
+w = []
+f o r i i n r a n g e ( l e n ( words ) − gram + 1 ) :
+w += [ ’ ’ . j o i n ( words [ i : i + gram ] ) ]
+return w
+
+13
+14
+15
+16
+17
+
+# Remove s to p wo r ds
+sw = s t op w o rd s . words ( ’ e n g l i s h ’ )
+words = [ word f o r word i n words i f word not i n sw ]
+# C r e a t e new d i c t w i t h o u t s to p wo r ds
+
+18
+19
+20
+21
+
+stemmer = PorterStemmer ( )
+# Stem words
+words = [ stemmer . stem ( word ) f o r word i n words ]
+# C r e a t e new d i c t o f stemmed words
+
+22
+23
+
+r e t u r n words
+
+24
+
+Listing 8: pre-processing of data prior to being used by the spam filter
+The actions performed on the text consist of:
+• Convert to lower case: This is due to that ’DROP’ and ’drop’, and likewise words
+convay the same meaning thus these are simply converted to all lower case.
+• Tokenise words: This splits the text into individual words. A dictionary is then
+created from the tokens that are above the length of 2 - due to words that are of
+less ’is’, ’he’ and ’if’ will not contribute to spam detection and are seen as generic
+words in the English language
+• Ngrams: This is implemented to provide richer word sequences for the spam
+filter classification, as explained in the litrature review use of ngrams can increase
+accuracy.
+59
+
+• Stop words Removal: This removes stopwords such as ’this’, ’we’ and ’now’ from
+the text. Due to these common words carrying less importance for sentiment
+analysis.
+• Stemming: Reduces words down to their smaller form, as in it remove suffixes
+from inflected words - ’studying’ become ’study’ [46]. The Porter Stemmer works
+by removing the suffixes from the text - ’going’ becomes ’go’, however, this applies
+to other words such as ’leaves’ becomes ’leav’ which is not a word. However,
+this method will be applied equally to all words containing such suffixes so all
+variations will become so, thus still allowing the probability classifications to
+occur on the word as all variations will be the same.
+As discovered from [46], lemmatisation could be an alternative and arguably a better
+solution to stemming. Lemmatization works fundamentally the same as stemming but
+reduces the inflected words properly ensuring that a root word belongs to a language.
+Using the same words that are used to describe stemming, lemmatisation reduces ’goes’
+to ’go’ and ’leaves’ to ’leaf’ as an example - by removing the suffixes down to create
+the actual root word. Although lemmatisation will provide the classifier with an actual
+English word, stemming regardless still reduces the words down to a similar form, this
+added with a lemmatiser needing a corpus for classifying the words to their root words
+and additional computational time to do so, the former of using a stemmer is sufficient
+for the use case.
+
+10.3
+
+Spam Filtering
+
+This section of the implementation will describe how the spam filter is initialised in
+the tweet_collector, how it is trained and how it classifies tweets as being either spam
+or ham (wanted data).
+The function is initialised within the tweet_collector, that creates the training and
+testing datasets, and tests classifier on hard specified tweets and checks their classification.
+1
+2
+3
+4
+5
+
+class filterSpam ( object ) :
+...
+def t r a i n F i l t e r ( s e l f ) :
+s e l f . dataset ()
+## S p l i t d a t a s e t 7 5 : 2 5
+s e l f . train ()
+## Train based on t r a i n i n g d a t a s e t
+
+6
+7
+8
+
+def dataset ( s e l f ) :
+s e l f . data = pd . read_csv ( s e l f . t r a i n i n g _ s e t )
+
+9
+10
+11
+
+s e l f . data [ ’ c l a s s ’ ] = s e l f . data [ ’ c l a s s e s ’ ] . map( { ’ham ’ : 0 , ’ spam ’ : 1 } )
+# Remap l a b e l s o f ’Spam ’ and ’Ham ’ t o 1 : 0 r e s p e c t i v e l y
+
+12
+13
+
+s e l f . data . drop ( [ ’ c l a s s e s ’ ] , a x i s =1, i n p l a c e=True )
+
+60
+
+14
+
+# Drop o l d l a b e l s
+
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+
+s e l f . trainIndex , s e l f . testIndex = l i s t () , l i s t ()
+f o r i i n r a n g e ( s e l f . data . shape [ 0 ] ) :
+i f np . random . uniform ( 0 , 1 ) < 0 . 7 5 : # Random s h u f f l e data o f 75%
+s e l f . t r a i n I n d e x += [ i ] # C r e a t e t r a i n i n g i n d e x
+else :
+s e l f . t e s t I n d e x += [ i ] # C r e a t e t e s t i n g i n d e x
+s e l f . t r a i n D a t a = s e l f . data . l o c [ s e l f . t r a i n I n d e x ]
+s e l f . t e s t D a t a = s e l f . data . l o c [ s e l f . t e s t I n d e x ]
+# D e f i n e d a t a s e t s by g e t t i n g v a l u e s from f i r s t 75% and then 25%
+
+25
+26
+27
+28
+
+s e l f . t r a i n D a t a . r e s e t _ i n d e x ( i n p l a c e=True )
+s e l f . t e s t D a t a . r e s e t _ i n d e x ( i n p l a c e=True )
+# Reset i n d e x e s
+
+29
+30
+31
+32
+
+s e l f . t r a i n D a t a . drop ( [ ’ i n d e x ’ ] , a x i s =1, i n p l a c e=True )
+s e l f . t e s t D a t a . drop ( [ ’ i n d e x ’ ] , a x i s =1, i n p l a c e=True )
+# Drop o l d i n d e x
+
+33
+34
+35
+36
+
+def train ( s e l f ) :
+s e l f . spamFilter = spam_filter . c l a s s i f i e r ( s e l f . trainData )
+# I n i t i a l i s e t h e spam f i l t e r with t h e 75% d a t a s e t
+
+37
+38
+39
+
+s e l f . spamFilter . train ()
+# Train
+
+40
+41
+42
+43
+44
+
+def testData_Prediction ( s e l f ) :
+# C l a s s i f y data from t e s t d a t a s e t
+p r e d i c t i o n = s e l f . spamFilter . p r e d i c t ( s e l f . testData [ ’ tweet ’ ] )
+return prediction
+
+45
+46
+47
+48
+
+def testPrediction ( s e l f ) :
+# Test Spam/Ham t w e e t s − s h o u l d r e t u r n True and F a l s e r e s p e c t i v l y
+spam = s p a m _ f i l t e r . p r o c e s s T w e e t ( " Earn more than 0015 b t c f r e e No
+d e p o s i t No i n v e s t m e n t Free B i t c o i n s − Earn $65 f r e e b t c i n 5 minutes
+bitcoin freebtc getbtc ")
+
+49
+50
+
+51
+
+ham = s p a m _ f i l t e r . p r o c e s s T w e e t ( " B i t c o i n c l o s e d with some g a i n s i n month
+o f February " )
+# P r o c e s s Tweets − T o k e n i s e and Stem
+
+52
+53
+54
+55
+
+hamTweet = s e l f . s p a m F i l t e r . c l a s s i f y (ham)
+spamTweet = s e l f . s p a m F i l t e r . c l a s s i f y ( spam )
+# C l a s s i f y both t w e e t s
+
+56
+57
+58
+
+59
+
+def f i l t e r S t a t i s t i c s ( s e l f , prediction ) :
+# Get p e r f o r m a n c e m e t r i c s f o r p r e d i c t i o n data compared t o a c t u a l t e s t
+data
+spam_filter . metrics ( s e l f . testData [ ’ c l a s s ’ ] , prediction )
+
+60
+
+61
+
+61
+62
+63
+64
+
+def testTweet ( s e l f , tweet ) :
+# Used f o r l i v e t w e e t s c l a s s i f i c a t i o n
+processed = spam_filter . processTweet ( tweet )
+c l a s s i f i e d = s e l f . spamFilter . c l a s s i f y ( processed )
+
+65
+66
+
+return c l a s s i f i e d
+
+67
+
+Listing 9: Spam filter training Class - tweet_collector.py
+
+• trainFilter: is a function that calls the dataset function which created the training
+and testing dataset, followed by the train function which trains the initialised
+classifier. This function’s sole purpose is to serve as a parent function that only
+needs to be called to perform the child functions once.
+• dataset: This function loads the pre-labelled spam dataset, remaps the labels to
+integers 0:1 to ham:spam respectively, creates a dictionary with an index of 75%
+of the original data for the training dataset and 25% for the testing dataset. This
+function does this by extracting the data at the set point from the spam dataset
+into the relevant new datasets which resetting indexes and dropping old columns
+to form appropriate data.
+• train: Is used to call the classifier function defined in the spam_filter script and
+passes the training data for it to initialise then train on.
+• testData_Prediction: Is a function similar to the ’train’ function, but calls the
+’predict’ function defined in spam_filter to test the classifier on the test data
+and returns the predictions made, which is used later on in the ’filterStatistics’
+function to calculate the accuracy of the classifier.
+• testPredictions: This function is used to test the accuracy of the trained classifier
+with pre-defined tweets that are assumed to be either spam or ham. The primary
+goal of this function is to ensure that the classifier correctly classifies the two
+tweets as either spam or ham appropriately. The text is processed through the
+’processTweet’ function previously described to transform the tweets into tokens
+ready for classification.
+• filterStatistics: Is used by the ’testData_Predictions’ function to calculate the
+accuracy of the classification model using the test data and prediction data. The
+’metrics’ function is defined in the spam_filter script.
+• testTweet: Is a function used on the live tweets by the ’on_data’ function also
+outlined previously to process the tweets data and classify it as either being spam
+or not, the ’on_data’ function then handles the result accordingly.
+
+62
+
+10.3.1
+
+Naive Bayes model
+
+The spam filter classifier, using a Naive Bayes model, was coded from scratch. This was
+ultimately unneeded as the Scikit-learn python package comes with four inbuilt Naive
+Bayes classification models (Bernoulli, Complement, Multinomial, Gaussian)[47]. The
+model was coded from scratch due to finding information on how this would be done
+with techniques such as TFIDF and Additive Smoothing as detailed in the literature
+review, the tutorial that helped the greatest Spam Classifier in Python from scratch
+[37] [48]. For an explanation of how the maths work behind this classifier see Literature
+review sections ’Bag Of Words’, ’TF-IDF’ and ’Addictive Smoothing’.
+The Naive Bayes model implemented was a multinomial Bayes model as the data used
+for classification was of multinomial distribution and categorical. This algorithm was
+not compared to the Scikit-learn’s inbuilt model for accuracy as this was not the focus
+of this project.
+1
+2
+3
+
+d e f TF_and_IDF( s e l f ) :
+...
+# Bag Of Words i m p l e m e n t a t i o n
+
+4
+5
+6
+7
+8
+
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+
+f o r e n t r y i n r a n g e ( noTweets ) :
+processed = processTweet ( s e l f . tweet [ entry ] )
+count = l i s t ( )
+#To keep t r a c k o f whether t h e word has o c u r e d i n t h e message o r not . TF
+count
+f o r word i n p r o c e s s e d :
+i f s e l f . l a b e l s [ entry ] :
+s e l f . tfSpam [ word ] = s e l f . tfSpam . g e t ( word , 0 ) + 1
+s e l f . spamCount += 1
+## I f l a b e l f o r data i s spam then add words t o spam l i s t
+else :
+s e l f . tfHam [ word ] = s e l f . tfHam . g e t ( word , 0 ) + 1
+s e l f . hamCount += 1
+# I f l a b e l f o r data i s ham then add words t o ham l i s t
+# A d d i c t i v e Smoothing − i f c u r r e n t word i s not s e e n add count l i s t
+i f word not i n count :
+count += [ word ]
+f o r word i n count :
+# Loop unseen word l i s t
+i f s e l f . l a b e l s [ entry ] :
+s e l f . idfSpam [ word ] = s e l f . idfSpam . g e t ( word , 0 ) + 1
+else :
+s e l f . idfHam [ word ] = s e l f . idfHam . g e t ( word , 0 ) + 1
+
+27
+28
+29
+30
+
+31
+32
+
+d e f TF_IDF( s e l f ) :
+...
+# C a l c u l a t e p r o b a b i l i t y o f word b e i n g spam o r ham based on o c c u r a n c e i n
+t e x t compared t o counted s e t s a l o n g with r e l e v a n t k e y s
+f o r word i n s e l f . tfSpam :
+s e l f . probSpam [ word ] = ( s e l f . tfSpam [ word ] ) ∗ l o g ( ( s e l f . spam + s e l f . ham
+
+63
+
+33
+
+) / ( s e l f . idfSpam [ word ] + s e l f . idfHam . g e t ( word , 0 ) ) )
+s e l f . sumSpam += s e l f . probSpam [ word ]
+
+34
+35
+36
+
+f o r word i n s e l f . tfSpam :
+s e l f . probSpam [ word ] = ( s e l f . probSpam [ word ] + 1 ) / ( s e l f . sumSpam + l e n
+( l i s t ( s e l f . probSpam . k e y s ( ) ) ) )
+
+37
+38
+39
+
+40
+41
+42
+
+f o r word i n s e l f . tfHam :
+s e l f . probHam [ word ] = ( s e l f . tfHam [ word ] ) ∗ l o g ( ( s e l f . spam + s e l f . ham)
+/ ( s e l f . idfSpam . g e t ( word , 0 ) + s e l f . idfHam [ word ] ) )
+s e l f . sumHam += s e l f . probHam [ word ]
+f o r word i n s e l f . tfHam :
+s e l f . probHam [ word ] = ( s e l f . probHam [ word ] + 1 ) / ( s e l f . sumHam + l e n (
+l i s t ( s e l f . probHam . k e y s ( ) ) ) )
+
+43
+44
+45
+
+# C a l c u l a t e t o t a l amount o f spam words i d e n t i f i e d
+s e l f . probSpamTotal , s e l f . probHamTotal = s e l f . spam / s e l f . t o t a l , s e l f .
+ham / s e l f . t o t a l
+
+46
+
+Listing 10: classifer class of spam_filter.py
+
+10.3.2
+
+Classification
+
+The classification function aims to classify the pre-processed tweet data as either spam
+or ham based on the term-frequency and probabilities calculated in the ’TF_IDF’
+function. This conducted for each word in the processed tweet is identified if the word
+is contained in the spam set, based on the level of occurrence the probability is assigned
+a weight (The more it occurs, the more likely it is a generic word), this is also identified
+for the level of occurrence in the ham set. Totals for the probability are formed, and
+the total count for both spam and ham are added to the spam and ham probabilities for
+the processed tweet. If the spam probability pSpam is higher than the ham probability
+pHam based on the level of occurrence of each word in the modelled respective sets, a
+boolean is returned based on which probability is higher - which identifies if the tweet
+is predominantly spam or ham (True or False).
+1
+2
+
+def c l a s s i f y ( s e l f , processed ) :
+pSpam , pHam = 0 , 0
+
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+
+f o r word i n p r o c e s s e d :
+i f word i n s e l f . probSpam :
+pSpam += l o g ( s e l f . probSpam [ word ] )
+else :
+pSpam −= l o g ( s e l f . sumSpam + l e n ( l i s t ( s e l f . probSpam . k e y s ( ) ) ) )
+i f word i n s e l f . probHam :
+pHam += l o g ( s e l f . probHam [ word ] )
+else :
+pHam −= l o g ( s e l f . sumHam + l e n ( l i s t ( s e l f . probHam . k e y s ( ) ) ) )
+
+64
+
+13
+14
+15
+
+pSpam += l o g ( s e l f . probSpamTotal )
+pHam += l o g ( s e l f . probHamTotal )
+r e t u r n pSpam >= pHam
+
+16
+
+Listing 11: Classify Function of Parent classifier class of spam_filter.py
+
+10.3.3
+
+Predict
+
+The predict function under the classify parent class used by the tweet_collector to
+test the trained classifier on the test dataset. For each tweet in the dataset, the data
+is processed through the processTweet function previously described, this returns a
+dictionary of words in the text which then used in the classify function described
+above to identify whether or not each tweet is predominantly spam or ham, the result
+of all tweets are returned. The tweet_collector then uses the returned array in the
+filterStatistics function, also previously described, to calculate the performance and
+accuracy of the trained model.
+1
+2
+3
+4
+5
+6
+
+def predict ( s e l f , testData ) :
+result = dict ()
+f o r ( i , t w e e t ) i n enumerate ( t e s t D a t a ) :
+processed = processTweet ( tweet )
+result [ i ] = int ( s e l f . c l a s s i f y ( processed ) )
+return r e s u l t
+
+7
+
+Listing 12: Predict function of parent classifier class of spam_filter.py
+
+10.3.4
+
+Metrics
+
+The metrics function calculates the F-score, precision, recall and accuracy (Suitable
+performance metrics for classification models) of the model when comparing the predicted class labels to the real class labels of the test dataset used in testing the model.
+By using these metrics, the performance of the model can be evaluated and later compared to a competitor model - for this reason, the metrics are calculated. A discussion
+of what these metrics show and the level of accuracy of the model are discussed in the
+Testing section later.
+1
+2
+
+def metrics ( labels , predictions ) :
+true_pos , true_neg , f a l s e _ p o s , f a l s e _ n e g = 0 , 0 , 0 , 0
+
+3
+4
+
+5
+6
+7
+
+# I d e n t i f y t h e t r u e pos / n e g s and
+o f p r e d i c t e d v a l u e s compared t o
+dataset class labels
+f o r i in range ( len ( l a b e l s ) ) :
+true_pos += i n t ( l a b e l s [ i ] == 1
+true_neg += i n t ( l a b e l s [ i ] == 0
+
+f a l s e pos / n e g s o f t h e p r e d i c t e d model
+the act ual true values of the t e s t
+
+and p r e d i c t i o n s [ i ] == 1 )
+and p r e d i c t i o n s [ i ] == 0 )
+
+65
+
+8
+9
+10
+11
+12
+13
+
+f a l s e _ p o s += i n t ( l a b e l s [ i ] == 0 and p r e d i c t i o n s [ i ] == 1 )
+f a l s e _ n e g += i n t ( l a b e l s [ i ] == 1 and p r e d i c t i o n s [ i ] == 0 )
+p r e c i s i o n = true_pos / ( true_pos + f a l s e _ p o s )
+r e c a l l = true_pos / ( true_pos + f a l s e _ n e g )
+Fscore = 2 ∗ p r e c i s i o n ∗ r e c a l l / ( p r e c i s i o n + r e c a l l )
+a c c u r a c y = ( true_pos + true_neg ) / ( true_pos + true_neg + f a l s e _ p o s +
+false_neg )
+
+14
+15
+16
+17
+18
+
+print (" Precision : " , precision )
+print (" Recall : " , r e c a l l )
+p r i n t ( "F−s c o r e : " , F s c o r e )
+p r i n t ( " Accuracy : " , a c c u r a c y )
+
+19
+
+Listing 13: Metrics function for calculating the performance and accuracy of the model
+
+10.4
+
+Sentiment Analysis
+
+This section of the implementation outlines how the VADER sentiment analyser is
+implemented and performs with the rest of the system. The get_sentiment class and
+its __init__ function are called in the tweet_collector script upon starting and by
+the historical tweets script to initialise the analyser from the VADER package. Both
+scripts then call get_vader_sentiment when needed to give polarity classification to a
+tweet.
+1
+2
+3
+
+c l a s s get_sentiment ( o b j e c t ) :
+...
+d e f get_vader_sentiment ( s e l f , s e n t e n c e ) :
+
+4
+5
+6
+
+# Calculate the p o l a r i t y s c o r e s of the provided tweet
+score = s e l f . analyser . polarity_scores ( sentence )
+
+7
+8
+9
+10
+11
+12
+
+# S p l i t d i c t i n t o o v e r a l l s e n t i m e n t and compound
+sentiment = l i s t ( score . values () )
+compound = s e n t i m e n t [ 3 : ]
+compound = compound [ 0 ]
+sentiment = sentiment [ : 3 ]
+
+13
+14
+15
+16
+
+# Compare and f i n d o v e r a l l s e n t i m e n t
+s c o r e = max( s e n t i m e n t )
+pos = [ i f o r i , j i n enumerate ( s e n t i m e n t ) i f j == s c o r e ]
+
+17
+18
+19
+20
+21
+22
+23
+24
+
+i f pos [ 0 ] == 1 :
+p r i n t ( " C o n s o l e : " , "Tweet i s o v e r a l N e u t r a l − S c o r e : " , s c o r e )
+# r e t u r n neg o r pos which e v e r i s h i g h e r
+i f sentiment [ 0 ] > sentiment [ 2 ] :
+score = sentiment [ 0 ]
+else :
+score = sentiment [ 2 ]
+
+66
+
+25
+26
+27
+
+r e t u r n s c o r e , compound
+else :
+r e t u r n s c o r e , compound
+
+28
+
+Listing 14: VADER polarity classification
+The get_vader_sentiment function provides the polarity scores for the provided tweet.
+The scores are split into polarity and compound to compare the positive and negative
+scores to identify the overall greater sentiment in the given tweet. By doing so helps to
+identify if the tweet was overall negative or positive. The compound score is separated
+and used separately.
+
+10.5
+
+Recurrent Neural Network - LSTM
+
+This section of the implementation describes and discusses how the LSTM neural
+network is configured, trained, tested and used to create the model later used for price
+forecasting for both neural networks - with and without hourly sentiment embedded
+in datasets. Its performance metrics that were calculated to verify the accuracy for
+the model, appropriate to regression models and K-fold validation implementation are
+discussed.
+Additionally, this section also discusses the code from the neural network that has
+the sentiment embedded in the datasets; comments are made in the code snippets
+with the reduced code that consists of the neural network and is due to each neural
+network having almost the same code. The reasons behind not implementing both
+networks in the same Python script was down to perform. Due to Python executing
+code synchronously and due the neural networks needing to ran on the dot of an hour
+and at the same time the code was divided and executed individually. This also reduced
+the need to recode most of the functions to loop and perform tasks for each network
+at every given stage of the network even if the majority of the code was duplicated.
+10.5.1
+
+Dataset Creation
+
+The datasets for training (train_X and train_Y) and testing (test_X and test_Y) are
+formed and shaped for model training. A look back of 2 is used to create a timestep
+of one record to ensure predictions are forecasted for the next record. Prices are also
+scaled between 0 and 1 due to sentiment ranging in the same values and is a standard
+for model creation to speed up regression and model training as the data is of smaller
+values - using the scikit-learns MinMaxScaler function.
+A function for merging the two datasets, price and sentiment occurs using the look
+back, takes place prior to the training (train_X and train_Y) and testing (test_X and
+test_Y) are formed. This function is different for the two networks as one includes the
+sentiment at the position of its respective price.
+67
+
+1
+2
+3
+
+d e f data ( s e l f ) :
+s e l f . preprocess ()
+# Pre−p r o c e s s and e x t r a c t r e q u i r e d data from d a t a s e t
+
+4
+5
+6
+
+loopback = 2
+# Set lookback f o r dataset c r e a t i o n − f o r 1 record timestep
+
+7
+8
+
+9
+
+10
+
+train_X , train_Y = s e l f . c r e a t e _ s e t s ( s e l f . p r i c e _ t r a i n , loopback , s e l f .
+sentiment_data [ 0 : s e l f . p r i c e _ t r a i n _ s i z e ] )
+test_X , test_Y = s e l f . c r e a t e _ s e t s ( s e l f . p r i c e _ t e s t , loopback , s e l f .
+sentiment_data [ s e l f . p r i c e _ t r a i n _ s i z e : l e n ( s e l f . s c a l e d P r i c e ) ] )
+## C r e a t e d a t a s e t s ( ! s e n t i m e n t p a r a m e t e r s a r e not p a s s e d i n t o t h e
+n e u r a l network t h e doesn ’ t embedded t h e s e n t i m e n t a l o n g s i d e p r i c e data
+!)
+
+11
+12
+13
+
+train_X = np . r e s h a p e ( train_X , ( train_X . shape [ 0 ] , 1 , train_X . shape [ 1 ] ) )
+test_X = np . r e s h a p e ( test_X , ( test_X . shape [ 0 ] , 1 , test_X . shape [ 1 ] ) )
+
+14
+15
+16
+
+s e l f . model_network ( train_X , train_Y , test_X , test_Y )
+# C a l l network f u n c t i o n t o t r a i n network
+
+17
+18
+19
+
+20
+
+def preprocess ( s e l f ) :
+s e l f . model_data = s e l f . lstm_data [ [ ’ p r i c e ’ , ’ compound ’ ] ] . groupby ( s e l f .
+lstm_data [ ’ c r e a t e d _ a t ’ ] ) . mean ( )
+#E x t r a c t p r i c e and compound columns from d a t a s e t
+
+21
+22
+23
+24
+
+s e l f . sentiment_data = s e l f . model_data [ ’ compound ’ ] . v a l u e s . r e s h a p e ( −1 ,1)
+s e l f . p r i c e _ d a t a = s e l f . model_data [ ’ p r i c e ’ ] . v a l u e s . r e s h a p e ( −1 ,1)
+## Reshape data t o column−w i s e
+
+25
+26
+27
+28
+
+# convert types to f l o a t 3 2 f o r consistancy
+s e l f . sentiment_data = s e l f . sentiment_data . a s t y p e ( ’ f l o a t 3 2 ’ )
+s e l f . price_data = s e l f . price_data . astype ( ’ f l o a t 3 2 ’ )
+
+29
+30
+31
+32
+
+s e l f . s c a l e = MinMaxScaler ( f e a t u r e _ r a n g e =(0 ,1) )
+s e l f . s c a l e d P r i c e = s e l f . s c a l e . fit_transform ( s e l f . price_data )
+# S c a l e p r i c e t o v a l u e s between 0 and 1
+
+33
+34
+35
+36
+
+s e l f . price_train_size = int ( len ( s e l f . scaledPrice ) ∗ 0.7 )
+# u s e 70% o f d a t a s e t f o r t r a i n i n g and 30% f o r t e s t i n g
+s e l f . price_test_size = len ( s e l f . scaledPrice ) − s e l f . price_train_size
+
+37
+38
+
+# Get s a i d t r a i n data on s i z e
+
+39
+40
+41
+
+42
+
+s e l f . price_train = s e l f . scaledPrice [ 0 : s e l f . price_train_size : ]
+s e l f . price_test = s e l f . scaledPrice [ s e l f . price_train_size : len ( s e l f .
+scaledPrice ) : ]
+#s e t s i z e s o f d a t a s e t t o be mapped l a t e r
+
+43
+44
+45
+
+d e f c r e a t e _ s e t s ( s e l f , data , lookback , s e n t i m e n t ) :
+data_X , data_Y = [ ] , [ ]
+
+68
+
+46
+47
+48
+49
+50
+
+f o r i i n r a n g e ( l e n ( data ) − l o o k b a c k ) :
+i f i >= l o o k b a c k :
+# S e t s t i m e s t e p i f data by a r e c o r d
+pos = data [ i −l o o k b a c k : i +1, 0 ]
+pos = pos . t o l i s t ( )
+
+51
+52
+53
+54
+
+55
+56
+57
+
+# Append s e n t i m e n t a t p o s i t i o n o f h o u r s p r i c e
+pos . append ( s e n t i m e n t [ i ] . t o l i s t ( ) [ 0 ] )
+## Above pos i s not conducted on n e u r a l network with no s e n t i m e n t
+embedded pos . append ( 0 ) o c c u r s i n s t e a d
+data_X . append ( pos )
+data_Y . append ( data [ i + lookback , 0 ] )
+r e t u r n np . a r r a y ( data_X ) , np . a r r a y ( data_Y )
+
+58
+
+Listing 15: Dataset creation and preprocessing
+
+10.5.2
+
+Training and Testing Model
+
+The neural network is set up with four layers each of which configured with 100 LSTM
+cells, with a dropout of 0.2 each, and returning sequences to each other layer. A dropout
+was used to ensure that the data would not be overfitted, by setting the dropout to
+0.2 probability, 80% of the data on each layer is retained for the next layer. Return
+sequences allows for the returning of the hidden state output for each time step and
+ensures the next LSTM layer has 2 inputs that carry over from the previous layer,
+which are the old weights and value outputs from the previous layer.
+1
+
+s e l f . model = S e q u e n t i a l ( )
+
+2
+3
+4
+
+5
+
+## 1 s t l a y e r − i n p u t l a y e r
+s e l f . model . add (LSTM( 1 0 0 , input_shape=(train_X . shape [ 1 ] , train_X . shape
+[ 2 ] ) , r e t u r n _ s e q u e n c e s=True ) )
+s e l f . model . add ( Dropout ( 0 . 2 ) )
+
+6
+7
+8
+9
+
+## 2nd Layer
+s e l f . model . add (LSTM( 1 0 0 , r e t u r n _ s e q u e n c e s=True ) )
+s e l f . model . add ( Dropout ( 0 . 2 ) )
+
+10
+11
+12
+13
+
+## 3 rd Layer
+s e l f . model . add (LSTM( 1 0 0 , r e t u r n _ s e q u e n c e s=True ) )
+s e l f . model . add ( Dropout ( 0 . 2 ) )
+
+14
+15
+16
+17
+
+## 4 th Layer w i t h o u t s e q u e n c e s
+s e l f . model . add (LSTM( 1 0 0 ) )
+s e l f . model . add ( Dropout ( 0 . 2 ) )
+
+18
+19
+20
+
+s e l f . model . add ( Dense ( 1 ) )
+s e l f . model . c o m p i l e ( l o s s= ’ mean_squared_error ’ , o p t i m i z e r= ’ adam ’ , m e t r i c s
+=[ ’ mse ’ , ’ mae ’ , ’ mape ’ ] )
+
+69
+
+21
+22
+23
+
+s e l f . model . summary ( )
+# Model summary o f params and dropout a t each l a y e r
+
+24
+25
+
+26
+
+h i s t o r y = s e l f . model . f i t ( train_X , train_Y , e p o c h s =200 , b a t c h _ s i z e =1000 ,
+v a l i d a t i o n _ d a t a =(test_X , test_Y ) , v e r b o s e =0, s h u f f l e=F a l s e , c a l l b a c k s
+=[TQDMCallback ( ) ] )
+## f i t model u s i n g t r a i n data and v a l i d a t e u s i n g t h e t e s t data
+
+27
+28
+
+yhat = s e l f . model . p r e d i c t ( test_X )
+
+29
+30
+31
+
+scale = self . scale
+scaledPrice = s e l f . scaledPrice
+
+32
+33
+34
+
+y h a t _ i n v e r s e _ s e n t = s c a l e . i n v e r s e _ t r a n s f o r m ( yhat . r e s h a p e ( −1 , 1 ) )
+t e s t Y _ i n v e r s e _ s e n t = s c a l e . i n v e r s e _ t r a n s f o r m ( test_Y . r e s h a p e ( −1 , 1 ) )
+
+35
+
+Listing 16: LSTM model creation layering compiling and fitting
+As per the discussion in the literature review and outlined in the solution approach,
+the Adam optimiser was used for the compilation of the model. The loss was calculated
+using the mean squared error and the metrics calculated and returned to present the
+accuracy of the model in prediction were: mean squared error, root mean squared
+error, mean absolute error and mean absolute percentage error. Both the metrics and
+predictions made are saved to a CSV that is then presented to users in the server-hosted
+UI.
+The model was fitted on the training sets (X, Y) over 200 epochs with a batch size of
+1000 on about 11000 records - was about the total amount of data used to train for a
+year. Predictions are then made using the test set resulting in the predictions of ’yhat’
+which is inverted and rescaled to get original price values to save to a CSV and which
+are displayed on the user interface. The model is also validated using the test data as
+specified in the model.fit method.
+
+70
+
+10.6
+
+Future Prediction Forecasting
+
+Future prediction forecasting is implemented as a loop which is executed every hour.
+This loads the previous five prices and sentiment data (minus sentiment for the nonsentiment model) and predicts the next hour price in a one-hour timestep. Due to the
+first four hours there is not enough live data, historical prices and sentiment are used
+until five hours have passed on initial executing of the network. After such the model
+predicts on all re-occurring data up to 1000 records to match the initial batch size the
+model is trained on, then only predicts using the past 1000 records due to the gradient
+descent of the model being averaged and modelled for a sample size of 1000.
+These predictions along with inverted test data are saved to relevant CSVs to be plotted
+as graphs on the interface. The function also forms a market prediction of either ’Buy’
+or ’Sell’ based on a hard-coded difference threshold of 25%, which suggest that at a
+given point between predictions when the best time for a user to either sell or buy
+Bitcoin.
+1
+2
+
+p r i c e = pd . read_csv ( l i v e _ p r i c e )
+s e n t i m e n t = pd . read_csv ( l i v e _ s e n t i m e n t )
+
+3
+4
+5
+6
+
+price_tail = price . tail ( i )
+sentiment_tail = sentiment . t a i l ( i )
+## Get l a s t 5 l i v e p r i c e s and p r e d i c t on them
+
+7
+8
+9
+
+p r i c e _ t a i l . index = p r i c e _ t a i l [ ’ created_at ’ ]
+sentiment_tail . index = sentiment_tail [ ’ created_at ’ ]
+
+10
+11
+
+## Example g e t s l a s t 5 r e c o r d s f o r some r e a s o n
+
+12
+13
+14
+
+p r i c e = p r i c e _ t a i l [ ’ p r i c e ’ ] . v a l u e s . r e s h a p e ( −1 ,1)
+s e n t i m e n t = s e n t i m e n t _ t a i l [ ’ compound ’ ] . v a l u e s . r e s h a p e ( −1 ,1)
+
+15
+16
+
+price_scale = s e l f . scale . fit_transform ( price )
+
+17
+18
+
+testX , t e s t Y = s e l f . c r e a t e _ s e t s ( p r i c e _ s c a l e , 2 , s e n t i m e n t )
+
+19
+20
+
+t e s t X = np . r e s h a p e ( testX , ( t e s t X . shape [ 0 ] , 1 , t e s t X . shape [ 1 ] ) )
+
+21
+22
+23
+24
+
+yhat = s e l f . model . p r e d i c t ( t e s t X )
+y h a t _ i n v e r s e = s e l f . s c a l e . i n v e r s e _ t r a n s f o r m ( yhat . r e s h a p e ( −1 , 1 ) )
+t e s t Y _ i n v e r s e = s e l f . s c a l e . i n v e r s e _ t r a n s f o r m ( t e s t Y . r e s h a p e ( −1 , 1 ) )
+
+25
+26
+27
+28
+
+rmse_sent = s q r t ( mean_squared_error ( t e s t Y _ i n v e r s e , y h a t _ i n v e r s e ) )
+p r i n t ( ’ Test RMSE: %.3 f ’ % rmse_sent )
+## C a l c u l a t e RMSE f o r p r e d i c t i o n
+
+29
+30
+
+31
+
+d i f f e r e n c e = (( yhat_inverse [ 0 ] [ 0 ] − s e l f . previous_val ) / s e l f .
+p r e v i o u s _ v a l ) ∗100
+# C a c l u l a t e d i f f e r e n c e between hour p r e d i c t i o n s f o r t h r e s h o l d a c t i o n
+p r e d i c t i o n ( below )
+
+71
+
+32
+33
+
+...
+## S u g g e s t market a c t i o n based on 0 . 2 5 t h r e s h o l d ( 2 . 5 % )
+
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+
+47
+48
+49
+
+i f d i f f e r e n c e >= s e l f . t h r e s h o l d :
+p r i n t ( "Buy" )
+s e l f . s t a t e = ’BUY ’
+e l i f difference < s e l f . threshold :
+print (" Sell ")
+s e l f . s t a t e = ’SELL ’
+...
+## Output p r e d i c t i o n made f o r hour t o CSV f i l e f o r u s e i n UI
+try :
+with open ( p r e d i c t i o n s _ f i l e , mode= ’ a ’ ) a s c s v _ f i l e :
+...
+w r i t e r . w r i t e r o w ( { ’ c r e a t e d _ a t ’ : now . s t r f t i m e ( "%Y−%m−%d %H: 0 0 : 0 0 " ) , ’
+next_hour_price ’ : hour , ’ c u r r e n t _ p r i c e ’ : c u r r e n t , ’ c u r r e n t _ s e n t i m e n t ’ :
+senti , ’ s t a t e ’ : s e l f . s t a t e })
+except Exception as e :
+p r i n t ( " E r r o r : %s " % s t r ( e ) )
+sys . stdout . f l u s h ()
+
+50
+51
+52
+
+# S e t t h e p r e d i c t e d v a l u e o f c u r r e n t hour
+s e l f . p r e v i o u s _ v a l = y h a t _ i n v e r s e [ 0 ] [ 0 ] ##THE NEXT PREDICTED VALUE IN
+AN HOUR
+
+53
+
+Listing 17: Forecasting future price of next hour for Bitcoin
+
+72
+
+10.7
+
+User Interface
+
+This section describes and discusses how the user interface is implemented, and what
+functions were used to both load data from the server and to display this data as
+graphical plots and tables on the interface. The aim of the interface, although simple
+in design, is to display relevant and useful information to the stakeholders in aiding in
+market decisions.
+The interface is a simple HTML page that uses JQuery and AJAX requests in conjunction to display the required data and consists of three charts and two tables - each
+displaying predictions and performance metrics. A snippet of the final interface can be
+seen in Figure 12 later in the section. This section will describe the reasoning behind
+the data displayed and the layout.
+10.7.1
+
+Key Functions
+
+Table Generation
+The below JQuery script, embedded in the HTML page, is one of two exact functions
+for loading data and generating a HTML table containing load data from an AJAX
+request, and fills a <div> tag based on provided class name with the generated table
+data.
+1
+2
+
+3
+4
+
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+
+<script >
+// C r e a t e t a b l e with r e c o r d s based on amount l o a d e d from data from AJAX
+request
+function arrayToTable ( t a b l e D a t a ) {
+var t a b l e = $ ( ’<t a b l e c e l l p a d d i n g ="0" c e l l s p a c i n g ="0" b o r d e r="0"></
+table ’ ) ;
+$ ( t a b l e D a t a ) . each ( function ( i , rowData ) {
+var row = $ ( ’<t r s t y l e ="b o r d e r :0;" > </ t r > ’ ) ;
+$ ( rowData ) . each ( function ( j , c e l l D a t a ) {
+row . append ( $ ( ’<td s t y l e ="b o r d e r :0;" > ’+c e l l D a t a+ ’</td> ’ ) ) ;
+}) ;
+// For each r e c o r d p r e s e n t add s e p a r a t l y i n s i d e t a b l e t a g s
+t a b l e . append ( row ) ;
+}) ;
+return t a b l e ;
+}
+
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+
+// Load data from s e r v e r a t b a s e path
+$ . ajax ({
+type : "GET" ,
+u r l : " metrics . csv " ,
+s u c c e s s : function ( data ) {
+$ ( ’ . t b l −m e t r i c s ’ ) . append ( arrayToTable ( Papa . p a r s e ( data ) . data ) ) ;
+// F i l l d i v with c l a s s ^ with g e n e r a t e d t a b l e
+}
+}) ;
+
+73
+
+25
+
+</script >
+
+26
+
+Listing 18: AJAX request and plotting performance data to HTML table
+The data displayed in these tables consist of the perforance metrics of the trained
+model of the network: root mean squared error, mean squard error, mean absolute
+error, mean absolute percentage error and loss of the network. Another table on the
+interface shows the the hourly predictions made by the LSTM network, showing: date
+and time of prediction, next hourly prediction, current hourly price, hourly sentiment
+and the suggested market action (Buy or Sell ) based on the hard-coded 0.25 (25%)
+threshold in the network code. See figure 12 below for visual representation
+Graph Generation
+The function shown in Listing 19 shows how charting is implemented as a function
+in the front-end application, likewise to the table function above in Listing 18, this
+function is duplicated multiple times for each of the three graphs presented on the
+interface application.
+This function uses an AJAX request to load the needed JSON data from the server
+and creates an array for each record present in the data. As shown in the function
+yhat_inverse and testY_inverse are the two data values generated by the neural network script, the former being the predicted next hour values time stepped by 1 record
+(1 hour), and the latter the true hourly data. Each of the three charts uses the same
+parameters to plot data, but each represents different data and values that are saved
+to the JSON files by the neural network script.
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+
+<script >
+var chartData = unpack ( )
+function unpack ( ) {
+var jsonD = { } ;
+// Load r e l e v a n t JSON f i l e s
+$ . ajax ({
+u r l : " updating . json " ,
+dataType : " j s o n " ,
+type : " g e t " ,
+async : f a l s e ,
+s u c c e s s : function ( j s o n ) {
+jsonD = j s o n ;
+}
+}) ;
+var chartData = [ ] ;
+f o r ( var i = 0 ; i < Object . k e y s ( jsonD ) . l e n g t h ; i ++)
+{
+// E x t r a c t Values a t p o s t i o n s and c r e a t e a r r a y f o r p l o t t i n g
+chartData . push ( {
+i n d e x : jsonD [ i ] [ " i n d e x " ] ,
+p r e d i c t : jsonD [ i ] [ " y h a t _ i n v e r s e " ] ,
+
+74
+
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+
+true : jsonD [ i ] [ " t e s t Y _ i n v e r s e " ]
+}) ;
+}
+return chartData ;
+};
+// JSON a t t r i b u t e s and p a r a m e t e r s f o r p l o t t i n g t h e a r r a y g e n e r a t e d
+var c h a r t = AmCharts . makeChart ( " c h a r t d i v " , {
+" type " : " s e r i a l " ,
+" theme " : " dark " ,
+" legend " : {
+" u s e G r a p h S e t t i n g s " : true
+},
+" d a t a P r o v i d e r " : chartData ,
+" s y n c h r o n i z e G r i d " : true ,
+" valueAxes " : [ {
+" i d " : " v1 " ,
+" a x i s C o l o r " : "#FF6600" ,
+" axisThickness " : 2 ,
+" axisAlpha " : 1 ,
+" position " : " l e f t "
+}, {
+" i d " : " v2 " ,
+...
+}] ,
+...
+// o t h e r JSON a t t r i b u t e p a r a m e t e r s f o r d e f i n i n g a c h a r t
+...
+</script >
+
+50
+
+Listing 19: Chart creation with AJAX request
+
+75
+
+10.7.2
+
+Final Interface
+
+Figure 12: Price Forecasting Dataflow diagram
+
+76
+
+11
+
+Testing Metrics and Accuracy
+
+This section discusses the performance metrics used to validate the network, any additional validation step during training, speed of execution of the two networks, and
+outlines what these mean regarding the performance of the network.
+Due to that the project is primarily an investigation of the use of discussed tools on how
+these would be used for forecasting the price of the next hour of Bitcoin, based on both
+historic and live price, and sentiment data, testing is focused around the accuracy of the
+predicted hourly values and the model generated by the LSTM network. A discussion
+of the accuracy of the predicted values is discussed in the ’Discussion of Results’ section
+along with comparing both models - with and without sentiment embedded to fulfil
+the problem statement.
+
+11.1
+
+Integration Testing
+
+Integration testing occurred throughout the development of this system, the goal of this
+type of testing is the ensure that each of the functions within the system was working
+with previous functions that it either uses or provides functionality too and to conform
+to an agile methodology when possible. If and when a function was completed, prior to
+moving on to the development of another, the function was tested with real and fake
+data - depending on the functionality the function performed. This was to ensure that
+the function was either being access or used other functions correctly.
+An example of when such testing occurred, though not documented, between components is that of the FilterSpam class in the tweet_collector script. This was a significant class to test the operation of and was due to both the multiple calling of functions
+within the class from throughout the tweet_collector script and from the functions of
+the class to individual functions in the spam_filter script. For a precise example, using
+Listing 9 and function testTweet, this function is only ever called upon receiving data
+from the Tweepy streamer (Listing 4 ), however, this function calls two other functions
+of processTweets (Listing 8 ) and classify (Listing 11 ) from the spam_filter script (detailed in the implementation section). Not only do each of these functions need to be
+tested that the correct data is being processed and returned, but the entire function
+is reliant on the classifier being already trained for classification which is handled by
+the function in the class, whom of which also call other functions from the spam_filter
+script (Listing 10 ).
+This example was one of the most complex classes and set of functions to test as there
+was a lot of jumping back and forth and sequencing needed to ensure that the classifier
+was trained correctly and that streamed tweets are classified correctly. Similar testing
+occurred with all other functions and classes of the system at each stage of development.
+
+77
+
+11.2
+
+Accuracy of Model & Results
+
+Due to the type of neural network used and its use case, suitable regression metrics
+were chosen to identify the accuracy of the model used for forecasting the next hour
+price of Bitcoin. As mentiod in the implementation section, subsection Training and
+Testing Model the metrics used are as follows:
+RMSE
+100 ± 20
+
+MSE
+0.3 ± 0.1
+
+MAE
+3.0 ± 0.5
+
+MAPE
+10% ± 5%
+
+Loss
+0.3 ± 0.1
+
+Per execution of the neural network - with sentiment embedded
+RMSE
+100 ± 25
+
+MSE
+0.3 ± 0.15
+
+MAE
+3.0 ± 0.5
+
+MAPE
+10% ± 6%
+
+Loss
+0.3 ± 0.15
+
+Per execution of the neural network - without sentiment embedded
+11.2.1
+
+Results Discussion
+
+The results, although exceptionally close for each network (with and without sentiment embedded), averaged over 50 runs of each network show that the model with
+sentiment embedded generally performs better than the model without sentiment used
+in predictions. The model with sentiment embedded has an average RMSE of 100 give
+or take 20 per each run which shows that on average the predictions are closer to the
+regression line than the model without sentiment. Additionally, the mean absolute
+percentage error discrepancy is less for the model with sentiment embedded than the
+model without. This, however, does not provide a clear distinction between the two
+models that is needed to justify what is outlined in the problem statement.
+A clearer distinction between the performance of the two models is when the metics
+are showing the two model performing almost as accurate, as in the RMSE of both has
+been 105 and 106, the closest it has been on the 50 runs during testing. This also saw
+the mean absolute percentage error have only 0.2% difference between the two models.
+Unfortunatly, the difference between the two models can only be seen when a portion
+of predictions are made. The models were left to run for 48 hours each which returned
+48 predictions each of which could be compared to the next hour price.
+
+78
+
+Created at
+2019-04-22 6pm
+2019-04-22 7pm
+2019-04-22 8pm
+2019-04-22 9pm
+2019-04-22 10pm
+2019-04-22 11pm
+2019-04-23 12am
+2019-04-23 1am
+2019-04-23 2am
+2019-04-23 3am
+2019-04-23 4am
+2019-04-23 5am
+2019-04-23 6am
+2019-04-23 7am
+2019-04-23 8am
+2019-04-23 9am
+
+Prediction
+5308.333
+5309.2754
+5310.557
+5317.3716
+5337.3213
+5370.356
+5386.6113
+5386.9487
+5379.05
+5384.681
+5388.9434
+5386.557
+5385.1934
+5389.97
+5406.9917
+5449.7676
+
+Current Price
+5318.4119
+5373.438
+5413.161
+5375.6269
+5373.607
+5386.581
+5392.774
+5387.8319
+5380.0669
+5386.57
+5399.268
+5429.906
+5510.472
+5533.843
+5531.68
+5534.522
+
+Current Sentiment
+0.24312407
+0.21355466
+0.28671014
+0.22499429
+0.25170501
+0.26898607
+0.22517575
+0.27451984
+0.23613823
+0.24832858
+0.25803705
+0.25804942
+0.25270584
+0.34432973
+0.34782233
+0.27746379
+
+15 records of predictions - with sentiment embedded
+Created at
+2019-04-22 6pm
+2019-04-22 7pm
+2019-04-22 8pm
+2019-04-22 9pm
+2019-04-22 10pm
+2019-04-22 11pm
+2019-04-23 12am
+2019-04-23 1am
+2019-04-23 2am
+2019-04-23 3am
+2019-04-23 4am
+2019-04-23 5am
+2019-04-23 6am
+2019-04-23 7am
+2019-04-23 8am
+2019-04-23 9am
+
+Prediction
+5373.431
+5381.814
+5381.952
+5388.013
+5410
+5442.346
+5457.733
+5460.422
+5451.898
+5457.16
+5461.436
+5459.212
+5457.895
+5461.916
+5479.55
+5523.663
+
+Current Price
+5318.4119
+5373.438
+5413.161
+5375.6269
+5373.607
+5386.581
+5392.774
+5387.8319
+5380.0669
+5386.57
+5399.268
+5429.906
+5510.472
+5533.843
+5531.68
+5534.522
+
+15 records of predictions - without sentiment embedded
+On visual inspection, after both models had made 48 predictions, See above tables
+showing 10 records as an example, it can be seen that the model with the sentiment
+embedded both follows the current price more closely and is not as conservative in
+79
+
+its predictions as the model without sentiment. How conservative the model without
+sentiment embedded is can seen in the five values between, 1 am to 5 am, where it
+attempts to correct itself to the actual value but slow to do so, then predicts a higher
+price for the next hour. At a point, the predicted value somewhat resembles that of the
+actual price but only due to the exact price rising substantially. This model through
+the data shown, shows that it takes much longer to change the prediction to the actual
+real value of the next hour compared to the model with the embedded sentiment. Also,
+neither model handles spikes in prices very well which is more noticeable with the model
+with sentiment as it follows the exact price more closely.
+Another factor that can be identified by the results shown above is that the model with
+the sentiment embedded in with the price data doesn’t react adequately for when the
+sentiment spikes - regardless of a price spike. This could suggest that the data has not
+been predicted using enough data of both price and sentiment, due to only training
+on the last five live prices and sentiment and not 1000 samples to match the batch
+size the model was trained on during model creation. An improvement to the model
+could be made during predictions of the next hour price where it continuously predicts
+on the data available until it has 1000 records, then only predicts using the last 1000
+records of live data. At this point, 1000 hours into predictions, said predictions might
+become more accurate than what is presented for evaluation at the time of writing due
+to matching the training batch sample size of the trained model of the network.
+Another result that can be drawn from the data presented, separate from the models’
+performance, is that of how sentiment affects the following hours’ price. It can be
+seen in a number of the records presented that the sentiment occasionally spikes, at 1
+am spikes to 0.27451984 from the previous hour of 0.22517575, and the spike is not
+represented in the following hours’ price. This also occurs on a previous hour at 8 pm
+which saw a spike of sentiment, a 0.07405548 difference from the previous hour but
+saw the price drop almost $40. This could indicate that the sentiment of the hours
+does not directly affect the next hours’ price but affects it over possibly several hours,
+and also shows that there is not a direct correlation in sentiment spikes to price spikes.
+11.2.2
+
+Execution Speeds
+
+Each of the models are trained and validated using both generated training and testing
+dataset over 200 epochs and a batch size of 1000 on 11000 records total of data, within
+minutes. The network with sentiment embedded take marginly longer to create the
+prediction model.
+Network
+With Sentiment
+Without Sentiment
+
+Speed
+3:15 ± 0:20 secs
+2:50 ± 0:20 secs
+
+Speed of executions of each network, averaged over the 50 testing runs
+80
+
+12
+12.1
+
+Discussion: Contribution and Reflection
+Limitations
+
+How would changing epoch and batch size affect performance?
+
+81
+
+13
+
+Social, Legal and Ethical Issues
+
+None
+
+14
+14.1
+
+Conclusion and Future Improvements
+Conclusion
+
+Interesting what would a days prediction would show due to sentiment not directly
+affecting the next hour price
+
+14.2
+
+Future Improvements
+
+Shifting the predicted data by and hour and sequencing over previous data - will also
+allow proper use of look-back windows
+Another could be to predict the hour of sentiment and create a threshold for it.
+Identify whether or not use of ngrams improved accuracy of spam classification
+Identify whether use lemmatisation would change how spam classification occured
+Look into use of other ngrams for use with language detection
+Compare Scikit-learns in-built naive bayes algorithms and other variations performance
+for spam filtering against hand-coded version
+Look into adding to the VADER lexicon for increasing performance and accuracy for
+topic domain of stock market language and what sentiment would be assigned to words
+IMPLEMENT AND IDENTIFY R2 stat and Mean Bias ERROR
+(R2 and mean bias error would be suitable metrics to show how conservative the model
+is and the difference between the predicted and true price it is) - never got to implement
+mean bias Error
+k-fold cross validation was attempted, but issues with continuous data How would this
+work what will it show or validate?
+
+82
+
+References
+[1] V. S. Pagolu, K. N. Reddy, G. Panda, and B. Majhi, “Sentiment analysis of twitter data for predicting stock market movements,” in 2016 international conference
+on signal processing, communication, power and embedded system (SCOPES),
+IEEE, 2016, pp. 1345–1350. [Online]. Available: https://arxiv.org/pdf/1610.
+09225.pdf.
+[2] N. Indera, I. Yassin, A. Zabidi, and Z. Rizman, “Non-linear autoregressive with
+exogeneous input (narx) bitcoin price prediction model using pso-optimized parameters and moving average technical indicators,” in Journal of Fundamental
+and Applied Sciences. Vol.35, No.35, University of El Oued, 2017, pp. 791–808.
+[Online]. Available: https : / / www . ajol . info / index . php / jfas / article /
+viewFile/165614/155073.
+[3] J. L. Evita Stenqvist, “Predicting bitcoin price fluctuation with twitter sentiment
+analysis,” Diva, 2017. [Online]. Available: http : / / www . diva - portal . org /
+smash/get/diva2:1110776/FULLTEXT01.pdf.
+[4] O. G. Yalcin, “Predict tomorrows bitcoin (btc) price with recurrent neural networks,” Towards Data Science, 2018. [Online]. Available: https://towardsdatascience.
+com / using - recurrent - neural - networks - to - predict - bitcoin - btc prices-c4ff70f9f3e4.
+[5] ISO, “Quality management principles:iso9000-is9001,” ISO, 2015. [Online]. Available: https://www.iso.org/files/live/sites/isoorg/files/archive/pdf/
+en/pub100080.pdf.
+[6] Intel-Corporation, “Stock predictions through news sentiment analysis,” Code
+Project, 2017. [Online]. Available: https://www.codeproject.com/Articles/
+1201444/Stock-Predictions-through-News-Sentiment-Analysis.
+[7] S. C. Sean McNally Jason Roche, “Predicting the price of bitcoin using machine learning,” in 2018 26th Euromicro International Conference on Parallel,
+Distributed and Network-based Processing (PDP), IEEE, 2018, pp. 344–347. [Online]. Available: https://ieeexplore.ieee.org/abstract/document/8374483.
+[8] Twitter, “Search tweets,” Twitter Developers, 2018. [Online]. Available: https:
+//developer.twitter.com/en/docs/tweets/search/overview.
+[9] ——, “Consuming streaming data,” Twitter Developers, 2018. [Online]. Available: https : / / developer . twitter . com / en / docs / tutorials / consuming streaming-data.html.
+[10] J. Roesslein, “Streaming with tweepy,” Tweepy, 2009. [Online]. Available: http:
+//docs.tweepy.org/en/v3.4.0/streaming_how_to.html.
+
+83
+
+[11] S. N. Mehrnoush Shamsfard, “Using linked data for polarity classification of
+patients experiences,” in Journal of Biomedical Informatics, Elsevier, 2015, pp. 6–
+19. [Online]. Available: https://www.sciencedirect.com/science/article/
+pii/S1532046415001276.
+[12] L. P. T. Chedia Dhaoui Cynthia M. Webster, “Social media sentiment analysis: Lexicon versus machine learning,” in Journal of Consumer Marketing, Volume 34. Issue 6, Emerald Insight, 2017. [Online]. Available: https : / / www .
+emeraldinsight.com/doi/pdfplus/10.1108/JCM-03-2017-2141.
+[13] C. Hutto and E. Gilbert, “Vader: A parsimonious rule-based model for sentiment
+analysis of social media text,” in Eighth International Conference on Weblogs and
+Social Media (ICWSM-14), Ann Arbor, MI, 2014. [Online]. Available: https://
+www.aaai.org/ocs/index.php/ICWSM/ICWSM14/paper/download/8109/8122.
+[14] W. Kenton, “Wisdom of crowds,” Investopedia, 2018. [Online]. Available: https:
+//www.investopedia.com/terms/w/wisdom-crowds.asp.
+[15] Skymind, “A beginner’s guide to neural networks and deep learning,” in A.I.
+Wiki, Skymind, 2018. [Online]. Available: https://skymind.ai/wiki/neuralnetwork.
+[16] J. DeMuro, “What is a neural network,” in World of tech, techradar, 2018. [Online]. Available: https://www.techradar.com/uk/news/what-is-a-neuralnetwork.
+[17] F. Bach, “Supervised dictionary learning,” in Advances in neural information
+processing systems, NIPS Proceedings, 2009, pp. 1033–1040. [Online]. Available:
+http://papers.nips.cc/paper/3448-supervised-dictionary-learning.
+[18] D. E. Rumelhart, G. E. Hinton, and R. J. Williams, “Learning internal representations by error propagation,” California Univ San Diego La Jolla Inst for
+Cognitive Science, 1985. [Online]. Available: https://apps.dtic.mil/docs/
+citations/ADA164453.
+[19] Skymind, “A beginner’s guide to lstms and recurrent neural networks,” in A.I.
+Wiki, Skymind, 2018. [Online]. Available: https://skymind.ai/wiki/lstm.
+[20] N. Donges, “Recurrent neural networks and lstm,” Towards Data Science, 2018.
+[Online]. Available: https://towardsdatascience.com/recurrent- neuralnetworks-and-lstm-4b601dd822a5.
+[21] P. Jason Brownlee, “A gentle introduction to exploding gradients in neural networks,” Machine Larning Mastery, 2017. [Online]. Available: https://machinelearningmastery.
+com/exploding-gradients-in-neural-networks/.
+[22] S. D. S. Team, “Recurrent neural networks (rnn) - the vanishing gradient problem,” Super Data Science, 2018. [Online]. Available: https://www.superdatascience.
+com/blogs/recurrent- neural- networks- rnn- the- vanishing- gradientproblem.
+84
+
+[23] S. Hochreiter and J. Schmidhuber, “Long short-term memory,” in Neural computation, Volume 9. 8, MIT Press, 1997, pp. 1735–1780. [Online]. Available: https:
+//www.bioinf.jku.at/publications/older/2604.pdf.
+[24] S. Yan, “Understanding lstm and its diagrams,” Medium, Mar 13, 2016. [Online].
+Available: https://medium.com/mlreview/understanding- lstm- and- itsdiagrams-37e2f46f1714.
+[25] C. Olah, “Understanding lstm networks,” 2015. [Online]. Available: https : / /
+colah.github.io/posts/2015-08-Understanding-LSTMs.
+[26] R. Kompella, “Using lstms to forecast time-series,” Towards Data Science, 2018.
+[Online]. Available: https : / / towardsdatascience . com / using - lstms - to forecast-time-series-4ab688386b1f.
+[27] M. Abadi, P. Barham, J. Chen, Z. Chen, A. Davis, J. Dean, M. Devin, S. Ghemawat, G. Irving, M. Isard, et al., “Tensorflow: A system for large-scale machine
+learning,” in 12th Symposium on Operating Systems Design and Implementation
+16), 2016, pp. 265–283. [Online]. Available: https://www.usenix.org/system/
+files/conference/osdi16/osdi16-abadi.pdf.
+[28] Stanford, “Optimization: Stochastic gradient descent,” in UFLDL Tutorial. [Online]. Available: http://deeplearning.stanford.edu/tutorial/supervised/
+OptimizationStochasticGradientDescent.
+[29] R. Mitra, “What are differences between update rules like adadelta, rmsprop,
+adagrad, and adam,” Quora, 2016. [Online]. Available: https://www.quora.com/
+What-are-differences-between-update-rules-like-AdaDelta-RMSPropAdaGrad-and-AdaM.
+[30] M. C. Mukkamala and M. Hein, “Variants of rmsprop and adagrad with logarithmic regret bounds,” in Proceedings of the 34th International Conference on
+Machine Learning-Volume 70, JMLR.org, 2017, pp. 2545–2553. [Online]. Available: https://arxiv.org/pdf/1706.05507.pdf.
+[31] R. Khandelwal, “Overview of different optimizers for neural networks,” Medium,
+2019. [Online]. Available: https://medium.com/datadriveninvestor/overviewof-different-optimizers-for-neural-networks-e0ed119440c3.
+[32] J. L. B. Diederik P. Kingma, “Adam: A method for stochastic optimization,”
+in arXiv preprint arXiv:1412.6980, arXiv, 2014. [Online]. Available: https://
+arxiv.org/pdf/1412.6980.pdf.
+[33] M. L. AI, “Neural network bias: Bias neuron, overfitting and underfitting,” Missing Link AI. [Online]. Available: https://missinglink.ai/guides/neuralnetwork - concepts / neural - network - bias - bias - neuron - overfitting underfitting/.
+[34] K. Team, “Dropout,” Keras. [Online]. Available: https://keras.io/layers/
+core/#dropout.
+85
+
+[35] I. Rish et al., “An empirical study of the naive bayes classifier,” in IJCAI 2001
+workshop on empirical methods in artificial intelligence, vol. 3, 2001, pp. 41–46.
+[Online]. Available: https://www.cc.gatech.edu/~isbell/reading/papers/
+Rish.pdf.
+[36] Skymind, “A beginner’s guide to bag of words and tf-idf,” in A.I Wiki, Skymind,
+2018. [Online]. Available: https://skymind.ai/wiki/bagofwords-tf-idf.
+[37] T. Karmali, “Spam classifier in python from scratch,” Towards Data Science,
+Aug 2, 2017. [Online]. Available: https : / / towardsdatascience . com / spam classifier-in-python-from-scratch-27a98ddd8e73.
+[38] A. Swalin, “Choosing the right metric for evaluating machine learning models,”
+Medium, Apr 7, 2018. [Online]. Available: https://medium.com/usf- msds/
+choosing - the - right - metric - for - machine - learning - models - part - 1 a99d7d7414e4.
+[39] M. Binieli, “Machine learning: An introduction to mean squared error and regression lines,” Medium, Oct 16, 2018. [Online]. Available: https : / / medium .
+freecodecamp.org/machine- learning- mean- squared- error- regressionline-c7dde9a26b93.
+[40] Stephanie, “Mean absolute percentage error (mape),” Statistics HowTo, Sep 8,
+2017. [Online]. Available: https://www.statisticshowto.datasciencecentral.
+com/mean-absolute-percentage-error-mape/.
+[41] J. Roesslein, “Tweepy documentation,” 2009. [Online]. Available: http://docs.
+tweepy.org/en/v3.5.0/.
+[42] S. Deoras, “Tensorflow vs. theano: What do researchers prefer as an artificial
+intelligence framework,” Analytics India, 2017. [Online]. Available: https : / /
+www.analyticsindiamag.com/tensorflow-vs-theano-researchers-preferartificial-intelligence-framework.
+[43] bitcoincharts, Bitcoin Charts. [Online]. Available: http://api.bitcoincharts.
+com/v1/csv/.
+[44] A. Nolla, “Detecting text language with python and nltk,” Alejandro Nolla Blog.
+[Online]. Available: http://blog.alejandronolla.com/2013/05/15/detectingtext-language-with-python-and-nltk/.
+[45] P. Cryptography, “A tutorial on automatic language identification - ngram based,”
+Practical Cryptography. [Online]. Available: http://practicalcryptography.
+com / miscellaneous / machine - learning / tutorial - automatic - language identification-ngram-b/.
+[46] T. Risueno, “What is the difference between stemming and lemmatization,” Bitext, Feb 26, 2018. [Online]. Available: https://blog.bitext.com/what-isthe-difference-between-stemming-and-lemmatization/.
+
+86
+
+[47] scikit-learn developers, “Naive bayes,” Scikit-Learn. [Online]. Available: https:
+//scikit-learn.org/stable/modules/naive_bayes.html.
+[48] T. K. .-.-. tejank10, “Spam-or-ham,” Github, Aug 2, 2017. [Online]. Available:
+https://github.com/tejank10/Spam-or-Ham.
+[49] A. Budhiraja, “Dropout in (deep) machine learning,” Medium, Dec 15, 2016.
+[Online]. Available: https : / / medium . com / @amarbudhiraja / https - medium com-amarbudhiraja-learning-less-to-learn-better-dropout-in-deepmachine-learning-74334da4bfc5.
+
+87
+
+15
+15.1
+
+Appendices
+Appendix A - Project Initiation Document
+
+Displayed on the following pages below.
+
+88
+
+Individual Project (CS3IP16)
+Department of Computer Science
+University of Reading
+
+Project Initiation Document
+PID Sign-Off
+Student No.
+
+24005432
+
+Student Name
+
+Andrew Sotheran
+
+Email
+
+andrew.sotheran@student.reading.ac.uk
+
+Degree programme
+(BSc CS/BSc IT)
+
+BSc CS
+
+Supervisor Name
+
+Kenneth Boness
+
+Supervisor Signature
+
+Date
+
+1
+
+SECTION 1 – General Information
+Project Identification
+1.1
+
+Project ID
+(as in handbook)
+N/A
+
+1.2
+
+Project Title
+
+Cryptocurrency market and value prediction tracking
+1.3
+
+Briefly describe the main purpose of the project in no more than 25 words
+
+To provide a means to predict the value of cryptocurrencies that will aid in investor decision making
+in investment of the market
+
+Student Identification
+1.4
+
+Student Name(s), Course, Email address(s)
+e.g. Anne Other, BSc CS, a.other@student.reading.ac.uk
+Andrew William Sotheran
+BSc CS
+Andrew.sotheran@student.reading.ac.uk
+
+Supervisor Identification
+1.5
+
+Primary Supervisor Name, Email address
+e.g. Prof Anne Other, a.other@reading.ac.uk
+
+1.6
+
+Secondary Supervisor Name, Email address
+Only fill in this section if a secondary supervisor has been assigned to your project
+
+Company Partner (only complete if there is a company involved)
+1.7
+
+Company Name
+
+N/A
+1.8
+
+Company Address
+N/A
+
+1.9
+
+Name, email and phone number of Company Supervisor or Primary Contact
+N/A
+
+2
+
+SECTION 2 – Project Description
+2.1
+
+Summarise the background research for the project in about 400 words. You must include
+references in this section but don’t count them in the word count.
+
+To create a tool that aims to predict the price of cryptocurrencies that aids in investor decisions.
+Research will need to be conducted into the following topics that surround data mining, machine
+learning and artificial neural networks.
+This research will consist along the lines of;
+Natural Language processing and analysis – To analyse and process fed in data gathered through RSS
+data feeds and social media feeds, through the underlying tasks of Natural language processing.
+Content categorisation (search and indexing, duplication detection), Topic discovery and modelling
+(Obtain meanings and themes within the data and perform analytic techniques), sentiment and
+semantic analysis (which will identify the mood and opinions within the data), summariser (to
+summarise a block of text and disregard the rest).
+Machine learning algorithms: The three types of machine learning (Supervised, Unsupervised and
+Reinforced)
+The types of common algorithms used, each of these will be researched to identify the most suitable
+for this project and only one will be used: (Linear Regression, Logistic Regression, Decision Tree,
+SVM, Naive Bayes, kNN, K-Means, Random Forest, Dimensionality Reduction Algorithms,
+Gradient Boosting algorithms (GBM, XGBoost, LightGBM, CatBoost).
+Artificial Neural Networks: To identify the drawbacks and benefits of using them or other
+computational models within machine learning. Recurrent Neural networks and 3rd generation
+Neural Networks.
+Data mining: To investigate the different techniques and algorithms used (Same as the ones listed
+above for machine learning including C4.5, Apriori, EM, PageRanks, AdaBoost and CART) these
+will be researched and the most appropriate identified.
+To investigate techniques: for storing and processing large amount of data, such as Hadoop,
+Elasticsearch utilities, Graphing and data modelling and visualisation.
+To identify appropriate libraries for python or C for each of the topics above to aid in the creation of
+this project. Libraries such as:
+Natural Language Toolkit (NLTK) – python
+Pandas - python
+Sklearn - python
+Numpy – python - scientific computation for working with arrays
+Matplotlib - python - data visualisation
+Investigate into types of databases. Sql and nosql for a storage medium between receiving data and
+feeding it into the machine learning algorithm.
+Investigate into the use of REST API and other web-service based technologies (GRPC,
+Elasticsearch)
+Investigate into frameworks for the thin client, such as Angular vs React, Nodejs, Leafelt.js, charts.js
+Additionally Web scraping may be needed if certain website that don’t either have an API or JSON
+for the data needed.
+https://www.sas.com/en_gb/insights/analytics/what-is-natural-language-processing-nlp.html
+https://blog.algorithmia.com/introduction-natural-language-processing-nlp/
+https://gerardnico.com/data_mining/algorithm
+https://www.analyticsvidhya.com/blog/2017/09/common-machine-learning-algorithms/
+https://www.kdnuggets.com/2015/05/top-10-data-mining-algorithms-explained.html
+https://www.datasciencecentral.com/profiles/blogs/artificial-neural-network-ann-in-machine-learning
+http://scikit-learn.org/stable/index.html
+https://grpc.io/docs/
+
+3
+
+2.2
+
+Summarise the project objectives and outputs in about 400 words.
+These objectives and outputs should appear as tasks, milestones and deliverables in your project plan.
+In general, an objective is something you can do and an output is something you produce – one leads
+to the other.
+To produce a thin web client that provides a dashboard that provides tangible and useful information
+to users such as; Their current price (Updated every 5 minutes), exchange rates, network hashrates,
+historical price data. It will also display statistics about sentiment analysis conducted on social media
+about the currency, graphical predictions on what the price may be, in a given time, and will also
+compare this to other currencies for aid in investment.
+To produce significant research into the topics in and around data mining, machine learning and
+Artificial Neural network and the underlying tasks and algorithms used, the efficiency, drawbacks
+and advantages of each to identify the most suitable for the use in this project.
+To produce a system that analyses a data set obtained through social media feeds and posts on news
+sites regarding crypto currencies. It should perform sentiment analysis using Natural Language
+processing and analysis techniques to identify features and identifies the type of sentiment in the data
+and categorises it for machine learning.
+To utilise machine learning techniques and algorithms to produce a system that learns from historical
+data to predict to an extent the possible future price of a given currency. To compare this with the use
+of an Artificial Neural Network and to analyse the drawbacks of both.
+
+2.3
+
+Initial project specification - list key features and functions of your finished project.
+Remember that a specification should not usually propose the solution. For example, your project
+may require open source datasets so add that to the specification but don’t state how that data-link
+will be achieved – that comes later.
+The finished project should provide a thin client single page application. This will provide a means to
+users the ability to view various statistics on crypto currencies on a dashboard that incorporates text
+analysis through natural language analysis, and will utilise various machine learning and data mining
+techniques to provide price predictions to the users. The nature and level of this will depend on the
+research conducted into the areas of data mining, machine learning, natural language processing and
+artificial neural networks, along with the algorithms used.
+The data set will be created from scratch for this project as it will require the gathering of data from
+numerous sources and performing text analysis on them to for the data needed. Data sets for the
+characteristic and data for the currencies can be obtained from pre-existing data sets such as:
+https://www.kaggle.com/sudalairajkumar/cryptocurrencypricehistory
+https://www.kaggle.com/jessevent/all-crypto-currencies
+Web scraping may be included if certain news/social media websites do not provide an API or RSS
+feed for the analysis engine to perform text analysis on
+Additionally, there will be a server between the analysis/prediction engine and the thin client that will
+maintain a database, either SQL or NoSQL, that will hold statistics about the currencies and data
+about the price predictions about the currencies. It will not hold any of the data used in the analysis
+engine, as this database will only hold data available to the end users.
+
+4
+
+2.4
+
+Describe the social, legal and ethical issues that apply to your project. Does your project
+require ethical approval? (If your project requires a questionnaire/interview for conducting
+research and/or collecting data, you will need to apply for an ethical approval)
+The project will not be handling any user related data, therefore it does not need ethical approval.
+
+2.5
+
+Identify and lists the items you expect to need to purchase for your project. Specify the cost
+(include VAT and shipping if known) of each item as well as the supplier.
+e.g. item 1 name, supplier, cost
+
+None Needed
+
+2.6
+
+State whether you need access to specific resources within the department or the University e.g.
+special devices and workshop
+
+Possibly a server to host the database and analysis engine on to perform the computation necessary,
+and a server to host the thin client.
+
+5
+
+SECTION 3 – Project Plan
+3.1
+
+Project Plan
+Split your project work into sections/categories/phases and add tasks for each of these sections. It is
+likely that the high-level objectives you identified in section 2.2 become sections here. The outputs from
+section 2.2 should appear in the Outputs column here. Remember to include tasks for your project
+presentation, project demos, producing your poster, and writing up your report.
+
+Task No.
+
+Task description
+
+1
+
+Background Research
+
+1.1
+
+Investigate into RPC frameworks and REST APIs
+
+0.3
+
+1.2
+
+Research into Natural Language processing and analysis
+techniques
+
+0.5
+
+1.3
+
+Research into the use of machine learning – types and
+algorithms
+
+0.5
+
+1.4
+
+Research into the application of Neural Networks –
+drawbacks and advantages of using them
+
+0.3
+
+1.5
+
+Research techniques for storing and processing large
+amount of data, such as Hadoop, spark or Elasticsearch
+utilities.
+
+1
+
+1.6
+
+Identify appropriate libraries for data modelling and
+visualisation, NLP and Machine Learning
+
+1
+
+1.7
+
+Investigate into frameworks for the front-end thin clients
+
+0.3
+
+1.8
+
+Research web scraping techniques
+
+0.3
+
+2
+2.1
+
+Analysis and design
+Resolve issues discovered by background research
+Identify limitations discovered from research and
+what is not feasible
+UML Diagrams/ XUML
+Wire frames for frontend
+Data Flow
+User Flow
+Develop prototype
+Develop thin client
+Develop analysis Engine
+Develop Prediction Engine
+Develop Unit tests
+Testing, evaluation/validation
+Unit testing
+Acceptance Testing
+User testing
+Assessments
+write-up project report
+produce poster
+Log book
+
+2.2
+2.3
+2.4
+2.5
+2.6
+3
+3.1
+3.2
+3.3
+3.4
+4
+4.1
+4.2
+4.3
+5
+5.1
+5.2
+5.3
+
+Effort
+(weeks)
+
+6
+
+Outputs
+
+To identify the type of API/RPC
+framework that would be most
+suitable
+To get an understanding of how
+NLP works and how it could be
+used
+To grasp how ML paradigms work
+and how this project will use it
+To identify whether there will be a
+need for a neural network or ML
+paradigms can be used instead
+To understand the uses, application
+and whether the use of these are
+more viable solution than standard
+ML practices
+To identify what libraries will aid in
+the construction of this project
+To identify what frameworks the
+thin client should be used with,
+along with drawbacks and
+advantages
+To understand the application of
+these techniques and learn how to
+apply them
+
+0.2
+
+...
+
+0.1
+
+…
+
+0.2
+0.1
+0.1
+0.1
+2
+4
+3
+2
+1
+0.8
+0.8
+2
+0.5
+0.5
+
+Project Report
+Poster
+
+TOTAL
+
+Sum of total effort in weeks
+
+7
+
+21.9
+
+SECTION 4 - Time Plan for the proposed Project work
+For each task identified in 3.1, please shade the weeks when you’ll be working on that task. You should also mark target milestones, outputs and key decision points.
+To shade a cell in MS Word, move the mouse to the top left of cell until the curser becomes an arrow pointing up, left click to select the cell and then right click and
+select ‘borders and shading’. Under the shading tab pick an appropriate grey colour and click ok.
+START DATE: 10/2018
+
+<enter the project start date here>
+
+Project Weeks
+0-3
+3-6
+
+9-12
+
+6-9
+
+12-15
+
+Project stage
+1 Background Research
+Investigate into RPC frameworks and REST
+APIs
+
+Research into Natural Language processing
+and analysis techniques
+Research into the use of machine learning –
+types and algorithms
+Research into the application of Neural
+Networks – drawbacks and advantages of
+Research techniques for storing and
+using them
+processing large amount of data, such as
+Identify appropriate libraries for data
+Hadoop, spark or Elasticsearch utilities.
+modelling and visualisation, NLP and
+Investigate into frameworks for the frontMachine Learning
+end thin clients
+Research web scraping techniques
+2 Analysis/Design
+Resolve issues discovered by background
+research
+Identify limitations discovered from
+research and what is not feasible
+UML Diagrams/ XUML
+Wire frames for frontend
+Data Flow
+User Flow
+
+8
+
+15-18
+
+18-21
+
+21-24
+
+24-27
+
+27-30
+
+30-33
+
+33-36
+
+36-39
+
+3 Develop prototype.
+Develop thin client
+Develop analysis Engine
+Develop Prediction Engine
+Develop Unit tests
+4 Testing, evaluation/validation
+Unit testing
+Acceptance Testing
+User testing
+5 Assessments
+write-up project report
+produce poster
+Log book
+
+9
+
+RISK ASSESSMENT FORM
+Assessment Reference No.
+
+Area or activity
+assessed:
+
+Assessment date
+Persons who may be affected by
+the activity (i.e. are at risk)
+
+Andrew Sotheran
+
+SECTION 1: Identify Hazards - Consider the activity or work area and identify if any of the hazards listed below are significant (tick the boxes that apply).
+
+1.
+
+2.
+
+Fall of person (from
+work at height)
+Fall of objects
+
+3.
+
+Slips, Trips &
+Housekeeping
+
+4.
+
+Manual handling
+operations
+
+5.
+
+Display screen
+5
+equipment
+5
+
+6.
+
+7.
+
+Lighting levels
+
+Heating &
+ventilation
+
+Use of portable
+tools / equipment
+
+16.
+
+Vehicles / driving
+at work
+
+21.
+
+12.
+
+Fixed machinery or
+lifting equipment
+
+17.
+
+Outdoor work /
+extreme weather
+
+22.
+
+Hazardous
+biological agent
+
+27.
+
+18.
+
+Fieldtrips / field
+work
+
+23.
+
+Confined space /
+asphyxiation risk
+
+28.
+
+24.
+
+Condition of
+Buildings & glazing
+
+29.
+
+Layout , storage,
+
+X 8. space, obstructions
+9.
+
+13.
+
+Welfare facilities
+Electrical
+
+X 10. Equipment
+
+14.
+
+X
+
+Hazardous fumes,
+
+11.
+
+15.
+
+Pressure vessels
+
+Noise or Vibration
+
+19.
+
+Fire hazards &
+flammable material
+
+10
+
+20.
+
+Radiation sources
+
+Work with lasers
+
+25.
+
+chemicals, dust
+
+Food preparation
+
+26.
+
+Occupational stress
+
+Violence to staff /
+verbal assault
+Work with animals
+Lone working /
+work out of hours
+Other(s) - specify
+
+30.
+
+X
+
+SECTION 2: Risk Controls - For each hazard identified in Section 1, complete Section 2.
+Hazard
+No.
+
+3
+
+5
+
+Hazard Description
+
+Tripping over wires
+
+Eye strain from
+looking at a
+monitor
+
+Existing controls to reduce risk
+
+Risk Level (tick one)
+
+Further action needed to reduce risks
+
+High
+
+(provide timescales and initials of person responsible)
+
+Med
+
+Cable management is at a minimum, none are
+currently properly cable managed and kept out
+of way
+Current screen contrast and brightness is
+acceptable
+
+x
+
+x
+
+SIGNED
+
+Name of Assessor(s)
+Review date
+
+11
+
+Low
+
+Sufficient cable management needed, cables
+tied together and moved out of way of feet
+
+To have periodic breaks from the screen
+
+Health and Safety Risk Assessments – continuation sheet
+
+Assessment Reference No
+Continuation sheet number:
+
+SECTION 2 continued: Risk Controls
+Hazard
+No.
+
+Hazard Description
+
+Existing controls to reduce risk
+
+Risk Level (tick one)
+
+Further action needed to reduce risks
+
+High
+
+(provide timescales and initials of person responsible for
+action)
+
+Med
+
+SIGNED
+
+Name of Assessor(s)
+Review date
+
+12
+
+Low
+
+15.2
+
+Appendix B - Log book
+
+The log book for this project is a physical book and was handed to the School of
+Computer Science. Due to being a physical book, it cannot be inserted here.
+
+101
+
+

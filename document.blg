@@ -1,26 +1,29 @@
 [0] Config.pm:302> INFO - This is Biber 2.9
 [0] Config.pm:305> INFO - Logfile is 'document.blg'
-[19] biber:313> INFO - === Sun Apr 28, 2019, 11:50:08
-[34] Biber.pm:371> INFO - Reading 'document.bcf'
-[82] Biber.pm:854> INFO - Using all citekeys in bib section 0
-[92] Biber.pm:3981> INFO - Processing section 0
-[100] Biber.pm:4154> INFO - Looking for bibtex format file 'report.bib' for section 0
-[101] bibtex.pm:1468> INFO - LaTeX decoding ...
-[140] bibtex.pm:1294> INFO - Found BibTeX data source 'report.bib'
-[146] Utils.pm:169> WARN - year field 'Oct 16, 2018' in entry 'MSE' is not an integer - this will probably not sort properly.
-[182] Utils.pm:169> WARN - year field 'Aug 2, 2017' in entry 'SpamOrHamGit' is not an integer - this will probably not sort properly.
-[185] Utils.pm:169> WARN - year field 'Sep 8, 2017' in entry 'MAPE' is not an integer - this will probably not sort properly.
-[199] Utils.pm:169> WARN - year field 'Aug 2, 2017' in entry 'SpamCScratch' is not an integer - this will probably not sort properly.
-[206] Utils.pm:169> WARN - Name "Mairal, J., Ponce, J., Sapiro, G., Zisserman, A." has too many commas: skipping name
-[237] Utils.pm:169> WARN - year field 'Feb 26, 2018' in entry 'StemvsLem' is not an integer - this will probably not sort properly.
-[246] Utils.pm:169> WARN - year field 'Apr 7, 2018' in entry 'RMSEMAE' is not an integer - this will probably not sort properly.
-[250] Utils.pm:169> WARN - year field 'Mar 13, 2016' in entry 'LSTMdia' is not an integer - this will probably not sort properly.
-[280] Utils.pm:169> WARN - BibTeX subsystem: warning: comma(s) at end of name (removing)
-[280] Utils.pm:169> WARN - BibTeX subsystem: author, warning: comma(s) at end of name (removing)
-[304] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[304] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[304] Biber.pm:3809> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
-[304] Biber.pm:3815> INFO - No sort tailoring available for locale 'en-US'
-[326] bbl.pm:617> INFO - Writing 'document.bbl' with encoding 'ascii'
-[342] bbl.pm:720> INFO - Output to document.bbl
-[342] Biber.pm:110> INFO - WARNINGS: 10
+[21] biber:313> INFO - === Sun Apr 28, 2019, 17:50:48
+[37] Biber.pm:371> INFO - Reading 'document.bcf'
+[89] Biber.pm:854> INFO - Using all citekeys in bib section 0
+[99] Biber.pm:3981> INFO - Processing section 0
+[107] Biber.pm:4154> INFO - Looking for bibtex format file 'report.bib' for section 0
+[109] bibtex.pm:1468> INFO - LaTeX decoding ...
+[154] bibtex.pm:1294> INFO - Found BibTeX data source 'report.bib'
+[170] Utils.pm:169> WARN - year field 'Dec 15, 2016' in entry 'dropoutM' is not an integer - this will probably not sort properly.
+[183] Utils.pm:169> WARN - year field 'Apr 7, 2018' in entry 'RMSEMAE' is not an integer - this will probably not sort properly.
+[196] Utils.pm:169> WARN - year field 'Feb 26, 2018' in entry 'StemvsLem' is not an integer - this will probably not sort properly.
+[210] Utils.pm:169> WARN - year field 'Effective: May 25, 2018' in entry 'TwitterTerms' is not an integer - this will probably not sort properly.
+[212] Utils.pm:169> WARN - year field 'Aug 2, 2017' in entry 'SpamCScratch' is not an integer - this will probably not sort properly.
+[222] Utils.pm:169> WARN - Name "Mairal, J., Ponce, J., Sapiro, G., Zisserman, A." has too many commas: skipping name
+[240] Utils.pm:169> WARN - year field 'Mar 13, 2016' in entry 'LSTMdia' is not an integer - this will probably not sort properly.
+[275] Utils.pm:169> WARN - year field 'Sep 8, 2017' in entry 'MAPE' is not an integer - this will probably not sort properly.
+[277] Utils.pm:169> WARN - year field 'Aug 2, 2017' in entry 'SpamOrHamGit' is not an integer - this will probably not sort properly.
+[282] Utils.pm:169> WARN - year field 'Oct 16, 2018' in entry 'MSE' is not an integer - this will probably not sort properly.
+[297] Utils.pm:169> WARN - year field 'Mar 23, 2016' in entry 'MBE' is not an integer - this will probably not sort properly.
+[320] Utils.pm:169> WARN - BibTeX subsystem: warning: comma(s) at end of name (removing)
+[320] Utils.pm:169> WARN - BibTeX subsystem: author, warning: comma(s) at end of name (removing)
+[348] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[348] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[348] Biber.pm:3809> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
+[348] Biber.pm:3815> INFO - No sort tailoring available for locale 'en-US'
+[375] bbl.pm:617> INFO - Writing 'document.bbl' with encoding 'ascii'
+[393] bbl.pm:720> INFO - Output to document.bbl
+[394] Biber.pm:110> INFO - WARNINGS: 13
