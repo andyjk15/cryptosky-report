@@ -2018,6 +2018,7 @@
     <bcf:citekey order="92">MBE</bcf:citekey>
     <bcf:citekey order="93">VADERPaper</bcf:citekey>
     <bcf:citekey order="94">TwitterTerms</bcf:citekey>
+    <bcf:citekey order="95">langdectNLTK</bcf:citekey>
     <bcf:citekey order="0">*</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->

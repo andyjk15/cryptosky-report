@@ -99,11 +99,10 @@
 
 
 \title{Opinion Mining and Social Media Sentiment Analysis in the Prediction of Cryptocurrency Prices}
-\date{Submission date: Place Holder}
+\date{Submission date: 29-04-2019}
 \author{Student: Andrew Sotheran
 	\\Student Number: fr005432
-	\\Supervisor: Kenneth Boness
-	\\Word Count: Place Holder}
+	\\Supervisor: Kenneth Boness}
 
 \begin{document}
 	
@@ -1837,41 +1836,65 @@ def create_sets(self, data, lookback, sentiment):
 		
 		
 		\subsection{Future Improvements}
+		Due to the time frame for the project's development and if more time was presented for development of this project, there would a number of improvements and festure that would be both improved upon and developed for the system. The features listed in this section were both considered thought about throughout development of the project, most of which relate to comparisions on accuracy of the chosen solution over another algorithm or improvements to improve said accuracy of predictions both price and for sentiment analysis.
+		\newline
 		
+		\textbf{Comparision of Neural Network Models}
 		
+		This feature would be to create multiple neural networks such as standard RNNs, feed-forward neural networks, Gated Recurrent Unit (GRU) RNN, Deep Convolutional Network (DCN), Deep Residual Network (DRN) and Support Vector Machine (SVN), to name a few other neural networks, to identify if the chosen LSTM solution performs better than those listed above. The primary goal of this comparison is to continuously identify a more suitable network for the problem this project has aimed to solve.
+		\newline
 		
+		\textbf{Comparison and affect of different Optimisers}
 		
+		A feature to compare the accuracy of the Adam optimiser that is currently implemented compared to RMSProp or Adagrad. Although identified as being a continuation and improvement of those two optimisers it would be interesting how the others perform.
+		\newline
 		
-		as such comparing recurrent neural network models, implementation and the affect of regularisation techniques, use of different optimisers would have on the network, how use of ngrams could be used to improve language detection, comparing hand-coded naive bayes model to that of scikit-learns in built classifiers, alterations and additions to the VADER lexicon to tailor it with domain specific language and relevant weighted sentiment values
+		\textbf{Ngrams for Language Detection}
 		
-		Interesting what would a days prediction would show due to sentiment not directly affecting the next hour price
+		As stated in \cite{langdectNLTK} \textit{"There are others ways to “guess” language from a given text like N-Gram-Based text categorization"} and based on previous assumption on the Ngram concept it would be interesting how this could be implemented and how it performs compared to the current solution.
+		\newline
 		
-		Shifting the predicted data by and hour and sequencing over previous data - will also allow proper use of look-back windows
+		\textbf{Hand-coded Naive Bayes Vs Scikit-Learns multiple in-built models}
 		
-		Another could be to predict the hour of sentiment and create a threshold for it.
+		Due to hand-coding the Naive 'multinomial' Bayes classifier and using techniques such as Addictive Smoothing, an implementation of a pre-existing form of the algorithm from the Scikit-learn Python package may perform better than the classifier that was coded. Additionally, there are multiple variations of the Naive Bayes classifier such as; Gaussian, Complement and Bernoulli Bayes models, and would be interesting how these each performed against each other and the version coded in the system.
+		\newline
 		
-		Identify whether or not use of ngrams improved accuracy of spam classification
+		\textbf{VADER Lexicon tailoring with Domain Specific Language}
 		
-		Identify whether use lemmatisation would change how spam classification occured
+		Due to VADER being a lexicon-based approach to sentiment analysis, and that the lexicon is open-source this allows it be added or altered. Thus a new lexicon tailored to a specific topic domain, containing domain specific langauge could improve the accuracy of polarity classification for the data presented. However this in itself would be a considerable undertaking to identify which weighted sentiment values should be assigned to each new words added.
+		\newline
 		
-		Look into use of other ngrams for use with language detection
+		\textbf{Lemmatisation Vs Stemming}
 		
-		Compare Scikit-learns in-built naive bayes algorithms and other variations performance for spam filtering against hand-coded version
+		Another feature and comparision could be made, as discussed in the implmentation of the spam filter, between how lemmatisation could out perform stemming and could possibly improve the accuracy of the spam classifier.
+		\newline
 		
-		Look into adding to the VADER lexicon for increasing performance and accuracy for topic domain of stock market language and what sentiment would be assigned to words
+		\textbf{Retraining of network \& Prediction of next hour sentiment}
 		
-		IMPLEMENT AND IDENTIFY R2 stat and Mean Bias ERROR
+		The current solution for price forecasting only uses the trained model to predict the next hour price of Bitcoin, which is trained on a batch size of 1000 samples. Retraining the network each hour with the current live data could improve the accuracy of the predictions further. This could be conducted based on the threshold set in the system, in which if the predicted value is outside of the threshold of the actual value the network is retrained.
 		
-		(R2 and mean bias error would be suitable metrics to show how conservative the model is and the difference between the predicted and true price it is) - never got to implement
+		This is a feature similar to the above on retraining the neural network if the price is out of a certain threshold to the actual hourly price. The same could be conducted for the sentiment per hour; however, it would also require the sentiment to be predicted for each hour too. The aim of these two features is an attempt to make the network less conservative and to be able to handle price and sentiment spikes more adequately.
+		\newline
 		
-		mean bias Error
+		\textbf{Implement $R^2$ Statistic and Mean Bias Error}
 		
-		k-fold cross validation was attempted, but issues with continuous data
-		How would this work what will it show or validate?
+		As this was not implemented as metrics for the network, and as described in the previous sections, could show a better correlation between the two models at a metric level.
+		\newline
 		
-		How would changing epoch and batch size affect performance?
+		\textbf{K-Fold Cross-Validation}
 		
-		Use a different charting system as the plotted lines seem to jump around and skew accuracy
+		Cross-Validation can be used to assess the predictive performance of a regression model to judge how a model performs outside of the sample training dataset to a new test dataset, in this case, the neural network, and would aid in analysing the correlation between the two models - with and without sentiment.
+		\newline
+		
+		\textbf{Affect of changing Epoch and Batch Size may have}
+		
+		This would be an investigation into how the predictive performance could be affected by changing the epoch size along with the batch size. This is aimed to identify the most suitable values for these two parameters for the data used in training the neural network.
+		\newline
+		
+		\textbf{Interface - Charting Library and extension}
+	
+		An improvement that could be conducted would be to improve the user interface to make it suitable to be a production ready system that will aid in investor decision making. Currently, as previously described, it is very basic in design and could be improved. Additionally, a different charting library could be used or the bug in which scrolling on different amounts of data using the range scale on each graph which skews both true and predict lines should be looked into.
+		
 	\newpage
 	
 	\nocite{*}
