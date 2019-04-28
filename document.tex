@@ -157,6 +157,14 @@
 	
 	LSTM - Long-Short Term Memory Neural Network
 	
+	RMSE - Root Mean Squared Error
+	
+	MSE - Mean Squared Error
+	
+	MAE - Mean Absolute Error
+	
+	MAPE - Mean Absolute Percentage Error
+	
 	\newpage
 	
 	\begin{center}
@@ -272,19 +280,10 @@
 		This project will only be coded to predict an hour ahead as the model will be trained on an hourly basis as the data is gathered per hour. Predictions for further in the future can be modelled but will be seen as a future improvement to the system.
 		
 		The detail of a interface may be subject of change through this project due to time contraints and the focus being the investigation of the impact social media has on market predictions.
-		
-		\subsection{Project Constraints}\label{constraints}
-		The following constraints are recognisted in this project
-		
-		\begin{itemize}
-			\item ...
-		\end{itemize}
 	
 	\newpage
 	\section{Quality Goals}
 	Although this project will be an investigation it is important to ensure that a specific level of quality is met and maintained throughout development to produce a final solution that fully meets the requirements set out in the technical specifiction. This section will outline the quality objectives, processes used to aid in ensuring quality, quality goals and the deveopment pipeline.
-	
-	\textit{Goals}
 	
 	\subsection{Process Description}
 	To maintain a level of quality through the project's development lifecycle various processes are to be defined. As stated in ISO 9001:2015 \cite{ISO9000} "Consistent and predictable results are achieved more effectively and efficiently when activities are understood and managed as interrelated processes". To achieve this, clearly defined processes of how this system should be developed along with tools to achieve this will need to be defined before the development of this project, to ensure an effective, transparent and well-tested system is created, of which should be outlined in the solution approach.
@@ -294,7 +293,7 @@
 	
 	The most important aspect of testing of the system is to ensure that predictions for Bitcoin price are calculated for the next hour interval. Testing should be conducted around this to both determine the accuracy of the predictions made by the system, and to validate the optimisers and other methods used for model creation. Suitable performance and accuracy metrics should be chosen and implemented to aid in justifying the accuracy of the developed solution for a regression model.
 	
-	The development of this project should follow an agile methodology as closely as and when possible. Prior to functions and components being created after another has finished development, said completed function should be tested and fully operational with the existing functions and components it uses or provides for. Component testing should be conducted to determine what functions are operating as intended along with the development of the system.
+	The development of this project should follow an agile methodology as closely as and when possible. Prior to functions and components being created after another has finished development, said completed function should be tested and fully operational with the existing functions and components it uses or provides for. Integration testing should be conducted to determine what functions are operating as intended along with the development of the system.
 	
 	Lastly, the testing of the user interface shouldn't be considered as part of the testing of the system due to the focus of this project not formulating around the development of the interface, but rather around the back-end prediction system. As long as what is intended to be displayed to the user and are displayed correctly as per the user interface design such testing will be sufficient.
 	
@@ -547,6 +546,16 @@
 			For TF-IDF:
 			
 			\[P(w|spam) = \frac{TF(w)*IDF(w) + \alpha}{\sum _{a\ words\ x\ \epsilon\ train\ dataset} TF(x|spam)*IDF(x) + \alpha\sum_{a\ words\ x\ \epsilon\ train\ dataset}}\]
+			
+			\subsection{Regression Performance Metrics}
+			Due to the problem statement and concept behind this project is that of a regression method, forecasting and predicting a future value, performance and accuracy of such a model will ultimatly need to be identified.
+			
+			\begin{itemize}
+				\item RMSE - Root Mean Squared Error: Represents the sample standard deviation of difference between predicted values and observed values, known as residuals. It identifies how concentrated the data is around the line of best fit, lower the better. \cite{RMSEMAE}
+				\item MSE - Mean Squared Error: Is the average squared difference between the estimated values. \textit{"MSE is a risk function, corresponding to the expected value of the squared error loss."} \cite{MSE}.
+				\item MAE - Mean Absolute Error: Is the average of the absolute difference between the predicted values and observed values, and is a linear score. This means that the idividual differences are weighted equally in the average. \cite{RMSEMAE}
+				\item MAPE - Mean Absolute Percentage Error: Is a measure of how accuracte a forecast system is, it measures the accuracy as a percentage error for each time period minus the actual valuse divided by the actual values. \cite{MAPE}
+			\end{itemize}
 		
 	\newpage
 	
@@ -660,17 +669,6 @@
 		\subsection{Solution Summary}\label{summary}
 		The overall solution, concerning the problem statement, is to create a system mainly consisting of; a frontend application that will display plotting, predicted and true, performance metric data to the user as a clear and concise form. The backend system behind the price forecasting will consist of various subsystem responsible for data collection, filtering, data pre-processing, sentiment analysis, network training, validation and training and future price predictions. Each stage will consist of relevant tools and techniques for performing their required task.
 		
-		%The tools and techniques that will be used for this project are as follows, with relation to the relevent part of the system.
-		
-		%\begin{itemize}
-		%	\item Data Collector
-		%	\subitem Prices: Historical - None, will be extrapolated from a historical price CSV, Live - Request and Coinbase Client api package
-		%	\subitem Tweets: Historical - Request or Curl from the Twitter API, Live - Tweepy
-		%	\item Natural Language pre-processing - Regex,  (Tokenisation, Stemming, Stopword removal), ngrams, language detection
-		%	\item Spam filter - Natural language pre-processing techniques (above), Naive Bayes Classifier
-		%	\item Neural Network - Tensorflow, Keras, Sc
-			
-		%\end{itemize}
 		\newpage
 		
 		\subsection{Data flow Overview}\label{data-flow}
@@ -678,7 +676,7 @@
 		
 		\includegraphics[width=18cm,height=8cm]{images/Generic_Flow.png}
 		\begin{center}
-			\textit{Figure 3: Basic Dataflow diagram of systems in the project and how data could possibly flow}
+			\textit{Figure 4: Basic Dataflow diagram of systems in the project and how data could possibly flow}
 		\end{center}
 		
 	\newpage
@@ -693,7 +691,7 @@
 		\textbf{Dataflow overview of entire system:}
 		\begin{center}
 			\includegraphics[width=18cm,height=8cm]{images/Dataflow.png}
-			\textit{Figure 4: Overall Dataflow diagram of the entire system}
+			\textit{Figure 5: Overall Dataflow diagram of the entire system}
 		\end{center}
 		This dataflow diagram shows the overall concept of how the data is intended to flow through the system, from being processed and manipulated through each component and what the outputs are of each. Due to the size, this will be broken up and individually explained.
 		\newpage
@@ -701,7 +699,7 @@
 		\textbf{Data collector}
 		\begin{center}
 			\includegraphics[width=15cm,height=8cm]{images/Data_Collector.png}
-			\textit{Figure 5: Data collector Dataflow diagram}
+			\textit{Figure 6: Data collector Dataflow diagram}
 		\end{center}
 		This dataflow diagram shows the part of the system responsible for the collection and processing of both historical data. This is split into three parts: Price collector, Tweet collector and tweet normalisation and natural language pre-processing.
 		\begin{itemize}
@@ -716,7 +714,7 @@
 		\textbf{Analysis Engine}
 		\begin{center}
 			\includegraphics[width=17cm,height=8cm]{images/Analysis_Engine.png}
-			\textit{Figure 6: Analysis Engine Dataflow diagram}
+			\textit{Figure 7: Analysis Engine Dataflow diagram}
 		\end{center}
 		This dataflow diagram shows the part of the system that is responsible for training a spam filter, creating the model that'll be used to identify if the tweets from the data collector are unwanted - spam. This system is also responsible for assigning the polarity classification to the tweet through sentiment analysis conducted by the VADER package \cite{VADERPaper}.
 		\begin{itemize}
@@ -734,9 +732,9 @@
 		\textbf{Neural Network}
 		\begin{center}
 			\includegraphics[width=17cm,height=12cm]{images/Neural_Network.png}
-			\textit{Figure 7: Neural Network layout Dataflow diagram}
+			\textit{Figure 8: Neural Network layout Dataflow diagram}
 		\end{center}
-		The dataflow diagram in \textit{figure 7} shows the part of the system that is responsible for training and creating the neural network model. The dataflow diagram shows how the network will be trained, and the layers of a possible solution to the network. The model shows four layers which may not be the solution that will be implemented but is there to show a representation of a number of layers that could be applied.
+		The dataflow diagram in \textit{figure 8} shows the part of the system that is responsible for training and creating the neural network model. The dataflow diagram shows how the network will be trained, and the layers of a possible solution to the network. The model shows four layers which may not be the solution that will be implemented but is there to show a representation of a number of layers that could be applied.
 		\begin{itemize}
 			\item Merging of Datasets - Data from both historical datasets are merged to create one dataset with mapped price and sentiment for each hour. *This is a specific process that is different from the system that does not include sentiment for predictions, the merge process doesn't occur in that system/model.
 			\item Training and Testing - Data is split into two samples of training and testing, 75:25 respectively. **This also doesn't occur in the system that doesn't model with the sentiment.
@@ -748,9 +746,9 @@
 		\textbf{Future Price Forecasting}
 		\begin{center}
 			\includegraphics[width=18cm,height=8cm]{images/Future_Predictions.png}
-			\textit{Figure 8: Price Forecasting Dataflow diagram}
+			\textit{Figure 9: Price Forecasting Dataflow diagram}
 		\end{center}
-		The dataflow diagram in \textit{figure 8} shows how the forecasting system would be implemented. This dataflow shows how it will read live data of both sentiment and price data, merge, split and conduct regression using the trained neural network model to predict the next hour price.
+		The dataflow diagram in \textit{figure 9} shows how the forecasting system would be implemented. This dataflow shows how it will read live data of both sentiment and price data, merge, split and conduct regression using the trained neural network model to predict the next hour price.
 		\begin{itemize}
 			 \item Data merging - (Doesn't occur with the system that doesn't include sentiment in price predictions). Data is consolidated from both historical and live data up to 5 iterations. This is due to after the initial hour there will only be a singular record of price and sentiment data, in which no prediction could be made from this as there isn't a sufficient amount of data.
 			 \item Prediction - This data is then fitted to the neural network model and predictions for the next time-step hour are made.
@@ -762,7 +760,7 @@
 		\begin{center}
 			\includegraphics[width=10cm,height=9cm]{images/Frontend_Application.png}
 			\newline
-			\textit{Figure 9: Front-end Application Dataflow diagram}
+			\textit{Figure 10: Front-end Application Dataflow diagram}
 		\end{center}
 		The above dataflow diagram shows the data flow for the front-end application and how the data is read into the system from the data files generated by the backend application (Neural network).
 		\begin{itemize}
@@ -771,26 +769,23 @@
 			\item Charting and Tables - Accesses the loaded data from the AJAX requests and plots the data. Prediction data, only with sentiment and prices are plotted into a table. There will be separate charts and tables displaying the data from the backend that hasn't used sentiment in predictions to aid in establishing a correlation between sentiment and price and whether it affects the hourly price (Aiming to solve the problem statement)
 			\item Stakeholders - There will be the four stakeholders, outlined in the problem articulation section, that would be the primary users of this application.
 		\end{itemize}
-
-		%\subsection{UML Component Design}
 		
 		\subsection{Interface Design}
-		
-		
+	
 		\begin{figure}[hbt!]
 			\centering
 			\includegraphics[width=8cm,height=13cm]{images/interface_design.png}
 		\end{figure}
 		\begin{center}
-			\textit{Figure 10: Interface design}
+			\textit{Figure 11: Interface design}
 		\end{center}
-		\textit{Figure 10} above shows the basic idea of the interface design that will be presented to the stakeholders and aims to be the interface that these stakeholders will use to aid in their market decisions of Bitcoin. The interface, although simplistic, provides all the necessary information that any of these stakeholders would need, it also provides information to allow visual comparison on how sentiment affects the hourly price of Bitcoin, represented as the two charts. The comparison will aid in solving the problem statement later in the conclusion of the project.
+		\textit{Figure 11} above shows the basic idea of the interface design that will be presented to the stakeholders and aims to be the interface that these stakeholders will use to aid in their market decisions of Bitcoin. The interface, although simplistic, provides all the necessary information that any of these stakeholders would need, it also provides information to allow visual comparison on how sentiment affects the hourly price of Bitcoin, represented as the two charts. The comparison will aid in solving the problem statement later in the conclusion of the project.
 		
 	\newpage 
 	\begin{center}
 		\section{Implementation}\label{implementation}
 	\end{center}
-		This section will outline the method and process of development of the system to satisfy the chosen solution, technical specification and the problem statement. Each section of the system will be outlined and discussed with relevant codes snippets of essential methods from the system to highlight the processing of data throughout. Some sections will reference code snippets in \textit{Appendix B}, due to the size of some crucial methods.
+		This section will outline the method and process of development of the system to satisfy the chosen solution, technical specification and the problem statement. Each section of the system will be outlined and discussed with relevant codes snippets of essential methods from the system to highlight the processing of data throughout. Additionally, the order in which the following sections are show was not the order in which they were developed, the order in which they are shown is to represent the order of how the data flows through the system, see \textit{section 9 - Ssytem Design} for an understanding of the flow of data through the system.
 		\newline
 		
 		\subsection{Data collection}\label{collection}
@@ -969,7 +964,7 @@ def processTweet(tweet, tweetFilter):
 			
 			The tweet text can be nested in multiple attributes in the response; this depends on a few factors of what the tweet is and how it was posted on Twitter. If a user retweeted the tweet, the text of the tweet would be nested under \textit{'retweeted\_status'} in the JSON response, also there is a check to see if the tweets are above the original twitter tweet character limit (140 characters). This is a possible legacy parameter in the Twitter API but is checked upon data response. If an attribute \textit{'extended\_tweet'} exists the character limit for the tweet exceeds 140 but is under the 280 characters hard limit of Twitter, this exact filtering is the same if it in a non-retweeted tweet.
 			
-			As for the key facts about this function; the length of the tweet is checked to be above 5 (tokenised) due to any tweets with fewer words will not contain enough information to be given a proper polarity classification and almost always returns as 100\% neutral, which is of no use and will have no effect on the hours average sentiment. The entire code in the function is encapsulated in a try-catch to check if data was received and handles non-responses and missing data. If there was no data the issue is ignored unless a connection between the streamer and API is broken it otherwise exits the script.	
+			As for the key facts about this function; the length of the tweet is checked to be above 5 (tokenised) due to any tweets with fewer words will not contain enough information to be given a proper polarity classification and almost always returns as 100\% neutral, which is of no use and will have no effect on the hours average sentiment. The entire code in the function is encapsulated in a try-catch to check if data was received and handles non-responses and missing data. If there was no data the issue is ignored unless a connection between the streamer and API is broken it otherwise exits the script. As for the processing of the tweet the code in \textit{Listing 4} is used.	
 			
 			\newpage
 		\subsection{Data pre-processing}\label{processing}
@@ -1431,6 +1426,7 @@ def create_sets(self, data, lookback, sentiment):
 	# Model summary of params and dropout at each layer
 	
 	history = self.model.fit(train_X, train_Y, epochs=200, batch_size=1000, validation_data=(test_X, test_Y), verbose=0, shuffle=False, callbacks=[TQDMCallback()])
+	## fit model using train data and validate using the test data
 	
 	yhat = self.model.predict(test_X)
 	
@@ -1443,7 +1439,7 @@ def create_sets(self, data, lookback, sentiment):
 		
 		As per the discussion in the literature review and outlined in the solution approach, the Adam optimiser was used for the compilation of the model. The loss was calculated using the mean squared error and the metrics calculated and returned to present the accuracy of the model in prediction were: mean squared error, root mean squared error, mean absolute error and mean absolute percentage error. Both the metrics and predictions made are saved to a CSV that is then presented to users in the server-hosted UI.
 		
-		The model was fitted on the training sets (X, Y) over 200 epochs with a batch size of 1000 on about ~11000 records - was about the total amount of data used to train for a year. Predictions are then made using the test set resulting in the predictions of \textit{'yhat'} which is inverted and rescaled to get original price values to save to a CSV and which are displayed on the user interface.
+		The model was fitted on the training sets (X, Y) over 200 epochs with a batch size of 1000 on about ~11000 records - was about the total amount of data used to train for a year. Predictions are then made using the test set resulting in the predictions of \textit{'yhat'} which is inverted and rescaled to get original price values to save to a CSV and which are displayed on the user interface. The model is also validated using the test data as specified in the \textit{model.fit} method.
 		
 		\newpage
 		
@@ -1513,7 +1509,7 @@ def create_sets(self, data, lookback, sentiment):
 		This section describes and discusses how the user interface is implemented, and what functions were used to both load data from the server and to display this data as graphical plots and tables on the interface.
 		The aim of the interface, although simple in design, is to display relevant and useful information to the stakeholders in aiding in market decisions. 
 		
-		The interface is a simple HTML page that uses JQuery and AJAX requests in conjunction to display the required data and consists of three charts and two tables - each displaying predictions and performance metrics. A snippet of the final interface can be seen in \textit{Figure 11} later in the section. This section will describe the reasoning behind the data displayed and the layout.
+		The interface is a simple HTML page that uses JQuery and AJAX requests in conjunction to display the required data and consists of three charts and two tables - each displaying predictions and performance metrics. A snippet of the final interface can be seen in \textit{Figure 12} later in the section. This section will describe the reasoning behind the data displayed and the layout.
 		
 		\subsubsection{Key Functions}
 		
@@ -1549,7 +1545,7 @@ def create_sets(self, data, lookback, sentiment):
 </script>
 		\end{lstlisting}
 		
-		The data displayed in these tables consist of the perforance metrics of the trained model of the network: root mean squared error, mean squard error, mean absolute error, mean absolute percentage error and loss of the network. Another table on the interface shows the the hourly predictions made by the LSTM network, showing: date and time of prediction, next hourly prediction, current hourly price, hourly sentiment and the suggested market action (\textit{Buy} or \textit{Sell}) based on the hard-coded 0.25 (25\%) threshold in the network code. \textit{See figure 11 below for visual representation}
+		The data displayed in these tables consist of the perforance metrics of the trained model of the network: root mean squared error, mean squard error, mean absolute error, mean absolute percentage error and loss of the network. Another table on the interface shows the the hourly predictions made by the LSTM network, showing: date and time of prediction, next hourly prediction, current hourly price, hourly sentiment and the suggested market action (\textit{Buy} or \textit{Sell}) based on the hard-coded 0.25 (25\%) threshold in the network code. \textit{See figure 12 below for visual representation}
 \newline
 
 		\textbf{Graph Generation}
@@ -1618,7 +1614,7 @@ def create_sets(self, data, lookback, sentiment):
 			\centering
 			\includegraphics[width=14cm,height=19cm]{images/final_interface.png}
 			\begin{center}
-				\textit{Figure 11: Price Forecasting Dataflow diagram}
+				\textit{Figure 12: Price Forecasting Dataflow diagram}
 			\end{center}
 		\end{figure}
 		
@@ -1627,18 +1623,123 @@ def create_sets(self, data, lookback, sentiment):
 	\section{Testing Metrics and Accuracy}
 	This section discusses the performance metrics used to validate the network, any additional validation step during training, speed of execution of the two networks, and outlines what these mean regarding the performance of the network. 
 	
-	Due to the project being primarily an investigation of the use of discussed tools on how these would be used for forecasting the price of the next hour of Bitcoin, based on both historical and live price, and sentiment data.
+	Due to that the project is primarily an investigation of the use of discussed tools on how these would be used for forecasting the price of the next hour of Bitcoin, based on both historic and live price, and sentiment data, testing is focused around the accuracy of the predicted hourly values and the model generated by the LSTM network. A discussion of the accuracy of the predicted values is discussed in the 'Discussion of Results' section along with comparing both models - with and without sentiment embedded to fulfil the problem statement.
 	
-	mean bias Error
+	\subsection{Integration Testing}
+	Integration testing occurred throughout the development of this system, the goal of this type of testing is the ensure that each of the functions within the system was working with previous functions that it either uses or provides functionality too and to conform to an agile methodology when possible.
+	If and when a function was completed, prior to moving on to the development of another, the function was tested with real and fake data - depending on the functionality the function performed. This was to ensure that the function was either being access or used other functions correctly.
 	
-	k-fold cross validation was attempted, but issues with continuous data
-	How would this work what will it show or validate?
+	An example of when such testing occurred, though not documented, between components is that of the \textit{FilterSpam} class in the \textit{tweet\_collector} script. This was a significant class to test the operation of and was due to both the multiple calling of functions within the class from throughout the \textit{tweet\_collector} script and from the functions of the class to individual functions in the \textit{spam\_filter} script. For a precise example, using \textit{Listing 9} and function \textit{testTweet}, this function is only ever called upon receiving data from the Tweepy streamer (\textit{Listing 4}), however, this function calls two other functions of \textit{processTweets} (\textit{Listing 8}) and \textit{classify} (\textit{Listing 11}) from the \textit{spam\_filter} script (detailed in the implementation section). Not only do each of these functions need to be tested that the correct data is being processed and returned, but the entire function is reliant on the classifier being already trained for classification which is handled by the function in the class, whom of which also call other functions from the \textit{spam\_filter} script (\textit{Listing 10}).
 	
-	Validation params for network compiling, what do that do?
+	This example was one of the most complex classes and set of functions to test as there was a lot of jumping back and forth and sequencing needed to ensure that the classifier was trained correctly and that streamed tweets are classified correctly. Similar testing occurred with all other functions and classes of the system at each stage of development.
 	
-	speed of execution - both networks are ~ 3:15 and no sent ~ 2:50 over 200 epochs on a batch size of 1000
+	\subsection{Accuracy of Model \& Results}
+	Due to the type of neural network used and its use case, suitable regression metrics were chosen to identify the accuracy of the model used for forecasting the next hour price of Bitcoin. As mentiod in the implementation section, subsection \textit{Training and Testing Model} the metrics used are as follows:
 	
-	\section{Discussion of Results}
+	\begin{center}
+		\begin{tabular}{c|c|c|c|c}
+			\textbf{RMSE} & \textbf{MSE} & \textbf{MAE} & \textbf{MAPE} & \textbf{Loss}\\
+			\hline
+			\multirow{1}{*}{} 100 $\pm$ 20 & 0.3 $\pm$ 0.1 & 3.0 $\pm$ 0.5 & 10\% $\pm$ 5\% & 0.3 $\pm$ 0.1 \\
+		\end{tabular}
+	\newline
+	
+			Per execution of the neural network - \textbf{with} sentiment embedded
+	\end{center}
+
+\begin{center}
+	\begin{tabular}{c|c|c|c|c}
+		\textbf{RMSE} & \textbf{MSE} & \textbf{MAE} & \textbf{MAPE} & \textbf{Loss}\\
+		\hline
+		\multirow{1}{*}{} 100 $\pm$ 25 & 0.3 $\pm$ 0.15 & 3.0 $\pm$ 0.5 & 10\% $\pm$ 6\% & 0.3 $\pm$ 0.15 \\
+	\end{tabular}
+	\newline
+	
+	Per execution of the neural network - \textbf{without} sentiment embedded
+\end{center}
+
+	\subsubsection{Results Discussion}
+
+	The results, although exceptionally close for each network (with and without sentiment embedded), averaged over 50 runs of each network show that the model with sentiment embedded generally performs better than the model without sentiment used in predictions. The model with sentiment embedded has an average RMSE of 100 give or take 20 per each run which shows that on average the predictions are closer to the regression line than the model without sentiment. Additionally, the mean absolute percentage error discrepancy is less for the model with sentiment embedded than the model without. This, however, does not provide a clear distinction between the two models that is needed to justify what is outlined in the problem statement.
+	
+	A clearer distinction between the performance of the two models is when the metics are showing the two model performing almost as accurate, as in the RMSE of both has been 105 and 106, the closest it has been on the 50 runs during testing. This also saw the mean absolute percentage error have only 0.2\% difference between the two models. Unfortunatly, the difference between the two models can only be seen when a portion of predictions are made. The models were left to run for 48 hours each which returned 48 predictions each of which could be compared to the next hour price.
+	
+	\begin{center}
+		\begin{tabular}{c|c|c|c}
+			\textbf{Created at} & \textbf{Prediction} & \textbf{Current Price} & \textbf{Current Sentiment}\\
+			\hline
+			\multirow{1}{*}{} 2019-04-22 6pm & 5308.333 & 5318.4119 & 0.24312407 \\
+			\multirow{1}{*}{} 2019-04-22 7pm & 5309.2754 & 5373.438 & 0.21355466 \\
+			\multirow{1}{*}{} 2019-04-22 8pm & 5310.557 & 5413.161 & 0.28671014 \\
+			\multirow{1}{*}{} 2019-04-22 9pm & 5317.3716 & 5375.6269 & 0.22499429\\
+			\multirow{1}{*}{} 2019-04-22 10pm & 5337.3213 & 5373.607 & 0.25170501 \\
+			\multirow{1}{*}{} 2019-04-22 11pm & 5370.356 & 5386.581 & 0.26898607\\
+			\multirow{1}{*}{} 2019-04-23 12am & 5386.6113 & 5392.774 & 0.22517575\\
+			\multirow{1}{*}{} 2019-04-23 1am & 5386.9487 & 5387.8319 & 0.27451984\\
+			\multirow{1}{*}{} 2019-04-23 2am & 5379.05 & 5380.0669 & 0.23613823\\
+			\multirow{1}{*}{} 2019-04-23 3am & 5384.681 & 5386.57 & 0.24832858\\
+			\multirow{1}{*}{} 2019-04-23 4am & 5388.9434 & 5399.268 & 0.25803705\\
+			\multirow{1}{*}{} 2019-04-23 5am & 5386.557 & 5429.906 &  0.25804942\\
+			\multirow{1}{*}{} 2019-04-23 6am & 5385.1934 & 5510.472 &  0.25270584\\
+			\multirow{1}{*}{} 2019-04-23 7am & 5389.97 & 5533.843 &  0.34432973\\
+			\multirow{1}{*}{} 2019-04-23 8am & 5406.9917 & 5531.68 &  0.34782233\\
+			\multirow{1}{*}{} 2019-04-23 9am & 5449.7676 & 5534.522 &  0.27746379\\
+		\end{tabular}
+		\newline
+		
+		15 records of predictions - \textbf{with} sentiment embedded
+	\end{center}
+
+\begin{center}
+	\begin{tabular}{c|c|c}
+		\textbf{Created at} & \textbf{Prediction} & \textbf{Current Price}\\
+		\hline
+		\multirow{1}{*}{} 2019-04-22 6pm & 5373.431 & 5318.4119 \\
+		\multirow{1}{*}{} 2019-04-22 7pm & 5381.814 & 5373.438 \\
+		\multirow{1}{*}{} 2019-04-22 8pm & 5381.952 & 5413.161 \\
+		\multirow{1}{*}{} 2019-04-22 9pm & 5388.013 & 5375.6269 \\
+		\multirow{1}{*}{} 2019-04-22 10pm & 5410 & 5373.607 \\
+		\multirow{1}{*}{} 2019-04-22 11pm & 5442.346 & 5386.581 \\
+		\multirow{1}{*}{} 2019-04-23 12am & 5457.733 & 5392.774 \\
+		\multirow{1}{*}{} 2019-04-23 1am & 5460.422 & 5387.8319 \\
+		\multirow{1}{*}{} 2019-04-23 2am & 5451.898 & 5380.0669 \\
+		\multirow{1}{*}{} 2019-04-23 3am & 5457.16 & 5386.57 \\
+		\multirow{1}{*}{} 2019-04-23 4am & 5461.436 & 5399.268 \\
+		\multirow{1}{*}{} 2019-04-23 5am & 5459.212 & 5429.906 \\
+		\multirow{1}{*}{} 2019-04-23 6am & 5457.895 & 5510.472 \\
+		\multirow{1}{*}{} 2019-04-23 7am & 5461.916 & 5533.843 \\
+		\multirow{1}{*}{} 2019-04-23 8am & 5479.55 & 5531.68 \\
+		\multirow{1}{*}{} 2019-04-23 9am & 5523.663 & 5534.522 \\
+	\end{tabular}
+	\newline
+	
+	15 records of predictions - \textbf{without} sentiment embedded
+\end{center}
+	
+	On visual inspection, after both models had made 48 predictions, \textit{See above tables} showing 10 records as an example, it can be seen that the model with the sentiment embedded both follows the current price more closely and is not as conservative in its predictions as the model without sentiment. 
+	How conservative the model without sentiment embedded is can seen in the five values between, 1 am to 5 am, where it attempts to correct itself to the actual value but slow to do so, then predicts a higher price for the next hour. At a point, the predicted value somewhat resembles that of the actual price but only due to the exact price rising substantially.
+	This model through the data shown, shows that it takes much longer to change the prediction to the actual real value of the next hour compared to the model with the embedded sentiment. 
+	Also, neither model handles spikes in prices very well which is more noticeable with the model with sentiment as it follows the exact price more closely.
+	
+	Another factor that can be identified by the results shown above is that the model with the sentiment embedded in with the price data doesn't react adequately for when the sentiment spikes - regardless of a price spike. This could suggest that the data has not been predicted using enough data of both price and sentiment, due to only training on the last five live prices and sentiment and not 1000 samples to match the batch size the model was trained on during model creation. An improvement to the model could be made during predictions of the next hour price where it continuously predicts on the data available until it has 1000 records, then only predicts using the last 1000 records of live data. At this point, 1000 hours into predictions, said predictions might become more accurate than what is presented for evaluation at the time of writing due to matching the training batch sample size of the trained model of the network.
+	
+	Another result that can be drawn from the data presented, separate from the models' performance, is that of how sentiment affects the following hours' price. It can be seen in a number of the records presented that the sentiment occasionally spikes, at 1 am spikes to \textit{0.27451984} from the previous hour of \textit{0.22517575}, and the spike is not represented in the following hours' price. This also occurs on a previous hour at 8 pm which saw a spike of sentiment, a \textit{0.07405548} difference from the previous hour but saw the price drop almost \$40. This could indicate that the sentiment of the hours does not directly affect the next hours' price but affects it over possibly several hours, and also shows that there is not a direct correlation in sentiment spikes to price spikes.
+	
+	\subsubsection{Execution Speeds}
+	Each of the models are trained and validated using both generated training and testing dataset over 200 epochs and a batch size of 1000 on 11000 records total of data, within minutes. The network with sentiment embedded take marginly longer to create the prediction model.
+	
+	\begin{center}
+		\begin{tabular}{c|c}
+			\textbf{Network} & \textbf{Speed} \\
+			\hline
+			\multirow{1}{*}{} With Sentiment & 3:15 $\pm$ 0:20 secs\\
+			\multirow{1}{*}{} Without Sentiment & 2:50 $\pm$ 0:20 secs\\
+			
+		\end{tabular}
+		\newline
+		
+		Speed of executions of each network, averaged over the 50 testing runs
+	\end{center}
 	
 	\newpage
 	
@@ -1652,11 +1753,13 @@ def create_sets(self, data, lookback, sentiment):
 	\subsection{Limitations}
 	
 	
+	How would changing epoch and batch size affect performance?
+	
 	\newpage
 	
 	\section{Conclusion and Future Improvements}
 		\subsection{Conclusion}
-		
+		Interesting what would a days prediction would show due to sentiment not directly affecting the next hour price
 		
 		\subsection{Future Improvements}
 		Shifting the predicted data by and hour and sequencing over previous data - will also allow proper use of look-back windows
@@ -1672,6 +1775,15 @@ def create_sets(self, data, lookback, sentiment):
 		Compare Scikit-learns in-built naive bayes algorithms and other variations performance for spam filtering against hand-coded version
 		
 		Look into adding to the VADER lexicon for increasing performance and accuracy for topic domain of stock market language and what sentiment would be assigned to words
+		
+		IMPLEMENT AND IDENTIFY R2 stat and Mean Bias ERROR
+		
+		(R2 and mean bias error would be suitable metrics to show how conservative the model is and the difference between the predicted and true price it is) - never got to implement
+		
+		mean bias Error
+		
+		k-fold cross validation was attempted, but issues with continuous data
+		How would this work what will it show or validate?
 	\newpage
 	
 	\nocite{*}

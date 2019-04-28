@@ -1186,6 +1186,94 @@
       \verb https://towardsdatascience.com/spam-classifier-in-python-from-scratch-27a98ddd8e73
       \endverb
     \endentry
+    \entry{RMSEMAE}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=4557151fc83b7534d523a502a84a9c9c}{%
+           family={Swalin},
+           familyi={S\bibinitperiod},
+           given={Alvira},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Medium}%
+      }
+      \strng{namehash}{4557151fc83b7534d523a502a84a9c9c}
+      \strng{fullhash}{4557151fc83b7534d523a502a84a9c9c}
+      \strng{bibnamehash}{4557151fc83b7534d523a502a84a9c9c}
+      \strng{authorbibnamehash}{4557151fc83b7534d523a502a84a9c9c}
+      \strng{authornamehash}{4557151fc83b7534d523a502a84a9c9c}
+      \strng{authorfullhash}{4557151fc83b7534d523a502a84a9c9c}
+      \field{sortinit}{6}
+      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Choosing the Right Metric for Evaluating Machine Learning Models}
+      \field{year}{Apr 7, 2018}
+      \verb{urlraw}
+      \verb https://medium.com/usf-msds/choosing-the-right-metric-for-machine-learning-models-part-1-a99d7d7414e4
+      \endverb
+      \verb{url}
+      \verb https://medium.com/usf-msds/choosing-the-right-metric-for-machine-learning-models-part-1-a99d7d7414e4
+      \endverb
+    \endentry
+    \entry{MSE}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=ef4b13671a2486f2f568d40a7a46a066}{%
+           family={Binieli},
+           familyi={B\bibinitperiod},
+           given={Moshe},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Medium}%
+      }
+      \strng{namehash}{ef4b13671a2486f2f568d40a7a46a066}
+      \strng{fullhash}{ef4b13671a2486f2f568d40a7a46a066}
+      \strng{bibnamehash}{ef4b13671a2486f2f568d40a7a46a066}
+      \strng{authorbibnamehash}{ef4b13671a2486f2f568d40a7a46a066}
+      \strng{authornamehash}{ef4b13671a2486f2f568d40a7a46a066}
+      \strng{authorfullhash}{ef4b13671a2486f2f568d40a7a46a066}
+      \field{sortinit}{6}
+      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Machine learning: an introduction to mean squared error and regression lines}
+      \field{year}{Oct 16, 2018}
+      \verb{urlraw}
+      \verb https://medium.freecodecamp.org/machine-learning-mean-squared-error-regression-line-c7dde9a26b93
+      \endverb
+      \verb{url}
+      \verb https://medium.freecodecamp.org/machine-learning-mean-squared-error-regression-line-c7dde9a26b93
+      \endverb
+    \endentry
+    \entry{MAPE}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=d764afef638302d6579ce78222a92818}{%
+           family={Stephanie},
+           familyi={S\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Statistics HowTo}%
+      }
+      \strng{namehash}{d764afef638302d6579ce78222a92818}
+      \strng{fullhash}{d764afef638302d6579ce78222a92818}
+      \strng{bibnamehash}{d764afef638302d6579ce78222a92818}
+      \strng{authorbibnamehash}{d764afef638302d6579ce78222a92818}
+      \strng{authornamehash}{d764afef638302d6579ce78222a92818}
+      \strng{authorfullhash}{d764afef638302d6579ce78222a92818}
+      \field{sortinit}{6}
+      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Mean absolute percentage error (MAPE)}
+      \field{year}{Sep 8, 2017}
+      \verb{urlraw}
+      \verb https://www.statisticshowto.datasciencecentral.com/mean-absolute-percentage-error-mape/
+      \endverb
+      \verb{url}
+      \verb https://www.statisticshowto.datasciencecentral.com/mean-absolute-percentage-error-mape/
+      \endverb
+    \endentry
     \entry{TweepyDoc}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=1e48a059b3f2c3703bea8d54a9e002c9}{%
@@ -1285,8 +1373,8 @@
       \strng{authorbibnamehash}{41b3b5daa9b33f52b08087b54f96f115}
       \strng{authornamehash}{41b3b5daa9b33f52b08087b54f96f115}
       \strng{authorfullhash}{41b3b5daa9b33f52b08087b54f96f115}
-      \field{sortinit}{7}
-      \field{sortinithash}{c818dd9105a2852444fc9f5e145c294e}
+      \field{sortinit}{8}
+      \field{sortinithash}{07edf88d4ea82509b9c4b4d13f41c452}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Detecting Text Language With Python and NLTK}
@@ -1314,8 +1402,8 @@
       \strng{authorbibnamehash}{90ecaa1e27a33fbd3ab56223485ab402}
       \strng{authornamehash}{90ecaa1e27a33fbd3ab56223485ab402}
       \strng{authorfullhash}{90ecaa1e27a33fbd3ab56223485ab402}
-      \field{sortinit}{7}
-      \field{sortinithash}{c818dd9105a2852444fc9f5e145c294e}
+      \field{sortinit}{8}
+      \field{sortinithash}{07edf88d4ea82509b9c4b4d13f41c452}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{A tutorial on Automatic Language Identification - ngram based}
@@ -1343,8 +1431,8 @@
       \strng{authorbibnamehash}{b26f0ccdcc8e766bb4785cce3a550346}
       \strng{authornamehash}{b26f0ccdcc8e766bb4785cce3a550346}
       \strng{authorfullhash}{b26f0ccdcc8e766bb4785cce3a550346}
-      \field{sortinit}{7}
-      \field{sortinithash}{c818dd9105a2852444fc9f5e145c294e}
+      \field{sortinit}{8}
+      \field{sortinithash}{07edf88d4ea82509b9c4b4d13f41c452}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{What is the difference between stemming and lemmatization}
