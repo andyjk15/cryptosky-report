@@ -1093,6 +1093,35 @@
       \verb https://arxiv.org/pdf/1412.6980.pdf
       \endverb
     \endentry
+    \entry{RegularisationSc}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=828de85c6a5e2b9df75d3cce6765238c}{%
+           family={AI},
+           familyi={A\bibinitperiod},
+           given={Missing\bibnamedelima Link},
+           giveni={M\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Missing Link AI}%
+      }
+      \strng{namehash}{828de85c6a5e2b9df75d3cce6765238c}
+      \strng{fullhash}{828de85c6a5e2b9df75d3cce6765238c}
+      \strng{bibnamehash}{828de85c6a5e2b9df75d3cce6765238c}
+      \strng{authorbibnamehash}{828de85c6a5e2b9df75d3cce6765238c}
+      \strng{authornamehash}{828de85c6a5e2b9df75d3cce6765238c}
+      \strng{authorfullhash}{828de85c6a5e2b9df75d3cce6765238c}
+      \field{sortinit}{5}
+      \field{sortinithash}{3c19c3776b658b3558e9e2e4840c01e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Neural Network Bias: Bias Neuron, Overfitting and Underfitting}
+      \verb{urlraw}
+      \verb https://missinglink.ai/guides/neural-network-concepts/neural-network-bias-bias-neuron-overfitting-underfitting/
+      \endverb
+      \verb{url}
+      \verb https://missinglink.ai/guides/neural-network-concepts/neural-network-bias-bias-neuron-overfitting-underfitting/
+      \endverb
+    \endentry
     \entry{StudyNBC}{inproceedings}{}
       \true{moreauthor}
       \true{morelabelname}
@@ -1346,8 +1375,8 @@
       \strng{authorbibnamehash}{9fb73450a6ae06fd7652db34b9a3c981}
       \strng{authornamehash}{9fb73450a6ae06fd7652db34b9a3c981}
       \strng{authorfullhash}{9fb73450a6ae06fd7652db34b9a3c981}
-      \field{sortinit}{7}
-      \field{sortinithash}{c818dd9105a2852444fc9f5e145c294e}
+      \field{sortinit}{8}
+      \field{sortinithash}{07edf88d4ea82509b9c4b4d13f41c452}
       \field{labelnamesource}{author}
       \verb{urlraw}
       \verb http://api.bitcoincharts.com/v1/csv/

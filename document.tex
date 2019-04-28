@@ -481,6 +481,9 @@
 				\end{center}
 			\end{itemize}
 		
+		\subsubsection{Regularisation}
+		To avoid issues such as overfitting of a neural networks model, techniques such as regularisation to produce better predictive performance and to improve variance of the model created. \cite{RegularisationSc}
+		
 		\subsection{Machine Learning}\label{machine}
 			\subsubsection{Naive Bayes}
 			To get an understanding of both how probability works and how a neural network will predict the next hour value based on the concepts of probability, using a well-established probability algorithm will aid in this understanding.
@@ -1398,7 +1401,7 @@ def create_sets(self, data, lookback, sentiment):
 		
 		\subsubsection{Training and Testing Model}
 		
-		The neural network is set up with four layers each of which configured with 100 LSTM cells, with a dropout of 0.2 each, and returning sequences to each other layer. A dropout was used to ensure that the data would not be overfitted, by setting the dropout to 0.2 probability, 80\% of the data on each layer is retained for the next layer. Return sequences allows for the returning of the hidden state output for each time step and ensures the next LSTM layer has 2 inputs that carry over from the previous layer, which are the old weights and value outputs from the previous layer.
+		The neural network is set up with four layers each of which configured with 100 LSTM cells, with a regularisation (dropout) of 0.2 each, and returning sequences to each other layer. A dropout was used to ensure that the data would not be overfitted, by setting the dropout to 0.2 probability, 80\% of the data on each layer is retained for the next layer. Return sequences allows for the returning of the hidden state output for each time step and ensures the next LSTM layer has 2 inputs that carry over from the previous layer, which are the old weights and value outputs from the previous layer.
 			
 		\begin{lstlisting}[language=python, caption=LSTM model creation\, layering\, compiling and fitting]
 	self.model = Sequential()
