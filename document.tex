@@ -683,7 +683,7 @@
 		The initial PID did, however, give an initial basis to base ideas and initial research from and was the beginning drive of this project.
 		
 		\subsection{Solution Summary}\label{summary}
-		The overall solution, concerning the problem statement, is to create a system mainly consisting of; a frontend application that will display plotting, predicted and true, performance metric data to the user as a clear and concise form. The backend system behind the price forecasting will consist of various subsystem responsible for data collection, filtering, data pre-processing, sentiment analysis, network training, validation and training and future price predictions. Each stage will consist of relevant tools and techniques for performing their required task.
+		The overall solution, concerning the problem statement, is to create a system mainly consisting of; a frontend application that will display plotted; predicted and true, performance metric data to the user as a clear and concise form. The backend system behind the price forecasting will consist of various subsystem responsible for data collection, filtering, data pre-processing, sentiment analysis, network training, validation and training and future price predictions. Each stage will consist of relevant tools and techniques for performing their required task.
 		
 		\newpage
 		
@@ -1799,8 +1799,8 @@ def create_sets(self, data, lookback, sentiment):
 	
 	Lastly, a limitation that could be identified and is also discussed in the results section above is that of the performance metrics not showing a clear distinction between the two network models. This limitation could be overcome by using more suitable explanative metrics, rather than relying on a more visual inspection, such as: 
 	\begin{itemize}
-		\item Adjusted $R^2$ statistic - which shows how well the selected independant variables of the model explain the variability of the dependant variables, and shows how well the terms fit a regression line \cite{RMSEMAE}. 
-		\item Mean Bias Error (MBE) - Is the Mean Absolute Error (MAE), which is calculated, if the absolute value is not taken (the signs of the errors are not removed) the MAE becomes the mean biased error. The MBE is intended to measure the average model bias and can convay more useful information that the MAE, but should be interpeted with caution due to the positive and negative error cancelling out. \cite{MBE}
+		\item Adjusted $R^2$ statistic - Shows how well the selected independant variables of the model explain the variability of the dependant variables, and shows how well the terms fit a regression line \cite{RMSEMAE}. 
+		\item Mean Bias Error (MBE) - Is the Mean Absolute Error (MAE), but is calculated if the absolute value isn't taken (the signs of the errors are not removed) the MAE becomes the mean biased error. The MBE is intended to measure the average model bias and can convey more useful information that the MAE, but should be interpreted with caution due to the positive and negative error cancelling out. \cite{MBE}
 	\end{itemize}
 	By calculating these metrics could aid in distinguishing a correlation between the models based on metrics rather than on visual analysis.
 	
@@ -1812,7 +1812,7 @@ def create_sets(self, data, lookback, sentiment):
 	
 	It has taught me how the classical (multinomial) naive Bayes probability model can be used for classification for spam or ham (wanted) data, and how the underlying maths and algorithm works - due to hand-coding the algorithm from scratch. Through the use of both the Bag Of Words algorithm for term-frequency identification: how it builds upon the base probability model of the Bayes algorithm. How TF-IDF (Term Frequency-Inverse Document Frequency) further builds upon this to both identify the amount of occurrence of words in a given text by assigning a weight, but also how it uses this to identify commonly used words that are of no relevance to classification. Further how the Addictive Smoothing method aids in dealing with words that have not been identified during training, due to not being initially presented in the training data.
 	
-	Development of this project has given me a further understanding of time management and priorities, in the sense of what needs to focused on during development prior to other features being coded or implemented. An excellent example of where priorities had changed can be seen from the original PID form, \textit{Appendix B}, in which the solution to this project changed from focusing on the front-end application to focusing on the back-end system. This was due to a few factors that have already been identified in the Solution approach section. Where both stakeholders, I the developer and the supervisor of the project concluded that the creation of a front-end application, with a basic back-end for predictions, would not be a satisfactory solution, and more focus should be invested into the price predictions of Bitcoin. Another point where time management had to be considered was when implementing the Naive Bayes Classifier for spam filtering. Time management was not considered during its development and saw the feature go out-of-scope for what was initially wanted - the initial idea was to use the scikit-learns in-built Multinomial Naive Bayes classifier for spam classification. However, tutorials were found on top of the papers used for describing the algorithm during the literature review, which further described how to implement such an algorithm from scratch. Thus this was undertaken and leading to arguably time wasted coded the classification model rather than spending more time on coding the neural network. Arguably in a sense, as detailed in the previous paragraph, it taught me a great deal of how the algorithm works and it's limitations.
+	Development of this project has given me a further understanding of time management and priorities, in the sense of what needs to focused on during development prior to other features being coded or implemented. An excellent example of where priorities had changed can be seen from the original PID form, \textit{Appendix B}, in which the solution to this project changed from focusing on the front-end application to focusing on the back-end system. This was due to a few factors that have already been identified in the Solution approach section. Where both stakeholders, I the developer and the supervisor of the project concluded that the creation of a front-end application, with a basic back-end for predictions, would not be a satisfactory solution, and more focus should be invested into the price predictions of Bitcoin. Another point where time management had to be considered was when implementing the Naive Bayes Classifier for spam filtering. Time management was not considered during its development and saw the feature go out-of-scope for what was initially wanted - the initial idea was to use the scikit-learns in-built Multinomial Naive Bayes classifier for spam classification. However, tutorials were found on top of the papers used for describing the algorithm during the literature review, which further described how to implement such an algorithm from scratch. Thus this was undertaken and leading to arguably time wasted coded the classification model rather than spending more time on coding the neural network. Arguably in a sense, as detailed in the previous paragraph, it taught me a great deal of how the algorithm works, and it's limitations.
 	
 	Furthermore, it has allowed me to form a better knowledge base and understanding of the Python language and data mining techniques used for the languages, to manipulate and used data for a required purpose, and has taught me relevant useful performance metrics for identifying the performance of a neural network and what the results of the metrics represent.
 	
@@ -1825,16 +1825,26 @@ def create_sets(self, data, lookback, sentiment):
 	
 	\section{Conclusion and Future Improvements}
 		\subsection{Conclusion}
-		What was aimed for?
+		As stated, the projects focus and solution changed considerably from the original Project Initiation Document which stated in section 2.2 of the document that, the main objective was to "produce a thin web client that provides a dashboard, that provides tangible and useful information to users such as; current price" - \textit{of a cryptocurrency} - "exchange rate, network hashrates and historical price data". "It will also display statistics about sentiment analysis conducted on social media about the currency" with "graphical predictions on what the price may be, in a given time". As from the extracts, the initial objectives of the project were broad and also vague. As this suggests that the focus of the project will be that of creating a thin client dashboard which was no longer the focus of the project, and \textit{"about the cryptocurrency"}, indicating sentiment analysis and price predictions would be conducted on multiple currencies which were an extremely board estimations of workload. It does, however, show that the initial thought process of performing sentiment analysis and price predictions occurred during initial stages of this project, but ultimately change through development to focus on how said sentiment of a cryptocurrency, Bitcoin, extracted from social media could be used in aiding in the prediction of future price.
 		
-		What was produced?
+		As for reference to the projects problem statement and solution approach, "This project will focus on the investigation of these technologies and tools", (sentiment analysers, machine learning algorithms and neural networks), "to justify whether it is feasible to predict the price of BTC based on historical price and the sentiment gathered from Twitter". The solution outlined in the solution approach stated that the solution is "to create a system mainly consisting of; a frontend application that will display plotted; predicted and true, performance metric data to the user as a clear and concise form". A back-end prediction system of "various subsystems responsible for data collection, filtering, data pre-processing, sentiment analysis, network training, validation and training, and future price predictions".
 		
-		Interesting what would a days prediction would show due to sentiment not directly affecting the next hour price
+		The end result followed suitably with would was outlined in both the problem statement and solution approach, and meet all but one point in the technical specification previously discussed in the reflection - where there were issues with deploying the back-end responsible for price forecasting to the external cloud server and getting it operational. A front-end application was also created, although basic, served its purpose of presenting the required data to users in a clear format. The back-end also suitably performed all the tasks set out for it such as; data collection from the Twitter API, sentiment analysis using VADER, and predicting the next hour price of Bitcoin.
+		
+		The majority of the focus was invested into implementing the back-end prediction solution, although fully implemented as intended some time was wasted hand-coding from scratch the Naive Bayes classifier. This did provide valuable information on exactly how the algorithm worked, its limitations and how additional techniques and methods overcome these but was ultimately wasted time due to an already used Python package, Scikit-Learn, having multiple in-built Naive Bayes models to choose from. If used, would have reduced time coding which could have been used elsewhere on the project. For example during testing, to implement K-fold Cross-validation, the $R^2$ statistic or produce the Mean Bias Error, and in turn possibly aid in identifying a correlation from the metrics between the two models, with and without sentiment, rather than relying on the metrics used which did not show much and visual inspection of prediction results.
+		
+		To conclude, the system that has been developed to meet the requirements set out for this project has been developed to the highest possible standard in the time frame that was given for this project. Moreover, from the discussion of results, it can be believed that the system works well and predicts the next hour price of Bitcoin appropriately given the data provided. The user interface provides the necessary information, although not pretty, to the possible stakeholders in a clear and concise which is what was intended for the interface.
+		
 		
 		\subsection{Future Improvements}
+		
+		
+		
+		
+		
 		as such comparing recurrent neural network models, implementation and the affect of regularisation techniques, use of different optimisers would have on the network, how use of ngrams could be used to improve language detection, comparing hand-coded naive bayes model to that of scikit-learns in built classifiers, alterations and additions to the VADER lexicon to tailor it with domain specific language and relevant weighted sentiment values
 		
-		
+		Interesting what would a days prediction would show due to sentiment not directly affecting the next hour price
 		
 		Shifting the predicted data by and hour and sequencing over previous data - will also allow proper use of look-back windows
 		
@@ -1860,6 +1870,8 @@ def create_sets(self, data, lookback, sentiment):
 		How would this work what will it show or validate?
 		
 		How would changing epoch and batch size affect performance?
+		
+		Use a different charting system as the plotted lines seem to jump around and skew accuracy
 	\newpage
 	
 	\nocite{*}

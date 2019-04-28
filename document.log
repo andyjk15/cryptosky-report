@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.16)  28 APR 2019 17:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.16)  28 APR 2019 19:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1237,56 +1237,56 @@ Overfull \hbox (14.37637pt too wide) in paragraph at lines 1746--1747
  []
 
 [81] [82 <./images/with_sentiment.png> <./images/without_sentiment.png>]
-[83] [84] [85] [86] [87] [88] [89]
-Overfull \hbox (40.38213pt too wide) in paragraph at lines 1867--1867
+[83] [84] [85] [86] [87] [88] [89] [90] [91]
+Overfull \hbox (40.38213pt too wide) in paragraph at lines 1879--1879
 \T1/cmr/m/n/12 works,'' To-wards Data Sci-ence, 2018. [On-line]. Avail-able: []
 $\T1/cmtt/m/n/12 https : / / towardsdatascience .
  []
 
-[90]
-Overfull \hbox (83.66737pt too wide) in paragraph at lines 1867--1867
+[92]
+Overfull \hbox (83.66737pt too wide) in paragraph at lines 1879--1879
 \T1/cmr/m/n/12 works,'' Ma-chine Larn-ing Mas-tery, 2017. [On-line]. Avail-able
 : []$\T1/cmtt/m/n/12 https : / / machinelearningmastery .
  []
 
 
-Overfull \hbox (28.45175pt too wide) in paragraph at lines 1867--1867
+Overfull \hbox (28.45175pt too wide) in paragraph at lines 1879--1879
 \T1/cmr/m/n/12 lem,'' Su-per Data Sci-ence, 2018. [On-line]. Avail-able: []$\T1
 /cmtt/m/n/12 https : / / www . superdatascience .
  []
 
-[91]
-Overfull \hbox (7.75049pt too wide) in paragraph at lines 1867--1867
+[93]
+Overfull \hbox (7.75049pt too wide) in paragraph at lines 1879--1879
 \T1/cmr/m/n/12 2019. [On-line]. Avail-able: []$\T1/cmtt/m/n/12 https : / / medi
 um . com / datadriveninvestor / overview -[]
  []
 
-[92]
-Overfull \hbox (7.25049pt too wide) in paragraph at lines 1867--1867
+[94]
+Overfull \hbox (7.25049pt too wide) in paragraph at lines 1879--1879
 \T1/cmr/m/n/12 2017. [On-line]. Avail-able: []$\T1/cmtt/m/n/12 https : / / www 
 . statisticshowto . datasciencecentral .
  []
 
 
-Overfull \hbox (9.24751pt too wide) in paragraph at lines 1867--1867
+Overfull \hbox (9.24751pt too wide) in paragraph at lines 1879--1879
 \T1/cmr/m/n/12 [On-line]. Avail-able: []$\T1/cmtt/m/n/12 http : / / blog . alej
 andronolla . com / 2013 / 05 / 15 / detecting -[]
  []
 
 
-Overfull \hbox (0.88026pt too wide) in paragraph at lines 1867--1867
+Overfull \hbox (0.88026pt too wide) in paragraph at lines 1879--1879
 []\T1/cmr/m/n/12 P. Cryp-tog-ra-phy, ``A tu-to-rial on au-to-matic lan-guage id
 en-ti-fi-ca-tion - ngram based,''
  []
 
-[93] [94]
+[95] [96]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./PID.pdf): PDF inclusion: found PDF ve
 rsion <1.7>, but at most version <1.5> allowed
-<PID.pdf, id=1794, 597.55246pt x 845.07718pt>
+<PID.pdf, id=1802, 597.55246pt x 845.07718pt>
 File: PID.pdf Graphic file (type pdf)
 <use PID.pdf>
-Package pdftex.def Info: PID.pdf  used on input line 1872.
+Package pdftex.def Info: PID.pdf  used on input line 1884.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 
@@ -1294,7 +1294,7 @@ pdfTeX warning: /usr/bin/pdflatex (file ./PID.pdf): PDF inclusion: found PDF ve
 rsion <1.7>, but at most version <1.5> allowed
 File: PID.pdf Graphic file (type pdf)
 <use PID.pdf>
-Package pdftex.def Info: PID.pdf  used on input line 1872.
+Package pdftex.def Info: PID.pdf  used on input line 1884.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 
@@ -1304,222 +1304,222 @@ rsion <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: /usr/bin/pdflatex (file ./PID.pdf): PDF inclusion: found PDF ve
 rsion <1.7>, but at most version <1.5> allowed
-<PID.pdf, id=1797, page=1, 597.55246pt x 845.07718pt>
+<PID.pdf, id=1805, page=1, 597.55246pt x 845.07718pt>
 File: PID.pdf Graphic file (type pdf)
 <use PID.pdf, page 1>
-Package pdftex.def Info: PID.pdf , page1 used on input line 1872.
+Package pdftex.def Info: PID.pdf , page1 used on input line 1884.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 File: PID.pdf Graphic file (type pdf)
 <use PID.pdf, page 1>
-Package pdftex.def Info: PID.pdf , page1 used on input line 1872.
+Package pdftex.def Info: PID.pdf , page1 used on input line 1884.
 (pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
-[95]
+[97]
 File: PID.pdf Graphic file (type pdf)
 <use PID.pdf, page 1>
-Package pdftex.def Info: PID.pdf , page1 used on input line 1872.
-(pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
-File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 1>
-Package pdftex.def Info: PID.pdf , page1 used on input line 1872.
+Package pdftex.def Info: PID.pdf , page1 used on input line 1884.
 (pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
 File: PID.pdf Graphic file (type pdf)
 <use PID.pdf, page 1>
-Package pdftex.def Info: PID.pdf , page1 used on input line 1872.
+Package pdftex.def Info: PID.pdf , page1 used on input line 1884.
 (pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
- [96 <./PID.pdf>]
+File: PID.pdf Graphic file (type pdf)
+<use PID.pdf, page 1>
+Package pdftex.def Info: PID.pdf , page1 used on input line 1884.
+(pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
+ [98 <./PID.pdf>]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./PID.pdf): PDF inclusion: found PDF ve
 rsion <1.7>, but at most version <1.5> allowed
-<PID.pdf, id=1827, page=2, 597.55246pt x 845.07718pt>
+<PID.pdf, id=1836, page=2, 597.55246pt x 845.07718pt>
 File: PID.pdf Graphic file (type pdf)
 <use PID.pdf, page 2>
-Package pdftex.def Info: PID.pdf , page2 used on input line 1872.
-(pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
-File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 2>
-Package pdftex.def Info: PID.pdf , page2 used on input line 1872.
+Package pdftex.def Info: PID.pdf , page2 used on input line 1884.
 (pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
 File: PID.pdf Graphic file (type pdf)
 <use PID.pdf, page 2>
-Package pdftex.def Info: PID.pdf , page2 used on input line 1872.
-(pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
-[97 <./PID.pdf>]
-
-pdfTeX warning: /usr/bin/pdflatex (file ./PID.pdf): PDF inclusion: found PDF ve
-rsion <1.7>, but at most version <1.5> allowed
-<PID.pdf, id=1834, page=3, 597.55246pt x 845.07718pt>
-File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 3>
-Package pdftex.def Info: PID.pdf , page3 used on input line 1872.
+Package pdftex.def Info: PID.pdf , page2 used on input line 1884.
 (pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 3>
-Package pdftex.def Info: PID.pdf , page3 used on input line 1872.
-(pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
-File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 3>
-Package pdftex.def Info: PID.pdf , page3 used on input line 1872.
-(pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
-[98 <./PID.pdf>]
-
-pdfTeX warning: /usr/bin/pdflatex (file ./PID.pdf): PDF inclusion: found PDF ve
-rsion <1.7>, but at most version <1.5> allowed
-<PID.pdf, id=1848, page=4, 597.55246pt x 845.07718pt>
-File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 4>
-Package pdftex.def Info: PID.pdf , page4 used on input line 1872.
-(pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
-File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 4>
-Package pdftex.def Info: PID.pdf , page4 used on input line 1872.
-(pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
-File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 4>
-Package pdftex.def Info: PID.pdf , page4 used on input line 1872.
+<use PID.pdf, page 2>
+Package pdftex.def Info: PID.pdf , page2 used on input line 1884.
 (pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
 [99 <./PID.pdf>]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./PID.pdf): PDF inclusion: found PDF ve
 rsion <1.7>, but at most version <1.5> allowed
-<PID.pdf, id=1854, page=5, 597.55246pt x 845.07718pt>
+<PID.pdf, id=1842, page=3, 597.55246pt x 845.07718pt>
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 5>
-Package pdftex.def Info: PID.pdf , page5 used on input line 1872.
+<use PID.pdf, page 3>
+Package pdftex.def Info: PID.pdf , page3 used on input line 1884.
 (pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 5>
-Package pdftex.def Info: PID.pdf , page5 used on input line 1872.
+<use PID.pdf, page 3>
+Package pdftex.def Info: PID.pdf , page3 used on input line 1884.
 (pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 5>
-Package pdftex.def Info: PID.pdf , page5 used on input line 1872.
+<use PID.pdf, page 3>
+Package pdftex.def Info: PID.pdf , page3 used on input line 1884.
 (pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
 [100 <./PID.pdf>]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./PID.pdf): PDF inclusion: found PDF ve
 rsion <1.7>, but at most version <1.5> allowed
-<PID.pdf, id=1860, page=6, 597.55246pt x 845.07718pt>
+<PID.pdf, id=1856, page=4, 597.55246pt x 845.07718pt>
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 6>
-Package pdftex.def Info: PID.pdf , page6 used on input line 1872.
+<use PID.pdf, page 4>
+Package pdftex.def Info: PID.pdf , page4 used on input line 1884.
 (pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 6>
-Package pdftex.def Info: PID.pdf , page6 used on input line 1872.
+<use PID.pdf, page 4>
+Package pdftex.def Info: PID.pdf , page4 used on input line 1884.
 (pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 6>
-Package pdftex.def Info: PID.pdf , page6 used on input line 1872.
+<use PID.pdf, page 4>
+Package pdftex.def Info: PID.pdf , page4 used on input line 1884.
 (pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
 [101 <./PID.pdf>]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./PID.pdf): PDF inclusion: found PDF ve
 rsion <1.7>, but at most version <1.5> allowed
-<PID.pdf, id=1866, page=7, 597.55246pt x 845.07718pt>
+<PID.pdf, id=1862, page=5, 597.55246pt x 845.07718pt>
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 7>
-Package pdftex.def Info: PID.pdf , page7 used on input line 1872.
+<use PID.pdf, page 5>
+Package pdftex.def Info: PID.pdf , page5 used on input line 1884.
 (pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 7>
-Package pdftex.def Info: PID.pdf , page7 used on input line 1872.
+<use PID.pdf, page 5>
+Package pdftex.def Info: PID.pdf , page5 used on input line 1884.
 (pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 7>
-Package pdftex.def Info: PID.pdf , page7 used on input line 1872.
+<use PID.pdf, page 5>
+Package pdftex.def Info: PID.pdf , page5 used on input line 1884.
 (pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
 [102 <./PID.pdf>]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./PID.pdf): PDF inclusion: found PDF ve
 rsion <1.7>, but at most version <1.5> allowed
-<PID.pdf, id=1872, page=8, 845.07718pt x 597.55246pt>
+<PID.pdf, id=1868, page=6, 597.55246pt x 845.07718pt>
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 8>
-Package pdftex.def Info: PID.pdf , page8 used on input line 1872.
-(pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
+<use PID.pdf, page 6>
+Package pdftex.def Info: PID.pdf , page6 used on input line 1884.
+(pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 8>
-Package pdftex.def Info: PID.pdf , page8 used on input line 1872.
-(pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
+<use PID.pdf, page 6>
+Package pdftex.def Info: PID.pdf , page6 used on input line 1884.
+(pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 8>
-Package pdftex.def Info: PID.pdf , page8 used on input line 1872.
-(pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
+<use PID.pdf, page 6>
+Package pdftex.def Info: PID.pdf , page6 used on input line 1884.
+(pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
 [103 <./PID.pdf>]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./PID.pdf): PDF inclusion: found PDF ve
 rsion <1.7>, but at most version <1.5> allowed
-<PID.pdf, id=1882, page=9, 845.07718pt x 597.55246pt>
+<PID.pdf, id=1875, page=7, 597.55246pt x 845.07718pt>
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 9>
-Package pdftex.def Info: PID.pdf , page9 used on input line 1872.
-(pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
+<use PID.pdf, page 7>
+Package pdftex.def Info: PID.pdf , page7 used on input line 1884.
+(pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 9>
-Package pdftex.def Info: PID.pdf , page9 used on input line 1872.
-(pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
+<use PID.pdf, page 7>
+Package pdftex.def Info: PID.pdf , page7 used on input line 1884.
+(pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 9>
-Package pdftex.def Info: PID.pdf , page9 used on input line 1872.
-(pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
+<use PID.pdf, page 7>
+Package pdftex.def Info: PID.pdf , page7 used on input line 1884.
+(pdftex.def)             Requested size: 562.1644pt x 795.0303pt.
 [104 <./PID.pdf>]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./PID.pdf): PDF inclusion: found PDF ve
 rsion <1.7>, but at most version <1.5> allowed
-<PID.pdf, id=1893, page=10, 845.07718pt x 597.55246pt>
+<PID.pdf, id=1881, page=8, 845.07718pt x 597.55246pt>
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 10>
-Package pdftex.def Info: PID.pdf , page10 used on input line 1872.
+<use PID.pdf, page 8>
+Package pdftex.def Info: PID.pdf , page8 used on input line 1884.
 (pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 10>
-Package pdftex.def Info: PID.pdf , page10 used on input line 1872.
+<use PID.pdf, page 8>
+Package pdftex.def Info: PID.pdf , page8 used on input line 1884.
 (pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 10>
-Package pdftex.def Info: PID.pdf , page10 used on input line 1872.
+<use PID.pdf, page 8>
+Package pdftex.def Info: PID.pdf , page8 used on input line 1884.
 (pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
 [105 <./PID.pdf>]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./PID.pdf): PDF inclusion: found PDF ve
 rsion <1.7>, but at most version <1.5> allowed
-<PID.pdf, id=1905, page=11, 845.07718pt x 597.55246pt>
+<PID.pdf, id=1891, page=9, 845.07718pt x 597.55246pt>
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 11>
-Package pdftex.def Info: PID.pdf , page11 used on input line 1872.
+<use PID.pdf, page 9>
+Package pdftex.def Info: PID.pdf , page9 used on input line 1884.
 (pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 11>
-Package pdftex.def Info: PID.pdf , page11 used on input line 1872.
+<use PID.pdf, page 9>
+Package pdftex.def Info: PID.pdf , page9 used on input line 1884.
 (pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 11>
-Package pdftex.def Info: PID.pdf , page11 used on input line 1872.
+<use PID.pdf, page 9>
+Package pdftex.def Info: PID.pdf , page9 used on input line 1884.
 (pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
 [106 <./PID.pdf>]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./PID.pdf): PDF inclusion: found PDF ve
 rsion <1.7>, but at most version <1.5> allowed
-<PID.pdf, id=1911, page=12, 845.07718pt x 597.55246pt>
+<PID.pdf, id=1901, page=10, 845.07718pt x 597.55246pt>
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 12>
-Package pdftex.def Info: PID.pdf , page12 used on input line 1872.
+<use PID.pdf, page 10>
+Package pdftex.def Info: PID.pdf , page10 used on input line 1884.
 (pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 12>
-Package pdftex.def Info: PID.pdf , page12 used on input line 1872.
+<use PID.pdf, page 10>
+Package pdftex.def Info: PID.pdf , page10 used on input line 1884.
 (pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
 File: PID.pdf Graphic file (type pdf)
-<use PID.pdf, page 12>
-Package pdftex.def Info: PID.pdf , page12 used on input line 1872.
+<use PID.pdf, page 10>
+Package pdftex.def Info: PID.pdf , page10 used on input line 1884.
 (pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
 [107 <./PID.pdf>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1877.
- [108]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1877.
+
+pdfTeX warning: /usr/bin/pdflatex (file ./PID.pdf): PDF inclusion: found PDF ve
+rsion <1.7>, but at most version <1.5> allowed
+<PID.pdf, id=1913, page=11, 845.07718pt x 597.55246pt>
+File: PID.pdf Graphic file (type pdf)
+<use PID.pdf, page 11>
+Package pdftex.def Info: PID.pdf , page11 used on input line 1884.
+(pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
+File: PID.pdf Graphic file (type pdf)
+<use PID.pdf, page 11>
+Package pdftex.def Info: PID.pdf , page11 used on input line 1884.
+(pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
+File: PID.pdf Graphic file (type pdf)
+<use PID.pdf, page 11>
+Package pdftex.def Info: PID.pdf , page11 used on input line 1884.
+(pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
+[108 <./PID.pdf>]
+
+pdfTeX warning: /usr/bin/pdflatex (file ./PID.pdf): PDF inclusion: found PDF ve
+rsion <1.7>, but at most version <1.5> allowed
+<PID.pdf, id=1919, page=12, 845.07718pt x 597.55246pt>
+File: PID.pdf Graphic file (type pdf)
+<use PID.pdf, page 12>
+Package pdftex.def Info: PID.pdf , page12 used on input line 1884.
+(pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
+File: PID.pdf Graphic file (type pdf)
+<use PID.pdf, page 12>
+Package pdftex.def Info: PID.pdf , page12 used on input line 1884.
+(pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
+File: PID.pdf Graphic file (type pdf)
+<use PID.pdf, page 12>
+Package pdftex.def Info: PID.pdf , page12 used on input line 1884.
+(pdftex.def)             Requested size: 795.0303pt x 562.1644pt.
+[109 <./PID.pdf>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1889.
+ [110]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1889.
  (./document.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1877.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1877.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1889.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1889.
 
 Package rerunfilecheck Info: File `document.out' has not changed.
 (rerunfilecheck)             Checksum: 1D7B2504DFF5D56ABCCDF1948D08498A;14207.
@@ -1528,8 +1528,8 @@ Package logreq Info: Writing requests to 'document.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 25151 strings out of 492982
- 396355 string characters out of 6134895
+ 25153 strings out of 492982
+ 396371 string characters out of 6134895
  1018656 words of memory out of 5000000
  27463 multiletter control sequences out of 15000+600000
  21245 words of font info for 60 fonts, out of 8000000 for 9000
@@ -1553,10 +1553,10 @@ ic/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000
 mf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/publi
 c/cm-super/sfrm2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.
 pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on document.pdf (108 pages, 2423767 bytes).
+Output written on document.pdf (110 pages, 2428026 bytes).
 PDF statistics:
- 2175 PDF objects out of 2487 (max. 8388607)
- 1980 compressed objects within 20 object streams
- 886 named destinations out of 1000 (max. 500000)
+ 2185 PDF objects out of 2487 (max. 8388607)
+ 1988 compressed objects within 20 object streams
+ 888 named destinations out of 1000 (max. 500000)
  855 words of extra memory for PDF output out of 10000 (max. 10000000)
 
