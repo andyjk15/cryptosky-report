@@ -112,9 +112,9 @@
 	\begin{center}
 		\section{Abstract}\label{abstract}
 	\end{center}
-		The volatility of the stock markets is an aspect that is both hard to predict and to mitigate particularly when relating to the cryptocurrency market. Commodities such as cryptocurrencies are profoundly volatile and have attracted investors in an attempt to make quick profits on the market. These financial commodities are subject to the whim of public confidence and platforms such as Twitter and Facebook are most notably utilised to express opinions. Extrapolating sentiment from such platforms has been used to gain insight into topics across industries, thus applying it to crypto-market analysis could serve to show a relationship between public opinion and market change. 
+		The volatility of the stock markets is an aspect that is both hard to predict and to mitigate particularly when relating to the cryptocurrency market. Commodities such as cryptocurrencies are profoundly volatile and have attracted investors in an attempt to make quick profits on the market. These financial commodities are subject to the whim of public confidence and platforms such as Twitter and Facebook are most notably utilised to express these opinions. Extrapolating sentiment from such platforms has been used to gain insight into topics across industries, thus applying it to crypto-market analysis could serve to show a relationship between public opinion and market change. 
 		
-		This project looks into public perception of the cryptomarket, by analysing Bitcoin-related tweets per hour for sentiment changes that could indicate a correlation to market fluctuations in the near future. This is achieved by training a recurrent neural network on the severity changes of historical sentiment and price over the past year every hour. The predictions are then shifted forward in time by 1 hour to indicate the corresponding Bitcoin price interval.
+		This project looks into the public perception of the cryptomarket, by analysing Bitcoin-related tweets per hour for sentiment changes that could indicate a correlation to market fluctuations in the near future. This is achieved by training a recurrent neural network on the severity changes of historical sentiment and price over the past year every hour. The predictions are then shifted forward in time by 1 hour to indicate the corresponding Bitcoin price interval.
 
 	
 	\newpage
@@ -188,14 +188,14 @@
 	
 	The chosen cryptocurrency that will be of focus for this project will be the currency Bitcoin (BTC), due to having the largest community and backing and has been known to lead other fiat currencies. Bitcoin is seen as one, if not the first cryptocurrency to bring a broader following to the peer-to-peer token transaction scene since 2009. Although it was not the first token to utilise blockchain technology, it allowed investors to openly trade a public cryptocurrency which provided pseudonymous means of transferring funds through the internet. Thus it has been around longer than most of the other fiat currencies and is the most popular crypto-token due to it's more extensive community base.
 	
-	Most financial commodities are subject to the whim of public confidence and are the core of its base value. A platform that is frequently used for the public to convey their opinions on a commodity is that of Twitter which provides arguably biased information and opinions. Whether the opinions present a basis in facts or not, they are usually taken at face value and can influence the public opinion of given topics. As Bitcoin has been around since 2009 the opinions and information on the commodity are prevalent through the platform. 
+	Most financial commodities are subject to the whim of public confidence and are the core of its base value. A platform that is frequently used for the public to convey their opinions on a commodity is that of Twitter, which provides arguably biased information and opinions. Whether the opinions present a basis in facts or not, they are usually taken at face value and can influence the public opinion of given topics. As Bitcoin has been around since 2009 the opinions and information on the commodity are prevalent through the platform. 
 	In the paper \textit{Sentiment Analysis of Twitter Data for Predicting Stock Market Movements} by \textit{Majhi et al.} \cite{SaTdpsmm} 2.5 million tweets on Microsoft were extracted from Twitter, sentiment analysis and logistical regression performed on the data yielded 69.01\% accuracy for a 3-day period on the increase/decrease in stock price. These results showed a "\textit{good correlation between stock market movements and the sentiments of the public expressed in Twitter}".
 	
-	The background of this project is in response to the volatility of the cryptocurrency market, which can fluctuate at a moments notice and can be seen to be social media driven. The history of the price of Bitcoin and what was being discussed on the currency around it's most volatile period to-date, Nov-2017 to Feb-2018, shows a strong bullish trend which saw Bitcoin reach a \$19,500 high in mid-Dec. While social media, such as Twitter, during that period was had an extremely positive outlook on the cryptocurrency. The trend was short lived and saw the market crash only a month later, with only a couple of sell-offs, expected for the holidays rush, accompanied by negative outlooks posted on social media turned the market against itself which saw the longest bearish market in Bitcoin's history and is still trying to recover today.
+	The background of this project is in response to the volatility of the cryptocurrency market, which can fluctuate at a moments notice and can be seen to be social media driven. The history of the price of Bitcoin and what was being discussed on the currency around it's most volatile period to-date, Nov-2017 to Feb-2018, shows a strong bullish trend which saw Bitcoin reach a \$19,500 high in mid-Dec. While social media, such as Twitter, during that period was had an extremely positive outlook on the cryptocurrency. The trend was short lived and saw the market crash only a month later, with only a couple of sell-offs as expected for the holidays rush, accompanied by negative outlooks posted on social media turned the market against itself which saw the longest bearish market in Bitcoin's history and is still trying to recover today.
 	
 	Due to how volatile the crypto-market can be, there is a need to either mitigate or to anticipate where the markets are heading. As the crypto-market and Bitcoin are affected by socially constructed opinions, either through Twitter, news articles or other forms of media, there is a way to perform the latter, where the prices of Bitcoin could be predicted based on the sentiment gathered from social media outlets.
 	
-	This project aims to create a tool that gathers tweets from Twitter, obtains the overall sentiment score of the given text while gathering historical price data for the period gathering occurs. Features are then extracted from the gathered data and used in a neural network to ascertain whether the price of the currency can be predicted from the correlation between the sentiment and price history of the data.
+	This project aims to create a tool that gathers tweets from Twitter, obtains the overall sentiment score of the given text while gathering historical price data for the period gathering occurs. Features then extracted from the gathered data and used in a neural network or a machine learning model to ascertain whether the price of the currency can be predicted from the correlation between the sentiment and price history of the data.
 	
 	This report will discuss the justifications for the project and the problems it will be attempting to resolve, the stakeholders that would benefit the most from this system and what this project will not attempt to accomplish. Similar tools will be critiqued and examined for their feature set and credibility in the literature review along with current sentiment analysers, algorithms, natural language processing techniques and neural networks in their respective topics and comparing their accuracy for this project purpose. 
 	The solution approach will discuss the decisions and reasoning behind choosing the techniques and tools used for this project and will outline the requirements for this project.
@@ -211,7 +211,7 @@
 		
 		The fundamental problems this project attempts to address are that of, an open-source system available to the public that aids in investor decision making on whether to invest at a given point, based on the analysis and prediction of BTC for each hour. The accuracy of open-source tools and technology when applied to the trading market scene and to identify whether there is a correlation between Twitter sentiment and BTC price fluctuation. While there are existing tools, only a few are available to the public and only provide basic functionality, while others are kept in-house of major corporations who invest in this problem domain.
 		
-		The other issue presented here is that assuming perfect accuracy can be achieved is naive. As this project will only be using existing tools and technologies; thus, there are limitations to the accuracy of what can be obtained. One of that being the suitability of the tools, there are no open-source sentiment analysers for stock market prediction, thus finding a specifically trained analyser for the chosen domain in highly unlikely. In relation, finding the most suitable machine learning or neural network is equally important as this will determine the accuracy of the predictions. Due to being a regression problem, machine learning techniques and neural networks that focus around this and forecasting should be considered.
+		The other issue presented here is that assuming perfect accuracy can be achieved is naive. As this project will only be using existing tools and technologies; thus, there are limitations to the accuracy of what can be obtained. One of that being the suitability of the tools, there are no open-source sentiment analysers for stock market prediction, thus finding a specifically trained analyser for the chosen domain is highly unlikely. In relation, finding the most suitable machine learning or neural network is equally important as this will determine the accuracy of the predictions. Due to being a regression problem, machine learning techniques and neural networks that focus around this and forecasting should be considered.
 		
 		The accuracy and suitability of various machine learning methods and neural networks are a known issue in their respective domains. This investigation should be carried out to determine their suitability for their needed use in this project and will be detailed in the literature review.
 		
@@ -229,6 +229,7 @@
 			\item Developer - Andrew Sotheran: The developer responsible for this project by developing a solution that satisfies the problem and	objective defined in the \textit{Technical Specification}. As the sole developer of this project it should be ensured that the system is developed on time and the project runs smoothly.
 			\item Project Supervisor - Kenneth Boness: Is the projects supervisor whom will oversee the development through weekly project meetings. Weekly feedback will be given on the progress and direction of development, and will offer advice to ensure the quality of the solution.
 		\end{itemize}
+		\newpage
 		
 		\subsection{Project Motivation}
 		The motivation behind the project stems from a range of points, from personal and public issues with the volatility if the crypto-market, and how losses specifically could be mitigated. The personal motivations behind the conceptualisation of this began two years ago during the crash of late 2017-2018, which saw new investors blindly jump into the trend that was buying cryptocurrencies. During this period of November to December 2017 saw Bitcoin's price reach \$20,000 from \$5,000, new public investors jumped on the chance to buy into the trend of possibly making quick profits and the fear of missing out (FOMO). In late December, a few holiday sell-offs occurred from business and big investors, this coupled with a few negative outlooks posted on social media by news outlets caused the market to implode causing investors to panic sell one after the other and posting negativity on social, thus causing more decline in the market. As a result, this caused personal monetary loss and distress as being a long-term investor.
@@ -420,11 +421,13 @@
 			\subsubsection{Long-Short Term Memory (LSTM)}\label{lstms}
 			LSTMs are an extension of recurrent neural networks capable of learning long-term dependancies and were conceptualised by \textit{Sepp Hochreiter and Juergen Schmidhuber, 1997} \cite{LSTM}. LSTMs were explicity designed to avoid long-term dependancy problems such as exploding and vanishing gradients. As they are an extension of RNNs they operating in almost the exact same manner, but stores the actual gradients and weights in memory which allows for LSTMs to read, write and alter the values. A way of explaining how this works is seeing the memory block as a gated cell, where 'gated' is that the cell decides whether or not to store or alter data in it's memory based input data and the importance assigned to it. In a sense it learns over time of which values and data is important.
 			
-			\begin{center}
-				\includegraphics[width=9cm,height=7cm]{images/lstm.png}
-				\newline
-				\textit{Figure 3: A conceptual design of an LSTM cell bank - from Medium article by Shi Yan: Understanding LSTM and its diagrams}\cite{LSTMdia}
-			\end{center}
+			\begin{figure}[hbt!]
+				\centering
+				\includegraphics[width=8cm,height=8cm]{images/lstm.png}
+				\begin{center}
+					\textit{Figure 3: A conceptual design of an LSTM cell bank - from Medium article by Shi Yan: Understanding LSTM and its diagrams}\cite{LSTMdia}
+				\end{center}
+			\end{figure}
 			
 			The network takes in three initial inputs, the input of the current time step, output from the previous LSTM unit if any, and the memory of the previous unit. Outputs, $H_t$ - output of current network, and $C_t$ - the memory of the current unit. \cite{LSTMdia}
 			
@@ -1851,7 +1854,7 @@ def create_sets(self, data, lookback, sentiment):
 		
 		\textbf{Ngrams for Language Detection}
 		
-		As stated in \cite{langdectNLTK} \textit{"There are others ways to “guess” language from a given text like N-Gram-Based text categorization"} and based on previous assumption on the Ngram concept it would be interesting how this could be implemented and how it performs compared to the current solution.
+		As stated in \cite{langdectNLTK} \textit{"There are others ways to 'guess' language from a given text like N-Gram-Based text categorization"} and based on previous assumption on the Ngram concept it would be interesting how this could be implemented and how it performs compared to the current solution.
 		\newline
 		
 		\textbf{Hand-coded Naive Bayes Vs Scikit-Learns multiple in-built models}
@@ -1907,6 +1910,58 @@ def create_sets(self, data, lookback, sentiment):
 		\includepdf[pages=-]{PID}
 		
 		\subsection{Appendix B - Log book}
-		The log book for this project is a physical book and was handed to the School of Computer Science. Due to being a physical book, it cannot be inserted here.
+		
+		\begin{center}
+			Poject Logbook - 2 week intervals
+		\end{center}
+		
+		\begin{table}[ht]
+			\centering
+			\resizebox{\textwidth}{!}{\begin{tabular}{l|l|l}
+					\textbf{Date - Week} & \textbf{Notes} & \textbf{Actions}\\
+					\hline
+					\multirow{6}{*}{1-10-18 to 15-10-18} & Initial reseach for PID creation & Project Initiation Document creation \\ & Reseach of frontend frameworks & Weekly supervisor meetings \\ & Research into various machine learning methods & \\ & Research into Artifical Neural Networks & \\ & Data mining approaches and access to Twitter data & \\
+					\hline
+					\multirow{2}{*}{15-10-19 to 29-10-18} & Began research into natural language processing techniques & beginning of literature review \\ & Researched into crucial python libraries & Weekly supervisor meetings \\
+					\hline
+					\multirow{3}{*}{29-10-18 to 12-11-18} & Discussion of project direction with supervisor & Change in project direction \\ & Research direction changed & to more back-end focus in prediction of bitcoin \\ & More in-depth research into neural networks & Weekly project supervisor meetings \\
+					\hline
+					\multirow{3}{*}{12-10-18 to 26-11-18} & Conclusion of using a recurrent neural network made & weekly project supervisor meetings \\ & System Design and Dataflow diagrams & Continued development of report \\ & definition of solution approach & \\
+					\hline
+					\multirow{3}{*}{26-10-18 to 10-12-18} & Research of the VADER sentiment analyser & weekly project supervisor meetings \\ & Definition of Technical Specification & Continued development of report \\ & Start of development of data collector with use of the Tweepy package for streaming & \\ & Obtaining of historical prices and averaging & \\
+					\hline
+					\multirow{5}{*}{10-10-18 to 24-12-18} & Development of Sentiment analyser & weekly project supervisor meetings \\ & Development of data pre-processing for tweets & \\ & Beginning of development of spam filter & \\ & Research of Naive Bayes Classification & \\ & Historical Tweet Collection directly from Twitter API & 8 user accounts created to obtain the amount of data needed \\
+					\hline
+					\multirow{5}{*}{24-10-18 to 7-01-19} & Completion of Data collection & weekly project supervisor meetings \\ & Completion of Bayes Classifier & \\ & Development of language detection & \\ & Completed Literature review with last revisions & \\ & Integrating spam filter with live data collection & \\
+					\hline
+					\multirow{2}{*}{7-01-18 to 21-01-19} & Development of Implementation section of report & weekly project supervisor meetings \\
+					\hline
+					\multirow{3}{*}{21-01-18 to 04-02-19} & Updating of missing historical data for time period between creation & weekly project supervisor meetings \\ & Began development of the Interface (HTML) & Defined interface design \\ & began developing of the electron app to display the frontend & \\
+					\hline
+					\multirow{3}{*}{04-02-18 to 18-02-19} & Continued development on the user interface (HTML) & weekly project supervisor meetings \\ & Began development of charts and tables (JQuery) & \\
+					\hline
+					\multirow{3}{*}{18-02-18 to 04-03-19} & Continued development on the user interface & weekly project supervisor meetings \\ & Additions to report - implementation and begining forming discussion of sentiment analysis & \\
+					\hline
+					\multirow{4}{*}{04-03-18 to 18-03-19} & Interface direction change & weekly project supervisor meetings \\ & Due to bugs rising with frame (Electron) being used and to resolve the problem statement & Interface shifted from applicaiton to web-based interface\\ & of providing a solution that is available to the public & \\
+					\hline
+					\multirow{8}{*}{18-03-18 to 01-04-19} & Ironing out bugs: & weekly project supervisor meetings \\ & spam filter not working due to misuse of ngrams & Research conducted on LSTM, implementation and their use\\ & Issues with initialisation of data CSV files \\ && \\ & Added metrics to judge performance of Bayes classifier for spam filtering & \\ & moved spam filter training into tweet collector due to sequencing of program execution & \\ & Added to report and started finalising implementation section & \\ & updated historical price and sentiment data to keep up to date & \\
+					\hline
+					\multirow{10}{*}{01-04-18 to 15-04-19} & Completion of interface - graph plotting and tables for metrics and predictions \\ & Began development of LSTM neural network for predictions - with sentiment embedded & \\ & Data preprocessing and splitting for training and testing of network & \\ & Creation of the network model - 4 layer LSTM & \\ & Began development of forecasting bitcoin prices & \\ & Modelling and data manipulation to form prediction sets & \\ & Attempted to code K-Fold Cross-Validation for network model & \\ & implemented threshold for price & \\ & Created functions for creating relevant data files for frontend use & \\ & Tested execution of entire system and began forming conclusions and results & \\ & Final collection of historical data to ensure data set is up to date for time of execution & \\
+					\hline
+					\multirow{8}{*}{15-04-18 to 22-04-19} & Completion of the Neural network and predictions \\ & Duped code for network without sentiment embedded - removed code for embedding sentiment & \\ & Completion of forecasting code & \\ & Addition of performance metrics and code for analysing performance and accuracy of network & \\ & Deployed interface to the server & \\ & Attempted to deploy backend to server & Issues occurred and so resorted back to running on laptop \\ & Creation of bash scripts to transfer data files to server for frontend use & \\ & Testing conducted on model and system - results drawn & \\ & Continued development of report & \\
+					\hline
+					\multirow{3}{*}{22-04-18 to 29-04-19} & Finalising of report and proofreading \\ & Discussions, reflections and conclusion wrote in report & \\ & Future improvements identified for project & \\
+			\end{tabular}}
+		\end{table}
 	
+	\newpage
+	
+	\subsection{Appendix C - Existing systems}
+		\begin{figure}[hbt!]
+			\centering
+			\includegraphics[width=7cm,height=6cm]{images/existing_system.png}
+			\begin{center}
+				\textit{Figure 14: \url{coingecko.com/en/coins/bitcoin} - Coingecko's Existing system for sentiment analysis}
+			\end{center}
+		\end{figure}
 \end{document}
